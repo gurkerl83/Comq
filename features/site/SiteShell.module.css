@@ -1,0 +1,184 @@
+.skipLink {
+  position: fixed;
+  z-index: 10;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.875rem 1rem;
+  transform: translateY(-200%);
+  color: #000;
+  background: var(--color-gold);
+  border-radius: 0.25rem;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
+
+.header {
+  border-bottom: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-gold);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.375rem 2rem;
+}
+
+.wordmark {
+  margin-right: auto;
+  color: var(--color-gold);
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.primaryNav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+
+.homeLink,
+.languages a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.homeLink:hover,
+.languages a:hover {
+  color: var(--color-gold);
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: var(--color-muted);
+}
+
+.languages a[aria-current='page'] {
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 0.45em;
+}
+
+.whatsappButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  /* Reserve room for either translation so locale changes keep the same rows. */
+  width: 15.5rem;
+  min-height: 44px;
+  padding: 0.875rem 1rem;
+  border-radius: 0.3125rem;
+  background: var(--color-red);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.whatsappButton:hover {
+  background: var(--color-red-hover);
+}
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.footerInner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.company p {
+  margin: 0;
+}
+
+.company > p:first-child {
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+
+.company .location {
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 3rem;
+}
+
+.contacts a {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+.contacts a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 0.625rem;
+  min-height: 44px;
+}
+
+.socialLink svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1040px) {
+  .primaryNav {
+    order: 1;
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .headerInner {
+    gap: 0.75rem 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .languages {
+    margin-left: auto;
+  }
+
+  .primaryNav {
+    column-gap: 1rem;
+  }
+
+  .whatsappButton {
+    max-width: 100%;
+  }
+
+  .footerInner {
+    padding: 2rem 1.25rem;
+  }
+}

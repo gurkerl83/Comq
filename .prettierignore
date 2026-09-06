@@ -1,0 +1,8 @@
+# Preserve the original standalone page byte-for-byte.
+index.html
+node_modules/
+.next/
+.pnpm-store/
+pnpm-lock.yaml
+next-env.d.ts
+*.tsbuildinfo
