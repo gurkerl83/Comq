@@ -6,6 +6,7 @@ import {
 } from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
 import { SITE_NAME, WHATSAPP_URL } from '../../lib/site/config';
+import { WhatsAppIcon } from './icons';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import styles from './SiteShell.module.css';
 
@@ -25,43 +26,15 @@ export function SiteNav({
         >
           {SITE_NAME}
         </Link>
-        <nav
-          className={styles.primaryNav}
-          aria-label={dictionary.navigation.primary}
-        >
-          <Link
-            className={styles.homeLink}
-            href={createHrefForLocale(locale, '/')}
-          >
-            {dictionary.navigation.home}
-          </Link>
-          <Link
-            className={styles.homeLink}
-            href={createHrefForLocale(locale, '/venta')}
-          >
-            {dictionary.navigation.sales}
-          </Link>
-          <Link
-            className={styles.homeLink}
-            href={createHrefForLocale(locale, '/alquiler')}
-          >
-            {dictionary.navigation.rentals}
-          </Link>
-          <Link
-            className={styles.homeLink}
-            href={createHrefForLocale(locale, '/repuestos')}
-          >
-            {dictionary.navigation.parts}
-          </Link>
-        </nav>
         <a
           className={styles.whatsappButton}
           href={WHATSAPP_URL}
           target='_blank'
           rel='noopener noreferrer'
+          aria-label={dictionary.navigation.whatsappLabel}
         >
+          <WhatsAppIcon />
           {dictionary.navigation.whatsapp}
-          <span aria-hidden='true'>↗</span>
         </a>
         <LanguageSwitcher
           locale={locale}

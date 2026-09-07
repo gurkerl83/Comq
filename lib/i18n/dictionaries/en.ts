@@ -2,13 +2,9 @@ import type { Dictionary } from '../types';
 
 const dictionary: Dictionary = {
   navigation: {
-    home: 'Home',
-    primary: 'Main navigation',
-    sales: 'Sales',
-    rentals: 'Rentals',
-    parts: 'Spare parts',
     language: 'Language',
-    whatsapp: 'Get a quote on WhatsApp',
+    whatsapp: 'Get a quote',
+    whatsappLabel: 'Get a quote on WhatsApp',
     skipToContent: 'Skip to content'
   },
   home: {
@@ -30,7 +26,8 @@ const dictionary: Dictionary = {
   },
   footer: {
     location: 'Lima, Peru',
-    whatsapp: 'WhatsApp'
+    phone: 'Phone',
+    email: 'Email'
   }
 };
 

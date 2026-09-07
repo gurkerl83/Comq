@@ -2,12 +2,7 @@ import type { Organization, Thing, WebSite, WithContext } from 'schema-dts';
 
 import { createHrefForLocale, type SupportedLocale } from '../i18n/locales';
 import type { Dictionary } from '../i18n/types';
-import {
-  createSiteUrl,
-  LEGAL_NAME,
-  SITE_NAME,
-  WHATSAPP_NUMBER
-} from './config';
+import { createSiteUrl, LEGAL_NAME, PHONE_NUMBER, SITE_NAME } from './config';
 
 /**
  * Serialize JSON-LD in a form safe to place inside a script tag.
@@ -49,7 +44,7 @@ export const createSiteStructuredData = (
       name: SITE_NAME,
       legalName: LEGAL_NAME,
       url: createSiteUrl('/'),
-      telephone: WHATSAPP_NUMBER,
+      telephone: PHONE_NUMBER,
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Lima',

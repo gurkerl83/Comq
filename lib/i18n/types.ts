@@ -1,12 +1,8 @@
 export interface Dictionary {
   navigation: {
-    home: string;
-    primary: string;
-    sales: string;
-    rentals: string;
-    parts: string;
     language: string;
     whatsapp: string;
+    whatsappLabel: string;
     skipToContent: string;
   };
   home: {
@@ -24,6 +20,7 @@ export interface Dictionary {
   };
   footer: {
     location: string;
-    whatsapp: string;
+    phone: string;
+    email: string;
   };
 }

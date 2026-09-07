@@ -11,6 +11,7 @@ import {
   createJsonLdMarkup,
   createSiteStructuredData
 } from '../../lib/site/json-ld';
+import { ArrowRightIcon } from '../site/icons';
 import styles from './HomePage.module.css';
 
 export function HomePage({
@@ -59,14 +60,21 @@ export function HomePage({
           id={service.id}
           className={styles.serviceSection}
           aria-labelledby={`${service.id}-heading`}
-          tabIndex={-1}
         >
+          <h2 id={`${service.id}-heading`}>
+            <Link
+              className={styles.serviceTitleLink}
+              href={createHrefForLocale(locale, `/${service.id}`)}
+            >
+              <span>{service.title}</span>
+              <ArrowRightIcon />
+            </Link>
+          </h2>
           <Link
-            className={styles.serviceLink}
+            className={styles.serviceImageLink}
             href={createHrefForLocale(locale, `/${service.id}`)}
             aria-labelledby={`${service.id}-heading`}
           >
-            <h2 id={`${service.id}-heading`}>{service.title}</h2>
             <Image
               className={styles.serviceImage}
               src='/images/service-placeholder.svg'
@@ -74,8 +82,8 @@ export function HomePage({
               width={800}
               height={500}
             />
-            <p>{service.description}</p>
           </Link>
+          <p>{service.description}</p>
         </section>
       ))}
     </>

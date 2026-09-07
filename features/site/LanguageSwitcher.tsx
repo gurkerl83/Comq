@@ -38,9 +38,11 @@ export function LanguageSwitcher({
           href={createHrefForLocale(language, localeFreePathname)}
           hrefLang={language}
           lang={language}
+          aria-label={languageNames[language]}
           aria-current={language === locale ? 'page' : undefined}
+          title={languageNames[language]}
         >
-          {languageNames[language]}
+          {language.toUpperCase()}
         </Link>
       ))}
     </nav>
