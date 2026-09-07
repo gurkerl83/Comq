@@ -1,0 +1,26 @@
+/* Global design tokens shared by both language branches and their CSS Modules. */
+:root {
+  color-scheme: dark;
+
+  --color-background: #080808;
+  --color-surface: #111;
+  --color-text: #fff;
+  --color-muted: #bcbcbc;
+  --color-border: #30302b;
+  --color-accent: #d4af37;
+  --color-action: #c8102e;
+  --color-action-hover: #a00e26;
+
+  /* Foregrounds belong to their surfaces, independent of the page text color. */
+  --color-on-accent: #000;
+  --color-on-action: #fff;
+  --color-focus-ring: var(--color-accent);
+
+  --font-family-body: Arial, Helvetica, sans-serif;
+  --radius-small: 0.25rem;
+  --radius-control: 0.3125rem;
+  --radius-media: 10px;
+  --border-width: 1px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 5px;
+}

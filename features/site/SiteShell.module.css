@@ -5,9 +5,9 @@
   left: 1rem;
   padding: 0.875rem 1rem;
   transform: translateY(-200%);
-  color: #000;
-  background: var(--color-gold);
-  border-radius: 0.25rem;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-radius: var(--radius-small);
 }
 
 .skipLink:focus {
@@ -15,7 +15,7 @@
 }
 
 .header {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: var(--border-width) solid var(--color-border);
 }
 
 .headerInner {
@@ -57,7 +57,7 @@
 }
 
 .languages a:hover {
-  color: var(--color-gold);
+  color: var(--color-accent);
 }
 
 .languages {
@@ -68,7 +68,7 @@
 }
 
 .languages a[aria-current='page'] {
-  color: var(--color-gold);
+  color: var(--color-accent);
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -84,8 +84,9 @@
   width: 9rem;
   min-height: 44px;
   padding: 0.625rem 0.75rem;
-  border-radius: 0.3125rem;
-  background: var(--color-red);
+  border-radius: var(--radius-control);
+  color: var(--color-on-action);
+  background: var(--color-action);
   font-weight: 700;
   font-size: 0.9375rem;
   text-decoration: none;
@@ -98,11 +99,11 @@
 }
 
 .whatsappButton:hover {
-  background: var(--color-red-hover);
+  background: var(--color-action-hover);
 }
 
 .footer {
-  border-top: 1px solid var(--color-border);
+  border-top: var(--border-width) solid var(--color-border);
   background: var(--color-surface);
 }
 
@@ -164,7 +165,7 @@
 }
 
 .contacts a:hover {
-  color: var(--color-gold);
+  color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
@@ -182,7 +183,7 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: var(--color-gold);
+  color: var(--color-accent);
 }
 
 @media (max-width: 640px) {

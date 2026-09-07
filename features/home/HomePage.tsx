@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -13,6 +12,7 @@ import {
 } from '../../lib/site/json-ld';
 import { ArrowRightIcon } from '../site/icons';
 import styles from './HomePage.module.css';
+import { ServiceImagePlaceholder } from './ServiceImagePlaceholder';
 
 export function HomePage({
   locale,
@@ -75,12 +75,9 @@ export function HomePage({
             href={createHrefForLocale(locale, `/${service.id}`)}
             aria-labelledby={`${service.id}-heading`}
           >
-            <Image
+            <ServiceImagePlaceholder
               className={styles.serviceImage}
-              src='/images/service-placeholder.svg'
               alt={`${dictionary.services.imagePlaceholder}: ${service.title}`}
-              width={800}
-              height={500}
             />
           </Link>
           <p>{service.description}</p>

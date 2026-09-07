@@ -2,7 +2,7 @@
 
 A standalone Next.js App Router application for COMQ, with Spanish at `/` and English at `/en`. The homepage includes the shared navigation, footer, company introduction and equipment sales, rentals and spare-parts sections. It uses server components, typed dictionaries and CSS Modules.
 
-Each homepage service title and image links to its own page: `/venta`, `/alquiler` and `/repuestos`, with matching `/en` routes. Descriptions and surrounding space remain non-clickable. The header contains only the COMQ mine symbol linking to the localized homepage, WhatsApp contact and the ES/EN language switch. Each service page currently contains only its translated title, with the shared header and footer. The homepage service copy is adapted from the original Spanish page and translated into English, with equipment sales now advertising immediate delivery worldwide. Local SVG image placeholders appear below the service headings until the original images are supplied.
+Each homepage service title and image links to its own page: `/venta`, `/alquiler` and `/repuestos`, with matching `/en` routes. Descriptions and surrounding space remain non-clickable. The header contains only the COMQ mine symbol linking to the localized homepage, WhatsApp contact and the ES/EN language switch. Each service page currently contains only its translated title, with the shared header and footer. The homepage service copy is adapted from the original Spanish page and translated into English, with equipment sales now advertising immediate delivery worldwide. Shared SVG image placeholders follow the theme below the service headings until the original images are supplied.
 
 The original `index.html` remains a separate standalone page. It is excluded from formatting and linting, is not imported by the application and is not served by Next.js. Keep it unchanged.
 
@@ -63,6 +63,27 @@ Route entrypoints load a server-only dictionary and pass the locale and translat
 Create thin `.tsx` page entrypoints in both native branches and share the page implementation in `features`. For example, an `equipos/page.tsx` entrypoint in each branch creates `/equipos` and `/en/equipos`. Keep locale validation in the prefixed page and pass its dictionary explicitly.
 
 The URL helper only adds locale prefixes; it does not translate slugs. If translated paths are needed, author explicit route wrappers and a corresponding URL mapping. Update the navigation and language-switch links to point to the actual matching pages. Extend metadata with page-specific titles and descriptions, matching canonical URLs and language alternates, and add only implemented pages to the sitemap. Do not add placeholder service links.
+
+## Theme and styling
+
+`app/theme.css` defines the global design tokens as CSS custom properties on `:root`, including the dark `color-scheme`. `app/globals.css` imports it, and CSS Modules consume its variables. Change this file to adjust the application palette; no theme provider, JavaScript state or additional library is needed.
+
+| Tokens                                                        | Purpose                                               |
+| ------------------------------------------------------------- | ----------------------------------------------------- |
+| `--color-background`, `--color-surface`                       | Page and raised surface backgrounds.                  |
+| `--color-text`, `--color-muted`, `--color-border`             | Primary text, secondary text and neutral dividers.    |
+| `--color-accent`, `--color-on-accent`                         | Gold accents and readable text on accent backgrounds. |
+| `--color-action`, `--color-action-hover`, `--color-on-action` | Quote button backgrounds and foreground.              |
+| `--color-focus-ring`                                          | Keyboard focus color; follows the accent by default.  |
+| `--font-family-body`                                          | Shared font stack.                                    |
+| `--radius-small`, `--radius-control`, `--radius-media`        | Skip-link, button and image corner radii.             |
+| `--border-width`, `--focus-ring-width`, `--focus-ring-offset` | Divider thickness and keyboard focus treatment.       |
+
+Choose background and foreground colors together and check text contrast, hover and keyboard focus in both languages. Layout spacing and responsive breakpoints remain in their component CSS Modules. The current palette is the only supplied theme.
+
+`features/home/ServiceImagePlaceholder.tsx` renders a shared inline SVG with a translated accessible label. Its drawing uses `currentColor`; the containing CSS Module supplies the accent and surface tokens so placeholders follow palette changes.
+
+Logo artwork is deliberately fixed: the header/footer symbol and favicons do not inherit CSS tokens. A future brand recolor needs coordinated exports from `design` into `public/images/comq-symbol.svg`, `app/icon.svg` and `app/favicon.ico`. Keep the standalone `index.html` unchanged.
 
 ## Site identity and reference patterns
 
