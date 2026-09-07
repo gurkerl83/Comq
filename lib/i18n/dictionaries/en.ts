@@ -17,7 +17,7 @@ const dictionary: Dictionary = {
     imagePlaceholder: 'Image placeholder',
     salesTitle: 'Equipment Sales',
     salesDescription:
-      'New jumbos, scooptrams and drilling rigs. Immediate delivery throughout Peru.',
+      'New jumbos, scooptrams and drilling rigs. Immediate delivery worldwide.',
     rentalsTitle: 'Equipment Rentals',
     rentalsDescription:
       'Our own fleet. Maintenance included. Round-the-clock response at your mine.',

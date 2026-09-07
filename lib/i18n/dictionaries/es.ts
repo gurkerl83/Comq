@@ -17,7 +17,7 @@ const dictionary: Dictionary = {
     imagePlaceholder: 'Imagen pendiente',
     salesTitle: 'Venta de Equipos',
     salesDescription:
-      'Jumbos, Scoops y Perforadoras nuevas. Entrega inmediata en todo el Perú.',
+      'Jumbos, Scoops y Perforadoras nuevas. Entrega inmediata a nivel mundial.',
     rentalsTitle: 'Alquiler de Equipos',
     rentalsDescription:
       'Flota propia. Mantenimiento incluido. Respuesta 24/7 en mina.',
