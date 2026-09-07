@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import type { Dictionary } from '../../lib/i18n/types';
 import {
   CONTACT_EMAIL,
@@ -13,11 +15,24 @@ export function SiteFooter({ dictionary }: { dictionary: Dictionary }) {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
-        <div className={styles.company}>
-          <p>{LEGAL_NAME}</p>
-          <p className={styles.location}>{dictionary.footer.location}</p>
+        <div className={styles.footerBrand}>
+          <Image
+            className={styles.footerBrandIcon}
+            src='/images/comq-symbol.svg'
+            alt=''
+            width={40}
+            height={34}
+            unoptimized
+          />
+          <div className={styles.company}>
+            <p>{LEGAL_NAME}</p>
+            <p className={styles.location}>{dictionary.footer.location}</p>
+          </div>
         </div>
-        <div className={styles.contacts}>
+        <nav
+          className={styles.contacts}
+          aria-label={dictionary.footer.contactLinks}
+        >
           <a
             className={styles.socialLink}
             href={`mailto:${CONTACT_EMAIL}`}
@@ -43,7 +58,7 @@ export function SiteFooter({ dictionary }: { dictionary: Dictionary }) {
             <LinkedInIcon />
             LinkedIn
           </a>
-        </div>
+        </nav>
       </div>
     </footer>
   );

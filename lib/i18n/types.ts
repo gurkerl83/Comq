@@ -1,5 +1,6 @@
 export interface Dictionary {
   navigation: {
+    home: string;
     language: string;
     whatsapp: string;
     whatsappLabel: string;
@@ -19,6 +20,7 @@ export interface Dictionary {
     partsDescription: string;
   };
   footer: {
+    contactLinks: string;
     location: string;
     phone: string;
     email: string;

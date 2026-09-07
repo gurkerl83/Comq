@@ -2,7 +2,7 @@
 
 A standalone Next.js App Router application for COMQ, with Spanish at `/` and English at `/en`. The homepage includes the shared navigation, footer, company introduction and equipment sales, rentals and spare-parts sections. It uses server components, typed dictionaries and CSS Modules.
 
-Each homepage service title and image links to its own page: `/venta`, `/alquiler` and `/repuestos`, with matching `/en` routes. Descriptions and surrounding space remain non-clickable. The header contains only the COMQ wordmark linking to the localized homepage, WhatsApp contact and the ES/EN language switch. Each service page currently contains only its translated title, with the shared header and footer. The Spanish homepage service copy is preserved from the original page and translated into English. Local SVG image placeholders appear below the service headings until the original images are supplied.
+Each homepage service title and image links to its own page: `/venta`, `/alquiler` and `/repuestos`, with matching `/en` routes. Descriptions and surrounding space remain non-clickable. The header contains only the COMQ mine symbol linking to the localized homepage, WhatsApp contact and the ES/EN language switch. Each service page currently contains only its translated title, with the shared header and footer. The Spanish homepage service copy is preserved from the original page and translated into English. Local SVG image placeholders appear below the service headings until the original images are supplied.
 
 The original `index.html` remains a separate standalone page. It is excluded from formatting and linting, is not imported by the application and is not served by Next.js. Keep it unchanged.
 
@@ -68,7 +68,7 @@ The URL helper only adds locale prefixes; it does not translate slugs. If transl
 
 `lib/site` centralizes the canonical origin (`https://www.comqcia.com`), company identity, email, phone, WhatsApp and LinkedIn contact links, localized metadata and safe JSON-LD serialization. The sitemap contains the homepage and three service pages in both languages; it deliberately omits invented modification dates. Each service route supplies its own title and description to the metadata helper. Social metadata is text-based. The company and website schemas use the supplied public facts.
 
-Shared decorative icons live in `features/site/icons.tsx`; the WhatsApp icon's license is included in `THIRD_PARTY_NOTICES.md`. The gold C browser icon uses Next.js's native `app/icon.svg` and `app/favicon.ico` conventions for both language branches. The ICO contains 16, 32 and 48px versions of the SVG mark.
+Shared decorative icons live in `features/site/icons.tsx`; the WhatsApp icon's license is included in `THIRD_PARTY_NOTICES.md`. The same gold mine symbol identifies the header, footer and browser icon in both language branches. The browser icon uses Next.js's native `app/icon.svg` and `app/favicon.ico` conventions, copied from the symbol exports in `design/favicon`. The ICO contains 16, 32 and 48px versions of the SVG mark.
 
 The setup adapts these read-only references from the `next-slug-splitter` repository:
 

@@ -2,6 +2,7 @@ import type { Dictionary } from '../types';
 
 const dictionary: Dictionary = {
   navigation: {
+    home: 'Home',
     language: 'Language',
     whatsapp: 'Get a quote',
     whatsappLabel: 'Get a quote on WhatsApp',
@@ -25,6 +26,7 @@ const dictionary: Dictionary = {
       'Original and aftermarket parts for all brands. Always in stock.'
   },
   footer: {
+    contactLinks: 'Contact links',
     location: 'Lima, Peru',
     phone: 'Phone',
     email: 'Email'

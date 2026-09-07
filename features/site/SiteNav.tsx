@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -21,10 +22,19 @@ export function SiteNav({
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <Link
-          className={styles.wordmark}
+          className={styles.brandLink}
           href={createHrefForLocale(locale, '/')}
+          aria-label={`${SITE_NAME} — ${dictionary.navigation.home}`}
         >
-          {SITE_NAME}
+          <Image
+            className={styles.brandIcon}
+            src='/images/comq-symbol.svg'
+            alt=''
+            width={48}
+            height={40}
+            loading='eager'
+            unoptimized
+          />
         </Link>
         <a
           className={styles.whatsappButton}

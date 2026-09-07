@@ -2,6 +2,7 @@ import type { Dictionary } from '../types';
 
 const dictionary: Dictionary = {
   navigation: {
+    home: 'Inicio',
     language: 'Idioma',
     whatsapp: 'Cotizar',
     whatsappLabel: 'Cotizar por WhatsApp',
@@ -25,6 +26,7 @@ const dictionary: Dictionary = {
       'Originales y alternativos para todas las marcas. Stock permanente.'
   },
   footer: {
+    contactLinks: 'Enlaces de contacto',
     location: 'Lima, Perú',
     phone: 'Teléfono',
     email: 'Correo'
