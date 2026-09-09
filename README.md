@@ -6,6 +6,17 @@ Each homepage service title and image links to its own page: `/venta`, `/alquile
 
 The original `index.html` remains a separate standalone page. It is excluded from formatting and linting, is not imported by the application and is not served by Next.js. Keep it unchanged.
 
+The footer's Empresa / Company group links to two separate pages, alongside the
+COMQ symbol, legal company name and location. Acerca de COMQ / About COMQ opens
+`/empresa` (Spanish) or `/en/empresa` (English), where
+`features/company/CompanyPage.tsx` introduces the company, its purpose, its
+customers and its approach.
+Nuestra experiencia / Our experience opens `/experiencia` or `/en/experiencia`,
+where `features/experience/ExperiencePage.tsx` presents Alberto Llana's founder
+experience, biography, portrait and LinkedIn profile. Both pages use the shared
+header/footer, and the language switch preserves the current page. Their slugs
+stay the same in both languages, following the service-page convention.
+
 ## Development
 
 Use Node.js 24 and pnpm 11.1.1, as declared in `.nvmrc` and `package.json`. Install the locked dependencies and start the development server:
@@ -87,7 +98,48 @@ Logo artwork is deliberately fixed: the header/footer symbol and favicons do not
 
 ## Site identity and reference patterns
 
-`lib/site` centralizes the canonical origin (`https://www.comqcia.com`), company identity, email, phone, WhatsApp and LinkedIn contact links, localized metadata and safe JSON-LD serialization. The sitemap contains the homepage and three service pages in both languages; it deliberately omits invented modification dates. Each service route supplies its own title and description to the metadata helper. Social metadata is text-based. The company and website schemas use the supplied public facts.
+### Founder experience
+
+The homepage shows a compact, static company-logo strip below the hero, separated
+by a neutral top divider and the existing charcoal `--color-surface` background.
+Its content stays within the site's standard width, with tighter internal spacing;
+the hero retains its original height and padding. Alberto
+Llana's introduction appears on the separate Our experience page linked from the
+footer. Both use the typed Spanish/English `experience` dictionary; About COMQ
+uses `company` for the company's introduction and purpose. The approved “Over 35 years of
+experience in mining” headline introduces the logos, with a smaller caption
+attributing that experience to the founder's career, not COMQ's age. The caption
+identifies previous employers, not COMQ clients or endorsements; employment
+dates are omitted.
+
+Our experience pairs Alberto's name and translated founder/advisor role with his
+biography and a real portrait. `public/images/company/alberto-llana.jpg` is
+the unchanged 481 × 481 JPEG retrieved from his
+[LinkedIn profile](https://www.linkedin.com/in/alberto-llana-69018592/) on
+September 8, 2026. Next.js serves optimized sizes from this local asset, without
+depending on LinkedIn at runtime. The image remains in its original proportions.
+Only the existing approved biography is used; a dated career timeline is deferred
+until exact roles and employment dates are supplied or verified.
+
+`features/experience/CompanyLogoStrip.tsx` uses the original local logo artwork
+and CSS Modules, with no animation, client state or new library. Its default
+`variant='monochrome'` matches the dark page. To use the alternative, pass
+`variant='colour'` at its homepage call site. That variant uses the paired
+`--color-logo-surface` and `--color-on-logo-surface` theme tokens for a light
+background that keeps the logos' black lettering readable. Logos wrap on narrow
+screens and retain their original proportions and supplied clear space.
+
+The served assets in `public/images/experience` are unchanged copies of the
+official files recorded in [the design notes](design/experience/README.md).
+The public `normet-colour.png` is the black-letter/red-O version, copied from
+the design asset `normet-colour-light.png`. ZANINGROUP uses its original LinkedIn
+JPEG in both variants, with a CSS monochrome treatment on the dark strip. The
+source artwork and provenance notes remain in `design/experience`; both visual
+variants are supported by the shared Next.js component.
+
+### Shared identity
+
+`lib/site` centralizes the canonical origin (`https://www.comqcia.com`), company identity, email, phone, WhatsApp and LinkedIn contact links, localized metadata and safe JSON-LD serialization. The sitemap contains the homepage, three service pages, About COMQ and Our experience in both languages; it deliberately omits invented modification dates. Each service, company and experience route supplies its own title and description to the metadata helper. Social metadata is text-based. The company and website schemas use the supplied public facts.
 
 Shared decorative icons live in `features/site/icons.tsx`; the WhatsApp icon's license is included in `THIRD_PARTY_NOTICES.md`. The same gold mine symbol identifies the header, footer and browser icon in both language branches. The browser icon uses Next.js's native `app/icon.svg` and `app/favicon.ico` conventions, copied from the symbol exports in `design/favicon`. The ICO contains 16, 32 and 48px versions of the SVG mark.
 
