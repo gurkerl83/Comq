@@ -6,9 +6,9 @@ import {
   type SupportedLocale
 } from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
-import { SITE_NAME, WHATSAPP_URL } from '../../lib/site/config';
-import { WhatsAppIcon } from './icons';
+import { SITE_NAME } from '../../lib/site/config';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { QuoteLink } from './QuoteLink';
 import styles from './SiteShell.module.css';
 
 export function SiteNav({
@@ -36,16 +36,10 @@ export function SiteNav({
             unoptimized
           />
         </Link>
-        <a
-          className={styles.whatsappButton}
-          href={WHATSAPP_URL}
-          target='_blank'
-          rel='noopener noreferrer'
-          aria-label={dictionary.navigation.whatsappLabel}
-        >
-          <WhatsAppIcon />
-          {dictionary.navigation.whatsapp}
-        </a>
+        <QuoteLink
+          label={dictionary.navigation.whatsapp}
+          accessibleLabel={dictionary.navigation.whatsappLabel}
+        />
         <LanguageSwitcher
           locale={locale}
           label={dictionary.navigation.language}

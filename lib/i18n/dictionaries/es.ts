@@ -55,6 +55,9 @@ const dictionary: Dictionary = {
     partsDescription:
       'Originales y alternativos para todas las marcas. Stock permanente.'
   },
+  quote: {
+    invitation: 'Hablemos de tus necesidades de equipos mineros.'
+  },
   footer: {
     about: 'Acerca de COMQ',
     expertise: 'Nuestra experiencia',

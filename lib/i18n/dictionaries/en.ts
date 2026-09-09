@@ -55,6 +55,9 @@ const dictionary: Dictionary = {
     partsDescription:
       'Original and aftermarket parts for all brands. Always in stock.'
   },
+  quote: {
+    invitation: 'Let’s discuss your mining equipment needs.'
+  },
   footer: {
     about: 'About COMQ',
     expertise: 'Our experience',

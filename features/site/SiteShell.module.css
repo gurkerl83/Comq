@@ -75,33 +75,6 @@
   text-underline-offset: 0.4em;
 }
 
-.whatsappButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  /* Reserve room for either translation so locale changes keep the same rows. */
-  width: 9rem;
-  min-height: 44px;
-  padding: 0.625rem 0.75rem;
-  border-radius: var(--radius-control);
-  color: var(--color-on-action);
-  background: var(--color-action);
-  font-weight: 700;
-  font-size: 0.9375rem;
-  text-decoration: none;
-}
-
-.whatsappButton svg {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-}
-
-.whatsappButton:hover {
-  background: var(--color-action-hover);
-}
-
 .footer {
   border-top: var(--border-width) solid var(--color-border);
   background: var(--color-surface);
@@ -235,10 +208,6 @@
 
   .languages {
     margin-left: auto;
-  }
-
-  .whatsappButton {
-    max-width: 100%;
   }
 
   .footerInner {

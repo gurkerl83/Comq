@@ -44,6 +44,9 @@ export interface Dictionary {
     partsTitle: string;
     partsDescription: string;
   };
+  quote: {
+    invitation: string;
+  };
   footer: {
     about: string;
     expertise: string;
