@@ -36,7 +36,6 @@ const dictionary: Dictionary = {
   },
   experience: {
     catchphrase: 'Más de 35 años de experiencia en minería.',
-    companies: 'Experiencia profesional previa de nuestro fundador',
     heading: 'La experiencia detrás de COMQ',
     founderRole: 'Fundador · Experto y asesor en minería',
     biography:

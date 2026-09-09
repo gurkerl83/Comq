@@ -7,7 +7,7 @@ Alberto’s biography lives on the Our experience page at `/experiencia` and `/e
 - **Black and white:** official white company logos on COMQ’s charcoal surface; ZANINGROUP’s colour JPEG uses a CSS monochrome treatment.
 - **Colour:** official artwork on a light strip so black lettering remains legible. Sandvik’s current logo is monochrome, so its black version is used here too.
 
-The heading and captions identify **Alberto Llana’s previous professional experience**, based on his [LinkedIn profile](https://www.linkedin.com/in/alberto-llana-69018592/), with ZANINGROUP added at the site owner’s request. The site owner supplied the “Over 35 years of experience in mining” figure, which describes Alberto’s career, not COMQ’s age. These logos are not presented as COMQ customers or endorsements. The strip omits individual employment dates.
+The company selection reflects **Alberto Llana’s previous professional experience**, based on his [LinkedIn profile](https://www.linkedin.com/in/alberto-llana-69018592/), with ZANINGROUP added at the site owner’s request. The site owner supplied the “Over 35 years of experience in mining” figure, which describes Alberto’s career, not COMQ’s age. These logos are not COMQ customer references or endorsements. The strip omits individual employment dates.
 
 ## Official artwork
 

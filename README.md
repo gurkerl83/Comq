@@ -107,10 +107,9 @@ the hero retains its original height and padding. Alberto
 Llana's introduction appears on the separate Our experience page linked from the
 footer. Both use the typed Spanish/English `experience` dictionary; About COMQ
 uses `company` for the company's introduction and purpose. The approved “Over 35 years of
-experience in mining” headline introduces the logos, with a smaller caption
-attributing that experience to the founder's career, not COMQ's age. The caption
-identifies previous employers, not COMQ clients or endorsements; employment
-dates are omitted.
+experience in mining” headline introduces the logos. That figure refers to
+Alberto's career, not COMQ's age. The logos represent his previous professional
+experience, not COMQ clients or endorsements; employment dates are omitted.
 
 Our experience pairs Alberto's name and translated founder/advisor role with his
 biography and a real portrait. `public/images/company/alberto-llana.jpg` is

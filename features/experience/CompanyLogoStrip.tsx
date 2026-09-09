@@ -38,26 +38,17 @@ const companies = [
  */
 export function CompanyLogoStrip({
   catchphrase,
-  caption,
   variant = 'monochrome'
 }: {
   catchphrase: string;
-  caption: string;
   variant?: LogoVariant;
 }) {
   return (
-    <section
-      className={styles.section}
-      aria-labelledby='company-experience'
-      aria-describedby='company-experience-caption'
-    >
+    <section className={styles.section} aria-labelledby='company-experience'>
       <div className={styles.strip} data-variant={variant}>
         <h2 className={styles.heading} id='company-experience'>
           {catchphrase}
         </h2>
-        <p className={styles.caption} id='company-experience-caption'>
-          {caption}
-        </p>
         <ul className={styles.logos} role='list'>
           {companies.map(company => {
             const image = company[variant];

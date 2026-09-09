@@ -28,15 +28,6 @@
   color: var(--color-on-logo-surface);
 }
 
-.caption {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  text-wrap: balance;
-}
-
 .logos {
   display: flex;
   flex-wrap: wrap;

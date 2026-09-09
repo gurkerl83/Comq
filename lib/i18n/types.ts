@@ -29,7 +29,6 @@ export interface Dictionary {
   };
   experience: {
     catchphrase: string;
-    companies: string;
     heading: string;
     founderRole: string;
     biography: string;

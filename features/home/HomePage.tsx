@@ -55,10 +55,7 @@ export function HomePage({
           <p className={styles.description}>{dictionary.home.description}</p>
         </div>
       </section>
-      <CompanyLogoStrip
-        catchphrase={dictionary.experience.catchphrase}
-        caption={dictionary.experience.companies}
-      />
+      <CompanyLogoStrip catchphrase={dictionary.experience.catchphrase} />
       {services.map(service => (
         <section
           key={service.id}
