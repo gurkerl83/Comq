@@ -13,6 +13,10 @@ const dictionary: Dictionary = {
     description:
       'Venta y alquiler de equipos y suministro de repuestos para la minería subterránea en Perú.'
   },
+  experience: {
+    catchphrase: 'Más de 35 años de experiencia en minería.',
+    companies: 'Experiencia profesional previa de nuestro fundador'
+  },
   services: {
     imagePlaceholder: 'Imagen pendiente',
     salesTitle: 'Venta de Equipos',

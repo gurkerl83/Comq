@@ -13,6 +13,10 @@ const dictionary: Dictionary = {
     description:
       'Equipment sales, rentals and spare parts for underground mining in Peru.'
   },
+  experience: {
+    catchphrase: 'Over 35 years of experience in mining.',
+    companies: 'Our founder’s previous professional experience'
+  },
   services: {
     imagePlaceholder: 'Image placeholder',
     salesTitle: 'Equipment Sales',

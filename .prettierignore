@@ -6,3 +6,6 @@ node_modules/
 pnpm-lock.yaml
 next-env.d.ts
 *.tsbuildinfo
+# Preserve the official company logo files exactly as supplied.
+design/experience/assets/
+public/images/experience/

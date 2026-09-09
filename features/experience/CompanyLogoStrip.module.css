@@ -1,0 +1,93 @@
+.section {
+  border-top: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.strip {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--color-muted);
+}
+
+.strip[data-variant='colour'] {
+  background: var(--color-logo-surface);
+  color: var(--color-on-logo-surface);
+}
+
+.heading {
+  margin: 0 0 0.75rem;
+  color: var(--color-text);
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.strip[data-variant='colour'] .heading {
+  color: var(--color-on-logo-surface);
+}
+
+.caption {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem clamp(2rem, 5vw, 4rem);
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logos li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.logos img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.sandvik {
+  width: 184px;
+}
+
+/* Keep the clear space inside Normet's supplied PNG. Its visible mark is
+   about 76% of the canvas width, so the image needs a larger layout width. */
+.normet {
+  width: 244px;
+}
+
+.resemin {
+  width: 175px;
+}
+
+.zaningroup {
+  width: 152px;
+}
+
+/* LinkedIn supplies a colour JPEG on white. Preserve the file and apply
+   the monochrome treatment only when displaying it on the dark strip. */
+.strip[data-variant='monochrome'] .zaningroup {
+  filter: grayscale(1) invert(1) brightness(2);
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 640px) {
+  .strip {
+    padding: 1.5rem 1.25rem;
+  }
+}

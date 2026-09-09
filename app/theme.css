@@ -16,6 +16,10 @@
   --color-on-action: #fff;
   --color-focus-ring: var(--color-accent);
 
+  /* Original coloured logos have dark lettering and need a light surface. */
+  --color-logo-surface: #fff;
+  --color-on-logo-surface: #545454;
+
   --font-family-body: Arial, Helvetica, sans-serif;
   --radius-small: 0.25rem;
   --radius-control: 0.3125rem;

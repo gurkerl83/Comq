@@ -10,6 +10,10 @@ export interface Dictionary {
     slogan: string;
     description: string;
   };
+  experience: {
+    catchphrase: string;
+    companies: string;
+  };
   services: {
     imagePlaceholder: string;
     salesTitle: string;
