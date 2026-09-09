@@ -37,6 +37,8 @@ const dictionary: Dictionary = {
   experience: {
     catchphrase: 'Más de 35 años de experiencia en minería.',
     heading: 'La experiencia detrás de COMQ',
+    highlightHeading: 'Experiencia minera aplicada a tu operación.',
+    yearsLabel: 'años en minería',
     founderRole: 'Fundador · Experto y asesor en minería',
     biography:
       'Alberto Llana, experto y asesor en minería, aporta a COMQ más de 35 años de experiencia en equipos mineros, gestión de servicios y desarrollo comercial, adquirida en Sandvik, Normet y RESEMIN.',

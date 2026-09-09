@@ -47,6 +47,8 @@ export interface Dictionary {
   experience: {
     catchphrase: string;
     heading: string;
+    highlightHeading: string;
+    yearsLabel: string;
     founderRole: string;
     biography: string;
     profileLink: string;

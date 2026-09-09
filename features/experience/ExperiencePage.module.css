@@ -1,57 +1,109 @@
-.section {
+.introduction,
+.highlightContent {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(4rem, 10vw, 8rem) 2rem;
-  text-align: left;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
-.section h1 {
-  margin: 0 0 2.5rem;
-  color: var(--color-accent);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.1;
+.introduction {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.introduction h1 {
+  max-width: 880px;
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.12;
   letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.highlight {
+  background: var(--color-surface);
+}
+
+.highlightContent {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.highlightHeading {
+  max-width: 700px;
+  margin: 0 0 2.5rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 .profile {
   display: grid;
-  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem 4rem;
 }
 
-.portrait {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-media);
-}
-
+.founder,
 .biography {
   min-width: 0;
 }
 
-.biography h2 {
+.experience {
   margin: 0;
-  color: var(--color-text);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.2;
 }
 
-.biography p {
-  max-width: 640px;
+.experience strong {
+  display: block;
+  color: var(--color-accent);
+  font-size: clamp(3.5rem, 7vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.experience span {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.portrait {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.name {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.role {
+  margin: 0.25rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.biography > p {
   margin: 0;
   color: var(--color-muted);
   font-size: 1.0625rem;
   line-height: 1.7;
-}
-
-.biography .role {
-  margin: 0.5rem 0 1.25rem;
-  color: var(--color-accent);
-  font-size: 0.9375rem;
-  line-height: 1.5;
 }
 
 .profileLink {
@@ -60,7 +112,7 @@
   gap: 0.625rem;
   min-height: 44px;
   margin-top: 1.25rem;
-  color: var(--color-text);
+  color: var(--color-accent);
   text-decoration: none;
 }
 
@@ -77,16 +129,18 @@
 }
 
 @media (max-width: 640px) {
-  .section {
-    padding: 4rem 1.25rem;
+  .introduction,
+  .highlightContent {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
   }
 
   .profile {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
-  .portrait {
-    max-width: 240px;
+  .highlightHeading {
+    margin-bottom: 2rem;
   }
 }

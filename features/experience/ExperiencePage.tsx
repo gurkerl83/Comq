@@ -9,37 +9,59 @@ import styles from './ExperiencePage.module.css';
 export function ExperiencePage({ dictionary }: { dictionary: Dictionary }) {
   return (
     <>
-      <section
-        id='expertise'
-        className={styles.section}
-        aria-labelledby='founder-heading'
-      >
-        <h1 id='founder-heading'>{dictionary.experience.heading}</h1>
-        <div className={styles.profile}>
-          <Image
-            className={styles.portrait}
-            src='/images/company/alberto-llana.jpg'
-            alt={FOUNDER_NAME}
-            width={481}
-            height={481}
-            sizes='(max-width: 640px) 240px, 280px'
-          />
-          <div className={styles.biography}>
-            <h2>{FOUNDER_NAME}</h2>
-            <p className={styles.role}>{dictionary.experience.founderRole}</p>
-            <p>{dictionary.experience.biography}</p>
-            <a
-              className={styles.profileLink}
-              href={LINKEDIN_URL}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <LinkedInIcon />
-              <span>{dictionary.experience.profileLink}</span>
-            </a>
+      <article id='expertise' aria-labelledby='founder-heading'>
+        <header className={styles.introduction}>
+          <h1 id='founder-heading'>{dictionary.experience.heading}</h1>
+        </header>
+        <section
+          className={styles.highlight}
+          aria-labelledby='experience-heading'
+        >
+          <div className={styles.highlightContent}>
+            <h2 id='experience-heading' className={styles.highlightHeading}>
+              {dictionary.experience.highlightHeading}
+            </h2>
+            <div className={styles.profile}>
+              {/* The experience figure belongs to Alberto's career, not COMQ's age. */}
+              <div className={styles.founder}>
+                <p className={styles.experience}>
+                  <strong>35+</strong>
+                  <span>{dictionary.experience.yearsLabel}</span>
+                </p>
+                <div className={styles.person}>
+                  <Image
+                    className={styles.portrait}
+                    src='/images/company/alberto-llana.jpg'
+                    alt={FOUNDER_NAME}
+                    width={481}
+                    height={481}
+                    sizes='64px'
+                    loading='eager'
+                  />
+                  <div>
+                    <p className={styles.name}>{FOUNDER_NAME}</p>
+                    <p className={styles.role}>
+                      {dictionary.experience.founderRole}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.biography}>
+                <p>{dictionary.experience.biography}</p>
+                <a
+                  className={styles.profileLink}
+                  href={LINKEDIN_URL}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <LinkedInIcon />
+                  <span>{dictionary.experience.profileLink}</span>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </article>
       <QuoteInvitation dictionary={dictionary} />
     </>
   );

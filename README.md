@@ -127,8 +127,11 @@ experience in mining” headline introduces the logos. That figure refers to
 Alberto's career, not COMQ's age. The logos represent his previous professional
 experience, not COMQ clients or endorsements; employment dates are omitted.
 
-Our experience pairs Alberto's name and translated founder/advisor role with his
-biography and a real portrait. `public/images/company/alberto-llana.jpg` is
+Our experience uses a charcoal feature with a large gold “35+” on the left and
+a compact portrait, Alberto's name and translated founder/advisor role beneath.
+The translated heading spans both columns; the biography and LinkedIn link sit
+on the right. The columns stack on narrow screens. The figure describes Alberto's mining
+career, not COMQ's age. `public/images/company/alberto-llana.jpg` is
 the unchanged 481 × 481 JPEG retrieved from his
 [LinkedIn profile](https://www.linkedin.com/in/alberto-llana-69018592/) on
 September 8, 2026. Next.js serves optimized sizes from this local asset, without
