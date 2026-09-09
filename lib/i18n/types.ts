@@ -45,7 +45,9 @@ export interface Dictionary {
     partsDescription: string;
   };
   footer: {
-    contactLinks: string;
+    about: string;
+    expertise: string;
+    contact: string;
     location: string;
     phone: string;
     email: string;

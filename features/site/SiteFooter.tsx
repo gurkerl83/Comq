@@ -1,5 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
+import {
+  createHrefForLocale,
+  type SupportedLocale
+} from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
 import {
   CONTACT_EMAIL,
@@ -11,7 +16,13 @@ import {
 import { LinkedInIcon, MailIcon, PhoneIcon } from './icons';
 import styles from './SiteShell.module.css';
 
-export function SiteFooter({ dictionary }: { dictionary: Dictionary }) {
+export function SiteFooter({
+  locale,
+  dictionary
+}: {
+  locale: SupportedLocale;
+  dictionary: Dictionary;
+}) {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
@@ -30,11 +41,30 @@ export function SiteFooter({ dictionary }: { dictionary: Dictionary }) {
           </div>
         </div>
         <nav
-          className={styles.contacts}
-          aria-label={dictionary.footer.contactLinks}
+          className={styles.footerNavigation}
+          aria-labelledby='footer-company-heading'
         >
+          <h2 id='footer-company-heading'>{dictionary.company.title}</h2>
+          <Link
+            className={styles.footerLink}
+            href={createHrefForLocale(locale, '/empresa')}
+          >
+            {dictionary.footer.about}
+          </Link>
+          <Link
+            className={styles.footerLink}
+            href={createHrefForLocale(locale, '/experiencia')}
+          >
+            {dictionary.footer.expertise}
+          </Link>
+        </nav>
+        <nav
+          className={styles.footerNavigation}
+          aria-labelledby='footer-contact-heading'
+        >
+          <h2 id='footer-contact-heading'>{dictionary.footer.contact}</h2>
           <a
-            className={styles.socialLink}
+            className={styles.footerLink}
             href={`mailto:${CONTACT_EMAIL}`}
             aria-label={`${dictionary.footer.email}: ${CONTACT_EMAIL}`}
           >
@@ -42,23 +72,29 @@ export function SiteFooter({ dictionary }: { dictionary: Dictionary }) {
             {dictionary.footer.email}
           </a>
           <a
-            className={styles.socialLink}
+            className={styles.footerLink}
             href={PHONE_URL}
             aria-label={`${dictionary.footer.phone}: ${PHONE_NUMBER}`}
           >
             <PhoneIcon />
             {dictionary.footer.phone}
           </a>
+        </nav>
+        <div className={styles.footerBottom}>
+          <p>
+            © {new Date().getFullYear()} {LEGAL_NAME}
+          </p>
           <a
-            className={styles.socialLink}
+            className={styles.footerSocialLink}
             href={LINKEDIN_URL}
+            aria-label='LinkedIn'
+            title='LinkedIn'
             target='_blank'
             rel='noopener noreferrer'
           >
             <LinkedInIcon />
-            LinkedIn
           </a>
-        </nav>
+        </div>
       </div>
     </footer>
   );

@@ -56,7 +56,9 @@ const dictionary: Dictionary = {
       'Originales y alternativos para todas las marcas. Stock permanente.'
   },
   footer: {
-    contactLinks: 'Enlaces de contacto',
+    about: 'Acerca de COMQ',
+    expertise: 'Nuestra experiencia',
+    contact: 'Contacto',
     location: 'Lima, Perú',
     phone: 'Teléfono',
     email: 'Correo'

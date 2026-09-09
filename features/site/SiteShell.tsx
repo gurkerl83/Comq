@@ -24,7 +24,7 @@ export function SiteShell({
       <main id='main-content' tabIndex={-1}>
         {children}
       </main>
-      <SiteFooter dictionary={dictionary} />
+      <SiteFooter locale={locale} dictionary={dictionary} />
     </>
   );
 }

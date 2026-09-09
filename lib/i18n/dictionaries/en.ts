@@ -56,7 +56,9 @@ const dictionary: Dictionary = {
       'Original and aftermarket parts for all brands. Always in stock.'
   },
   footer: {
-    contactLinks: 'Contact links',
+    about: 'About COMQ',
+    expertise: 'Our experience',
+    contact: 'Contact',
     location: 'Lima, Peru',
     phone: 'Phone',
     email: 'Email'
