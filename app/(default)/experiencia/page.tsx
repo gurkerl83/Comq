@@ -1,0 +1,17 @@
+import { ExperiencePage } from '../../../features/experience/ExperiencePage';
+import { getDictionary } from '../../../lib/i18n/dictionaries';
+import { DEFAULT_LOCALE } from '../../../lib/i18n/locales';
+import { createPageMetadata } from '../../../lib/site/metadata';
+
+export async function generateMetadata() {
+  const dictionary = await getDictionary(DEFAULT_LOCALE);
+  return createPageMetadata(DEFAULT_LOCALE, dictionary, '/experiencia', {
+    title: dictionary.experience.heading,
+    description: dictionary.experience.biography
+  });
+}
+
+export default async function Page() {
+  const dictionary = await getDictionary(DEFAULT_LOCALE);
+  return <ExperiencePage dictionary={dictionary} />;
+}

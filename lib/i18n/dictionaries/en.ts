@@ -13,9 +13,35 @@ const dictionary: Dictionary = {
     description:
       'Equipment sales, rentals and spare parts for underground mining in Peru.'
   },
+  company: {
+    title: 'Company',
+    heading: 'About COMQ',
+    description:
+      'COMQ brings practical mining experience to equipment sales, rental and spare-parts supply for underground operations.',
+    purpose: {
+      heading: 'The idea behind COMQ',
+      description:
+        'Our aim is to help customers choose solutions suited to their underground operations, with clear advice and direct contact. We bring together knowledge of mining equipment and an understanding of the day-to-day needs of a mine to support those decisions.'
+    },
+    customers: {
+      heading: 'Focused on each operation',
+      description:
+        'Every operation has its own requirements. Whether the need is to purchase equipment, arrange a rental or source spare parts, our starting point is to understand the intended use and what the customer needs to keep working.'
+    },
+    approach: {
+      heading: 'How we work',
+      description:
+        'We believe useful advice starts with listening. Our approach combines practical equipment knowledge, clear communication and a direct relationship with the customer, from the initial enquiry to discussing a suitable solution.'
+    }
+  },
   experience: {
     catchphrase: 'Over 35 years of experience in mining.',
-    companies: 'Our founder’s previous professional experience'
+    companies: 'Our founder’s previous professional experience',
+    heading: 'The experience behind COMQ',
+    founderRole: 'Founder · Mining expert and advisor',
+    biography:
+      'Alberto Llana, mining expert and advisor, brings COMQ over 35 years of experience in mining equipment, service management and business development gained at Sandvik, Normet and RESEMIN.',
+    profileLink: 'Explore Alberto’s professional background'
   },
   services: {
     imagePlaceholder: 'Image placeholder',

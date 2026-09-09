@@ -1,0 +1,48 @@
+.page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+}
+
+.introduction h1 {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.introduction p,
+.section p {
+  max-width: 700px;
+  margin: 1.5rem 0 0;
+  color: var(--color-muted);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.section {
+  margin-top: 3.5rem;
+}
+
+.section h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+.section p {
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 4rem 1.25rem;
+  }
+
+  .section {
+    margin-top: 2.5rem;
+  }
+}

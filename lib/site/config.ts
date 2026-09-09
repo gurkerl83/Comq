@@ -1,5 +1,6 @@
 export const SITE_NAME = 'COMQ';
 export const LEGAL_NAME = 'COMQ CIA S.A.C';
+export const FOUNDER_NAME = 'Alberto Llana';
 export const SITE_URL = 'https://www.comqcia.com';
 export const PHONE_NUMBER = '+51 980 523 531';
 export const PHONE_URL = `tel:${PHONE_NUMBER.replaceAll(' ', '')}`;

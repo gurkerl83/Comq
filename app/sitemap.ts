@@ -10,10 +10,17 @@ import { createLanguageAlternates } from '../lib/site/metadata';
  * Only published pages are listed; modification dates require actual content
  * changes and are not inferred from when the application builds or runs.
  *
- * @returns Sitemap entries for the Spanish and English home and service pages.
+ * @returns Sitemap entries for Spanish and English home, service, company and experience pages.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ['/', '/venta', '/alquiler', '/repuestos'].flatMap(pathname =>
+  return [
+    '/',
+    '/venta',
+    '/alquiler',
+    '/repuestos',
+    '/empresa',
+    '/experiencia'
+  ].flatMap(pathname =>
     SUPPORTED_LOCALES.map(locale => ({
       url: createSiteUrl(createHrefForLocale(locale, pathname)),
       alternates: {

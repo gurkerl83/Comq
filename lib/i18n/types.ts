@@ -10,9 +10,30 @@ export interface Dictionary {
     slogan: string;
     description: string;
   };
+  company: {
+    title: string;
+    heading: string;
+    description: string;
+    purpose: {
+      heading: string;
+      description: string;
+    };
+    customers: {
+      heading: string;
+      description: string;
+    };
+    approach: {
+      heading: string;
+      description: string;
+    };
+  };
   experience: {
     catchphrase: string;
     companies: string;
+    heading: string;
+    founderRole: string;
+    biography: string;
+    profileLink: string;
   };
   services: {
     imagePlaceholder: string;
