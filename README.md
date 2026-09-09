@@ -125,8 +125,9 @@ and CSS Modules, with no animation, client state or new library. Its default
 `variant='monochrome'` matches the dark page. To use the alternative, pass
 `variant='colour'` at its homepage call site. That variant uses the paired
 `--color-logo-surface` and `--color-on-logo-surface` theme tokens for a light
-background that keeps the logos' black lettering readable. Logos wrap on narrow
-screens and retain their original proportions and supplied clear space.
+background that keeps the logos' black lettering readable. All four logos occupy
+one row of equal columns on desktop and a two-by-two grid at widths of 640px or
+less, retaining their original proportions and supplied clear space.
 
 The served assets in `public/images/experience` are unchanged copies of the
 official files recorded in [the design notes](design/experience/README.md).
