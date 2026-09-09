@@ -54,6 +54,92 @@ const dictionary: Dictionary = {
     partsDescription:
       'Originales y alternativos para todas las marcas. Stock permanente.'
   },
+  servicePages: {
+    quoteHeading: 'Cuéntanos qué necesita tu operación.',
+    pages: {
+      sales: {
+        title: 'Venta de equipos para minería subterránea',
+        introduction:
+          'Jumbos, scoops y perforadoras, con asesoría adaptada a tu operación.',
+        options: {
+          heading: 'Equipos y aplicaciones',
+          items: [
+            'Tipos de equipos y aplicaciones previstas',
+            'Modelos, fotografías y especificaciones técnicas',
+            'Disponibilidad y estado de los equipos'
+          ]
+        },
+        details: {
+          heading: 'Detalles de entrega y compra',
+          items: [
+            'Modalidades y plazos de entrega para tu destino',
+            'Consultas sobre documentación, pago y garantía',
+            'Requerimientos que aclarar antes de la compra'
+          ]
+        },
+        quoteRequirements: [
+          'Tipo de equipo',
+          'Especificaciones requeridas',
+          'Cantidad',
+          'Destino'
+        ]
+      },
+      rentals: {
+        title: 'Alquiler de equipos para minería subterránea',
+        introduction:
+          'Conversemos sobre los equipos que necesita tu mina, el plazo y los requerimientos de operación.',
+        options: {
+          heading: 'Flota y opciones de alquiler',
+          items: [
+            'Tipos de equipos y unidades a evaluar',
+            'Especificaciones e idoneidad para el trabajo',
+            'Duración del alquiler y disponibilidad de equipos'
+          ]
+        },
+        details: {
+          heading: 'Cobertura, mantenimiento y condiciones de alquiler',
+          items: [
+            'Ubicación de la mina y traslado de los equipos',
+            'Alcance del mantenimiento y responsabilidades del cliente',
+            'Necesidades de operadores, consumibles y condiciones de alquiler'
+          ]
+        },
+        quoteRequirements: [
+          'Equipo requerido',
+          'Ubicación de la mina',
+          'Fecha de inicio',
+          'Duración del alquiler'
+        ]
+      },
+      parts: {
+        title: 'Repuestos para equipos de minería subterránea',
+        introduction:
+          'Conversemos sobre repuestos originales y alternativos para tus equipos y su aplicación.',
+        options: {
+          heading: 'Repuestos y compatibilidad con tus equipos',
+          items: [
+            'Marcas, modelos de equipos y tipos de repuestos',
+            'Números de parte, números de serie y compatibilidad',
+            'Cantidades requeridas y consulta de disponibilidad'
+          ]
+        },
+        details: {
+          heading: 'Detalles de suministro, entrega y calidad',
+          items: [
+            'Plazos y modalidades de entrega para tu destino',
+            'Opciones originales y alternativas para comparar',
+            'Consultas sobre garantía y devoluciones'
+          ]
+        },
+        quoteRequirements: [
+          'Modelo del equipo',
+          'Número de parte o fotografía',
+          'Cantidad',
+          'Destino'
+        ]
+      }
+    }
+  },
   quote: {
     invitation: 'Hablemos de tus necesidades de equipos mineros.'
   },

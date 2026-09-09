@@ -4,7 +4,6 @@ import type { SupportedLocale } from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
 import { SiteNav } from './SiteNav';
 import { SiteFooter } from './SiteFooter';
-import { QuoteInvitation } from './QuoteInvitation';
 import styles from './SiteShell.module.css';
 
 export function SiteShell({
@@ -23,8 +22,8 @@ export function SiteShell({
       </a>
       <SiteNav locale={locale} dictionary={dictionary} />
       <main id='main-content' tabIndex={-1}>
+        {/* Pages own closing actions so service-specific quotes are not duplicated. */}
         {children}
-        <QuoteInvitation dictionary={dictionary} />
       </main>
       <SiteFooter locale={locale} dictionary={dictionary} />
     </>

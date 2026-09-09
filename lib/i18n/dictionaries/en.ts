@@ -54,6 +54,92 @@ const dictionary: Dictionary = {
     partsDescription:
       'Original and aftermarket parts for all brands. Always in stock.'
   },
+  servicePages: {
+    quoteHeading: 'Tell us what your operation needs.',
+    pages: {
+      sales: {
+        title: 'Underground mining equipment for sale',
+        introduction:
+          'Jumbos, scooptrams and drilling rigs, with advice shaped around your operation.',
+        options: {
+          heading: 'Equipment and applications',
+          items: [
+            'Equipment categories and intended applications',
+            'Models, photos and technical specifications',
+            'Availability and equipment condition'
+          ]
+        },
+        details: {
+          heading: 'Delivery and purchase details',
+          items: [
+            'Delivery arrangements and lead times for your destination',
+            'Documentation, payment and warranty questions',
+            'Requirements to clarify before purchase'
+          ]
+        },
+        quoteRequirements: [
+          'Equipment type',
+          'Required specification',
+          'Quantity',
+          'Destination'
+        ]
+      },
+      rentals: {
+        title: 'Equipment rental for underground mining',
+        introduction:
+          'Discuss the equipment your mine needs, the duration and operating requirements.',
+        options: {
+          heading: 'Fleet and rental options',
+          items: [
+            'Equipment categories and units to consider',
+            'Specifications and suitability for the work',
+            'Rental duration and equipment availability'
+          ]
+        },
+        details: {
+          heading: 'Coverage, maintenance and rental terms',
+          items: [
+            'Mine location and mobilisation arrangements',
+            'Maintenance scope and customer responsibilities',
+            'Operator needs, consumables and rental terms'
+          ]
+        },
+        quoteRequirements: [
+          'Equipment requirement',
+          'Mine location',
+          'Start date',
+          'Rental duration'
+        ]
+      },
+      parts: {
+        title: 'Spare parts for underground mining equipment',
+        introduction:
+          'Discuss original and aftermarket parts for your equipment and application.',
+        options: {
+          heading: 'Parts and equipment compatibility',
+          items: [
+            'Equipment brands, models and part categories',
+            'Part numbers, serial numbers and compatibility',
+            'Required quantities and availability checks'
+          ]
+        },
+        details: {
+          heading: 'Supply, delivery and quality details',
+          items: [
+            'Lead times and delivery arrangements for your destination',
+            'Original and aftermarket options to compare',
+            'Warranty and returns questions'
+          ]
+        },
+        quoteRequirements: [
+          'Equipment model',
+          'Part number or photo',
+          'Quantity',
+          'Destination'
+        ]
+      }
+    }
+  },
   quote: {
     invitation: 'Let’s discuss your mining equipment needs.'
   },

@@ -12,6 +12,7 @@ import {
 } from '../../lib/site/json-ld';
 import { CompanyLogoStrip } from '../experience/CompanyLogoStrip';
 import { ArrowRightIcon } from '../site/icons';
+import { QuoteInvitation } from '../site/QuoteInvitation';
 import styles from './HomePage.module.css';
 import { ServiceImagePlaceholder } from './ServiceImagePlaceholder';
 
@@ -85,6 +86,7 @@ export function HomePage({
           <p>{service.description}</p>
         </section>
       ))}
+      <QuoteInvitation dictionary={dictionary} />
     </>
   );
 }

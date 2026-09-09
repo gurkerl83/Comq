@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: LocalePageProps) {
   if (!isPrefixedLocale(locale)) notFound();
   const dictionary = await getDictionary(locale);
   return createPageMetadata(locale, dictionary, '/repuestos', {
-    title: dictionary.services.partsTitle,
-    description: dictionary.services.partsDescription
+    title: dictionary.servicePages.pages.parts.title,
+    description: dictionary.servicePages.pages.parts.introduction
   });
 }
 
@@ -21,5 +21,5 @@ export default async function Page({ params }: LocalePageProps) {
   const { locale } = await params;
   if (!isPrefixedLocale(locale)) notFound();
   const dictionary = await getDictionary(locale);
-  return <ServicePage title={dictionary.services.partsTitle} />;
+  return <ServicePage dictionary={dictionary} service='parts' />;
 }

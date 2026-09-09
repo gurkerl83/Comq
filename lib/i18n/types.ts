@@ -1,3 +1,20 @@
+export type ServiceKey = 'sales' | 'rentals' | 'parts';
+
+/** Shared content shape for the three authored service pages in each locale. */
+export interface ServicePageContent {
+  title: string;
+  introduction: string;
+  options: {
+    heading: string;
+    items: string[];
+  };
+  details: {
+    heading: string;
+    items: string[];
+  };
+  quoteRequirements: string[];
+}
+
 export interface Dictionary {
   navigation: {
     home: string;
@@ -42,6 +59,10 @@ export interface Dictionary {
     rentalsDescription: string;
     partsTitle: string;
     partsDescription: string;
+  };
+  servicePages: {
+    quoteHeading: string;
+    pages: Record<ServiceKey, ServicePageContent>;
   };
   quote: {
     invitation: string;

@@ -2,7 +2,7 @@
 
 A standalone Next.js App Router application for COMQ, with Spanish at `/` and English at `/en`. The homepage includes the shared navigation, footer, company introduction and equipment sales, rentals and spare-parts sections. It uses server components, typed dictionaries and CSS Modules.
 
-Each homepage service title and image links to its own page: `/venta`, `/alquiler` and `/repuestos`, with matching `/en` routes. Descriptions and surrounding space remain non-clickable. The header contains only the COMQ mine symbol linking to the localized homepage, WhatsApp contact and the ES/EN language switch. Each service page currently contains only its translated title, with the shared header and footer. The homepage service copy is adapted from the original Spanish page and translated into English, with equipment sales now advertising immediate delivery worldwide. Shared SVG image placeholders follow the theme below the service headings until the original images are supplied.
+Each homepage service title and image links to its own page: `/venta`, `/alquiler` and `/repuestos`, with matching `/en` routes. Descriptions and surrounding space remain non-clickable. The header contains only the COMQ mine symbol linking to the localized homepage, WhatsApp contact and the ES/EN language switch. Each service page presents a translated offer, relevant options, practical details and a contextual quote request, with the shared header and footer. The homepage service copy is adapted from the original Spanish page and translated into English, with equipment sales now advertising immediate delivery worldwide. Shared SVG image placeholders follow the theme below the service headings until the original images are supplied.
 
 The original `index.html` remains a separate standalone page. It is excluded from formatting and linting, is not imported by the application and is not served by Next.js. Keep it unchanged.
 
@@ -74,6 +74,22 @@ Route entrypoints load a server-only dictionary and pass the locale and translat
 Create thin `.tsx` page entrypoints in both native branches and share the page implementation in `features`. For example, an `equipos/page.tsx` entrypoint in each branch creates `/equipos` and `/en/equipos`. Keep locale validation in the prefixed page and pass its dictionary explicitly.
 
 The URL helper only adds locale prefixes; it does not translate slugs. If translated paths are needed, author explicit route wrappers and a corresponding URL mapping. Update the navigation and language-switch links to point to the actual matching pages. Extend metadata with page-specific titles and descriptions, matching canonical URLs and language alternates, and add only implemented pages to the sitemap. Do not add placeholder service links.
+
+### Service page content
+
+The three service pages share `features/services/ServicePage.tsx` and typed
+Spanish/English `servicePages` dictionaries. Each focuses on the offer, options to
+discuss, practical details and the information needed to request a quote.
+Alberto's biography remains on the separate Our experience page.
+The copy guides buyers through their requirements; actual inventory, equipment
+details, availability and commercial terms still need confirmation. It does not
+present an invented catalogue. Service route metadata uses each page's title and
+introduction.
+
+Closing quote actions belong to the page features. Home, About COMQ and Our
+experience render the shared `QuoteInvitation` after their main content. Service
+pages provide their own contextual closing section, so `SiteShell` does not add
+a duplicate invitation.
 
 ## Theme and styling
 

@@ -1,20 +1,89 @@
-.section {
+.offer,
+.details,
+.closing {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
-.section h1 {
+.offer {
+  padding-top: clamp(3rem, 6vw, 5rem);
+}
+
+.title {
+  max-width: 880px;
   margin: 0;
-  color: var(--color-accent);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.1;
+  color: var(--color-text);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.12;
   letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.introduction {
+  max-width: 650px;
+  margin: 1.5rem 0 1.75rem;
+  color: var(--color-muted);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.detailSection {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.detailSection h2,
+.closing h2 {
+  max-width: 800px;
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.detailSection ul {
+  max-width: 800px;
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.detailSection li + li {
+  margin-top: 0.5rem;
+}
+
+.closing {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.requirements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 0 0 1.75rem;
+  padding-left: 1.25rem;
+  color: var(--color-muted);
+  line-height: 1.6;
 }
 
 @media (max-width: 640px) {
-  .section {
-    padding: 4rem 1.25rem;
+  .offer,
+  .details,
+  .closing {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .requirements {
+    display: block;
+  }
+
+  .requirements li + li {
+    margin-top: 0.25rem;
   }
 }

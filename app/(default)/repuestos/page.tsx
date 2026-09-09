@@ -6,12 +6,12 @@ import { createPageMetadata } from '../../../lib/site/metadata';
 export async function generateMetadata() {
   const dictionary = await getDictionary(DEFAULT_LOCALE);
   return createPageMetadata(DEFAULT_LOCALE, dictionary, '/repuestos', {
-    title: dictionary.services.partsTitle,
-    description: dictionary.services.partsDescription
+    title: dictionary.servicePages.pages.parts.title,
+    description: dictionary.servicePages.pages.parts.introduction
   });
 }
 
 export default async function Page() {
   const dictionary = await getDictionary(DEFAULT_LOCALE);
-  return <ServicePage title={dictionary.services.partsTitle} />;
+  return <ServicePage dictionary={dictionary} service='parts' />;
 }
