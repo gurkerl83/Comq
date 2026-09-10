@@ -1,0 +1,15 @@
+.symbol {
+  display: block;
+  flex-shrink: 0;
+  color: var(--color-brand);
+  background-color: currentColor;
+  /* Use the unchanged SVG's transparency so gradients cannot alter the brand color. */
+  mask: url('/images/comq-symbol.svg') center / contain no-repeat;
+  mask-mode: alpha;
+}
+
+@media (forced-colors: active) {
+  .symbol {
+    background-color: CanvasText;
+  }
+}

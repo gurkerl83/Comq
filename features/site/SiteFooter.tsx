@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -14,6 +13,7 @@ import {
   PHONE_URL
 } from '../../lib/site/config';
 import { LinkedInIcon, MailIcon, PhoneIcon } from './icons';
+import { BrandSymbol } from './BrandSymbol';
 import styles from './SiteShell.module.css';
 
 export function SiteFooter({
@@ -27,14 +27,7 @@ export function SiteFooter({
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
         <div className={styles.footerBrand}>
-          <Image
-            className={styles.footerBrandIcon}
-            src='/images/comq-symbol.svg'
-            alt=''
-            width={40}
-            height={34}
-            unoptimized
-          />
+          <BrandSymbol className={styles.footerBrandIcon} />
           <div className={styles.company}>
             <p>{LEGAL_NAME}</p>
             <p className={styles.location}>{dictionary.footer.location}</p>

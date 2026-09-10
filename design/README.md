@@ -33,7 +33,7 @@ SVG canvas sizes are coordinate units, not required on-screen sizes. PNG dimensi
 
 The header symbol is transparent, tightly framed and centered. Both favicons show the centered symbol on a `#080808` rounded square with a 10-unit corner radius and transparent outer corners. The ICO contains 32-bit DIB raster frames with alpha.
 
-These exports omit COMQ lettering. Their gold gradients and favicon background are embedded and do not inherit CSS theme tokens.
+These exports omit COMQ lettering. Their gold gradients and favicon background remain embedded in the original files. The website uses the header export's alpha shape as a CSS mask for theme-aware color; favicons display their original gold gradients and background.
 
 ## Website copies
 
@@ -45,15 +45,17 @@ Sources are relative to this directory; website paths are relative to the projec
 | `favicon/comq-symbol.svg` | [app/icon.svg](../app/icon.svg)                                   |
 | `favicon/comq-symbol.ico` | [app/favicon.ico](../app/favicon.ico)                             |
 
-| Location                                  | Purpose             | Display size       |
-| ----------------------------------------- | ------------------- | ------------------ |
-| [Header](../features/site/SiteNav.tsx)    | Localized home link | 48 × 40 CSS px     |
-| [Footer](../features/site/SiteFooter.tsx) | Company identity    | 40 × 34 CSS px     |
-| Browser                                   | SVG / ICO favicon   | Browser-controlled |
+| Location                                  | Purpose             | Display size       | Rendering             |
+| ----------------------------------------- | ------------------- | ------------------ | --------------------- |
+| [Header](../features/site/SiteNav.tsx)    | Localized home link | 48 × 40 CSS px     | CSS alpha mask        |
+| [Footer](../features/site/SiteFooter.tsx) | Company identity    | 40 × 34 CSS px     | CSS alpha mask        |
+| Browser                                   | SVG / ICO favicon   | Browser-controlled | Original gold artwork |
 
 The header link has a minimum **48 × 44 CSS px** target. The footer symbol is decorative, beside COMQ CIA S.A.C and the location.
 
-Header and footer share `/images/comq-symbol.svg`, served unchanged with `unoptimized`. Their image boxes use `object-fit: contain` in [SiteShell.module.css](../features/site/SiteShell.module.css), preserving proportions. Image sizes stay fixed at mobile breakpoints; only the surrounding layout changes. No separate footer export is needed.
+Header and footer use the shared server component [BrandSymbol.tsx](../features/site/BrandSymbol.tsx). Its [CSS Module](../features/site/BrandSymbol.module.css) loads the unchanged `/images/comq-symbol.svg` as an alpha mask, centered with `contain` sizing and no repetition to preserve proportions. The mask lets one SVG follow the theme; CSS `color` cannot override the embedded fills of an SVG loaded through `next/image`.
+
+The component uses `--color-brand` for `color` and `currentColor` for its background: gold (`#d4af37`) in the default dark theme and charcoal (`--color-text`, `#20201d`) in light mode. The large homepage COMQ heading shares this brand token independently of UI accents. Forced-colors mode uses the system `CanvasText` color. Symbol sizes stay fixed at mobile breakpoints; only the surrounding layout changes. Theme variants and the footer need no separate image exports.
 
 Next.js automatically adds icon links for `app/icon.svg` and root `app/favicon.ico`. The SVG scales from its 64 × 64 canvas; the ICO offers 16, 32 and 48 px frames. No manual metadata or locale-specific icons are needed.
 
@@ -91,7 +93,7 @@ These settings preserve composition; raster antialiasing and encoding may vary b
 
 ## Updating website copies
 
-Update the source export first, then replace its mapped website copy. A header change does not update the favicon composition. For brand-wide changes, regenerate both compositions and the ICO frames before replacing all three website copies.
+For artwork changes, update the source export first, then replace its mapped website copy. A header change does not update the favicon composition. Changes intended for both compositions require regenerating them and the ICO frames before replacing all three website copies. Theme colors are runtime styling in [app/theme.css](../app/theme.css) and require no changes to masters, exports or website image copies.
 
 From the project root, check each pair:
 

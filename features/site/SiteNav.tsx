@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -7,6 +6,7 @@ import {
 } from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
 import { SITE_NAME } from '../../lib/site/config';
+import { BrandSymbol } from './BrandSymbol';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { QuoteLink } from './QuoteLink';
 import { ThemeToggle } from './ThemeToggle';
@@ -27,15 +27,7 @@ export function SiteNav({
           href={createHrefForLocale(locale, '/')}
           aria-label={`${SITE_NAME} — ${dictionary.navigation.home}`}
         >
-          <Image
-            className={styles.brandIcon}
-            src='/images/comq-symbol.svg'
-            alt=''
-            width={48}
-            height={40}
-            loading='eager'
-            unoptimized
-          />
+          <BrandSymbol className={styles.brandIcon} />
         </Link>
         <QuoteLink
           label={dictionary.navigation.whatsapp}
