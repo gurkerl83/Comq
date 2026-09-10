@@ -116,10 +116,10 @@ Logo artwork is deliberately fixed: the header/footer symbol and favicons do not
 
 ### Founder experience
 
-The homepage shows a compact, static company-logo strip below the hero, separated
-by a neutral top divider and the existing charcoal `--color-surface` background.
-Its content stays within the site's standard width, with tighter internal spacing;
-the hero retains its original height and padding. Alberto
+The homepage shows a compact, static company-logo band below the hero, with no
+divider directly above or below it. Dividers between the service sections remain.
+The background spans the full page width; inner content stays within 1200px with
+the existing padding and layout. The hero retains its original height and padding. Alberto
 Llana's introduction appears on the separate Our experience page linked from the
 footer. Both use the typed Spanish/English `experience` dictionary; About COMQ
 uses `company` for the company's introduction and purpose. The approved “Over 35 years of
@@ -139,22 +139,27 @@ depending on LinkedIn at runtime. The image remains in its original proportions.
 Only the existing approved biography is used; a dated career timeline is deferred
 until exact roles and employment dates are supplied or verified.
 
-`features/experience/CompanyLogoStrip.tsx` uses the original local logo artwork
+`features/experience/CompanyLogoStrip.tsx` uses local logo artwork
 and CSS Modules, with no animation, client state or new library. Its default
-`variant='monochrome'` matches the dark page. To use the alternative, pass
-`variant='colour'` at its homepage call site. That variant uses the paired
-`--color-logo-surface` and `--color-on-logo-surface` theme tokens for a light
-background that keeps the logos' black lettering readable. All four logos occupy
+`variant='monochrome'` matches the dark page. Pass `variant='colour'` at the
+homepage call site to compare the colour version. The colour variant applies
+`--color-logo-surface` (`#f3f2ee`) to the full-width outer section and pairs it with
+`--color-on-logo-surface` for readable text. All four logos occupy
 one row of equal columns on desktop and a two-by-two grid at widths of 640px or
 less, retaining their original proportions and supplied clear space.
 
-The served assets in `public/images/experience` are unchanged copies of the
-official files recorded in [the design notes](design/experience/README.md).
-The public `normet-colour.png` is the black-letter/red-O version, copied from
-the design asset `normet-colour-light.png`. ZANINGROUP uses its original LinkedIn
-JPEG in both variants, with a CSS monochrome treatment on the dark strip. The
-source artwork and provenance notes remain in `design/experience`; both visual
-variants are supported by the shared Next.js component.
+Employer logos are grouped into `colour/` and `monochrome/`, with lowercase
+company-only filenames. The eight website assets in `public/images/experience`
+mirror the same paths under `design/experience/assets`, copied unchanged as
+recorded in [the design notes](design/experience/README.md). Each variant uses
+SVGs for Sandvik, RESEMIN and ZANINGROUP and a PNG for Normet;
+`colour/normet.png` is the black-letter/red-O version. ZANINGROUP and RESEMIN use dedicated
+supplied monochrome SVGs on the dark strip and separate supplied colour SVGs in
+the colour variant. No CSS filters or blending are applied to the logos. The
+colour SVG metadata identifies reconstructed artwork with approximated details,
+not verified official masters.
+Four supplied RESEMIN and ZANINGROUP PNG originals are retained under the same
+variant folders for design use only; the website renders their SVG counterparts.
 
 ### Shared identity
 

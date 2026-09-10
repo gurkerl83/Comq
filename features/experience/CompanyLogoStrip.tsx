@@ -8,33 +8,39 @@ const companies = [
   {
     name: 'Sandvik',
     className: styles.sandvik,
-    monochrome: { file: 'sandvik-monochrome.svg', width: 308, height: 56 },
-    colour: { file: 'sandvik-colour.svg', width: 308, height: 56 }
+    file: 'sandvik.svg',
+    width: 308,
+    height: 56
   },
   {
     name: 'Normet',
     className: styles.normet,
-    monochrome: { file: 'normet-monochrome.png', width: 2000, height: 792 },
-    colour: { file: 'normet-colour.png', width: 2000, height: 792 }
+    file: 'normet.png',
+    width: 2000,
+    height: 792
   },
   {
     name: 'RESEMIN',
     className: styles.resemin,
-    monochrome: { file: 'resemin-monochrome.png', width: 175, height: 36 },
-    colour: { file: 'resemin-colour.png', width: 202, height: 38 }
+    file: 'resemin.svg',
+    width: 2064,
+    height: 356
   },
   {
     name: 'ZANINGROUP',
     className: styles.zaningroup,
-    monochrome: { file: 'zaningroup.jpg', width: 200, height: 200 },
-    colour: { file: 'zaningroup.jpg', width: 200, height: 200 }
+    file: 'zaningroup.svg',
+    width: 1122,
+    height: 744
   }
 ];
 
 /**
- * Identify the founder's previous employers with their original logo artwork.
+ * Identify the founder's previous employers with local logo artwork.
+ * RESEMIN and ZANINGROUP use supplied vector reconstructions unchanged.
  * These companies are not presented as COMQ customers or endorsements.
  * Both variants render static HTML; colour selection is an authoring choice.
+ * Variant folders share company filenames and image dimensions.
  */
 export function CompanyLogoStrip({
   catchphrase,
@@ -44,28 +50,28 @@ export function CompanyLogoStrip({
   variant?: LogoVariant;
 }) {
   return (
-    <section className={styles.section} aria-labelledby='company-experience'>
-      <div className={styles.strip} data-variant={variant}>
+    <section
+      className={styles.section}
+      data-variant={variant}
+      aria-labelledby='company-experience'
+    >
+      <div className={styles.strip}>
         <h2 className={styles.heading} id='company-experience'>
           {catchphrase}
         </h2>
         <ul className={styles.logos} role='list'>
-          {companies.map(company => {
-            const image = company[variant];
-
-            return (
-              <li key={company.name}>
-                <Image
-                  className={company.className}
-                  src={`/images/experience/${image.file}`}
-                  alt={company.name}
-                  width={image.width}
-                  height={image.height}
-                  unoptimized
-                />
-              </li>
-            );
-          })}
+          {companies.map(company => (
+            <li key={company.name}>
+              <Image
+                className={company.className}
+                src={`/images/experience/${variant}/${company.file}`}
+                alt={company.name}
+                width={company.width}
+                height={company.height}
+                unoptimized
+              />
+            </li>
+          ))}
         </ul>
       </div>
     </section>

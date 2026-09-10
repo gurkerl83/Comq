@@ -1,18 +1,17 @@
 .section {
-  border-top: var(--border-width) solid var(--color-border);
   background: var(--color-surface);
+  color: var(--color-muted);
+}
+
+.section[data-variant='colour'] {
+  background: var(--color-logo-surface);
+  color: var(--color-on-logo-surface);
 }
 
 .strip {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  color: var(--color-muted);
-}
-
-.strip[data-variant='colour'] {
-  background: var(--color-logo-surface);
-  color: var(--color-on-logo-surface);
 }
 
 .heading {
@@ -24,7 +23,7 @@
   text-wrap: balance;
 }
 
-.strip[data-variant='colour'] .heading {
+.section[data-variant='colour'] .heading {
   color: var(--color-on-logo-surface);
 }
 
@@ -67,13 +66,6 @@
 
 .zaningroup {
   width: 152px;
-}
-
-/* LinkedIn supplies a colour JPEG on white. Preserve the file and apply
-   the monochrome treatment only when displaying it on the dark strip. */
-.strip[data-variant='monochrome'] .zaningroup {
-  filter: grayscale(1) invert(1) brightness(2);
-  mix-blend-mode: screen;
 }
 
 @media (max-width: 640px) {

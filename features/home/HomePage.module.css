@@ -43,9 +43,13 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 6rem 2rem;
-  border-top: var(--border-width) solid var(--color-border);
   scroll-margin-top: 1.5rem;
   text-align: center;
+}
+
+/* The logo band's background already separates the first service. */
+.serviceSection + .serviceSection {
+  border-top: var(--border-width) solid var(--color-border);
 }
 
 .serviceTitleLink {
