@@ -2,10 +2,18 @@ import type { Dictionary } from '../../lib/i18n/types';
 import { QuoteLink } from './QuoteLink';
 import styles from './QuoteInvitation.module.css';
 
-export function QuoteInvitation({ dictionary }: { dictionary: Dictionary }) {
+export function QuoteInvitation({
+  dictionary,
+  showDivider = true
+}: {
+  dictionary: Dictionary;
+  showDivider?: boolean;
+}) {
   return (
     <section
-      className={styles.section}
+      className={
+        showDivider ? `${styles.section} ${styles.withDivider}` : styles.section
+      }
       aria-labelledby='quote-invitation-heading'
     >
       <h2 id='quote-invitation-heading' className={styles.heading}>

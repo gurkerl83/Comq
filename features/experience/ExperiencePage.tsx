@@ -62,7 +62,7 @@ export function ExperiencePage({ dictionary }: { dictionary: Dictionary }) {
           </div>
         </section>
       </article>
-      <QuoteInvitation dictionary={dictionary} />
+      <QuoteInvitation dictionary={dictionary} showDivider={false} />
     </>
   );
 }
