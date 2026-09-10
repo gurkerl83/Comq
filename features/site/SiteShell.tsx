@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { ReactNode } from 'react';
 
 import type { SupportedLocale } from '../../lib/i18n/locales';
@@ -26,6 +27,8 @@ export function SiteShell({
         {children}
       </main>
       <SiteFooter locale={locale} dictionary={dictionary} />
+      {/* Both locale root layouts share this single analytics mount. */}
+      <Analytics />
     </>
   );
 }

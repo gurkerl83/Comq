@@ -51,6 +51,12 @@ The native TypeScript 7 compiler does not provide the JavaScript compiler API ex
 
 Keep both TypeScript packages when upgrading, until the framework and lint tools support the native compiler's integration directly.
 
+## Web analytics
+
+`@vercel/analytics/next` is mounted once after the footer in `features/site/SiteShell.tsx`, shared by both locale root layouts. It tracks page views and Next.js navigation for pages using the shell. The package supplies its own client and Suspense boundaries, so the layouts and shell remain Server Components and pages retain static rendering.
+
+Keep the default automatic environment detection: `pnpm dev` uses the Vercel debug script and logs events without recording analytics data. To collect deployed traffic, enable Web Analytics for the COMQ project in Vercel's Analytics dashboard and deploy the integration. Follow the [Vercel setup guide](https://vercel.com/docs/analytics/quickstart) to verify collection. A local production server does not provide Vercel's analytics endpoints.
+
 ## Routing and translations
 
 There is no top-level `app/layout.tsx`. Instead, two native root layouts render their own `<html lang>` and share `SiteShell`:
