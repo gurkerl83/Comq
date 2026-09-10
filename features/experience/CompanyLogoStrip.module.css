@@ -57,7 +57,7 @@
   width: 184px;
 }
 
-/* Keep the clear space inside Normet's supplied PNG. Its visible mark is
+/* Keep the clear space inside Normet's official artwork. Its visible mark is
    about 76% of the canvas width, so the image needs a larger layout width. */
 .normet {
   width: 244px;

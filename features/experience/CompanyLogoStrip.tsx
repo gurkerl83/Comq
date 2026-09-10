@@ -13,7 +13,7 @@ const companies = [
   {
     name: 'Normet',
     className: styles.normet,
-    file: 'normet.png',
+    file: 'normet.svg',
     width: 2000,
     height: 792
   },
@@ -35,6 +35,7 @@ const companies = [
 
 /**
  * Identify the founder's previous employers with local logo artwork.
+ * Normet's SVGs preserve its official EPS paths and digital PNG colors.
  * RESEMIN and ZANINGROUP use supplied vector reconstructions unchanged.
  * These companies are not presented as COMQ customers or endorsements.
  * Both variants render static HTML; CSS follows the root theme before hydration.
@@ -57,7 +58,6 @@ export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
                 alt={company.name}
                 width={company.width}
                 height={company.height}
-                unoptimized
               />
               <Image
                 className={`${company.className} ${styles.colour}`}
@@ -65,7 +65,6 @@ export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
                 alt={company.name}
                 width={company.width}
                 height={company.height}
-                unoptimized
               />
             </li>
           ))}
