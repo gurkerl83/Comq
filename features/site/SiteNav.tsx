@@ -9,6 +9,7 @@ import type { Dictionary } from '../../lib/i18n/types';
 import { SITE_NAME } from '../../lib/site/config';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { QuoteLink } from './QuoteLink';
+import { ThemeToggle } from './ThemeToggle';
 import styles from './SiteShell.module.css';
 
 export function SiteNav({
@@ -40,10 +41,13 @@ export function SiteNav({
           label={dictionary.navigation.whatsapp}
           accessibleLabel={dictionary.navigation.whatsappLabel}
         />
-        <LanguageSwitcher
-          locale={locale}
-          label={dictionary.navigation.language}
-        />
+        <div className={styles.preferences}>
+          <LanguageSwitcher
+            locale={locale}
+            label={dictionary.navigation.language}
+          />
+          <ThemeToggle labels={dictionary.theme} />
+        </div>
       </div>
     </header>
   );

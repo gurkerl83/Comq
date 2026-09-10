@@ -1,9 +1,4 @@
 .section {
-  background: var(--color-surface);
-  color: var(--color-muted);
-}
-
-.section[data-variant='colour'] {
   background: var(--color-logo-surface);
   color: var(--color-on-logo-surface);
 }
@@ -16,15 +11,10 @@
 
 .heading {
   margin: 0 0 0.75rem;
-  color: var(--color-text);
   font-size: clamp(1.25rem, 2.4vw, 1.5rem);
   line-height: 1.25;
   text-align: center;
   text-wrap: balance;
-}
-
-.section[data-variant='colour'] .heading {
-  color: var(--color-on-logo-surface);
 }
 
 .logos {
@@ -48,6 +38,19 @@
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+/* Display only the active artwork, including in the accessibility tree. */
+.logos .colour {
+  display: none;
+}
+
+:global(html[data-theme='light']) .logos .monochrome {
+  display: none;
+}
+
+:global(html[data-theme='light']) .logos .colour {
+  display: block;
 }
 
 .sandvik {

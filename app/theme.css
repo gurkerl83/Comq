@@ -6,8 +6,12 @@
   --color-surface: #111;
   --color-text: #fff;
   --color-muted: #bcbcbc;
+  --color-footer-link: var(--color-muted);
   --color-border: #30302b;
-  --color-accent: #d4af37;
+  --color-brand-gold: #d4af37;
+  /* The COMQ wordmark and symbol share an identity color, separate from UI accents. */
+  --color-brand: var(--color-brand-gold);
+  --color-accent: var(--color-brand-gold);
   --color-action: #c8102e;
   --color-action-hover: #a00e26;
 
@@ -16,9 +20,9 @@
   --color-on-action: #fff;
   --color-focus-ring: var(--color-accent);
 
-  /* Original coloured logos have dark lettering and need a light surface. */
-  --color-logo-surface: #f3f2ee;
-  --color-on-logo-surface: #545454;
+  /* Pair the logo band's surface and text with the active artwork. */
+  --color-logo-surface: var(--color-surface);
+  --color-on-logo-surface: var(--color-text);
 
   --font-family-body: Arial, Helvetica, sans-serif;
   --radius-small: 0.25rem;
@@ -27,4 +31,21 @@
   --border-width: 1px;
   --focus-ring-width: 2px;
   --focus-ring-offset: 5px;
+}
+
+/* Keep brand gold fixed; use charcoal text accents on light surfaces.
+   The theme attribute is restored before paint in both locale root layouts. */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-background: #f3f2ee;
+  --color-surface: #eae8e1;
+  --color-text: #20201d;
+  --color-muted: #595952;
+  --color-footer-link: var(--color-text);
+  --color-border: #cfcdc3;
+  --color-brand: var(--color-text);
+  --color-accent: var(--color-text);
+  --color-on-accent: #fff;
+  --color-on-logo-surface: #545454;
 }

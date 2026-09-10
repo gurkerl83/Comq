@@ -16,7 +16,8 @@ export default async function DefaultLocaleLayout({
   const dictionary = await getDictionary(DEFAULT_LOCALE);
 
   return (
-    <html lang={DEFAULT_LOCALE}>
+    // The provider restores data-theme and color-scheme before hydration.
+    <html lang={DEFAULT_LOCALE} data-theme='dark' suppressHydrationWarning>
       <body>
         <SiteShell locale={DEFAULT_LOCALE} dictionary={dictionary}>
           {children}

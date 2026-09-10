@@ -46,6 +46,13 @@
   object-fit: contain;
 }
 
+.preferences {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
 .languages a {
   display: inline-flex;
   align-items: center;
@@ -58,6 +65,8 @@
 
 .languages a:hover {
   color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
 }
 
 .languages {
@@ -145,7 +154,7 @@
   width: max-content;
   max-width: 100%;
   min-height: 44px;
-  color: var(--color-muted);
+  color: var(--color-footer-link);
   text-decoration: none;
 }
 
@@ -206,10 +215,6 @@
     padding: 1rem 1.25rem;
   }
 
-  .languages {
-    margin-left: auto;
-  }
-
   .footerInner {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
@@ -218,6 +223,24 @@
 
   .footerBrand {
     grid-column: 1 / -1;
+  }
+}
+
+/* The quote and preference controls keep predictable rows in both languages. */
+@media (max-width: 380px) {
+  .headerInner {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .brandLink {
+    grid-row: span 2;
+    margin-right: 0;
+  }
+
+  .preferences {
+    justify-content: flex-end;
   }
 }
 

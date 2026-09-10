@@ -1,6 +1,10 @@
 import type { Dictionary } from '../types';
 
 const dictionary: Dictionary = {
+  theme: {
+    switchToLight: 'Cambiar al tema claro',
+    switchToDark: 'Cambiar al tema oscuro'
+  },
   navigation: {
     home: 'Inicio',
     language: 'Idioma',

@@ -2,8 +2,6 @@ import Image from 'next/image';
 
 import styles from './CompanyLogoStrip.module.css';
 
-type LogoVariant = 'monochrome' | 'colour';
-
 const companies = [
   {
     name: 'Sandvik',
@@ -39,22 +37,13 @@ const companies = [
  * Identify the founder's previous employers with local logo artwork.
  * RESEMIN and ZANINGROUP use supplied vector reconstructions unchanged.
  * These companies are not presented as COMQ customers or endorsements.
- * Both variants render static HTML; colour selection is an authoring choice.
+ * Both variants render static HTML; CSS follows the root theme before hydration.
+ * The hidden variant is also excluded from the accessibility tree.
  * Variant folders share company filenames and image dimensions.
  */
-export function CompanyLogoStrip({
-  catchphrase,
-  variant = 'monochrome'
-}: {
-  catchphrase: string;
-  variant?: LogoVariant;
-}) {
+export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
   return (
-    <section
-      className={styles.section}
-      data-variant={variant}
-      aria-labelledby='company-experience'
-    >
+    <section className={styles.section} aria-labelledby='company-experience'>
       <div className={styles.strip}>
         <h2 className={styles.heading} id='company-experience'>
           {catchphrase}
@@ -63,8 +52,16 @@ export function CompanyLogoStrip({
           {companies.map(company => (
             <li key={company.name}>
               <Image
-                className={company.className}
-                src={`/images/experience/${variant}/${company.file}`}
+                className={`${company.className} ${styles.monochrome}`}
+                src={`/images/experience/monochrome/${company.file}`}
+                alt={company.name}
+                width={company.width}
+                height={company.height}
+                unoptimized
+              />
+              <Image
+                className={`${company.className} ${styles.colour}`}
+                src={`/images/experience/colour/${company.file}`}
                 alt={company.name}
                 width={company.width}
                 height={company.height}

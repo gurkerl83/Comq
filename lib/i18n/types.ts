@@ -16,6 +16,10 @@ export interface ServicePageContent {
 }
 
 export interface Dictionary {
+  theme: {
+    switchToLight: string;
+    switchToDark: string;
+  };
   navigation: {
     home: string;
     language: string;
