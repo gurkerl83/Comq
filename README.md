@@ -167,6 +167,8 @@ variant folders for design use only; the website renders their SVG counterparts.
 
 Shared decorative icons live in `features/site/icons.tsx`; the WhatsApp icon's license is included in `THIRD_PARTY_NOTICES.md`. The same gold mine symbol identifies the header, footer and browser icon in both language branches. The browser icon uses Next.js's native `app/icon.svg` and `app/favicon.ico` conventions, copied from the symbol exports in `design/favicon`. The ICO contains 16, 32 and 48px versions of the SVG mark.
 
+The [COMQ asset guide](design/README.md) maps each source to its website copy and records its purpose, display size, format, background and regeneration settings. Keep each selected source export and its website copy identical.
+
 The setup adapts these read-only references from the `next-slug-splitter` repository:
 
 - The `app-router-multi-locale-heavy` demo contributed typed locale constants, validation, locale-aware links, static locale enumeration and shared server components.
