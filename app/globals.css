@@ -38,8 +38,3 @@ button:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-focus-ring);
   outline-offset: var(--focus-ring-offset);
 }
-
-::selection {
-  color: var(--color-on-accent);
-  background: var(--color-accent);
-}
