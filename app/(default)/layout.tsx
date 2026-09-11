@@ -18,6 +18,9 @@ export default async function DefaultLocaleLayout({
   return (
     // The provider restores data-theme and color-scheme before hydration.
     <html lang={DEFAULT_LOCALE} data-theme='dark' suppressHydrationWarning>
+      <head>
+        <link rel='describedby' href='/llms.txt' type='text/plain' />
+      </head>
       <body>
         <SiteShell locale={DEFAULT_LOCALE} dictionary={dictionary}>
           {children}

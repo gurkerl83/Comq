@@ -1,0 +1,27 @@
+# COMQ
+
+> COMQ CIA S.A.C provides equipment sales, rental and spare-parts supply for underground mining operations. The company is based in Lima, Peru.
+
+The canonical website is https://www.comqcia.com. Spanish is the default language; English pages use the /en prefix and retain the same page slugs.
+
+Founder Alberto Llana is a mining expert and advisor with more than 35 years of professional experience. This experience belongs to the founder, not the age of COMQ. Companies mentioned in his professional background are not presented as COMQ customers or endorsements.
+
+Contact: alberto.llana@comqcia.com. Telephone: +51 980 523 531. Equipment availability, delivery arrangements and commercial terms can be discussed directly with COMQ.
+
+## Español
+
+- [Inicio](https://www.comqcia.com/): Soluciones integrales en minería subterránea y presentación de los servicios.
+- [Venta de equipos](https://www.comqcia.com/venta): Jumbos, scoops y perforadoras; aplicaciones, requisitos de compra y entrega.
+- [Alquiler de equipos](https://www.comqcia.com/alquiler): Necesidades de equipos, duración, ubicación de la mina y condiciones de alquiler.
+- [Repuestos](https://www.comqcia.com/repuestos): Repuestos originales y alternativos, identificación de piezas y compatibilidad.
+- [Acerca de COMQ](https://www.comqcia.com/empresa): Propósito de la empresa, enfoque y forma de trabajar con los clientes.
+- [Nuestra experiencia](https://www.comqcia.com/experiencia): Perfil de Alberto Llana y su trayectoria profesional en minería.
+
+## English
+
+- [Home](https://www.comqcia.com/en): Underground mining solutions and an introduction to COMQ's services.
+- [Equipment sales](https://www.comqcia.com/en/venta): Jumbos, scooptrams and drilling rigs; applications, purchasing requirements and delivery.
+- [Equipment rental](https://www.comqcia.com/en/alquiler): Equipment requirements, duration, mine location and rental terms.
+- [Spare parts](https://www.comqcia.com/en/repuestos): Original and aftermarket parts, part identification and compatibility.
+- [About COMQ](https://www.comqcia.com/en/empresa): Company purpose, approach and how COMQ works with customers.
+- [Our experience](https://www.comqcia.com/en/experiencia): Alberto Llana's profile and professional background in mining.

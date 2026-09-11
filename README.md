@@ -12,6 +12,7 @@ A bilingual website for COMQ's underground mining equipment and services.
 - Responsive navigation and footer, keyboard-accessible controls and WhatsApp quote actions.
 - Company logos, founder portrait, email, telephone and LinkedIn contact links.
 - Localized metadata, canonical URLs, language alternates, [sitemap](https://www.comqcia.com/sitemap.xml), [robots policy](https://www.comqcia.com/robots.txt), structured data and Vercel Web Analytics.
+- Optional [AI agent guide](public/llms.txt) at `/llms.txt`, linked from every page and covering both languages.
 
 ## Foundation
 
@@ -29,10 +30,12 @@ Language switches perform a full page load between the two root layouts. Page sl
 
 When extending the site:
 
-- **Add a page:** create thin entrypoints in `app/(default)` and `app/(localized)/[locale]`, share the feature and translated content, and update its [metadata](lib/site/metadata.ts) and [sitemap](app/sitemap.ts).
+- **Add a page:** create thin entrypoints in `app/(default)` and `app/(localized)/[locale]`, share the feature and translated content, and update its [metadata](lib/site/metadata.ts), [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
 - **Add a language:** extend [supported locales](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper.
 
 Keep the original standalone `index.html` unchanged; it is separate from the Next.js application.
+
+Keep `public/llms.txt` aligned with published content, contact details and supported languages. It follows the [llms.txt proposal](https://llmstxt.org/) as a concise guide to the existing HTML pages; it does not replace the sitemap or guarantee AI search inclusion. The robots policy allows all crawlers; hosting and firewall settings must also permit their requests.
 
 ## Local development
 
