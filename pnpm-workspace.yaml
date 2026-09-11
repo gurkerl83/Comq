@@ -1,4 +1,0 @@
-# This remains a single application; pnpm 11 keeps dependency policy here.
-allowBuilds:
-  # ESLint's import resolver verifies its platform-specific native binding.
-  unrs-resolver: true

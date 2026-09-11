@@ -1,5 +1,3 @@
-import 'server-only';
-
 import type { SupportedLocale } from './locales';
 
 // Explicit imports keep the supported dictionaries visible to the bundler and

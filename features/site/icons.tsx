@@ -1,4 +1,3 @@
-/** Bootstrap Icons WhatsApp mark; see THIRD_PARTY_NOTICES.md. */
 export function WhatsAppIcon() {
   return (
     <svg aria-hidden='true' fill='currentColor' viewBox='0 0 16 16'>

@@ -16,7 +16,7 @@ A bilingual website for COMQ's underground mining equipment and services.
 
 ## Foundation
 
-Next.js 16.3 App Router, React 19.2 and strict TypeScript, with Node.js 24 and pnpm 11.1.1. ESLint and Prettier provide code checks and formatting. Exact versions are pinned in [package.json](package.json) and the lockfile.
+Next.js 16.3 App Router, React 19.3 and strict TypeScript, with Node.js 24 and pnpm 11.1.1. TypeScript checks types and Prettier handles formatting. Dependency ranges use caret (`^`) prefixes in [package.json](package.json); the lockfile records exact resolved versions.
 
 | Area            | Approach                                                                                                                |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -31,7 +31,7 @@ Language switches perform a full page load between the two root layouts. Page sl
 When extending the site:
 
 - **Add a page:** create thin entrypoints in `app/(default)` and `app/(localized)/[locale]`, share the feature and translated content, and update its [metadata](lib/site/metadata.ts), [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
-- **Add a language:** extend [supported locales](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper.
+- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper.
 
 Keep the original standalone `index.html` unchanged; it is separate from the Next.js application.
 
@@ -51,7 +51,6 @@ Open [Spanish](http://localhost:3000) or [English](http://localhost:3000/en). If
 | Command             | Purpose                                           |
 | ------------------- | ------------------------------------------------- |
 | `pnpm typecheck`    | Generate route types and run TypeScript 7 checks. |
-| `pnpm lint`         | Run ESLint.                                       |
 | `pnpm format`       | Format project files.                             |
 | `pnpm format:check` | Check formatting.                                 |
 | `pnpm build`        | Run typecheck and create a production build.      |
@@ -62,7 +61,6 @@ Open [Spanish](http://localhost:3000) or [English](http://localhost:3000/en). If
 Before deploying, run:
 
 ```sh
-pnpm lint
 pnpm format:check
 pnpm build
 ```
@@ -85,4 +83,3 @@ Choose the existing `comq` project when linking. The CLI returns a preview URL; 
 
 - [COMQ artwork](design/README.md) — brand masters, CSS mask, favicons and export mappings.
 - [Company logo assets](design/experience/README.md) — sources, variants, sizes and regeneration.
-- [Third-party notices](THIRD_PARTY_NOTICES.md) — icon attribution and licensing.
