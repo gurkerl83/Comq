@@ -15,5 +15,5 @@ export const CONTACT_EMAIL = 'alberto.llana@comqcia.com';
  * @param path - Absolute website path such as `/en`.
  * @returns Absolute URL string for metadata, sitemap, and structured data.
  */
-export const createSiteUrl = (path: string): string =>
+export const createSiteUrl = (path: string) =>
   new URL(path, SITE_URL).toString();

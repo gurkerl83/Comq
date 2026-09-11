@@ -6,7 +6,6 @@ import {
   SUPPORTED_LOCALES,
   type SupportedLocale
 } from '../i18n/locales';
-import type { Dictionary } from '../i18n/types';
 import { createSiteUrl, SITE_NAME, SITE_URL } from './config';
 
 const OPEN_GRAPH_LOCALES: Record<SupportedLocale, string> = {
@@ -16,7 +15,7 @@ const OPEN_GRAPH_LOCALES: Record<SupportedLocale, string> = {
 
 /** Build matching language alternates for page metadata and the sitemap. */
 export const createLanguageAlternates = (
-  pathname: string = '/'
+  pathname: string
 ): Record<string, string> => ({
   ...Object.fromEntries(
     SUPPORTED_LOCALES.map(locale => [
@@ -30,15 +29,11 @@ export const createLanguageAlternates = (
 /** Use the same localized public URL for canonical and social metadata. */
 export const createPageMetadata = (
   locale: SupportedLocale,
-  dictionary: Dictionary,
-  pathname: string = '/',
-  content: { title: string; description: string } = {
-    title: dictionary.home.slogan,
-    description: dictionary.home.description
-  }
+  pathname: string,
+  pageTitle: string,
+  description: string
 ): Metadata => {
-  const title = `${SITE_NAME} | ${content.title}`;
-  const description = content.description;
+  const title = `${SITE_NAME} | ${pageTitle}`;
   const url = createSiteUrl(createHrefForLocale(locale, pathname));
 
   return {

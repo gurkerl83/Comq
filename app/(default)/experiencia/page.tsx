@@ -5,10 +5,12 @@ import { createPageMetadata } from '../../../lib/site/metadata';
 
 export async function generateMetadata() {
   const dictionary = await getDictionary(DEFAULT_LOCALE);
-  return createPageMetadata(DEFAULT_LOCALE, dictionary, '/experiencia', {
-    title: dictionary.experience.heading,
-    description: dictionary.experience.biography
-  });
+  return createPageMetadata(
+    DEFAULT_LOCALE,
+    '/experiencia',
+    dictionary.experience.heading,
+    dictionary.experience.biography
+  );
 }
 
 export default async function Page() {

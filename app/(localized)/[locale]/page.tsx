@@ -10,7 +10,13 @@ type LocalePageProps = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: LocalePageProps) {
   const { locale } = await params;
   if (!isPrefixedLocale(locale)) notFound();
-  return createPageMetadata(locale, await getDictionary(locale));
+  const dictionary = await getDictionary(locale);
+  return createPageMetadata(
+    locale,
+    '/',
+    dictionary.home.slogan,
+    dictionary.home.description
+  );
 }
 
 export default async function Page({ params }: LocalePageProps) {

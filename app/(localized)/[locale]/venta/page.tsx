@@ -11,10 +11,12 @@ export async function generateMetadata({ params }: LocalePageProps) {
   const { locale } = await params;
   if (!isPrefixedLocale(locale)) notFound();
   const dictionary = await getDictionary(locale);
-  return createPageMetadata(locale, dictionary, '/venta', {
-    title: dictionary.servicePages.pages.sales.title,
-    description: dictionary.servicePages.pages.sales.introduction
-  });
+  return createPageMetadata(
+    locale,
+    '/venta',
+    dictionary.servicePages.pages.sales.title,
+    dictionary.servicePages.pages.sales.introduction
+  );
 }
 
 export default async function Page({ params }: LocalePageProps) {

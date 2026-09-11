@@ -12,9 +12,7 @@ import { createSiteUrl, LEGAL_NAME, PHONE_NUMBER, SITE_NAME } from './config';
  */
 export const createJsonLdMarkup = (
   schema: WithContext<Thing> | Array<WithContext<Thing>>
-): {
-  __html: string;
-} => ({
+) => ({
   __html: JSON.stringify(schema).replace(/</g, '\\u003c')
 });
 

@@ -1,7 +1,12 @@
-export const DEFAULT_LOCALE = 'es';
-export const SUPPORTED_LOCALES = ['es', 'en'] as const;
+export const Locale = {
+  Spanish: 'es',
+  English: 'en'
+} as const;
 
-export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+export type SupportedLocale = (typeof Locale)[keyof typeof Locale];
+
+export const DEFAULT_LOCALE = Locale.Spanish;
+export const SUPPORTED_LOCALES = Object.values(Locale);
 
 export const PREFIXED_LOCALES = SUPPORTED_LOCALES.filter(
   locale => locale !== DEFAULT_LOCALE
@@ -10,7 +15,7 @@ export const PREFIXED_LOCALES = SUPPORTED_LOCALES.filter(
 /**
  * Type guard for the supported COMQ locales.
  *
- * 1. `SUPPORTED_LOCALES` is the source of truth.
+ * 1. `Locale` is the source of truth.
  * 2. A `true` result narrows the input string to `SupportedLocale`.
  *
  * @example
@@ -24,7 +29,7 @@ export const PREFIXED_LOCALES = SUPPORTED_LOCALES.filter(
  * @returns `true` when the value is a supported locale.
  */
 export const isSupportedLocale = (value: string): value is SupportedLocale =>
-  SUPPORTED_LOCALES.includes(value as SupportedLocale);
+  SUPPORTED_LOCALES.some(locale => locale === value);
 
 /**
  * Validate a locale from the prefixed route branch. Spanish is supported but
@@ -32,7 +37,7 @@ export const isSupportedLocale = (value: string): value is SupportedLocale =>
  */
 export const isPrefixedLocale = (
   value: string
-): value is (typeof PREFIXED_LOCALES)[number] =>
+): value is Exclude<SupportedLocale, typeof DEFAULT_LOCALE> =>
   isSupportedLocale(value) && value !== DEFAULT_LOCALE;
 
 /**
