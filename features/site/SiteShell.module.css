@@ -71,7 +71,7 @@
   display: flex;
   flex-shrink: 0;
   gap: 0;
-  color: var(--color-muted);
+  color: var(--color-text-muted);
 }
 
 .languages a[aria-current='page'] {
@@ -123,7 +123,7 @@
 
 .company .location {
   margin-top: 0.25rem;
-  color: var(--color-muted);
+  color: var(--color-text-muted);
   font-size: 0.875rem;
   line-height: 1.4;
 }
@@ -175,7 +175,7 @@
   grid-column: 1 / -1;
   padding-top: 1.25rem;
   border-top: var(--border-width) solid var(--color-border);
-  color: var(--color-muted);
+  color: var(--color-text-muted);
   font-size: 0.8125rem;
 }
 

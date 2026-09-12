@@ -5,7 +5,6 @@ import type { SupportedLocale } from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
 import { SiteNav } from './SiteNav';
 import { SiteFooter } from './SiteFooter';
-import { ThemeProvider } from './ThemeProvider';
 import styles from './SiteShell.module.css';
 
 export function SiteShell({
@@ -19,17 +18,15 @@ export function SiteShell({
 }) {
   return (
     <>
-      <ThemeProvider>
-        <a className={styles.skipLink} href='#main-content'>
-          {dictionary.navigation.skipToContent}
-        </a>
-        <SiteNav locale={locale} dictionary={dictionary} />
-        <main id='main-content' tabIndex={-1}>
-          {/* Pages own closing actions so service-specific quotes are not duplicated. */}
-          {children}
-        </main>
-        <SiteFooter locale={locale} dictionary={dictionary} />
-      </ThemeProvider>
+      <a className={styles.skipLink} href='#main-content'>
+        {dictionary.navigation.skipToContent}
+      </a>
+      <SiteNav locale={locale} dictionary={dictionary} />
+      <main id='main-content' tabIndex={-1}>
+        {/* Pages own closing actions so service-specific quotes are not duplicated. */}
+        {children}
+      </main>
+      <SiteFooter locale={locale} dictionary={dictionary} />
       {/* Both locale root layouts share this single analytics mount. */}
       <Analytics />
     </>
