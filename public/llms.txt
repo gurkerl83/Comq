@@ -2,7 +2,7 @@
 
 > COMQ CIA S.A.C provides equipment sales, rental and spare-parts supply for underground mining operations. The company is based in Lima, Peru.
 
-The canonical website is https://www.comqcia.com. Spanish is the default language; English pages use the /en prefix and retain the same page slugs.
+The canonical website is https://www.comqcia.com. Spanish is the default language and uses unprefixed URLs. English pages use the /en prefix and retain the same page slugs.
 
 Founder Alberto Llana is a mining expert and advisor with more than 35 years of professional experience. This experience belongs to the founder, not the age of COMQ. Companies mentioned in his professional background are not presented as COMQ customers or endorsements.
 
