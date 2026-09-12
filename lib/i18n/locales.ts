@@ -8,10 +8,6 @@ export type SupportedLocale = (typeof Locale)[keyof typeof Locale];
 export const DEFAULT_LOCALE = Locale.Spanish;
 export const SUPPORTED_LOCALES = Object.values(Locale);
 
-export const PREFIXED_LOCALES = SUPPORTED_LOCALES.filter(
-  locale => locale !== DEFAULT_LOCALE
-);
-
 /**
  * Type guard for the supported COMQ locales.
  *
@@ -32,25 +28,19 @@ export const isSupportedLocale = (value: string): value is SupportedLocale =>
   SUPPORTED_LOCALES.some(locale => locale === value);
 
 /**
- * Validate a locale from the prefixed route branch. Spanish is supported but
- * lives at `/`, so `/es` must not become a second URL for the default locale.
- */
-export const isPrefixedLocale = (
-  value: string
-): value is Exclude<SupportedLocale, typeof DEFAULT_LOCALE> =>
-  isSupportedLocale(value) && value !== DEFAULT_LOCALE;
-
-/**
  * Create the navigation href for one COMQ locale from a locale-free
  * pathname.
  *
- * 1. The default locale keeps the pathname unchanged.
+ * 1. The default locale keeps every pathname unprefixed.
  * 2. Non-default locales add their locale segment at the front.
- * 3. The root pathname is handled without adding a trailing slash.
+ * 3. Locale homepages are handled without adding a trailing slash.
  * 4. Already localized paths are rejected to prevent doubled locale prefixes.
  *
  * @example
- * // Default locale
+ * // Default-locale homepage
+ * createHrefForLocale('es', '/') -> '/'
+ *
+ * // Default-locale subpage
  * createHrefForLocale('es', '/equipos') -> '/equipos'
  *
  * // Non-default locale
