@@ -46,6 +46,11 @@ const companies = [
  *    the root theme before hydration. The hidden variant is also excluded
  *    from the accessibility tree. Variant folders share company filenames
  *    and image dimensions.
+ *
+ * 3. Image loading
+ *    Load both small SVG sets eagerly, including the inactive theme, so
+ *    revealing it does not initiate its first image downloads. Loading both
+ *    sets does not change which artwork CSS displays.
  */
 export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
   return (
@@ -63,6 +68,7 @@ export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
                 alt={company.name}
                 width={company.width}
                 height={company.height}
+                loading='eager'
               />
               <Image
                 className={`${company.className} light-theme-only`}
@@ -70,6 +76,7 @@ export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
                 alt={company.name}
                 width={company.width}
                 height={company.height}
+                loading='eager'
               />
             </li>
           ))}

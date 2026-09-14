@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
    * without duplicating pages or layouts in a separate default-language branch.
    *
    * Existing public files and non-dynamic routes resolve before this array;
-   * for example, `/images/comq-symbol.svg` and `/sitemap.xml` are served directly.
+   * for example, `/images/brand/comq-symbol.svg` and `/sitemap.xml` are served directly.
    *
    * The browser keeps the requested URL without a redirect. Direct URLs with
    * the default locale prefix remain accessible, while public links and canonical
