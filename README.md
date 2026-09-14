@@ -93,6 +93,8 @@ Choose the existing `comq` project when linking. The CLI returns a preview URL; 
 
 ## Documentation
 
+- [Content strategy](strategy/content-roadmap.md) — product comparisons, staged pickers, articles and LinkedIn presence.
+- [What we need from Alberto](strategy/alberto-first-inputs.md) — a short list of the first content inputs, in priority order.
 - [Artwork guide](design/README.md) — directory overview and shared image rendering.
 - [COMQ artwork](design/brand/README.md) — brand masters, theme variants, favicons and export mappings.
 - [Company logo assets](design/experience/README.md) — sources, variants, sizes and regeneration.
