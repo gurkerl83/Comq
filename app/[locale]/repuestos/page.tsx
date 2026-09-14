@@ -1,6 +1,5 @@
 import { ServicePage } from '../../../features/services/ServicePage';
 import { getServiceMetadata } from '../../../features/services/metadata';
-import { SiteShell } from '../../../features/site/SiteShell';
 import { getDictionary } from '../../../lib/i18n/dictionaries';
 import { getRouteLocale } from '../../../lib/i18n/route-locale';
 
@@ -13,9 +12,5 @@ export async function generateMetadata({ params }: LocalePageProps) {
 export default async function Page({ params }: LocalePageProps) {
   const locale = await getRouteLocale(params);
   const dictionary = await getDictionary(locale);
-  return (
-    <SiteShell locale={locale} dictionary={dictionary} pathname='/repuestos'>
-      <ServicePage dictionary={dictionary} service='parts' />
-    </SiteShell>
-  );
+  return <ServicePage dictionary={dictionary} service='parts' />;
 }

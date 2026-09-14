@@ -28,6 +28,31 @@ export const isSupportedLocale = (value: string): value is SupportedLocale =>
   SUPPORTED_LOCALES.some(locale => locale === value);
 
 /**
+ * Remove a supported locale prefix before building language links.
+ *
+ * 1. Match the complete first segment so page names such as '/energia' stay intact.
+ * 2. Normalize locale homepages to '/'.
+ * 3. Give prerendered routes and public URLs the same locale-free path so
+ *    rendered links agree across our default-locale rewrites.
+ *
+ * @example
+ * getLocaleFreePathname('/es/venta') -> '/venta'
+ * getLocaleFreePathname('/en/venta') -> '/venta'
+ * getLocaleFreePathname('/venta') -> '/venta'
+ * getLocaleFreePathname('/en') -> '/'
+ * getLocaleFreePathname('/energia') -> '/energia'
+ *
+ * @param pathname - Absolute pathname without a query or hash.
+ */
+export const getLocaleFreePathname = (pathname: string) => {
+  const segments = pathname.split('/');
+
+  if (!isSupportedLocale(segments[1])) return pathname;
+
+  return `/${segments.slice(2).join('/')}`;
+};
+
+/**
  * Create the navigation href for one COMQ locale from a locale-free
  * pathname.
  *

@@ -1,3 +1,10 @@
+.shell {
+  min-height: 100svh;
+  display: grid;
+  /* Header and footer fit their content; main fills spare height on short pages. */
+  grid-template-rows: auto 1fr auto;
+}
+
 .skipLink {
   position: fixed;
   z-index: 10;
@@ -15,7 +22,11 @@
 }
 
 .header {
+  position: sticky;
+  z-index: 5;
+  top: 0;
   border-bottom: var(--border-width) solid var(--color-border);
+  background: var(--color-background);
 }
 
 .headerInner {

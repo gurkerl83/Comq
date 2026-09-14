@@ -5,6 +5,15 @@
   color: var(--color-text);
   background: var(--color-background);
   scrollbar-gutter: stable;
+  /* Keep anchor and keyboard-scroll destinations below the sticky header. */
+  scroll-padding-top: 6rem;
+}
+
+@media (max-width: 380px) {
+  :root {
+    /* The existing narrow-screen header uses two rows. */
+    scroll-padding-top: 9rem;
+  }
 }
 
 * {
@@ -12,14 +21,7 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100svh;
   margin: 0;
-}
-
-body > main {
-  flex: 1 0 auto;
 }
 
 button,

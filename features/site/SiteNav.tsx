@@ -14,12 +14,10 @@ import styles from './SiteShell.module.css';
 
 export function SiteNav({
   locale,
-  dictionary,
-  pathname
+  dictionary
 }: {
   locale: SupportedLocale;
   dictionary: Dictionary;
-  pathname: string;
 }) {
   return (
     <header className={styles.header}>
@@ -39,7 +37,6 @@ export function SiteNav({
           <LanguageSwitcher
             locale={locale}
             label={dictionary.navigation.language}
-            pathname={pathname}
           />
           <ThemeToggle labels={dictionary.theme} />
         </div>

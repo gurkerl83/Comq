@@ -1,7 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import {
   createHrefForLocale,
+  getLocaleFreePathname,
   SUPPORTED_LOCALES,
   type SupportedLocale
 } from '../../lib/i18n/locales';
@@ -14,19 +18,20 @@ const languageNames: Record<SupportedLocale, string> = {
 
 export function LanguageSwitcher({
   locale,
-  label,
-  pathname
+  label
 }: {
   locale: SupportedLocale;
   label: string;
-  pathname: string;
 }) {
+  const pathname = usePathname();
+  const localeFreePathname = getLocaleFreePathname(pathname);
+
   return (
     <nav className={styles.languages} aria-label={label}>
       {SUPPORTED_LOCALES.map(language => (
         <Link
           key={language}
-          href={createHrefForLocale(language, pathname)}
+          href={createHrefForLocale(language, localeFreePathname)}
           hrefLang={language}
           lang={language}
           aria-label={languageNames[language]}

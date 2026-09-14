@@ -7,32 +7,30 @@ import { SiteFooter } from './SiteFooter';
 import styles from './SiteShell.module.css';
 
 /**
- * Pages supply their locale-free path so language links target the equivalent
- * page without a client routing hook. Keep navigation and footer markup shared;
- * the locale root layout owns the document and analytics.
+ * The locale layout owns this shell so navigation and footer markup persist
+ * between pages in the same language. The root layout owns the document and
+ * analytics; LanguageSwitcher reads the current pathname on navigation.
  */
 export function SiteShell({
   children,
   locale,
-  dictionary,
-  pathname
+  dictionary
 }: {
   children: ReactNode;
   locale: SupportedLocale;
   dictionary: Dictionary;
-  pathname: string;
 }) {
   return (
-    <>
+    <div className={styles.shell}>
       <a className={styles.skipLink} href='#main-content'>
         {dictionary.navigation.skipToContent}
       </a>
-      <SiteNav locale={locale} dictionary={dictionary} pathname={pathname} />
+      <SiteNav locale={locale} dictionary={dictionary} />
       <main id='main-content' tabIndex={-1}>
         {/* Pages own closing actions so service-specific quotes are not duplicated. */}
         {children}
       </main>
       <SiteFooter locale={locale} dictionary={dictionary} />
-    </>
+    </div>
   );
 }
