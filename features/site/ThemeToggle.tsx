@@ -11,12 +11,13 @@ export function ThemeToggle({ labels }: { labels: Dictionary['theme'] }) {
   return (
     <button type='button' className={styles.toggle} onClick={toggleTheme}>
       {/* CSS follows the OS or manual theme for the icon and accessible action.
-          Stable server markup avoids a hydration placeholder or layout shift. */}
-      <span className={styles.lightAction}>
+          Stable server markup avoids a hydration placeholder or layout shift.
+          Show the light action in dark mode, and the dark action in light mode. */}
+      <span className='dark-theme-only'>
         <SunIcon />
         <span className={styles.label}>{labels.switchToLight}</span>
       </span>
-      <span className={styles.darkAction}>
+      <span className='light-theme-only'>
         <MoonIcon />
         <span className={styles.label}>{labels.switchToDark}</span>
       </span>

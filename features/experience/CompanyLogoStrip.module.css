@@ -35,33 +35,8 @@
 }
 
 .logos img {
-  display: block;
   max-width: 100%;
   height: auto;
-}
-
-/* Display only the active artwork, including in the accessibility tree. */
-.logos .colour {
-  display: none;
-}
-
-/* The OS selects the initial artwork; manual choices use the selectors below. */
-@media (prefers-color-scheme: light) {
-  :global(html:not([data-theme])) .logos .monochrome {
-    display: none;
-  }
-
-  :global(html:not([data-theme])) .logos .colour {
-    display: block;
-  }
-}
-
-:global(html[data-theme='light']) .logos .monochrome {
-  display: none;
-}
-
-:global(html[data-theme='light']) .logos .colour {
-  display: block;
 }
 
 .sandvik {

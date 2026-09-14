@@ -24,33 +24,6 @@
   height: 22px;
 }
 
-.lightAction {
-  display: inline-flex;
-}
-
-.darkAction {
-  display: none;
-}
-
-/* Follow the OS before JavaScript runs; an explicit choice takes precedence. */
-@media (prefers-color-scheme: light) {
-  :global(html:not([data-theme])) .lightAction {
-    display: none;
-  }
-
-  :global(html:not([data-theme])) .darkAction {
-    display: inline-flex;
-  }
-}
-
-:global(html[data-theme='light']) .lightAction {
-  display: none;
-}
-
-:global(html[data-theme='light']) .darkAction {
-  display: inline-flex;
-}
-
 .label {
   position: absolute;
   width: 1px;

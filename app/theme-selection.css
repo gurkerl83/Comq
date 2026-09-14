@@ -1,0 +1,126 @@
+/*
+ * Theme selection shared by page colors, artwork and toggle controls.
+ * The page follows the browser/OS preference until useThemeToggle writes
+ * data-theme="light" or data-theme="dark" on <html>. CSS reads this attribute;
+ * declaring properties inside :root does not add or change HTML attributes.
+ *
+ * These are matching conditions, not commands executed in sequence. When the
+ * OS preference or data-theme changes, the browser recalculates matching rules.
+ *
+ * Two separate jobs:
+ * - color-scheme selects the light-dark() colors in theme.css and the appearance
+ *   of native controls. It does not select or recolor our external SVG images.
+ * - The shared classes show the artwork and button action for the active theme.
+ */
+
+/*
+ * Shared setup
+ *
+ * :root matches <html>. color-scheme: light dark allows both schemes and lets
+ * the browser choose from its system preference; neither theme is forced here.
+ *
+ * .light-theme-only and .dark-theme-only match elements with those class names.
+ * The names describe WHEN content belongs on screen, not its actual color.
+ * - display: block shows the element as a layout box; "block" does not mean hide.
+ * - display: none hides the element, removes its layout space and excludes it
+ *   from the accessibility tree. The element remains in the HTML.
+ *
+ * Example: both logo images exist in the page, but only the matching one is shown.
+ * The "switch to light" action belongs to .dark-theme-only because it is offered
+ * while the page is dark; "switch to dark" belongs to .light-theme-only.
+ */
+:root {
+  color-scheme: light dark;
+}
+
+/*
+ * Automatic mode: follow the browser/OS when there is no manual choice
+ *
+ * Each @media block checks whether the browser reports light or dark. Setting
+ * color-scheme: light below does NOT activate the light media query: these
+ * queries observe the browser/OS preference, independently of our toggle.
+ *
+ * Read :root:not([data-theme]) .light-theme-only as:
+ * - :root: the <html> element.
+ * - [data-theme]: the attribute exists, regardless of its value.
+ * - :not([data-theme]): the attribute must be absent.
+ * - The space and .light-theme-only: matching descendants inside that <html>.
+ * The .dark-theme-only selectors use the same condition for the other content.
+ *
+ * Example: light OS + <html lang="es"> uses the light block. If the OS changes
+ * to dark, the dark block applies instead, without JavaScript changing the HTML.
+ *
+ * With <html data-theme="dark">, the absence check fails even if the OS is light.
+ * Both OS blocks' visibility rules are then excluded; the manual rules apply.
+ */
+
+/* Light OS + no data-theme: show light content and hide dark content. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .light-theme-only {
+    display: block;
+  }
+
+  :root:not([data-theme]) .dark-theme-only {
+    display: none;
+  }
+}
+
+/* Dark OS + no data-theme: hide light content and show dark content. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .light-theme-only {
+    display: none;
+  }
+
+  :root:not([data-theme]) .dark-theme-only {
+    display: block;
+  }
+}
+
+/*
+ * Manual light choice
+ *
+ * :root[data-theme='light'] matches <html> only when the attribute equals 'light'.
+ * color-scheme: light selects light page colors and native controls. The following
+ * descendant rules separately show light-only content and hide dark-only content.
+ *
+ * Example: the OS is dark, then the user selects light. The hook writes
+ * <html data-theme="light">, so these rules apply even though the OS stays dark.
+ */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* Show light-theme artwork and the "switch to dark" action. */
+:root[data-theme='light'] .light-theme-only {
+  display: block;
+}
+
+/* Hide dark-theme artwork and the "switch to light" action, without layout space. */
+:root[data-theme='light'] .dark-theme-only {
+  display: none;
+}
+
+/*
+ * Manual dark choice
+ *
+ * :root[data-theme='dark'] matches <html> only when the attribute equals 'dark'.
+ * color-scheme: dark selects dark page colors and native controls. The following
+ * descendant rules separately hide light-only content and show dark-only content.
+ *
+ * Example: light OS -> user selects dark -> <html data-theme="dark"> keeps the
+ * page dark even if the OS preference changes. A full reload resets the hook's
+ * temporary choice; <html> starts without data-theme and follows the OS again.
+ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* Hide light-theme artwork and the "switch to dark" action, without layout space. */
+:root[data-theme='dark'] .light-theme-only {
+  display: none;
+}
+
+/* Show dark-theme artwork and the "switch to light" action. */
+:root[data-theme='dark'] .dark-theme-only {
+  display: block;
+}

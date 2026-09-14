@@ -1,18 +1,4 @@
-/* Theme selection: follow the OS until the user chooses a manual override. */
-:root {
-  color-scheme: light dark;
-}
-
-/* Manual overrides are applied only after interaction, never before hydration. */
-:root[data-theme='light'] {
-  color-scheme: light;
-}
-
-:root[data-theme='dark'] {
-  color-scheme: dark;
-}
-
-/* Global design tokens shared by all localized pages and their CSS Modules.
+/* Global design tokens shared by localized pages and their CSS Modules.
    Each light-dark() pair lists the light color first, then the dark color. */
 :root {
   /* Shared typography and sizing. */
@@ -24,7 +10,7 @@
   --focus-ring-width: 2px;
   --focus-ring-offset: 5px;
 
-  /* Fixed brand and action colors, shared by both color schemes. */
+  /* Fixed colors: for example, the quote button stays red in both themes. */
   --color-brand-base: #d4af37;
   --color-action: #c8102e;
   --color-action-hover: #a00e26;
@@ -46,7 +32,7 @@
   --color-on-accent: light-dark(#fff, #000);
   --color-focus-ring: var(--color-accent);
 
-  /* Pair the logo band's surface and text with the active artwork. */
+  /* Logo strip background and text; artwork colors come from the image files. */
   --color-logo-strip-background: var(--color-surface);
   --color-logo-strip-text: light-dark(#545454, var(--color-text));
 }

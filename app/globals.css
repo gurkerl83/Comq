@@ -1,3 +1,6 @@
+/* @import includes these global rules before the page styles below:
+   first theme selection, then the design tokens used by every route. */
+@import './theme-selection.css';
 @import './theme.css';
 
 :root {

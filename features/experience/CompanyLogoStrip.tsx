@@ -35,12 +35,17 @@ const companies = [
 
 /**
  * Identify the founder's previous employers with local logo artwork.
- * Normet's SVGs preserve its official EPS paths and digital PNG colors.
- * RESEMIN and ZANINGROUP use supplied vector reconstructions unchanged.
- * These companies are not presented as COMQ customers or endorsements.
- * Both variants render static HTML; CSS follows the root theme before hydration.
- * The hidden variant is also excluded from the accessibility tree.
- * Variant folders share company filenames and image dimensions.
+ *
+ * 1. Artwork and provenance
+ *    Normet's SVGs preserve its official EPS paths and digital PNG colors.
+ *    RESEMIN and ZANINGROUP use supplied vector reconstructions unchanged.
+ *    These companies are not presented as COMQ customers or endorsements.
+ *
+ * 2. Theme rendering and accessibility
+ *    Both variants render static HTML; CSS selects the visible artwork from
+ *    the root theme before hydration. The hidden variant is also excluded
+ *    from the accessibility tree. Variant folders share company filenames
+ *    and image dimensions.
  */
 export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
   return (
@@ -53,14 +58,14 @@ export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
           {companies.map(company => (
             <li key={company.name}>
               <Image
-                className={`${company.className} ${styles.monochrome}`}
+                className={`${company.className} dark-theme-only`}
                 src={`/images/experience/monochrome/${company.file}`}
                 alt={company.name}
                 width={company.width}
                 height={company.height}
               />
               <Image
-                className={`${company.className} ${styles.colour}`}
+                className={`${company.className} light-theme-only`}
                 src={`/images/experience/colour/${company.file}`}
                 alt={company.name}
                 width={company.width}
