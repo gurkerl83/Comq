@@ -6,16 +6,20 @@ The company selection reflects **Alberto Llana’s previous professional experie
 
 ## Website rendering
 
-The static server component [`CompanyLogoStrip`](../../features/experience/CompanyLogoStrip.tsx) renders both logo sets. Its [CSS Module](../../features/experience/CompanyLogoStrip.module.css) displays the active set and hides the other with `display: none`, excluding duplicate company names from the accessibility tree. See the root README's [Theme section](../../README.md#theme) for color tokens and theme behavior.
+[`CompanyLogoStrip`](../../features/experience/CompanyLogoStrip.tsx) renders the four company logos. Shared image loading and theme selection are documented in [Website rendering](../README.md#website-rendering).
 
-- **Dark theme:** files from `monochrome/`: Sandvik’s official white SVG, Normet’s white SVG converted from its official EPS, and dedicated supplied ZANINGROUP and RESEMIN SVGs.
-- **Light theme:** files from `colour/`; Sandvik uses its black version.
+### Theme variants
 
-Neither set uses CSS filters or blending.
+| Theme | Artwork folder | Visibility class   |
+| ----- | -------------- | ------------------ |
+| Light | `colour/`      | `light-theme-only` |
+| Dark  | `monochrome/`  | `dark-theme-only`  |
 
-### Image dimensions and layout
+Each image uses the company name as its `alt` text.
 
-The component's `width` and `height` describe each website image's original canvas. Next.js uses these values to establish its aspect ratio and reserve space before loading, helping prevent layout shifts. Each company's colour and monochrome files share these dimensions, so one pair is defined per company.
+### Image dimensions
+
+The component's `width` and `height` match each SVG's original canvas. Each company's colour and monochrome files share these dimensions, so one pair is defined per company.
 
 | Company    | Original width × height | CSS width |
 | ---------- | ----------------------- | --------- |
@@ -24,11 +28,13 @@ The component's `width` and `height` describe each website image's original canv
 | RESEMIN    | 2064 × 356              | 175px     |
 | ZANINGROUP | 1122 × 744              | 152px     |
 
-The original values are SVG intrinsic canvas dimensions. CSS controls display size: `height: auto` preserves proportions, and `max-width: 100%` allows images to shrink within narrower grid columns. Keep the original dimensions on the current path-based `<Image>` elements even when CSS sets a smaller display width. Next.js serves all eight SVGs directly; they need no `sizes` hint because they have no raster size variants.
+CSS controls display size: `height: auto` preserves proportions, and `max-width: 100%` allows images to shrink within narrower grid columns. Keep the original dimensions on the current path-based `<Image>` elements even when CSS sets a smaller display width.
 
-The background belongs to the full-width outer section. Its inner content has a 1200px maximum width and padding. There is no divider directly above or below the band; dividers between the service sections remain.
+### Layout
 
-The static grid has four equal columns above 640px and two at 640px or below, without scrolling or animation. The images have different proportions and clear space. Their individual CSS widths balance their visible sizes. Normet's visible mark occupies about 76% of its canvas width, so its 244px CSS width preserves the supplied padding while keeping the mark comparable to the others.
+The [CSS Module](../../features/experience/CompanyLogoStrip.module.css) controls image sizing and the grid. The background spans the full width; the inner content has a 1200px maximum width and padding. The grid has four equal columns above 640px and two at 640px or below.
+
+Individual CSS widths balance the logos' different proportions and clear space. Normet's visible mark occupies about 76% of its canvas width, so its 244px CSS width preserves the supplied padding while keeping the mark comparable to the others.
 
 ## Artwork and provenance
 

@@ -16,7 +16,7 @@ A bilingual website for COMQ's underground mining equipment and services.
 
 ## Foundation
 
-Next.js 16.3 App Router, React 19.3 and strict TypeScript, with Node.js 24 and pnpm 11.1.1. TypeScript checks types and Prettier handles formatting. Dependency ranges use caret (`^`) prefixes in [package.json](package.json); the lockfile records exact resolved versions.
+Next.js 16.3 App Router, React 19.3 and strict TypeScript, with Node.js 24 and pnpm 11.1.1. TypeScript checks types and Prettier handles formatting. See [package.json](package.json) for dependencies and scripts.
 
 | Area            | Approach                                                                                                                |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -30,9 +30,11 @@ Next.js 16.3 App Router, React 19.3 and strict TypeScript, with Node.js 24 and p
 
 Next.js rewrites keep default-language URLs unprefixed while letting all locales share the same pages and server layout. The routing rules and examples are documented in [next.config.ts](next.config.ts). Unsupported locales and missing pages return 404.
 
+The shared locale layout keeps the header and footer mounted during navigation within one language. Pages render only their content.
+
 When extending the site:
 
-- **Add a page:** create one thin entrypoint under `app/[locale]`, render its feature inside `SiteShell` with the locale-free `pathname`, add its `metadata.ts` helper and translated content, and update its [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
+- **Add a page:** create one thin entrypoint under `app/[locale]` that renders its feature, add its `metadata.ts` helper and translated content, and update its [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
 - **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper.
 
 Keep the original standalone `index.html` unchanged; it is separate from the Next.js application.
@@ -41,23 +43,11 @@ Keep `public/llms.txt` aligned with published content, contact details and suppo
 
 ### Theme
 
-[app/theme.css](app/theme.css) separates theme selection from shared design tokens. The selection group follows the operating system through native `color-scheme`; each `light-dark()` pair lists the light value first and the dark value second. Edit palette values in this file; CSS Modules consume the tokens.
+Theme selection and shared visibility classes live in [app/theme-selection.css](app/theme-selection.css), and design tokens in [app/theme.css](app/theme.css). Both are imported by [app/globals.css](app/globals.css); CSS Modules retain component styling.
 
-The [theme toggle](features/site/useThemeToggle.ts) sets `data-theme` on the document after interaction. Its manual choice stays in browser memory across soft page and language navigation and is reapplied before paint when a locale change resets the document attributes. A full reload returns to the OS preference. The implementation uses no theme provider, persistent storage or initialization script.
+The theme follows the operating system until the user toggles it. The manual choice survives page and language navigation; a full reload returns to the OS preference. See the [theme toggle](features/site/useThemeToggle.ts) for its implementation.
 
-The [toggle styles](features/site/ThemeToggle.module.css) and [company logo styles](features/experience/CompanyLogoStrip.module.css) select the visible icon or artwork through `prefers-color-scheme` until a manual override is active. Asset sources, rendering and regeneration are documented in the [COMQ artwork](design/README.md) and [company logo](design/experience/README.md) guides.
-
-Token names describe their purpose:
-
-| Token                                                         | Purpose                                                             |
-| ------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `--color-brand-base`                                          | Fixed brand color.                                                  |
-| `--color-brand`                                               | Theme-dependent COMQ symbol and wordmark color.                     |
-| `--color-accent`, `--color-on-accent`                         | UI emphasis and its contrasting foreground.                         |
-| `--color-action`, `--color-action-hover`, `--color-on-action` | Quote-button background, hover and foreground.                      |
-| `--color-text-muted`                                          | Secondary text color.                                               |
-| `--color-footer-link`                                         | Footer navigation color.                                            |
-| `--color-logo-strip-background`, `--color-logo-strip-text`    | Company logo band's surface and text; artwork keeps its own colors. |
+Logo variants, image loading and regeneration are covered in the [artwork guides](#documentation).
 
 ## Local development
 
@@ -99,9 +89,10 @@ vercel deploy --target=preview
 
 Choose the existing `comq` project when linking. The CLI returns a preview URL; local changes do not need to be committed. Production releases use the Git integration on `main`, or an intentional `vercel deploy --prod` invocation. See [Vercel deployment options](https://vercel.com/docs/cli/deploy). Enable Web Analytics in the project's dashboard to collect deployed traffic; the integration is already included ([setup guide](https://vercel.com/docs/analytics/quickstart)).
 
-**Other Node.js hosts:** install dependencies, run `pnpm build`, then serve with `pnpm start`. The application uses a normal Next.js runtime, including image optimization.
+**Other Node.js hosts:** install dependencies, run `pnpm build`, then serve with `pnpm start` using a normal Next.js runtime.
 
 ## Documentation
 
-- [COMQ artwork](design/README.md) — brand masters, CSS mask, favicons and export mappings.
+- [Artwork guide](design/README.md) — directory overview and shared image rendering.
+- [COMQ artwork](design/brand/README.md) — brand masters, theme variants, favicons and export mappings.
 - [Company logo assets](design/experience/README.md) — sources, variants, sizes and regeneration.
