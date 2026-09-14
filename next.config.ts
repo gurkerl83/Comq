@@ -11,9 +11,6 @@ const nextConfig: NextConfig = {
    * This lets the shared server layout render the correct `<html lang>`
    * without duplicating pages or layouts in a separate default-language branch.
    *
-   * Existing public files and non-dynamic routes resolve before this array;
-   * for example, `/images/brand/comq-symbol.svg` and `/sitemap.xml` are served directly.
-   *
    * The browser keeps the requested URL without a redirect. Direct URLs with
    * the default locale prefix remain accessible, while public links and canonical
    * metadata use unprefixed URLs. Missing destinations still return 404.
@@ -25,11 +22,17 @@ const nextConfig: NextConfig = {
    *
    * Examples: `/` serves `/es` when DEFAULT_LOCALE is 'es', or `/en` when
    * DEFAULT_LOCALE is 'en'. The browser address remains `/` in either case.
+   * Run this exact match in `beforeFiles`, before Vercel resolves Next's
+   * prerendered navigation data. Rewriting it later can request the wrong
+   * payload, causing a full reload that resets the temporary theme choice.
    *
    * 2. Subpages
    *
    * Prepend DEFAULT_LOCALE to an unprefixed path, including nested
    * segments, so adding a page does not require another rewrite rule.
+   * Keep this broader rule in `afterFiles`: existing public files and
+   * non-dynamic routes, such as `/images/brand/comq-symbol.svg` and
+   * `/sitemap.xml`, must resolve first.
    * Examples below assume DEFAULT_LOCALE = 'es' and supported locales es/en.
    *
    * - `:path(...)` is Next's named parameter with a regex constraint.
@@ -53,16 +56,20 @@ const nextConfig: NextConfig = {
    * to serve content; otherwise the request returns 404.
    */
   rewrites() {
-    return [
-      {
-        source: '/',
-        destination: `/${DEFAULT_LOCALE}`
-      },
-      {
-        source: `/:path((?!(?:${SUPPORTED_LOCALES.join('|')}|_next|_vercel|api)(?:/|$)).+)`,
-        destination: `/${DEFAULT_LOCALE}/:path`
-      }
-    ];
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          destination: `/${DEFAULT_LOCALE}`
+        }
+      ],
+      afterFiles: [
+        {
+          source: `/:path((?!(?:${SUPPORTED_LOCALES.join('|')}|_next|_vercel|api)(?:/|$)).+)`,
+          destination: `/${DEFAULT_LOCALE}/:path`
+        }
+      ]
+    };
   }
 };
 
