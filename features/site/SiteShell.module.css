@@ -68,14 +68,12 @@
   justify-content: center;
   width: 32px;
   min-height: 44px;
-  font-size: 0.9375rem;
   text-decoration: none;
 }
 
 .languages a:hover {
   color: var(--color-accent);
   text-decoration: underline;
-  text-underline-offset: 0.4em;
 }
 
 .languages {
@@ -90,7 +88,6 @@
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 0.4em;
 }
 
 .footer {
@@ -103,18 +100,14 @@
   grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
   align-items: start;
   gap: 2rem;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  font-size: 0.9375rem;
-  line-height: 1.6;
 }
 
 .footerBrand {
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  min-width: 0;
 }
 
 .footerBrandIcon {
@@ -128,29 +121,24 @@
 
 .company > p:first-child {
   font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: 0.035em;
 }
 
 .company .location {
   margin-top: 0.25rem;
   color: var(--color-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.4;
+  font-size: var(--font-size-small);
 }
 
 .footerNavigation {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 0;
 }
 
 .footerNavigation h2 {
   margin: 0 0 0.5rem;
   font-size: inherit;
   font-weight: 700;
-  line-height: 1.35;
 }
 
 .footerLink {
@@ -168,7 +156,6 @@
 .footerLink:focus-visible {
   color: var(--color-accent);
   text-decoration: underline;
-  text-underline-offset: 0.25em;
 }
 
 .footerLink svg {
@@ -187,7 +174,7 @@
   padding-top: 1.25rem;
   border-top: var(--border-width) solid var(--color-border);
   color: var(--color-text-muted);
-  font-size: 0.8125rem;
+  font-size: var(--font-size-small);
 }
 
 .footerBottom p {

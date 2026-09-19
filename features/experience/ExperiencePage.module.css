@@ -1,25 +1,17 @@
 .introduction,
 .highlightContent {
-  width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding-right: 2rem;
   padding-left: 2rem;
 }
 
 .introduction {
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  padding-top: var(--spacing-page-section);
+  padding-bottom: var(--spacing-page-section);
 }
 
 .introduction h1 {
-  max-width: 880px;
   margin: 0;
-  color: var(--color-text);
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
-  line-height: 1.12;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
 }
 
 .highlight {
@@ -27,28 +19,19 @@
 }
 
 .highlightContent {
-  padding-top: clamp(2.5rem, 5vw, 4rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-top: var(--spacing-content-section);
+  padding-bottom: var(--spacing-content-section);
 }
 
 .highlightHeading {
-  max-width: 700px;
   margin: 0 0 2.5rem;
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
+  font-size: var(--font-size-feature-title);
 }
 
 .profile {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2.5rem 4rem;
-}
-
-.founder,
-.biography {
-  min-width: 0;
 }
 
 .experience {
@@ -58,16 +41,13 @@
 .experience strong {
   display: block;
   color: var(--color-accent);
-  font-size: clamp(3.5rem, 7vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: 3.5rem;
 }
 
 .experience span {
   display: block;
   margin-top: 0.5rem;
   color: var(--color-text-muted);
-  line-height: 1.5;
 }
 
 .person {
@@ -87,23 +67,18 @@
 
 .name {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
   font-weight: 700;
 }
 
 .role {
   margin: 0.25rem 0 0;
   color: var(--color-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: var(--font-size-small);
 }
 
 .biography > p {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 1.0625rem;
-  line-height: 1.7;
 }
 
 .profileLink {
@@ -125,7 +100,6 @@
 .profileLink:hover span,
 .profileLink:focus-visible span {
   text-decoration: underline;
-  text-underline-offset: 0.2em;
 }
 
 @media (max-width: 640px) {

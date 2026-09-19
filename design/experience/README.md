@@ -32,7 +32,7 @@ CSS controls display size: `height: auto` preserves proportions, and `max-width:
 
 ### Layout
 
-The [CSS Module](../../features/experience/CompanyLogoStrip.module.css) controls image sizing and the grid. The background spans the full width; the inner content has a 1200px maximum width and padding. The grid has four equal columns above 640px and two at 640px or below.
+The [CSS Module](../../features/experience/CompanyLogoStrip.module.css) controls image sizing and the grid. The background and inner content span the full width, with padding around the content. The grid has four equal columns above 640px and two at 640px or below.
 
 Individual CSS widths balance the logos' different proportions and clear space. Normet's visible mark occupies about 76% of its canvas width, so its 244px CSS width preserves the supplied padding while keeping the mark comparable to the others.
 

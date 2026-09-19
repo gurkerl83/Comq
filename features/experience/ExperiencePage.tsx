@@ -23,7 +23,7 @@ export function ExperiencePage({ dictionary }: { dictionary: Dictionary }) {
             </h2>
             <div className={styles.profile}>
               {/* The experience figure belongs to Alberto's career, not COMQ's age. */}
-              <div className={styles.founder}>
+              <div>
                 <p className={styles.experience}>
                   <strong>35+</strong>
                   <span>{dictionary.experience.yearsLabel}</span>

@@ -1,55 +1,38 @@
 .offer,
 .details,
 .closing {
-  width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding-right: 2rem;
   padding-left: 2rem;
 }
 
 .offer {
-  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-top: var(--spacing-page-section);
 }
 
 .title {
-  max-width: 880px;
   margin: 0;
-  color: var(--color-text);
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
-  line-height: 1.12;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
 }
 
 .introduction {
-  max-width: 650px;
   margin: 1.5rem 0 1.75rem;
   color: var(--color-text-muted);
-  font-size: 1.0625rem;
-  line-height: 1.65;
 }
 
 .detailSection {
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  padding: var(--spacing-content-section) 0;
   border-bottom: var(--border-width) solid var(--color-border);
 }
 
 .detailSection h2,
 .closing h2 {
-  max-width: 800px;
   margin: 0 0 1rem;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
 }
 
 .detailSection ul {
-  max-width: 800px;
   margin: 0;
   padding-left: 1.25rem;
   color: var(--color-text-muted);
-  line-height: 1.7;
 }
 
 .detailSection li + li {
@@ -57,8 +40,8 @@
 }
 
 .closing {
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  padding-top: var(--spacing-page-section);
+  padding-bottom: var(--spacing-page-section);
 }
 
 .requirements {
@@ -68,7 +51,6 @@
   margin: 0 0 1.75rem;
   padding-left: 1.25rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
 }
 
 @media (max-width: 640px) {

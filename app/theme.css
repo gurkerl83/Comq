@@ -1,8 +1,33 @@
 /* Global design tokens shared by localized pages and their CSS Modules.
    Each light-dark() pair lists the light color first, then the dark color. */
 :root {
-  /* Shared typography and sizing. */
+  /*
+   * Shared typography by role:
+   * - Small: captions, help text and progress labels.
+   * - Body: paragraphs, form labels, controls and actions.
+   * - Titles: subsection, section, feature and page headings.
+   * Page titles adapt at the mobile breakpoint below.
+   */
   --font-family-body: Arial, Helvetica, sans-serif;
+  --font-size-small: 0.875rem;
+  --font-size-body: 1rem;
+  --font-size-subsection-title: 1.25rem;
+  --font-size-section-title: 1.5rem;
+  --font-size-feature-title: 1.75rem;
+  --font-size-page-title: 3rem;
+
+  /*
+   * Shared section padding and column gaps. Large sections include the
+   * homepage hero, its service sections and the company page.
+   */
+  --spacing-large-section: 6rem;
+  --spacing-page-section: 3rem;
+  --spacing-content-section: 2.5rem;
+  --spacing-column-gap: 2rem;
+
+  /*
+   * Border, control and focus dimensions.
+   */
   --radius-small: 0.25rem;
   --radius-control: 0.3125rem;
   --radius-media: 10px;
@@ -35,4 +60,14 @@
   /* Logo strip background and text; artwork colors come from the image files. */
   --color-logo-strip-background: var(--color-surface);
   --color-logo-strip-text: light-dark(#545454, var(--color-text));
+}
+
+/*
+ * Components inherit these shared mobile sizes through their tokens.
+ */
+@media (max-width: 640px) {
+  :root {
+    --font-size-page-title: 2.25rem;
+    --spacing-large-section: 4rem;
+  }
 }

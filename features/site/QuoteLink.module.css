@@ -4,7 +4,7 @@
   justify-content: center;
   flex-shrink: 0;
   gap: 0.5rem;
-  /* Reserve room for either translation so locale changes keep the same rows. */
+  /* Keep the button width consistent across translations. */
   width: 9rem;
   max-width: 100%;
   min-height: 44px;
@@ -13,7 +13,6 @@
   color: var(--color-on-action);
   background: var(--color-action);
   font-weight: 700;
-  font-size: 0.9375rem;
   text-decoration: none;
 }
 

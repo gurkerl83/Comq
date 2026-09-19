@@ -4,24 +4,21 @@
 }
 
 .strip {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
 .heading {
   margin: 0 0 0.75rem;
-  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
-  line-height: 1.25;
+  font-size: var(--font-size-subsection-title);
   text-align: center;
-  text-wrap: balance;
 }
 
 .logos {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
-  gap: 1.5rem clamp(2rem, 5vw, 4rem);
+  gap: 1.5rem var(--spacing-column-gap);
   margin: 1rem 0 0;
   padding: 0;
   list-style: none;
@@ -31,7 +28,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 100%;
 }
 
 .logos img {
