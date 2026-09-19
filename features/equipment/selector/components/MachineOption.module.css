@@ -1,0 +1,49 @@
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  background: var(--color-background);
+}
+
+.option:has(> label:hover),
+.option:has(input:checked) {
+  border-color: var(--color-accent);
+}
+
+.option:has(input:checked) {
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  background: var(--color-background);
+  object-fit: cover;
+}
+
+.detailLink {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 44px;
+  margin-top: auto;
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.detailLink:hover {
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 640px) {
+  .option {
+    padding: 1rem;
+  }
+}

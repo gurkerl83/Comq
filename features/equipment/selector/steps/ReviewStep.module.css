@@ -1,0 +1,65 @@
+.summary {
+  margin: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: first baseline;
+  gap: 0.75rem 1.5rem;
+  padding: 1.125rem 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.row:first-child {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.row dt {
+  color: var(--color-text-muted);
+}
+
+.row dd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: first baseline;
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+}
+
+.row dd > span {
+  white-space: pre-line;
+}
+
+.editButton {
+  min-height: 44px;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: var(--radius-control);
+  color: var(--color-accent);
+  background: transparent;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.editButton:hover {
+  background: var(--color-background);
+}
+
+.note {
+  margin: 1.5rem 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem 0.75rem;
+  }
+
+  .row dd {
+    gap: 0.75rem;
+  }
+}
