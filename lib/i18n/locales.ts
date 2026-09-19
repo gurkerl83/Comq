@@ -45,11 +45,11 @@ export const isSupportedLocale = (value: string): value is SupportedLocale =>
  * @param pathname - Absolute pathname without a query or hash.
  */
 export const getLocaleFreePathname = (pathname: string) => {
-  const segments = pathname.split('/');
+  const [, firstSegment = '', ...remainingSegments] = pathname.split('/');
 
-  if (!isSupportedLocale(segments[1])) return pathname;
+  if (!isSupportedLocale(firstSegment)) return pathname;
 
-  return `/${segments.slice(2).join('/')}`;
+  return `/${remainingSegments.join('/')}`;
 };
 
 /**
@@ -97,7 +97,8 @@ export const createHrefForLocale = (
     throw new Error('Expected a pathname without relative segments.');
   }
 
-  if (isSupportedLocale(segments[1] ?? '')) {
+  const [, firstSegment = ''] = segments;
+  if (isSupportedLocale(firstSegment)) {
     throw new Error('Expected a locale-free pathname.');
   }
 
