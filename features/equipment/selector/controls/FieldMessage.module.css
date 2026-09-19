@@ -1,0 +1,18 @@
+.help,
+.requirement {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+.requirement {
+  white-space: nowrap;
+}
+
+.error {
+  margin: 0.75rem 0 0;
+  padding: 0.625rem 0.875rem;
+  border-inline-start: 3px solid var(--color-action);
+  background: var(--color-background);
+  font-weight: 700;
+}
