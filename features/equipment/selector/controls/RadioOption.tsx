@@ -9,7 +9,7 @@ type RadioOptionProps = {
   description?: string;
   required?: boolean;
   invalid?: boolean;
-  appearance?: 'card' | 'plain';
+  appearance?: 'card' | 'sharedRows';
 };
 
 export function RadioOption({

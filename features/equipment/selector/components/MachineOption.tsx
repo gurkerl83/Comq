@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -30,7 +29,6 @@ export function MachineOption({
 }: MachineOptionProps) {
   return (
     <div className={styles.option}>
-      {entry.image && <Image className={styles.image} {...entry.image} />}
       <RadioOption
         name='machine'
         value={entry.slug}
@@ -40,7 +38,7 @@ export function MachineOption({
         invalid={invalid}
         label={entry.name}
         description={entry.summary}
-        appearance='plain'
+        appearance='sharedRows'
       />
       <Specifications
         items={entry.specifications}

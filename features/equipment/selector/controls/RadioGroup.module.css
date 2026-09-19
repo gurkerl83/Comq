@@ -16,6 +16,21 @@
   font-weight: 700;
 }
 
+/*
+ * Lay out choices in two columns.
+ *
+ * MachineOption cards span four content-sized rows of this parent grid.
+ * Subgrid shares those rows across each side-by-side pair, aligning:
+ * 1. Machine names.
+ * 2. Descriptions.
+ * 3. Specification blocks.
+ * 4. Details links.
+ *
+ * At 640px and below, choices stack and each machine card sizes its own rows.
+ *
+ * Full layout map: ../components/MachineOption.module.css
+ * Nested label/text alignment: RadioOption.module.css (.sharedRows)
+ */
 .choices {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

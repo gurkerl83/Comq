@@ -1,6 +1,38 @@
+/*
+ * Machine cards: four shared rows for each side-by-side pair.
+ *
+ * Subgrid lets a nested grid use its parent's rows. Content inside either
+ * card contributes to those row heights, keeping corresponding sections level.
+ *
+ *     +------------------------+------------------------+
+ *   1 | J1 name                | J2 name                |
+ *     +------------------------+------------------------+
+ *   2 | Short description      | Longer description     |
+ *     |                        | continues here         |
+ *     +------------------------+------------------------+
+ *   3 | Specifications block   | Specifications block   |
+ *     +------------------------+------------------------+
+ *   4 | Details link           | Details link           |
+ *     +------------------------+------------------------+
+ *
+ * 1. ../controls/RadioGroup.module.css (.choices) provides two columns.
+ *    The browser creates content-sized parent rows as the cards occupy them.
+ * 2. grid-row: span 4 places each card across four parent rows;
+ *    grid-template-rows: subgrid uses those rows inside the card as well.
+ *    Four is the number of rows, not a requirement that their heights match.
+ * 3. A longer description enlarges row 2 for both cards, so both specification
+ *    blocks start at row 3. Heights adjust with the text and available width.
+ * 4. ../controls/RadioOption.module.css (.sharedRows and its text span) passes
+ *    rows 1 and 2 through the radio label and text wrapper to name/description.
+ *
+ * Row 3 contains the entire specifications list; its individual entries do
+ * not share rows across cards. Later pairs of cards get their own four rows.
+ * If the card's sections change, update the row spans and this map together.
+ */
 .option {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
   gap: 1.25rem;
   padding: 1.25rem;
   border: var(--border-width) solid var(--color-border);
@@ -17,23 +49,12 @@
   box-shadow: inset 0 0 0 1px var(--color-accent);
 }
 
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-media);
-  background: var(--color-background);
-  object-fit: cover;
-}
-
 .detailLink {
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
+  justify-self: start;
   min-height: 44px;
-  margin-top: auto;
   color: var(--color-accent);
   text-decoration: underline;
 }
@@ -44,6 +65,13 @@
 
 @media (max-width: 640px) {
   .option {
+    /*
+     * Match .choices switching to one column in RadioGroup.module.css.
+     * Each card now creates its own content-sized rows. The label/text
+     * subgrids still work inside that card, without sharing with other cards.
+     */
+    grid-row: auto;
+    grid-template-rows: none;
     padding: 1rem;
   }
 }
