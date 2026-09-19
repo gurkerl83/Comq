@@ -8,7 +8,6 @@ import type { Dictionary } from '../../lib/i18n/types';
 import { SITE_NAME } from '../../lib/site/config';
 import { BrandSymbol } from './BrandSymbol';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { QuoteLink } from './QuoteLink';
 import { ThemeToggle } from './ThemeToggle';
 import styles from './SiteShell.module.css';
 
@@ -29,10 +28,6 @@ export function SiteNav({
         >
           <BrandSymbol className={styles.brandIcon} />
         </Link>
-        <QuoteLink
-          label={dictionary.navigation.whatsapp}
-          accessibleLabel={dictionary.navigation.whatsappLabel}
-        />
         <div className={styles.preferences}>
           <LanguageSwitcher
             locale={locale}

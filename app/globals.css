@@ -4,18 +4,26 @@
 @import './theme.css';
 
 :root {
+  /* Shared dimensions align the header and document scroll offsets.
+     The header's single row reserves at least 44px for its controls. */
+  --site-header-row-height: max(44px, 2.75rem);
+  --site-header-padding-block: 1.375rem;
+  --site-header-height: calc(
+    var(--site-header-row-height) + 2 * var(--site-header-padding-block) +
+      var(--border-width)
+  );
+
   font-family: var(--font-family-body);
   color: var(--color-text);
   background: var(--color-background);
   scrollbar-gutter: stable;
-  /* Keep anchor and keyboard-scroll destinations below the sticky header. */
-  scroll-padding-top: 6rem;
+  /* Keep scroll destinations below the header with a small visible gap. */
+  scroll-padding-top: calc(var(--site-header-height) + 0.5rem);
 }
 
-@media (max-width: 380px) {
+@media (max-width: 640px) {
   :root {
-    /* The existing narrow-screen header uses two rows. */
-    scroll-padding-top: 9rem;
+    --site-header-padding-block: 1rem;
   }
 }
 

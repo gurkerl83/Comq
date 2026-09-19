@@ -32,11 +32,10 @@
 .headerInner {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1.5rem;
-  max-width: 1200px;
+  min-height: calc(var(--site-header-height) - var(--border-width));
   margin: 0 auto;
-  padding: 1.375rem 2rem;
+  padding: var(--site-header-padding-block) 2rem;
 }
 
 .brandLink {
@@ -44,7 +43,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  min-width: 48px;
   min-height: 44px;
   margin-right: auto;
   text-decoration: none;
@@ -204,8 +202,8 @@
 
 @media (max-width: 640px) {
   .headerInner {
-    gap: 0.75rem 1rem;
-    padding: 1rem 1.25rem;
+    gap: 1rem;
+    padding: var(--site-header-padding-block) 1.25rem;
   }
 
   .footerInner {
@@ -216,30 +214,5 @@
 
   .footerBrand {
     grid-column: 1 / -1;
-  }
-}
-
-/* The quote and preference controls keep predictable rows in both languages. */
-@media (max-width: 380px) {
-  .headerInner {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
-  }
-
-  .brandLink {
-    grid-row: span 2;
-    margin-right: 0;
-  }
-
-  .preferences {
-    justify-content: flex-end;
-  }
-}
-
-@media (max-width: 360px) {
-  .headerInner {
-    column-gap: 0.5rem;
-    padding-inline: 1rem;
   }
 }
