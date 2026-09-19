@@ -1,0 +1,25 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  margin: 0.5rem 0 1rem;
+  padding: 0.75rem 1rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-control);
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+.link svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}

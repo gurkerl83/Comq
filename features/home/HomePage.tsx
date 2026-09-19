@@ -11,6 +11,7 @@ import {
   createSiteStructuredData
 } from '../../lib/site/json-ld';
 import { CompanyLogoStrip } from '../experience/CompanyLogoStrip';
+import { SelectorLink } from '../equipment/SelectorLink';
 import { ArrowRightIcon } from '../site/icons';
 import { QuoteInvitation } from '../site/QuoteInvitation';
 import styles from './HomePage.module.css';
@@ -84,6 +85,7 @@ export function HomePage({
             />
           </Link>
           <p>{service.description}</p>
+          {service.id === 'venta' && <SelectorLink locale={locale} />}
         </section>
       ))}
       <QuoteInvitation dictionary={dictionary} />

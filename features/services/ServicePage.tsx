@@ -1,13 +1,17 @@
+import type { ReactNode } from 'react';
+
 import type { Dictionary, ServiceKey } from '../../lib/i18n/types';
 import { QuoteLink } from '../site/QuoteLink';
 import styles from './ServicePage.module.css';
 
 export function ServicePage({
   dictionary,
-  service
+  service,
+  selector
 }: {
   dictionary: Dictionary;
   service: ServiceKey;
+  selector?: ReactNode;
 }) {
   const { quoteHeading, pages } = dictionary.servicePages;
   const content = pages[service];
@@ -23,6 +27,7 @@ export function ServicePage({
           {content.title}
         </h1>
         <p className={styles.introduction}>{content.introduction}</p>
+        {selector}
       </section>
 
       <div className={styles.details}>
