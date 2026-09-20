@@ -7,11 +7,13 @@ import styles from './ServicePage.module.css';
 export function ServicePage({
   dictionary,
   service,
-  selector
+  selector,
+  children
 }: {
   dictionary: Dictionary;
   service: ServiceKey;
   selector?: ReactNode;
+  children?: ReactNode;
 }) {
   const { quoteHeading, pages } = dictionary.servicePages;
   const content = pages[service];
@@ -31,6 +33,7 @@ export function ServicePage({
       </section>
 
       <div className={styles.details}>
+        {children}
         {detailSections.map(section => (
           <section
             key={section.id}

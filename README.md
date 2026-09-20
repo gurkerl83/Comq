@@ -35,7 +35,7 @@ The shared locale layout keeps the header and footer mounted during navigation w
 When extending the site:
 
 - **Add a page:** create one thin entrypoint under `app/[locale]` that renders its feature, add its `metadata.ts` helper and translated content, and update its [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
-- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper. Add the [selector translations](features/equipment/selector-content.ts), [machine-page text](features/equipment/MachinePage.tsx) and all localized content in the [equipment catalogue](features/equipment/catalogue.ts).
+- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper. Add the [selector translations](features/equipment/selector-content.ts), [catalogue-page text](features/equipment/catalogue-content.ts), [machine-page text](features/equipment/MachinePage.tsx) and all localized content in the [equipment catalogue](features/equipment/catalogue.ts).
 
 Keep the original standalone `index.html` unchanged; it is separate from the Next.js application.
 
@@ -43,15 +43,17 @@ Keep `public/llms.txt` aligned with published content, contact details and suppo
 
 ### Equipment selector
 
+The sales pages (`/venta` and `/en/venta`) offer compact machine cards before the service details. Cards show the category, summary and first two specifications in catalogue order, then link to the full machine page. Keep those specifications ordered by their usefulness for a quick comparison. Demo equipment remains explicitly identified.
+
 `/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. Local React state retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
 
-Machine-page links use `?machine=...` to start at Requirements. Missing or unknown machines start at equipment type. Change equipment returns to the equipment-type step and preserves the enquiry draft, including the visitor's purchase/rental preference and rental details.
+A browse link above the wizard returns to the sales-page catalogue. Machine-page links use `?machine=...` to start at Requirements. Missing or unknown machines start at equipment type. Change equipment returns to the equipment-type step and preserves the enquiry draft, including the visitor's purchase/rental preference and rental details.
 
 The draft lasts for the current wizard instance. A full page reload initializes a new draft from the machine in the URL, or from equipment type if none is recognized. Navigating to a different valid machine link also starts a new draft. Language changes do not transfer answers, and the language switch drops `?machine=...`.
 
 Purchase and Rental are enquiry preferences available for every machine. COMQ confirms availability and terms. Rental fields appear only when Rental is selected.
 
-The fictional catalogue is explicitly labelled as a demo and does not represent real COMQ offers. These routes are marked `noindex` and intentionally excluded from the sitemap and `llms.txt` until real content is confirmed. To add real products later, update the localized text, specifications and `variants` in [the equipment catalogue](features/equipment/catalogue.ts).
+The fictional catalogue is explicitly labelled as a demo and does not represent real COMQ offers. The demo selector and machine-detail routes are marked `noindex` and intentionally excluded from the sitemap and `llms.txt` until real content is confirmed. To add real products later, update the localized text, specifications and `variants` in [the equipment catalogue](features/equipment/catalogue.ts).
 
 ### Theme
 

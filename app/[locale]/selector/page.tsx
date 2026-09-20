@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { getEquipmentCatalogue } from '../../../features/equipment/catalogue';
+import { getCatalogueContent } from '../../../features/equipment/catalogue-content';
 import { EquipmentSelector } from '../../../features/equipment/EquipmentSelector';
 import type { SelectorQuery } from '../../../features/equipment/selector/types';
 import styles from '../../../features/equipment/SelectorPage.module.css';
@@ -47,6 +48,7 @@ export default async function Page({
 }: LocalePageProps & { searchParams: Promise<SelectorQuery> }) {
   const locale = await getRouteLocale(params);
   const catalogue = getEquipmentCatalogue(locale);
+  const catalogueContent = getCatalogueContent(locale);
   const translations = getSelectorContent(locale);
   return (
     <article className={styles.page}>
@@ -62,6 +64,19 @@ export default async function Page({
       />
       <h1 className={styles.heading}>{translations.title}</h1>
       <p className={styles.intro}>{translations.introduction}</p>
+      {catalogue.length > 0 && (
+        <p className={styles.cataloguePrompt}>
+          {catalogueContent.browsePrompt}{' '}
+          <Link
+            href={{
+              pathname: createHrefForLocale(locale, '/venta'),
+              hash: 'equipment-catalogue'
+            }}
+          >
+            {catalogueContent.title}
+          </Link>
+        </p>
+      )}
       {catalogue.some(machine => machine.isDemo) && (
         <p className={styles.demoNotice}>{translations.demo}</p>
       )}
@@ -71,23 +86,6 @@ export default async function Page({
         translations={translations}
         searchParams={searchParams}
       />
-      <section
-        className={styles.machineLinks}
-        aria-labelledby='direct-machine-pages'
-      >
-        <h2 id='direct-machine-pages'>{translations.directPages}</h2>
-        <ul>
-          {catalogue.map(machine => (
-            <li key={machine.slug}>
-              <Link
-                href={createHrefForLocale(locale, `/equipos/${machine.slug}`)}
-              >
-                {machine.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
     </article>
   );
 }

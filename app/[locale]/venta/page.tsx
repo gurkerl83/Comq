@@ -1,3 +1,4 @@
+import { EquipmentCatalogue } from '../../../features/equipment/EquipmentCatalogue';
 import { SelectorLink } from '../../../features/equipment/SelectorLink';
 import { ServicePage } from '../../../features/services/ServicePage';
 import { getServiceMetadata } from '../../../features/services/metadata';
@@ -18,6 +19,8 @@ export default async function Page({ params }: LocalePageProps) {
       dictionary={dictionary}
       service='sales'
       selector={<SelectorLink locale={locale} />}
-    />
+    >
+      <EquipmentCatalogue locale={locale} />
+    </ServicePage>
   );
 }

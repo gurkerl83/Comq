@@ -1,0 +1,41 @@
+.catalogue {
+  padding: var(--spacing-content-section) 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.catalogue h2 {
+  margin: 0 0 1rem;
+}
+
+.introduction {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.demoNotice {
+  margin: 0 0 1.5rem;
+  padding: 0.875rem 1rem;
+  border-inline-start: 3px solid var(--color-accent);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  font-size: var(--font-size-small);
+}
+
+/*
+ * MachineBrowseCard.module.css shares five rows across each adjacent pair.
+ * This list owns the columns; each card passes its content into those rows.
+ */
+.machines {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 640px) {
+  .machines {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

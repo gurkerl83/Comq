@@ -11,7 +11,7 @@ const en = {
   introduction:
     'Explore equipment, choose a configuration and prepare your enquiry. You can go back at any time to adjust your selection.',
   demo: 'Machines marked “Demo”, including their specifications and configurations, are fictional examples for trying the selector. They are not actual COMQ offers.',
-  entryLink: 'Choose equipment',
+  entryLink: 'Use the guided selector',
   progress: 'Selection progress',
   steps: {
     [SelectionStep.Category]: {
@@ -107,7 +107,6 @@ const en = {
   emptyCatalogue:
     'The equipment catalogue is being prepared. Contact COMQ to discuss your requirements.',
   contact: 'Contact COMQ',
-  directPages: 'Explore the machines directly',
   confirmation:
     'All model, configuration and delivery details will be confirmed by COMQ.'
 };
@@ -124,7 +123,7 @@ const es: SelectorContent = {
   introduction:
     'Explora los equipos, elige una configuración y prepara tu consulta. Puedes volver a cualquier paso para ajustar tu selección.',
   demo: 'Los equipos identificados como “Demo”, junto con sus especificaciones y configuraciones, son ejemplos ficticios para probar el selector. No representan ofertas reales de COMQ.',
-  entryLink: 'Elegir equipo',
+  entryLink: 'Usar el selector guiado',
   progress: 'Avance de la selección',
   steps: {
     [SelectionStep.Category]: {
@@ -221,7 +220,6 @@ const es: SelectorContent = {
   emptyCatalogue:
     'Estamos preparando el catálogo de equipos. Contacta a COMQ para conversar sobre tus necesidades.',
   contact: 'Contactar a COMQ',
-  directPages: 'Explora las páginas de los equipos',
   confirmation:
     'COMQ confirmará todos los detalles del modelo, la configuración y la entrega.'
 };

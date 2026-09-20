@@ -92,8 +92,8 @@ const EQUIPMENT: EquipmentDefinition[] = [
     category: 'jumbo',
     name: { es: 'Jumbo Demo J1', en: 'Demo Jumbo J1' },
     summary: {
-      es: 'Jumbo ficticio de un brazo para probar la selección de equipo, variante y modalidad.',
-      en: 'Fictional single-boom jumbo for trying equipment, variant and purchase or rental selection.'
+      es: 'Jumbo ficticio de un brazo para perforación subterránea.',
+      en: 'Fictional single-boom jumbo for underground drilling.'
     },
     application: {
       es: 'Ejemplo de una operación de perforación subterránea. Describe tu proyecto al preparar la consulta.',
@@ -113,8 +113,8 @@ const EQUIPMENT: EquipmentDefinition[] = [
     category: 'jumbo',
     name: { es: 'Jumbo Demo J2', en: 'Demo Jumbo J2' },
     summary: {
-      es: 'Segundo jumbo ficticio para comparar modelos de una misma categoría y preparar una consulta de compra o alquiler.',
-      en: 'A second fictional jumbo for comparing models in the same category and preparing a purchase or rental enquiry.'
+      es: 'Jumbo ficticio de dos brazos para perforación subterránea.',
+      en: 'Fictional two-boom jumbo for underground drilling.'
     },
     application: {
       es: 'Ejemplo de una operación de perforación con dos brazos. Las cifras solo ilustran las opciones del selector.',
@@ -134,8 +134,8 @@ const EQUIPMENT: EquipmentDefinition[] = [
     category: 'scooptram',
     name: { es: 'Scooptram Demo S1', en: 'Demo Scooptram S1' },
     summary: {
-      es: 'Scooptram ficticio para explorar una consulta de carga y transporte, en compra o alquiler.',
-      en: 'Fictional scooptram for exploring a loading and hauling enquiry, for purchase or rental.'
+      es: 'Scooptram ficticio para carga y transporte de material.',
+      en: 'Fictional scooptram for loading and hauling material.'
     },
     application: {
       es: 'Ejemplo de tareas de carga y transporte de material. La capacidad indicada es un dato de demostración.',
@@ -155,8 +155,8 @@ const EQUIPMENT: EquipmentDefinition[] = [
     category: 'drill',
     name: { es: 'Perforadora Demo D1', en: 'Demo Drilling Rig D1' },
     summary: {
-      es: 'Perforadora ficticia para probar la elección de una configuración y preparar una consulta de compra o alquiler.',
-      en: 'Fictional drilling rig for trying configuration selection and preparing a purchase or rental enquiry.'
+      es: 'Equipo ficticio para tareas de perforación.',
+      en: 'Fictional drilling rig for drilling tasks.'
     },
     application: {
       es: 'Ejemplo de un proyecto de perforación. El método y las condiciones de trabajo se describen en la consulta.',
