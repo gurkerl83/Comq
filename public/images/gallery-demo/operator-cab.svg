@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <title>Operator cab and controls of an imaginary mining rig — demo illustration</title>
+  <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#d8d7cb" stroke-width="1"/></pattern></defs>
+  <rect width="900" height="900" fill="#f0ede5"/>
+  <rect x="35" y="35" width="830" height="830" rx="12" fill="url(#grid)"/>
+  <g fill="none" stroke="#b3b7aa" stroke-width="2"><path d="M55 90V55H90M810 55h35v35M55 810v35h35M810 845h35v-35"/></g>
+  <rect x="65" y="62" width="178" height="46" rx="23" fill="#252e2c"/>
+  <text x="154" y="92" fill="#f0ede5" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" letter-spacing="3">DEMO 04</text>
+  <g stroke="#293330" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+<ellipse cx="454" cy="769" rx="297" ry="34" fill="#d5d8ca" stroke="none"/>
+<path d="M184 724V246l80-66h398l63 66v478Z" fill="#668d87"/>
+<path d="M216 252 278 204h181v237H216ZM485 204h164l44 51v186H485Z" fill="#cfddd4"/>
+<path d="M243 249 430 395M237 299l118 94M515 225l141 139" stroke="#e2ebe0" stroke-width="12"/>
+<path d="M175 176h551v34H175Z" fill="#343f39"/>
+<path d="M450 211v256m245-14-68 52H241l-25-62" fill="none" stroke-width="9"/>
+<path d="M527 421h143v259H518Z" fill="#d39d4b"/>
+<path d="M544 445h102v76H544Z" fill="#374b41"/><path d="M558 502v-25h15v-12h19v29h18v-38h17" fill="none" stroke="#b9d4bf" stroke-width="4"/>
+<circle cx="559" cy="551" r="10" fill="#b97257"/><circle cx="594" cy="551" r="10" fill="#718f7c"/><circle cx="629" cy="551" r="10" fill="#eee5d4"/>
+<path d="M554 591h82m-82 24h55" fill="none" stroke="#9f7543" stroke-width="7"/>
+<path d="M326 594V483q0-28 28-28h79q28 0 28 28v111Z" fill="#38483f"/>
+<path d="M346 477h94v108h-94Z" fill="#879b86"/><path d="M346 510h94m-94 37h94" stroke="#657d68"/>
+<path d="M309 579h175v56H309Z" fill="#879b86"/><path d="M331 635v53h129v-53" fill="#38483f"/>
+<path d="M394 690v28m-65 0h128" fill="none" stroke-width="12"/>
+<path d="M257 618v-87h52m178 0h17v87" fill="none" stroke-width="11"/>
+<path d="M271 528v-44m221 44v-40" fill="none" stroke-width="7"/><circle cx="271" cy="478" r="14" fill="#b97257"/><circle cx="492" cy="482" r="14" fill="#b97257"/>
+<path d="M189 707h534v44H189Z" fill="#d39d4b"/><path d="M230 719v18m35-18v18m35-18v18m235-18v18m35-18v18m35-18v18m35-18v18" stroke="#9f7543"/>
+
+  </g>
+  <g fill="none" stroke="#8f998f" stroke-width="2"><path d="M65 815h110m-110-6v12m110-12v12M715 815h110m-110-6v12m110-12v12"/></g>
+</svg>

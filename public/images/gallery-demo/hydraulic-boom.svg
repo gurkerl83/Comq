@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <title>Close-up illustration of a hydraulic boom and hoses — demo illustration</title>
+  <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#d8d7cb" stroke-width="1"/></pattern></defs>
+  <rect width="1200" height="800" fill="#f0ede5"/>
+  <rect x="35" y="35" width="1130" height="730" rx="12" fill="url(#grid)"/>
+  <g fill="none" stroke="#b3b7aa" stroke-width="2"><path d="M55 90V55H90M1110 55h35v35M55 710v35h35M1110 745h35v-35"/></g>
+  <rect x="65" y="62" width="178" height="46" rx="23" fill="#252e2c"/>
+  <text x="154" y="92" fill="#f0ede5" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" letter-spacing="3">DEMO 03</text>
+  <g stroke="#293330" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+<ellipse cx="600" cy="665" rx="445" ry="30" fill="#d5d8ca" stroke="none"/>
+<path d="M170 604h296v66H170Z" fill="#668d87"/><path d="M235 597 308 430h89l55 167" fill="#d39d4b"/>
+<path d="M280 445 707 222 746 292 357 524Z" fill="#d39d4b"/>
+<path d="M321 431 697 239 711 269 345 479" fill="#e8bb73"/>
+<path d="m708 222 273 119-20 64-270-113Z" fill="#d39d4b"/>
+<path d="m746 247 219 93-12 31-219-93" fill="#e8bb73"/>
+<path d="M940 325 1106 316 1113 369 962 407" fill="#668d87"/>
+<path d="M975 346h112m-92 43h92" stroke="#a9c2b6" stroke-width="6"/>
+<path d="m357 506 216-135" stroke="#75897d" stroke-width="34"/>
+<path d="m567 375 85-54" stroke="#c9d2c5" stroke-width="19"/>
+<path d="m571 388 21-39" stroke="#293330" stroke-width="7"/>
+<path d="M367 576Q233 473 306 417L674 209Q712 186 750 205L1001 300" fill="none" stroke="#41534a" stroke-width="13"/>
+<path d="M383 576Q271 471 326 435L684 231Q709 213 744 228L994 327" fill="none" stroke="#788e7c" stroke-width="9"/>
+<path d="m480 319 24 39m56-85 23 40m278-42-21 45" stroke-width="10"/>
+<circle cx="329" cy="464" r="48" fill="#668d87"/><circle cx="329" cy="464" r="22" fill="#eee5d4"/>
+<circle cx="713" cy="254" r="40" fill="#668d87"/><circle cx="713" cy="254" r="19" fill="#eee5d4"/>
+<circle cx="971" cy="365" r="29" fill="#eee5d4"/><circle cx="971" cy="365" r="9" fill="#293330"/>
+<path d="M212 609v42m38-42v42m124-42v42m39-42v42" stroke="#a9c2b6" stroke-width="8"/>
+<path d="M385 475 627 582h182" fill="none" stroke="#8f998f" stroke-width="2"/><circle cx="385" cy="475" r="6" fill="#8f998f" stroke="none"/>
+
+  </g>
+  <g fill="none" stroke="#8f998f" stroke-width="2"><path d="M65 715h110m-110-6v12m110-12v12M1015 715h110m-110-6v12m110-12v12"/></g>
+</svg>

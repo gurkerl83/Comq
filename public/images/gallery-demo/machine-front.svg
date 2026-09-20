@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <title>Front view of a fictional underground wheeled rig — demo illustration</title>
+  <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#d8d7cb" stroke-width="1"/></pattern></defs>
+  <rect width="900" height="1200" fill="#f0ede5"/>
+  <rect x="35" y="35" width="830" height="1130" rx="12" fill="url(#grid)"/>
+  <g fill="none" stroke="#b3b7aa" stroke-width="2"><path d="M55 90V55H90M810 55h35v35M55 1110v35h35M810 1145h35v-35"/></g>
+  <rect x="65" y="62" width="178" height="46" rx="23" fill="#252e2c"/>
+  <text x="154" y="92" fill="#f0ede5" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" letter-spacing="3">DEMO 02</text>
+  <g stroke="#293330" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+<ellipse cx="449" cy="1000" rx="299" ry="38" fill="#d5d8ca" stroke="none"/>
+<path d="M361 290 385 171h130l24 119" fill="#d39d4b"/><path d="M390 168h120v49H390Z" fill="#668d87"/>
+<path d="M272 553V326l32-75h292l32 75v227" fill="#668d87"/>
+<path d="M297 332 323 280h254l26 52v175H297Z" fill="#cfddd4"/>
+<path d="M450 284v222M309 349l270 135" fill="none" stroke-width="7"/>
+<path d="M313 310v165m22-176v177" stroke="#e5eee2" stroke-width="10"/>
+<path d="M276 251h348v27H276Z" fill="#343f39"/>
+<path d="M239 388h-44v119m468-119h44v119" fill="none"/>
+<rect x="174" y="410" width="41" height="98" rx="11" fill="#7c9588"/><rect x="685" y="410" width="41" height="98" rx="11" fill="#7c9588"/>
+<rect x="196" y="696" width="111" height="285" rx="37" fill="#3a4240"/><rect x="593" y="696" width="111" height="285" rx="37" fill="#3a4240"/>
+<path d="m212 743 71-16m-71 69 71-16m-71 69 71-16m-71 69 71-16m326-143 71 16m-71 37 71 16m-71 37 71 16m-71 37 71 16" stroke="#788079" stroke-width="13"/>
+<path d="M215 566 267 526H633L685 566V822H215Z" fill="#d39d4b"/>
+<path d="M301 576h298v177H301Z" fill="#668d87"/><path d="M322 598h256M322 624h256M322 650h256M322 676h256M322 702h256M322 728h256" stroke="#364f43" stroke-width="10"/>
+<rect x="237" y="585" width="46" height="68" rx="7" fill="#eee5d4"/><rect x="617" y="585" width="46" height="68" rx="7" fill="#eee5d4"/>
+<path d="M196 791h508v71H196Z" fill="#6d7d71"/><path d="M226 813h82m286 0h82" stroke="#eee5d4" stroke-width="10"/>
+<path d="M394 859v49h112v-49M407 908v24h86v-24" fill="#b97257"/><circle cx="450" cy="891" r="14" fill="#293330"/>
+<path d="M156 1052H744m-588-9v18m588-18v18" stroke="#8f998f" stroke-width="2"/>
+
+  </g>
+  <g fill="none" stroke="#8f998f" stroke-width="2"><path d="M65 1115h110m-110-6v12m110-12v12M715 1115h110m-110-6v12m110-12v12"/></g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <title>Side view of a fictional underground wheeled drilling rig — demo illustration</title>
+  <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#d8d7cb" stroke-width="1"/></pattern></defs>
+  <rect width="1200" height="800" fill="#f0ede5"/>
+  <rect x="35" y="35" width="1130" height="730" rx="12" fill="url(#grid)"/>
+  <g fill="none" stroke="#b3b7aa" stroke-width="2"><path d="M55 90V55H90M1110 55h35v35M55 710v35h35M1110 745h35v-35"/></g>
+  <rect x="65" y="62" width="178" height="46" rx="23" fill="#252e2c"/>
+  <text x="154" y="92" fill="#f0ede5" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" letter-spacing="3">DEMO 01</text>
+  <g stroke="#293330" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+<ellipse cx="586" cy="646" rx="455" ry="31" fill="#d5d8ca" stroke="none"/>
+<path d="M124 563H981L1054 523V467H907L875 417H389L334 481H182Z" fill="#d39d4b"/>
+<path d="M380 431V316L450 275H578V433" fill="#668d87"/>
+<path d="M399 406V328L458 294H493V406ZM512 294H558V406Z" fill="#cfddd4"/>
+<path d="M414 321l62 51m-69-22 46 35" stroke="#a9c2b6" stroke-width="8"/>
+<path d="M368 280h224v24H368Z" fill="#343f39"/>
+<path d="M459 419v85m52-84v84M459 456h52M459 485h52" fill="none"/>
+<path d="M596 435V375H791L844 435" fill="#b97257"/>
+<path d="M619 396h23m14 0h23m14 0h23m14 0h23m14 0h17" stroke="#eee5d4" stroke-width="9"/>
+<path d="M188 486h145v50H172Z" fill="#668d87"/>
+<path d="M837 410 698 319 737 284 884 376Z" fill="#d39d4b"/>
+<path d="M714 304 668 245 884 184 901 217Z" fill="#d39d4b"/>
+<path d="M744 323 705 304m89 59-69-48M712 246l166-43" fill="none" stroke="#718a7e" stroke-width="15"/>
+<path d="M873 174 1118 146 1122 171 879 202Z" fill="#668d87"/>
+<path d="m1119 159 36-4M948 173l12 68m30-73 12 68" fill="none"/>
+<circle cx="718" cy="303" r="13" fill="#eee5d4"/><circle cx="860" cy="391" r="13" fill="#eee5d4"/>
+<path d="M887 384q34-14 41 37v54" fill="none"/>
+<path d="M94 553h932v38H94Z" fill="#6d7d71"/>
+<g transform="translate(282 563)"><circle r="80" fill="#3a4240"/><circle r="62" fill="#535c58"/><circle r="44" fill="#d1d4c8"/><circle r="30" fill="#eae8dc"/><circle r="12" fill="#668d87"/><path d="M0 -77v14M0 77v-14M-77 0h14M77 0h-14" stroke="#788079" stroke-width="8"/><path d="M-18 -18l5 5M18 -18l-5 5M-18 18l5-5M18 18l-5-5" stroke-width="7"/></g><g transform="translate(810 563)"><circle r="80" fill="#3a4240"/><circle r="62" fill="#535c58"/><circle r="44" fill="#d1d4c8"/><circle r="30" fill="#eae8dc"/><circle r="12" fill="#668d87"/><path d="M0 -77v14M0 77v-14M-77 0h14M77 0h-14" stroke="#788079" stroke-width="8"/><path d="M-18 -18l5 5M18 -18l-5 5M-18 18l5-5M18 18l-5-5" stroke-width="7"/></g>
+<path d="M906 483h92v48h-92Z" fill="#ede8d8"/><path d="M921 490v34m15-34v34m15-34v34m15-34v34m15-34v34" stroke-width="3"/>
+<rect x="157" y="493" width="29" height="24" rx="4" fill="#eee5d4"/>
+<path d="M118 691H1060m-942-9v18m942-18v18" stroke="#8f998f" stroke-width="2"/>
+
+  </g>
+  <g fill="none" stroke="#8f998f" stroke-width="2"><path d="M65 715h110m-110-6v12m110-12v12M1015 715h110m-110-6v12m110-12v12"/></g>
+</svg>

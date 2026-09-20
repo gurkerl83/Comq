@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <title>Close-up illustration of a heavy tread wheel assembly — demo illustration</title>
+  <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#d8d7cb" stroke-width="1"/></pattern></defs>
+  <rect width="900" height="1200" fill="#f0ede5"/>
+  <rect x="35" y="35" width="830" height="1130" rx="12" fill="url(#grid)"/>
+  <g fill="none" stroke="#b3b7aa" stroke-width="2"><path d="M55 90V55H90M810 55h35v35M55 1110v35h35M810 1145h35v-35"/></g>
+  <rect x="65" y="62" width="178" height="46" rx="23" fill="#252e2c"/>
+  <text x="154" y="92" fill="#f0ede5" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" letter-spacing="3">DEMO 05</text>
+  <g stroke="#293330" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+<ellipse cx="449" cy="994" rx="299" ry="38" fill="#d5d8ca" stroke="none"/>
+<path d="M77 365 142 221H754l68 144v151H77Z" fill="#d39d4b"/>
+<path d="M137 250h229v78H137ZM397 250h289v78H397Z" fill="#b97257"/>
+<path d="M423 270h42m18 0h42m18 0h42m18 0h42" stroke="#e3c28f" stroke-width="12"/>
+<path d="M78 406h744v73H78Z" fill="#668d87"/>
+<path d="M282 488v176h328V488" fill="#6d7d71"/>
+<path d="M288 513h51m215 0h50M288 548h51m215 0h50M288 583h51m215 0h50" stroke="#a9c2b6" stroke-width="14"/>
+<ellipse cx="484" cy="738" rx="245" ry="264" fill="#3a4240"/>
+<ellipse cx="417" cy="738" rx="239" ry="264" fill="#48544b"/>
+<ellipse cx="417" cy="738" rx="195" ry="219" fill="#59665a"/>
+<path d="m336 491 73 20m100-18-24 37m129 23-35 33m66 79-43 18m46 78-42-5m5 102-41-23m-16 108-35-31m-58 78-19-39m-77 39 5-43m-104 8 27-36m-100-35 35-30m-70-64 42-15m-41-75 43 6m-20-97 42 21m20-93 27 33" stroke="#8a9783" stroke-width="22"/>
+<ellipse cx="417" cy="738" rx="126" ry="143" fill="#c9d2bd"/>
+<ellipse cx="417" cy="738" rx="94" ry="108" fill="#e5e6d7"/>
+<ellipse cx="417" cy="738" rx="49" ry="56" fill="#668d87"/>
+<ellipse cx="417" cy="738" rx="21" ry="24" fill="#344a3b"/>
+<g fill="#59665a" stroke-width="3"><circle cx="417" cy="656" r="9"/><circle cx="417" cy="820" r="9"/><circle cx="479" cy="697" r="9"/><circle cx="479" cy="779" r="9"/><circle cx="355" cy="697" r="9"/><circle cx="355" cy="779" r="9"/></g>
+<path d="M615 532 671 566M660 620l49 28M680 713l48 13M678 810h42M645 906l31-7" stroke="#697766" stroke-width="17"/>
+<path d="M765 486v502m-9-502h18m-18 502h18" stroke="#8f998f" stroke-width="2"/>
+
+  </g>
+  <g fill="none" stroke="#8f998f" stroke-width="2"><path d="M65 1115h110m-110-6v12m110-12v12M715 1115h110m-110-6v12m110-12v12"/></g>
+</svg>

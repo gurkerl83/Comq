@@ -1,0 +1,93 @@
+.page {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--spacing-content-section) 2rem var(--spacing-page-section);
+}
+
+.page h1 {
+  margin: 0;
+}
+
+.page h2 {
+  margin: 0 0 0.75rem;
+}
+
+.introduction {
+  max-width: 48rem;
+  margin: 1.25rem 0;
+  color: var(--color-text-muted);
+}
+
+.notice {
+  padding: 1rem 1.25rem;
+  border: var(--border-width) solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+.counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+
+.counts a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 0.875rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  text-decoration: none;
+}
+
+.counts a:hover {
+  border-color: var(--color-accent);
+}
+
+.counts a[aria-current='page'] {
+  border-color: var(--color-action);
+  color: var(--color-on-action);
+  background: var(--color-action);
+  font-weight: 700;
+}
+
+.description {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-muted);
+}
+
+.media {
+  max-width: 38rem;
+  overflow: hidden;
+  margin: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+}
+
+.placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+}
+
+.media figcaption {
+  padding: 0 1rem 1.25rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+}
