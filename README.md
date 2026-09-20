@@ -107,6 +107,7 @@ Choose the existing `comq` project when linking. The CLI returns a preview URL; 
 
 ## Documentation
 
+- [Equipment catalogue and enquiry wizard](features/equipment/README.md) — current behaviour, proposed options and requirements, and decisions awaiting confirmation.
 - [Content strategy](strategy/content-roadmap.md) — product comparisons, staged pickers, articles and LinkedIn presence.
 - [What we need from Alberto](strategy/alberto-first-inputs.md) — a short list of the first content inputs, in priority order.
 - [Artwork guide](design/README.md) — directory overview and shared image rendering.
