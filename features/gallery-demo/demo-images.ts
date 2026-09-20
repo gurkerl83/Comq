@@ -10,7 +10,7 @@ type GalleryDemoImage = Omit<GalleryImage, 'alt'> & {
 /** Standalone fixtures; product catalogue changes do not alter these examples. */
 const GALLERY_DEMO_IMAGES: GalleryDemoImage[] = [
   {
-    src: '/images/gallery-demo/machine-side.svg',
+    src: '/images/demo/machine-side.svg',
     width: 1200,
     height: 800,
     alt: {
@@ -19,7 +19,7 @@ const GALLERY_DEMO_IMAGES: GalleryDemoImage[] = [
     }
   },
   {
-    src: '/images/gallery-demo/machine-front.svg',
+    src: '/images/demo/machine-front.svg',
     width: 900,
     height: 1200,
     alt: {
@@ -28,7 +28,7 @@ const GALLERY_DEMO_IMAGES: GalleryDemoImage[] = [
     }
   },
   {
-    src: '/images/gallery-demo/hydraulic-boom.svg',
+    src: '/images/demo/hydraulic-boom.svg',
     width: 1200,
     height: 800,
     alt: {
@@ -37,7 +37,7 @@ const GALLERY_DEMO_IMAGES: GalleryDemoImage[] = [
     }
   },
   {
-    src: '/images/gallery-demo/operator-cab.svg',
+    src: '/images/demo/operator-cab.svg',
     width: 900,
     height: 900,
     alt: {
@@ -46,7 +46,7 @@ const GALLERY_DEMO_IMAGES: GalleryDemoImage[] = [
     }
   },
   {
-    src: '/images/gallery-demo/wheel-detail.svg',
+    src: '/images/demo/wheel-detail.svg',
     width: 900,
     height: 1200,
     alt: {
@@ -55,7 +55,7 @@ const GALLERY_DEMO_IMAGES: GalleryDemoImage[] = [
     }
   },
   {
-    src: '/images/gallery-demo/machine-rear.svg',
+    src: '/images/demo/machine-rear.svg',
     width: 1200,
     height: 800,
     alt: {
