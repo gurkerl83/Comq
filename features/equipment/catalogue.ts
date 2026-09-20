@@ -1,4 +1,6 @@
 import type { SupportedLocale } from '../../lib/i18n/locales';
+import type { GalleryImage } from '../../components/gallery';
+import { DEMO_EQUIPMENT_IMAGES } from './demo-images';
 
 type EquipmentCategoryId = keyof typeof CATEGORIES;
 
@@ -13,7 +15,8 @@ export type EquipmentEntry = {
   model: string | null;
   specifications: Array<{ label: string; value: string | null }>;
   variants: Array<{ id: string; label: string; description: string }>;
-  image?: { src: string; alt: string; width: number; height: number };
+  /** Product photographs in display order; empty when none are available. */
+  images: GalleryImage[];
   isDemo: boolean;
 };
 
@@ -37,7 +40,13 @@ type EquipmentDefinition = {
     label: LocalizedText;
     description: LocalizedText;
   }>;
-  image?: { src: string; alt: LocalizedText; width: number; height: number };
+  /** Source photographs with descriptions resolved for the requested locale. */
+  images: Array<
+    Omit<GalleryImage, 'alt'> & {
+      /** Describe the photograph in each supported language. */
+      alt: LocalizedText;
+    }
+  >;
   isDemo: boolean;
 };
 
@@ -106,6 +115,7 @@ const EQUIPMENT: EquipmentDefinition[] = [
       { label: { es: 'Ancho', en: 'Width' }, value: '1.8 m' }
     ],
     variants: DEMO_VARIANTS,
+    images: DEMO_EQUIPMENT_IMAGES,
     isDemo: true
   },
   {
@@ -127,6 +137,7 @@ const EQUIPMENT: EquipmentDefinition[] = [
       { label: { es: 'Ancho', en: 'Width' }, value: '2.4 m' }
     ],
     variants: DEMO_VARIANTS,
+    images: DEMO_EQUIPMENT_IMAGES.slice(0, 3),
     isDemo: true
   },
   {
@@ -148,6 +159,7 @@ const EQUIPMENT: EquipmentDefinition[] = [
       { label: { es: 'Ancho', en: 'Width' }, value: '1.6 m' }
     ],
     variants: DEMO_VARIANTS,
+    images: DEMO_EQUIPMENT_IMAGES.slice(0, 4),
     isDemo: true
   },
   {
@@ -172,6 +184,7 @@ const EQUIPMENT: EquipmentDefinition[] = [
       { label: { es: 'Ancho', en: 'Width' }, value: '1.5 m' }
     ],
     variants: DEMO_VARIANTS,
+    images: DEMO_EQUIPMENT_IMAGES.slice(0, 2),
     isDemo: true
   }
 ];
@@ -202,8 +215,6 @@ export const getEquipmentCatalogue = (
       label: variant.label[locale],
       description: variant.description[locale]
     })),
-    ...(entry.image && {
-      image: { ...entry.image, alt: entry.image.alt[locale] }
-    }),
+    images: entry.images.map(image => ({ ...image, alt: image.alt[locale] })),
     isDemo: entry.isDemo
   }));

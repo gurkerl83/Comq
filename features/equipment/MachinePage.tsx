@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -9,6 +8,7 @@ import { WHATSAPP_URL } from '../../lib/site/config';
 import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
 import { Breadcrumbs } from '../site/Breadcrumbs';
 import type { EquipmentEntry } from './catalogue';
+import { Gallery } from '../../components/gallery';
 import styles from './MachinePage.module.css';
 
 const CONTENT = {
@@ -17,10 +17,19 @@ const CONTENT = {
     sales: 'Venta de equipos',
     demo: 'Equipo de demostración',
     demoNotice:
-      'Los modelos, las especificaciones y las variantes de esta demostración son ficticios. Sirven para probar el selector y no constituyen una oferta real de venta o alquiler.',
+      'Los modelos, las ilustraciones, las especificaciones y las variantes de esta demostración son ficticios. Sirven para probar el selector y no constituyen una oferta real de venta o alquiler.',
     model: 'Modelo',
     unconfirmed: 'Por confirmar con COMQ',
     noImage: 'Sin fotografía',
+    gallery: {
+      label: 'Imágenes del equipo',
+      openImage: 'Abrir imagen',
+      moreImages: 'Más imágenes',
+      close: 'Cerrar',
+      previous: 'Imagen anterior',
+      next: 'Imagen siguiente',
+      image: 'Imagen'
+    },
     application: 'Aplicación',
     specifications: 'Especificaciones',
     demoSpecifications: 'Especificaciones ficticias de referencia',
@@ -37,10 +46,19 @@ const CONTENT = {
     sales: 'Equipment sales',
     demo: 'Demonstration equipment',
     demoNotice:
-      'The models, specifications and variants in this demonstration are fictional. They are for trying the selector and do not represent an actual sale or rental offer.',
+      'The models, illustrations, specifications and variants in this demonstration are fictional. They are for trying the selector and do not represent an actual sale or rental offer.',
     model: 'Model',
     unconfirmed: 'To be confirmed with COMQ',
     noImage: 'No photograph',
+    gallery: {
+      label: 'Equipment images',
+      openImage: 'Open image',
+      moreImages: 'More images',
+      close: 'Close',
+      previous: 'Previous image',
+      next: 'Next image',
+      image: 'Image'
+    },
     application: 'Application',
     specifications: 'Specifications',
     demoSpecifications: 'Fictional reference specifications',
@@ -100,15 +118,8 @@ export function MachinePage({
         </header>
 
         <figure className={styles.media}>
-          {equipment.image ? (
-            <Image
-              className={styles.image}
-              src={equipment.image.src}
-              alt={equipment.image.alt}
-              width={equipment.image.width}
-              height={equipment.image.height}
-              sizes='(max-width: 640px) 100vw, 50vw'
-            />
+          {equipment.images.length > 0 ? (
+            <Gallery images={equipment.images} labels={content.gallery} />
           ) : (
             <>
               <ServiceImagePlaceholder
