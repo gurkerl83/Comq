@@ -26,16 +26,7 @@ Next.js 16.3 App Router, React 19.3 and strict TypeScript, with Node.js 24 and p
 | Styling         | CSS Modules and shared design tokens; see [Theme](#theme).                                                              |
 | Assets          | Source artwork in `design/`; website copies in `public/` and App Router favicon files in `app/`.                        |
 
-### Routing and content
-
-Next.js rewrites keep default-language URLs unprefixed while letting all locales share the same pages and server layout. The routing rules and examples are documented in [next.config.ts](next.config.ts). Unsupported locales and missing pages return 404.
-
-The shared locale layout keeps the header and footer mounted during navigation within one language. Pages render only their content.
-
-When extending the site:
-
-- **Add a page:** create one thin entrypoint under `app/[locale]` that renders its feature, add its `metadata.ts` helper and translated content, and update its [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
-- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper. Add the [selector translations](features/equipment/selector-content.ts), [catalogue-page text](features/equipment/catalogue-content.ts), [machine-page text](features/equipment/MachinePage.tsx) and all localized content in the [equipment catalogue](features/equipment/catalogue.ts).
+For routing, shared layouts and navigation behavior, see [Next.js conventions](NEXTJS.md).
 
 Keep the original standalone `index.html` unchanged; it is separate from the Next.js application.
 
