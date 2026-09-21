@@ -14,11 +14,13 @@
   );
 
   font-family: var(--font-family-body);
+  /* Respect the browser's preferred font size, normally 16px. */
+  font-size: 100%;
   color: var(--color-text);
   background: var(--color-background);
   scrollbar-gutter: stable;
-  /* Keep scroll destinations below the header with a small visible gap. */
-  scroll-padding-top: calc(var(--site-header-height) + 0.5rem);
+  /* Match scroll clearance to the sticky header's height. */
+  scroll-padding-top: var(--site-header-height);
 }
 
 @media (max-width: 640px) {
