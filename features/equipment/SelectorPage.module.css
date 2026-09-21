@@ -21,15 +21,6 @@
   font-size: var(--font-size-small);
 }
 
-.cataloguePrompt {
-  margin: 0 0 1.5rem;
-  color: var(--color-text-muted);
-}
-
-.cataloguePrompt a {
-  color: var(--color-accent);
-}
-
 @media (max-width: 640px) {
   .page {
     padding-right: 1.25rem;

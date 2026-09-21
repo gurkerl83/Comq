@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 import {
   EQUIPMENT_SLUGS,
   getEquipmentCatalogue
-} from '../../../../features/equipment/catalogue';
-import { MachinePage } from '../../../../features/equipment/MachinePage';
-import { getEquipmentMetadata } from '../../../../features/equipment/metadata';
-import { getRouteLocale } from '../../../../lib/i18n/route-locale';
+} from '../../../../../features/equipment/catalogue';
+import { MachinePage } from '../../../../../features/equipment/MachinePage';
+import { getEquipmentMetadata } from '../../../../../features/equipment/metadata';
+import { getRouteLocale } from '../../../../../lib/i18n/route-locale';
 
 type EquipmentPageProps = {
   params: Promise<{ locale: string; slug: string }>;

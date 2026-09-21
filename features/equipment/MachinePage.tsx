@@ -4,7 +4,6 @@ import {
 } from '../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../lib/site/config';
 import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
-import { Breadcrumbs } from '../site/Breadcrumbs';
 import { Link } from '../../components/Link';
 import type { EquipmentEntry } from './catalogue';
 import { Gallery } from '../../components/gallery';
@@ -12,8 +11,6 @@ import styles from './MachinePage.module.css';
 
 const CONTENT = {
   es: {
-    breadcrumb: 'Ruta de navegación',
-    sales: 'Venta de equipos',
     demo: 'Equipo de demostración',
     demoNotice:
       'Los modelos, las ilustraciones, las especificaciones y las variantes de esta demostración son ficticios. Sirven para probar el selector y no constituyen una oferta real de venta o alquiler.',
@@ -41,8 +38,6 @@ const CONTENT = {
     contactLabel: 'Conversar con COMQ por WhatsApp (abre otra pestaña)'
   },
   en: {
-    breadcrumb: 'Breadcrumb',
-    sales: 'Equipment sales',
     demo: 'Demonstration equipment',
     demoNotice:
       'The models, illustrations, specifications and variants in this demonstration are fictional. They are for trying the selector and do not represent an actual sale or rental offer.',
@@ -86,14 +81,6 @@ export function MachinePage({
 
   return (
     <article className={styles.page} aria-labelledby='equipment-title'>
-      <Breadcrumbs
-        label={content.breadcrumb}
-        ancestors={[
-          { href: createHrefForLocale(locale, '/venta'), label: content.sales }
-        ]}
-        currentPage={equipment.name}
-      />
-
       {equipment.isDemo && (
         <aside className={styles.notice} aria-labelledby='demo-label'>
           <strong id='demo-label'>{content.demo}</strong>

@@ -9,7 +9,7 @@ import {
   createSiteStructuredData
 } from '../../lib/site/json-ld';
 import { CompanyLogoStrip } from '../experience/CompanyLogoStrip';
-import { SelectorLink } from '../equipment/SelectorLink';
+import { EquipmentActions } from '../equipment/EquipmentActions';
 import { ArrowRightIcon } from '../site/icons';
 import { QuoteInvitation } from '../site/QuoteInvitation';
 import { Link } from '../../components/Link';
@@ -84,7 +84,7 @@ export function HomePage({
             />
           </Link>
           <p>{service.description}</p>
-          {service.id === 'venta' && <SelectorLink locale={locale} />}
+          {service.id === 'venta' && <EquipmentActions locale={locale} />}
         </section>
       ))}
       <QuoteInvitation dictionary={dictionary} />

@@ -4,14 +4,10 @@ import { SelectionStep } from './selection-steps';
 import { SELECTION_LIMITS } from './selection-limits';
 
 const en = {
-  breadcrumb: 'Breadcrumb',
-  sales: 'Equipment sales',
-  breadcrumbTitle: 'Equipment selector',
   title: 'Find equipment for your operation',
   introduction:
     'Explore equipment, choose a configuration and prepare your enquiry. You can go back at any time to adjust your selection.',
   demo: 'Machines marked “Demo”, including their specifications and configurations, are fictional examples for trying the selector. They are not actual COMQ offers.',
-  entryLink: 'Use the guided selector',
   progress: 'Selection progress',
   steps: {
     [SelectionStep.Category]: {
@@ -116,14 +112,10 @@ export type SelectorContent = typeof en;
 // Each server page passes its selected dictionary, including localized country
 // options, to the interactive form. The browser uses the supplied labels/order.
 const es: SelectorContent = {
-  breadcrumb: 'Ruta de navegación',
-  sales: 'Venta de equipos',
-  breadcrumbTitle: 'Selector de equipos',
   title: 'Encuentra el equipo para tu operación',
   introduction:
     'Explora los equipos, elige una configuración y prepara tu consulta. Puedes volver a cualquier paso para ajustar tu selección.',
   demo: 'Los equipos identificados como “Demo”, junto con sus especificaciones y configuraciones, son ejemplos ficticios para probar el selector. No representan ofertas reales de COMQ.',
-  entryLink: 'Usar el selector guiado',
   progress: 'Avance de la selección',
   steps: {
     [SelectionStep.Category]: {

@@ -8,8 +8,7 @@ const en = {
   demoNotice:
     'Machines marked “Demo” and their specifications are fictional examples, not actual COMQ offers.',
   details: 'View machine details',
-  notSpecified: 'Not specified',
-  browsePrompt: 'Prefer to browse?'
+  notSpecified: 'Not specified'
 };
 
 export type CatalogueContent = typeof en;
@@ -22,8 +21,7 @@ const es: CatalogueContent = {
   demoNotice:
     'Los equipos identificados como “Demo” y sus especificaciones son ejemplos ficticios, no ofertas reales de COMQ.',
   details: 'Ver detalles del equipo',
-  notSpecified: 'Sin especificar',
-  browsePrompt: '¿Prefieres explorar los equipos?'
+  notSpecified: 'Sin especificar'
 };
 
 export const getCatalogueContent = (locale: SupportedLocale) =>

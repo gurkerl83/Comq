@@ -1,15 +1,10 @@
-import Link from 'next/link';
-
-import { getEquipmentCatalogue } from '../../../features/equipment/catalogue';
-import { getCatalogueContent } from '../../../features/equipment/catalogue-content';
-import { EquipmentSelector } from '../../../features/equipment/EquipmentSelector';
-import type { SelectorQuery } from '../../../features/equipment/selector/types';
-import styles from '../../../features/equipment/SelectorPage.module.css';
-import { getSelectorContent } from '../../../features/equipment/selector-content';
-import { Breadcrumbs } from '../../../features/site/Breadcrumbs';
-import { createHrefForLocale } from '../../../lib/i18n/locales';
-import { getRouteLocale } from '../../../lib/i18n/route-locale';
-import { createPageMetadata } from '../../../lib/site/metadata';
+import { getEquipmentCatalogue } from '../../../../features/equipment/catalogue';
+import { EquipmentSelector } from '../../../../features/equipment/EquipmentSelector';
+import type { SelectorQuery } from '../../../../features/equipment/selector/types';
+import styles from '../../../../features/equipment/SelectorPage.module.css';
+import { getSelectorContent } from '../../../../features/equipment/selector-content';
+import { getRouteLocale } from '../../../../lib/i18n/route-locale';
+import { createPageMetadata } from '../../../../lib/site/metadata';
 
 type LocalePageProps = { params: Promise<{ locale: string }> };
 
@@ -48,35 +43,11 @@ export default async function Page({
 }: LocalePageProps & { searchParams: Promise<SelectorQuery> }) {
   const locale = await getRouteLocale(params);
   const catalogue = getEquipmentCatalogue(locale);
-  const catalogueContent = getCatalogueContent(locale);
   const translations = getSelectorContent(locale);
   return (
     <article className={styles.page}>
-      <Breadcrumbs
-        label={translations.breadcrumb}
-        ancestors={[
-          {
-            href: createHrefForLocale(locale, '/venta'),
-            label: translations.sales
-          }
-        ]}
-        currentPage={translations.breadcrumbTitle}
-      />
       <h1 className={styles.heading}>{translations.title}</h1>
       <p className={styles.intro}>{translations.introduction}</p>
-      {catalogue.length > 0 && (
-        <p className={styles.cataloguePrompt}>
-          {catalogueContent.browsePrompt}{' '}
-          <Link
-            href={{
-              pathname: createHrefForLocale(locale, '/venta'),
-              hash: 'equipment-catalogue'
-            }}
-          >
-            {catalogueContent.title}
-          </Link>
-        </p>
-      )}
       {catalogue.some(machine => machine.isDemo) && (
         <p className={styles.demoNotice}>{translations.demo}</p>
       )}

@@ -7,12 +7,10 @@ import styles from './ServicePage.module.css';
 export function ServicePage({
   dictionary,
   service,
-  selector,
   children
 }: {
   dictionary: Dictionary;
   service: ServiceKey;
-  selector?: ReactNode;
   children?: ReactNode;
 }) {
   const { quoteHeading, pages } = dictionary.servicePages;
@@ -29,7 +27,6 @@ export function ServicePage({
           {content.title}
         </h1>
         <p className={styles.introduction}>{content.introduction}</p>
-        {selector}
       </section>
 
       <div className={styles.details}>
