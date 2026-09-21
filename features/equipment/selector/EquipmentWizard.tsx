@@ -4,6 +4,7 @@ import { useEffect, useRef, type FormEvent } from 'react';
 
 import { focusFormField } from '../../../lib/forms/native-controls';
 import { WHATSAPP_URL } from '../../../lib/site/config';
+import { Link } from '../../../components/Link';
 import type { EquipmentSelection } from '../selection';
 import { SelectionStep, SELECTION_STEP_ORDER } from '../selection-steps';
 import { CategoryStep } from './steps/CategoryStep';
@@ -78,7 +79,9 @@ export function EquipmentWizard({
     return (
       <p>
         {translations.emptyCatalogue}{' '}
-        <a href={WHATSAPP_URL}>{translations.contact}</a>
+        <Link native href={WHATSAPP_URL}>
+          {translations.contact}
+        </Link>
       </p>
     );
 

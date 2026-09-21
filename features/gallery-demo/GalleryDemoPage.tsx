@@ -1,11 +1,10 @@
-import Link from 'next/link';
-
 import { Gallery } from '../../components/gallery';
 import {
   createHrefForLocale,
   type SupportedLocale
 } from '../../lib/i18n/locales';
 import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
+import { Link } from '../../components/Link';
 import { getGalleryDemoImages } from './demo-images';
 import styles from './GalleryDemoPage.module.css';
 

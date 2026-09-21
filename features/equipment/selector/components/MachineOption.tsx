@@ -1,9 +1,8 @@
-import Link from 'next/link';
-
 import {
   createHrefForLocale,
   type SupportedLocale
 } from '../../../../lib/i18n/locales';
+import { Link } from '../../../../components/Link';
 import type { EquipmentEntry } from '../../catalogue';
 import type { SelectorContent } from '../../selector-content';
 import { RadioOption } from '../controls/RadioOption';

@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
+import { Link } from '../../../components/Link';
 import type { WithoutClassName } from './types';
 import styles from './WizardActions.module.css';
 
@@ -49,5 +50,5 @@ export function WizardActions({
 export function WizardActionLink(
   props: WithoutClassName<ComponentPropsWithoutRef<'a'>> & { href: string }
 ) {
-  return <a {...props} className={styles.primaryButton} />;
+  return <Link native {...props} className={styles.primaryButton} />;
 }

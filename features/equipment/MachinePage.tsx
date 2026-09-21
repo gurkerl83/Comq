@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import {
   createHrefForLocale,
   type SupportedLocale
@@ -7,6 +5,7 @@ import {
 import { WHATSAPP_URL } from '../../lib/site/config';
 import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
 import { Breadcrumbs } from '../site/Breadcrumbs';
+import { Link } from '../../components/Link';
 import type { EquipmentEntry } from './catalogue';
 import { Gallery } from '../../components/gallery';
 import styles from './MachinePage.module.css';
@@ -188,14 +187,15 @@ export function MachinePage({
           <span aria-hidden='true'> →</span>
         </Link>
         <p>
-          <a
+          <Link
+            native
             href={WHATSAPP_URL}
             target='_blank'
             rel='noopener noreferrer'
             aria-label={content.contactLabel}
           >
             {content.contact}
-          </a>
+          </Link>
         </p>
       </section>
     </article>

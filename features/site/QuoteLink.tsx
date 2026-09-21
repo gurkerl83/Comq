@@ -1,5 +1,6 @@
 import { WHATSAPP_URL } from '../../lib/site/config';
 import { WhatsAppIcon } from './icons';
+import { Link } from '../../components/Link';
 import styles from './QuoteLink.module.css';
 
 export function QuoteLink({
@@ -10,7 +11,8 @@ export function QuoteLink({
   accessibleLabel: string;
 }) {
   return (
-    <a
+    <Link
+      native
       className={styles.link}
       href={WHATSAPP_URL}
       target='_blank'
@@ -19,6 +21,6 @@ export function QuoteLink({
     >
       <WhatsAppIcon />
       {label}
-    </a>
+    </Link>
   );
 }

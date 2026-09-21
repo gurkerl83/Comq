@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import {
   createHrefForLocale,
   type SupportedLocale
@@ -14,6 +12,7 @@ import {
 } from '../../lib/site/config';
 import { LinkedInIcon, MailIcon, PhoneIcon } from './icons';
 import { BrandSymbol } from './BrandSymbol';
+import { Link } from '../../components/Link';
 import styles from './SiteShell.module.css';
 
 export function SiteFooter({
@@ -56,28 +55,31 @@ export function SiteFooter({
           aria-labelledby='footer-contact-heading'
         >
           <h2 id='footer-contact-heading'>{dictionary.footer.contact}</h2>
-          <a
+          <Link
+            native
             className={styles.footerLink}
             href={`mailto:${CONTACT_EMAIL}`}
             aria-label={`${dictionary.footer.email}: ${CONTACT_EMAIL}`}
           >
             <MailIcon />
             {dictionary.footer.email}
-          </a>
-          <a
+          </Link>
+          <Link
+            native
             className={styles.footerLink}
             href={PHONE_URL}
             aria-label={`${dictionary.footer.phone}: ${PHONE_NUMBER}`}
           >
             <PhoneIcon />
             {dictionary.footer.phone}
-          </a>
+          </Link>
         </nav>
         <div className={styles.footerBottom}>
           <p>
             © {new Date().getFullYear()} {LEGAL_NAME}
           </p>
-          <a
+          <Link
+            native
             className={styles.footerSocialLink}
             href={LINKEDIN_URL}
             aria-label='LinkedIn'
@@ -86,7 +88,7 @@ export function SiteFooter({
             rel='noopener noreferrer'
           >
             <LinkedInIcon />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import { hasError } from '../../../../lib/forms/errors';
 import type { SupportedLocale } from '../../../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../../../lib/site/config';
+import { Link } from '../../../../components/Link';
 import type { EquipmentEntry } from '../../catalogue';
 import type { EquipmentSelection } from '../../selection';
 import type { ChoiceProps } from '../types';
@@ -36,7 +37,9 @@ export function MachineStep({
         !machines.length && (
           <p>
             {translations.noMachines}{' '}
-            <a href={WHATSAPP_URL}>{translations.contact}</a>
+            <Link native href={WHATSAPP_URL}>
+              {translations.contact}
+            </Link>
           </p>
         )
       }

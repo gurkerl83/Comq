@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import {
   createHrefForLocale,
   type SupportedLocale
@@ -8,6 +6,7 @@ import type { Dictionary } from '../../lib/i18n/types';
 import { SITE_NAME } from '../../lib/site/config';
 import { BrandSymbol } from './BrandSymbol';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { Link } from '../../components/Link';
 import { ThemeToggle } from './ThemeToggle';
 import styles from './SiteShell.module.css';
 

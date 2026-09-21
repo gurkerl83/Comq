@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import {
   createHrefForLocale,
   type SupportedLocale
@@ -14,6 +12,7 @@ import { CompanyLogoStrip } from '../experience/CompanyLogoStrip';
 import { SelectorLink } from '../equipment/SelectorLink';
 import { ArrowRightIcon } from '../site/icons';
 import { QuoteInvitation } from '../site/QuoteInvitation';
+import { Link } from '../../components/Link';
 import styles from './HomePage.module.css';
 import { ServiceImagePlaceholder } from './ServiceImagePlaceholder';
 
