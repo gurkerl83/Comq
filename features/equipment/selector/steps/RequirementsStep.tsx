@@ -1,4 +1,4 @@
-import type { EquipmentEntry } from '../../catalogue';
+import type { EquipmentEntry } from '../../types';
 import {
   AcquisitionMode,
   type EquipmentSelection,
@@ -11,7 +11,6 @@ import { SelectField } from '../controls/SelectField';
 import { TextAreaField } from '../controls/TextAreaField';
 import { TextField } from '../controls/TextField';
 import { AcquisitionChoices } from '../fields/AcquisitionChoices';
-import { ConfigurationChoices } from '../fields/ConfigurationChoices';
 import { RentalFields } from '../fields/RentalFields';
 import styles from './RequirementsStep.module.css';
 
@@ -25,8 +24,8 @@ type RequirementsStepProps = {
 };
 
 /**
- * Show the selected equipment before asking for its configuration and enquiry
- * details. Change equipment asks the parent wizard to open Category while
+ * Show the selected equipment before asking for project and commercial
+ * enquiry details. Change equipment asks the parent wizard to open Category while
  * keeping the draft. Selecting another machine resets its configuration;
  * the visitor's purchase/rental preference and rental details stay unchanged.
  */
@@ -53,15 +52,6 @@ export function RequirementsStep({
           {translations.changeEquipment}
         </button>
       </div>
-      {machine.variants.length > 0 && (
-        <ConfigurationChoices
-          variants={machine.variants}
-          value={selection.variant}
-          error={errors.variant}
-          onChange={value => onChange('variant', value)}
-          translations={translations}
-        />
-      )}
       <AcquisitionChoices
         value={selection.acquisition}
         error={errors.acquisition}

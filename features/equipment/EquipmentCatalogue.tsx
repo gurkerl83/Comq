@@ -1,5 +1,5 @@
 import type { SupportedLocale } from '../../lib/i18n/locales';
-import { getEquipmentCatalogue } from './catalogue';
+import type { EquipmentEntry } from './types';
 import { getCatalogueContent } from './catalogue-content';
 import { MachineBrowseCard } from './MachineBrowseCard';
 import styles from './EquipmentCatalogue.module.css';
@@ -7,10 +7,15 @@ import styles from './EquipmentCatalogue.module.css';
 /**
  * Render the sales-page catalogue on the server, before the service details.
  * The selector's browse link targets this section. Opening a machine page
- * leads to its existing enquiry link, which starts the wizard at Requirements.
+ * leads to its existing enquiry link, which opens the Machine step in the wizard.
  */
-export function EquipmentCatalogue({ locale }: { locale: SupportedLocale }) {
-  const machines = getEquipmentCatalogue(locale);
+export function EquipmentCatalogue({
+  locale,
+  machines
+}: {
+  locale: SupportedLocale;
+  machines: EquipmentEntry[];
+}) {
   const translations = getCatalogueContent(locale);
   if (machines.length === 0) return null;
 

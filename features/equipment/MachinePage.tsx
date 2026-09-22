@@ -5,7 +5,7 @@ import {
 import { WHATSAPP_URL } from '../../lib/site/config';
 import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
 import { Link } from '../../components/Link';
-import type { EquipmentEntry } from './catalogue';
+import type { EquipmentEntry, EquipmentOption } from './types';
 import { Gallery } from '../../components/gallery';
 import styles from './MachinePage.module.css';
 
@@ -13,7 +13,7 @@ const CONTENT = {
   es: {
     demo: 'Equipo de demostración',
     demoNotice:
-      'Los modelos, las ilustraciones, las especificaciones y las variantes de esta demostración son ficticios. Sirven para probar el selector y no constituyen una oferta real de venta o alquiler.',
+      'Los modelos, las ilustraciones, las especificaciones y las opciones de esta demostración son ficticios. Sirven para probar el selector y no constituyen una oferta real de venta o alquiler.',
     model: 'Modelo',
     unconfirmed: 'Por confirmar con COMQ',
     noImage: 'Sin fotografía',
@@ -29,8 +29,10 @@ const CONTENT = {
     application: 'Aplicación',
     specifications: 'Especificaciones',
     demoSpecifications: 'Especificaciones ficticias de referencia',
-    variants: 'Variantes',
-    demoVariants: 'Variantes de demostración',
+    options: 'Opciones de equipo',
+    demoOptions: 'Opciones de demostración',
+    defaultValue: 'De serie',
+    extras: 'Equipamiento opcional',
     select: 'Preparar una consulta',
     closing: 'Prepara tu consulta',
     next: 'Elige la configuración, indica si prefieres comprar o alquilar y añade los detalles de tu proyecto en el selector. COMQ confirmará la disponibilidad y las condiciones.',
@@ -40,7 +42,7 @@ const CONTENT = {
   en: {
     demo: 'Demonstration equipment',
     demoNotice:
-      'The models, illustrations, specifications and variants in this demonstration are fictional. They are for trying the selector and do not represent an actual sale or rental offer.',
+      'The models, illustrations, specifications and options in this demonstration are fictional. They are for trying the selector and do not represent an actual sale or rental offer.',
     model: 'Model',
     unconfirmed: 'To be confirmed with COMQ',
     noImage: 'No photograph',
@@ -56,8 +58,10 @@ const CONTENT = {
     application: 'Application',
     specifications: 'Specifications',
     demoSpecifications: 'Fictional reference specifications',
-    variants: 'Variants',
-    demoVariants: 'Demonstration variants',
+    options: 'Equipment options',
+    demoOptions: 'Demonstration options',
+    defaultValue: 'Default',
+    extras: 'Optional equipment',
     select: 'Prepare an enquiry',
     closing: 'Prepare your enquiry',
     next: 'Choose your configuration, purchase or rental preference, and project details in the selector. COMQ will confirm availability and terms.',
@@ -65,6 +69,22 @@ const CONTENT = {
     contactLabel: 'Talk to COMQ on WhatsApp (opens a new tab)'
   }
 };
+
+/**
+ * Format the available choices, marking the default with its translated label.
+ */
+function formatOptionChoices(
+  option: EquipmentOption,
+  defaultLabel: string
+): string {
+  return option.choices
+    .map(choice =>
+      choice.id === option.defaultChoice
+        ? `${choice.label} (${defaultLabel})`
+        : choice.label
+    )
+    .join(' · ');
+}
 
 export function MachinePage({
   locale,
@@ -147,21 +167,24 @@ export function MachinePage({
         </section>
       </div>
 
-      {equipment.variants.length > 0 && (
-        <section
-          className={styles.variants}
-          aria-labelledby='equipment-variants'
-        >
-          <h2 id='equipment-variants'>
-            {equipment.isDemo ? content.demoVariants : content.variants}
+      {(equipment.options.length > 0 || equipment.extras.length > 0) && (
+        <section className={styles.options} aria-labelledby='equipment-options'>
+          <h2 id='equipment-options'>
+            {equipment.isDemo ? content.demoOptions : content.options}
           </h2>
           <ul>
-            {equipment.variants.map(variant => (
-              <li key={variant.id}>
-                <h3>{variant.label}</h3>
-                <p>{variant.description}</p>
+            {equipment.options.map(option => (
+              <li key={option.id}>
+                <h3>{option.label}</h3>
+                <p>{formatOptionChoices(option, content.defaultValue)}</p>
               </li>
             ))}
+            {equipment.extras.length > 0 && (
+              <li>
+                <h3>{content.extras}</h3>
+                <p>{equipment.extras.map(extra => extra.label).join(', ')}</p>
+              </li>
+            )}
           </ul>
         </section>
       )}

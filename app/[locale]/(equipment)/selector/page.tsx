@@ -1,8 +1,9 @@
-import { getEquipmentCatalogue } from '../../../../features/equipment/catalogue';
+import { createEquipmentCatalogue } from '../../../../features/equipment/catalogue';
 import { EquipmentSelector } from '../../../../features/equipment/EquipmentSelector';
 import type { SelectorQuery } from '../../../../features/equipment/selector/types';
 import styles from '../../../../features/equipment/SelectorPage.module.css';
 import { getSelectorContent } from '../../../../features/equipment/selector-content';
+import { getDictionary } from '../../../../lib/i18n/dictionaries';
 import { getRouteLocale } from '../../../../lib/i18n/route-locale';
 import { createPageMetadata } from '../../../../lib/site/metadata';
 
@@ -10,6 +11,7 @@ type LocalePageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: LocalePageProps) {
   const locale = await getRouteLocale(params);
+  const dictionary = await getDictionary(locale);
   const translations = getSelectorContent(locale);
   const metadata = createPageMetadata(
     locale,
@@ -17,7 +19,11 @@ export async function generateMetadata({ params }: LocalePageProps) {
     translations.title,
     translations.introduction
   );
-  if (getEquipmentCatalogue(locale).every(machine => machine.isDemo)) {
+  if (
+    createEquipmentCatalogue(dictionary.equipment).every(
+      machine => machine.isDemo
+    )
+  ) {
     metadata.robots = { index: false, follow: true };
   }
   return metadata;
@@ -42,7 +48,8 @@ export default async function Page({
   searchParams
 }: LocalePageProps & { searchParams: Promise<SelectorQuery> }) {
   const locale = await getRouteLocale(params);
-  const catalogue = getEquipmentCatalogue(locale);
+  const dictionary = await getDictionary(locale);
+  const catalogue = createEquipmentCatalogue(dictionary.equipment);
   const translations = getSelectorContent(locale);
   return (
     <article className={styles.page}>

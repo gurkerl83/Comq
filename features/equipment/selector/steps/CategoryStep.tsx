@@ -1,5 +1,5 @@
 import { hasError } from '../../../../lib/forms/errors';
-import type { EquipmentCategory } from '../../catalogue';
+import type { EquipmentCategory } from '../../types';
 import type { EquipmentSelection } from '../../selection';
 import type { ChoiceProps } from '../types';
 import { RadioGroup } from '../controls/RadioGroup';

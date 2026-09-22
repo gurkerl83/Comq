@@ -1,6 +1,27 @@
 import type { SupportedLocale } from '../../../lib/i18n/locales';
-import type { EquipmentEntry } from '../catalogue';
+import type { EquipmentEntry, EquipmentConfiguration } from '../types';
 import type { SelectorContent } from '../selector-content';
+
+/** Applied values and the explicit editing session for the selected machine. */
+export type MachineCustomization = {
+  /** Values already included in the enquiry. */
+  value: EquipmentConfiguration;
+  /** Temporary values while customizing; null means read-only mode. */
+  draft: EquipmentConfiguration | null;
+  /**
+   * Begin editing the currently applied configuration.
+   */
+  onStart: () => void;
+  /**
+   * Replace the draft without changing the applied configuration.
+   * Create new objects or arrays for changed values; do not mutate existing ones.
+   */
+  onChange: (draft: EquipmentConfiguration) => void;
+  /** Validate and apply the temporary values, then leave edit mode. */
+  onApply: () => void;
+  /** Discard temporary edits. */
+  onCancel: () => void;
+};
 
 /** Data shared by server preparation and the interactive wizard. */
 export type SelectorProps = {

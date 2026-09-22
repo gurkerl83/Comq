@@ -26,42 +26,51 @@
  * Carry the machine card's first two rows through the native radio label.
  * See ../components/MachineOption.module.css for the full four-row map.
  *
- * label.sharedRows       input column | text span column
- *                       +-------------+------------------+
- * Card row 1            | radio       | name             |
- * Card row 2            |             | description      |
- *                       +-------------+------------------+
+ * label.sharedRows       radio column | name / action columns
+ *                       +-------------+------------------------+
+ * Card row 1            | radio       | name       | Customize |
+ * Card row 2            | description across all columns       |
+ *                       +-------------+------------------------+
  *
- * 1. .sharedRows spans two card rows and adopts them with subgrid. Its columns
- *    are local: auto fits the radio; 1fr gives the text the remaining width.
+ * 1. .sharedRows spans two card rows and adopts the card's rows and columns.
+ *    The last column is reserved for the separate Customize button, if shown.
  * 2. .sharedRows > input occupies row 1, beside the name.
- * 3. .sharedRows > span occupies column 2 and both rows. It also needs subgrid
+ * 3. .sharedRows > span occupies all columns and both rows. It needs subgrid
  *    to align its name/description children with those rows; an ordinary
  *    wrapper would lay out the two texts independently of adjacent cards.
+ *    The name stays in column 2; the description spans the card's content width.
  *
  * Both texts remain inside the label, so clicking either selects the radio.
  */
 .sharedRows {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: subgrid;
   grid-template-rows: subgrid;
   grid-row: span 2;
-  row-gap: 0.375rem;
+  row-gap: inherit;
   border: 0;
-}
-
-.sharedRows > input {
-  grid-row: 1;
 }
 
 .sharedRows > span {
   display: grid;
-  grid-column: 2;
+  grid-column: 1 / -1;
   grid-row: 1 / span 2;
   grid-template-rows: subgrid;
+  grid-template-columns: subgrid;
+  min-width: 0;
+}
+
+.sharedRows .title {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .sharedRows .description {
+  grid-column: 1 / -1;
+  grid-row: 2;
   margin-top: 0;
 }
 
@@ -72,6 +81,15 @@
   margin: 0.1875rem 0 0;
   accent-color: var(--color-accent);
   cursor: inherit;
+}
+
+.sharedRows > input {
+  grid-column: 1;
+  grid-row: 1;
+  /* Keep the native radio clickable above the full-width text wrapper. */
+  z-index: 1;
+  align-self: center;
+  margin: 0;
 }
 
 .title {

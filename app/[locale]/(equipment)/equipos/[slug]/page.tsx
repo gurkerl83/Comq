@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation';
 
-import {
-  EQUIPMENT_SLUGS,
-  getEquipmentCatalogue
-} from '../../../../../features/equipment/catalogue';
+import { EQUIPMENT_SLUGS } from '../../../../../features/equipment/catalogue-data';
+import { createEquipmentCatalogue } from '../../../../../features/equipment/catalogue';
 import { MachinePage } from '../../../../../features/equipment/MachinePage';
 import { getEquipmentMetadata } from '../../../../../features/equipment/metadata';
+import { getDictionary } from '../../../../../lib/i18n/dictionaries';
 import { getRouteLocale } from '../../../../../lib/i18n/route-locale';
 
 type EquipmentPageProps = {
@@ -21,7 +20,8 @@ export const generateStaticParams = () =>
 const resolveEquipment = async (params: EquipmentPageProps['params']) => {
   const locale = await getRouteLocale(params);
   const { slug } = await params;
-  const equipment = getEquipmentCatalogue(locale).find(
+  const dictionary = await getDictionary(locale);
+  const equipment = createEquipmentCatalogue(dictionary.equipment).find(
     entry => entry.slug === slug
   );
   if (!equipment) notFound();

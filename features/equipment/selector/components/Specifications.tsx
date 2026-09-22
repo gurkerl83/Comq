@@ -1,4 +1,4 @@
-import type { EquipmentEntry } from '../../catalogue';
+import type { EquipmentEntry } from '../../types';
 import styles from './Specifications.module.css';
 
 type SpecificationsProps = {

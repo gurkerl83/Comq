@@ -4,7 +4,8 @@ import {
   validateOptionalFutureDate,
   type FieldValidator
 } from '../../lib/forms/validation';
-import type { EquipmentEntry } from './catalogue';
+import type { EquipmentEntry } from './types';
+import { isValidConfiguration } from './configuration';
 import { AcquisitionMode, type EquipmentSelection } from './selection';
 import { SELECTION_LIMITS } from './selection-limits';
 import { SelectionStep } from './selection-steps';
@@ -41,13 +42,10 @@ export function createSelectionValidators(
       }
       return null;
     },
-    variant: value => {
-      if (!machine) return translations.invalidVariant;
-      if (value === '') return null;
-      if (!machine.variants.some(option => option.id === value))
-        return translations.invalidVariant;
-      return null;
-    },
+    configuration: value =>
+      machine && isValidConfiguration(machine, value)
+        ? null
+        : translations.invalidConfiguration,
     acquisition: value => {
       if (!Object.values(AcquisitionMode).some(mode => mode === value))
         return translations.invalidAcquisition;
@@ -111,10 +109,10 @@ export function getSelectionFields(
   selection: EquipmentSelection
 ): Array<keyof EquipmentSelection> {
   if (step === SelectionStep.Category) return ['category'];
-  if (step === SelectionStep.Machine) return ['machine'];
+  if (step === SelectionStep.Machine) return ['machine', 'configuration'];
   if (step !== SelectionStep.Requirements) return [];
 
-  const fields: Array<keyof EquipmentSelection> = ['variant', 'acquisition'];
+  const fields: Array<keyof EquipmentSelection> = ['acquisition'];
   if (selection.acquisition === AcquisitionMode.Rental) {
     fields.push('rentalDuration', 'rentalUnit', 'startDate');
   }

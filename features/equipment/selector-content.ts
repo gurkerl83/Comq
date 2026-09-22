@@ -19,13 +19,13 @@ const en = {
       title: 'Choose your machine',
       shortTitle: 'Machine',
       description:
-        'Review the key differences and select a machine. Open its page for more detail.'
+        'Compare the specifications, select a machine and customize its available options. Open its page for more detail.'
     },
     [SelectionStep.Requirements]: {
       title: 'Make it fit your enquiry',
       shortTitle: 'Requirements',
       description:
-        'Choose a configuration and your preferred purchase or rental option. COMQ will confirm suitability, availability and terms.'
+        'Tell us about your project and your preferred purchase or rental option. COMQ will confirm suitability, availability and terms.'
     },
     [SelectionStep.Review]: {
       title: 'Review your selection',
@@ -41,8 +41,14 @@ const en = {
   opensNewTab: 'opens in a new tab',
   oneMachine:
     'This category has one machine, so it is selected for you. You can still review its details.',
-  configuration: 'Configuration',
-  configurationAdvice: 'I need advice on the configuration',
+  customize: 'Customize',
+  defaultValue: 'Default',
+  optionalEquipment: 'Optional equipment',
+  noExtras: 'None requested',
+  configurationAdvice: 'I need advice',
+  applyOptions: 'Apply options',
+  cancelCustomization: 'Cancel',
+  applyBeforeContinue: 'Apply or cancel your changes before continuing.',
   acquisition: 'How would you like to obtain it?',
   purchase: 'Purchase',
   rental: 'Rental',
@@ -71,6 +77,7 @@ const en = {
     demoNotice: 'Fictional equipment — not an actual product offer.',
     introduction: 'Hello COMQ, I would like to discuss this equipment:',
     equipment: 'Equipment',
+    options: 'Requested equipment options',
     purchase: 'Purchase request',
     rental: 'Rental request',
     location: 'Location',
@@ -78,7 +85,6 @@ const en = {
     labels: {
       category: 'Type',
       machine: 'Machine',
-      variant: 'Configuration',
       quantity: 'Quantity',
       country: 'Country',
       projectLocation: 'Mine / project',
@@ -89,7 +95,7 @@ const en = {
   send: 'Open enquiry in WhatsApp',
   chooseCategory: 'Choose an equipment type to continue.',
   chooseMachine: 'Choose a machine to continue.',
-  invalidVariant: 'Choose an available configuration or request advice.',
+  invalidConfiguration: 'Choose supported equipment options or request advice.',
   invalidAcquisition: 'Choose purchase or rental.',
   invalidQuantity: `Enter a whole number of machines between ${SELECTION_LIMITS.quantity.min} and ${SELECTION_LIMITS.quantity.max}.`,
   chooseCountry: 'Choose a country to continue.',
@@ -127,13 +133,13 @@ const es: SelectorContent = {
       title: 'Elige tu equipo',
       shortTitle: 'Equipo',
       description:
-        'Compara las características principales y selecciona un equipo. Abre su página para conocer más detalles.'
+        'Compara las especificaciones, selecciona un equipo y personaliza sus opciones disponibles. Abre su página para conocer más detalles.'
     },
     [SelectionStep.Requirements]: {
       title: 'Cuéntanos qué necesitas',
       shortTitle: 'Requisitos',
       description:
-        'Elige una configuración e indica si prefieres comprar o alquilar. COMQ confirmará si el equipo es adecuado, su disponibilidad y las condiciones.'
+        'Describe tu proyecto e indica si prefieres comprar o alquilar. COMQ confirmará si el equipo es adecuado, su disponibilidad y las condiciones.'
     },
     [SelectionStep.Review]: {
       title: 'Revisa tu selección',
@@ -150,8 +156,14 @@ const es: SelectorContent = {
   opensNewTab: 'se abre en una nueva pestaña',
   oneMachine:
     'Esta categoría tiene un solo equipo, por eso ya está seleccionado. Puedes revisar sus detalles antes de continuar.',
-  configuration: 'Configuración',
-  configurationAdvice: 'Necesito asesoría sobre la configuración',
+  customize: 'Personalizar',
+  defaultValue: 'De serie',
+  optionalEquipment: 'Equipamiento opcional',
+  noExtras: 'Ninguno solicitado',
+  configurationAdvice: 'Necesito asesoría',
+  applyOptions: 'Aplicar opciones',
+  cancelCustomization: 'Cancelar',
+  applyBeforeContinue: 'Aplica o cancela los cambios antes de continuar.',
   acquisition: '¿Buscas comprar o alquilar?',
   purchase: 'Compra',
   rental: 'Alquiler',
@@ -180,6 +192,7 @@ const es: SelectorContent = {
     demoNotice: 'Equipos ficticios — no constituyen una oferta real.',
     introduction: 'Hola, COMQ. Quisiera consultar sobre este equipo:',
     equipment: 'Equipo',
+    options: 'Opciones de equipo solicitadas',
     purchase: 'Solicitud de compra',
     rental: 'Solicitud de alquiler',
     location: 'Ubicación',
@@ -187,7 +200,6 @@ const es: SelectorContent = {
     labels: {
       category: 'Tipo',
       machine: 'Equipo',
-      variant: 'Configuración',
       quantity: 'Cantidad',
       country: 'País',
       projectLocation: 'Mina / proyecto',
@@ -198,7 +210,8 @@ const es: SelectorContent = {
   send: 'Abrir consulta en WhatsApp',
   chooseCategory: 'Elige un tipo de equipo para continuar.',
   chooseMachine: 'Elige un equipo para continuar.',
-  invalidVariant: 'Elige una configuración disponible o solicita asesoría.',
+  invalidConfiguration:
+    'Elige opciones disponibles para el equipo o solicita asesoría.',
   invalidAcquisition: 'Elige compra o alquiler.',
   invalidQuantity: `Ingresa una cantidad de equipos entre ${SELECTION_LIMITS.quantity.min} y ${SELECTION_LIMITS.quantity.max}, sin decimales.`,
   chooseCountry: 'Elige un país para continuar.',

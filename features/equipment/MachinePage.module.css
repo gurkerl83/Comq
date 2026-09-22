@@ -105,17 +105,17 @@
 }
 
 .section h2,
-.variants h2,
+.options h2,
 .closing h2 {
   margin: 0 0 1.25rem;
 }
 
-.variants h3 {
+.options h3 {
   margin: 0 0 0.75rem;
 }
 
 .section p,
-.variants p,
+.options p,
 .closing p {
   margin: 0 0 1.5rem;
   color: var(--color-text-muted);
@@ -146,12 +146,12 @@
   font-weight: 700;
 }
 
-.variants {
+.options {
   padding: var(--spacing-content-section) 0;
   border-bottom: var(--border-width) solid var(--color-border);
 }
 
-.variants ul {
+.options ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -160,13 +160,13 @@
   list-style: none;
 }
 
-.variants li {
+.options li {
   padding: 1.25rem;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-small);
 }
 
-.variants p {
+.options p {
   margin: 0;
 }
 
@@ -198,7 +198,7 @@
     padding-left: 1.25rem;
   }
 
-  .variants ul {
+  .options ul {
     grid-template-columns: 1fr;
   }
 }

@@ -3,7 +3,7 @@ import {
   type SupportedLocale
 } from '../../lib/i18n/locales';
 import { Link } from '../../components/Link';
-import type { EquipmentEntry } from './catalogue';
+import type { EquipmentEntry } from './types';
 import type { CatalogueContent } from './catalogue-content';
 import { Specifications } from './selector/components/Specifications';
 import styles from './MachineBrowseCard.module.css';

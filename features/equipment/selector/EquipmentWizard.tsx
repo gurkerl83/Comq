@@ -22,7 +22,7 @@ import styles from './EquipmentWizard.module.css';
  *
  * 1. On a direct visit, Next renders the initial wizard HTML on the server,
  *    then hydrates it in the browser using the same initialSelection. A valid
- *    machine link therefore starts at Requirements without a post-mount jump.
+ *    machine link therefore starts at Machine without a post-mount jump.
  * 2. Subsequent Next navigation supplies server-prepared props through the RSC
  *    payload. The key assigned by EquipmentSelector determines whether this
  *    wizard instance is reused or replaced with a new draft.
@@ -118,6 +118,8 @@ export function EquipmentWizard({
             machines={wizard.machines}
             value={selection.machine}
             error={errors.machine}
+            configurationError={errors.configuration}
+            customization={wizard.customization}
             onChange={wizard.chooseMachine}
             translations={translations}
           />
@@ -143,7 +145,9 @@ export function EquipmentWizard({
           onBack={wizard.hasPreviousStep ? wizard.previousStep : undefined}
           backLabel={translations.back}
           nextLabel={translations.next}
-          nextDisabled={!wizard.validation.isValid}
+          nextDisabled={
+            !wizard.validation.isValid || wizard.customization.draft !== null
+          }
           isLastStep={wizard.isLastStep}
           finalAction={
             machine && (

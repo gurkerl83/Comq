@@ -1,3 +1,4 @@
+import { createEquipmentCatalogue } from '../../../../features/equipment/catalogue';
 import { EquipmentCatalogue } from '../../../../features/equipment/EquipmentCatalogue';
 import { ServicePage } from '../../../../features/services/ServicePage';
 import { getServiceMetadata } from '../../../../features/services/metadata';
@@ -13,9 +14,10 @@ export async function generateMetadata({ params }: LocalePageProps) {
 export default async function Page({ params }: LocalePageProps) {
   const locale = await getRouteLocale(params);
   const dictionary = await getDictionary(locale);
+  const machines = createEquipmentCatalogue(dictionary.equipment);
   return (
     <ServicePage dictionary={dictionary} service='sales'>
-      <EquipmentCatalogue locale={locale} />
+      <EquipmentCatalogue locale={locale} machines={machines} />
     </ServicePage>
   );
 }

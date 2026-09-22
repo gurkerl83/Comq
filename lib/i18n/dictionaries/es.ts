@@ -146,6 +146,73 @@ const dictionary: Dictionary = {
       }
     }
   },
+  equipment: {
+    categories: {
+      jumbo: {
+        name: 'Jumbos',
+        description: 'Explora ejemplos de equipos de perforación subterránea.'
+      },
+      scooptram: {
+        name: 'Scooptrams',
+        description: 'Explora ejemplos de equipos de carga y transporte.'
+      },
+      drill: {
+        name: 'Perforadoras',
+        description: 'Explora ejemplos de equipos para tareas de perforación.'
+      }
+    },
+    machines: {
+      'demo-jumbo-j1': {
+        name: 'Jumbo Demo J1',
+        summary: 'Jumbo ficticio de un brazo para perforación subterránea.',
+        application:
+          'Ejemplo de una operación de perforación subterránea. Describe tu proyecto al preparar la consulta.'
+      },
+      'demo-jumbo-j2': {
+        name: 'Jumbo Demo J2',
+        summary: 'Jumbo ficticio de dos brazos para perforación subterránea.',
+        application:
+          'Ejemplo de una operación de perforación con dos brazos. Las cifras solo ilustran las opciones del selector.'
+      },
+      'demo-scooptram-s1': {
+        name: 'Scooptram Demo S1',
+        summary: 'Scooptram ficticio para carga y transporte de material.',
+        application:
+          'Ejemplo de tareas de carga y transporte de material. La capacidad indicada es un dato de demostración.'
+      },
+      'demo-drill-d1': {
+        name: 'Perforadora Demo D1',
+        summary: 'Equipo ficticio para tareas de perforación.',
+        application:
+          'Ejemplo de un proyecto de perforación. El método y las condiciones de trabajo se describen en la consulta.'
+      }
+    },
+    specifications: {
+      booms: 'Brazos',
+      power: 'Potencia',
+      width: 'Ancho',
+      payload: 'Capacidad de carga',
+      diameter: 'Diámetro de perforación'
+    },
+    extras: {
+      'rear-camera': 'Cámara de visión trasera',
+      'central-lubrication': 'Lubricación centralizada'
+    },
+    images: {
+      machineSide:
+        'Ilustración de demostración 01: vista lateral de un equipo minero ficticio.',
+      machineFront:
+        'Ilustración de demostración 02: vista frontal de un equipo minero ficticio.',
+      hydraulicBoom:
+        'Ilustración de demostración 03: detalle de un brazo hidráulico ficticio.',
+      operatorCab:
+        'Ilustración de demostración 04: cabina y controles de un equipo ficticio.',
+      wheelDetail:
+        'Ilustración de demostración 05: detalle de una rueda de un equipo ficticio.',
+      machineRear:
+        'Ilustración de demostración 06: vista posterior de un equipo minero ficticio.'
+    }
+  },
   quote: {
     invitation: 'Hablemos de tus necesidades de equipos mineros.'
   },
