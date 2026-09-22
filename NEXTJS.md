@@ -11,7 +11,7 @@ All application links use the shared [Link component](components/Link.tsx). Its 
 When extending the site:
 
 - **Add a page:** create one thin entrypoint under `app/[locale]` that renders its feature, add its `metadata.ts` helper and translated content, and update its [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
-- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper. Add the [selector translations](features/equipment/selector-content.ts), [catalogue-page text](features/equipment/catalogue-content.ts), [machine-page text](features/equipment/MachinePage.tsx) and all localized content in the [equipment catalogue](features/equipment/catalogue.ts).
+- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper. Add the [selector translations](features/equipment/selector-content.ts), [catalogue-page text](features/equipment/catalogue-content.ts), [machine-page text](features/equipment/MachinePage.tsx) and the catalogue text described by `EquipmentContent` in the [dictionary types](lib/i18n/types.ts).
 
 ### Next.js route groups and shared layouts
 

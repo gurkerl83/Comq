@@ -1,18 +1,24 @@
 # Equipment catalogue and enquiry wizard
 
-This document describes the current feature and its proposed development direction. Sections marked **Proposed** describe future work. Product options, configurable builds and selection criteria still need confirmation from Alberto before implementation or publication as COMQ offers.
+This document describes the equipment feature and its development direction. Items marked **Proposed** describe future work. Real product data, configurable builds and selection criteria need confirmation from Alberto before publication as COMQ offers. The demo data is fictional and exercises the interaction.
 
 ## Current implementation
 
 The sales catalogue links to individual machine pages with specifications and an image gallery. The wizard collects equipment type, machine, requirements and a review before preparing a WhatsApp enquiry.
 
-All current machines and illustrations are labelled as demonstrations. Every machine shares the same fictional **Standard** and **Compact** variants. Selecting a variant changes the configuration recorded in the review and enquiry; it does not change the machine's specifications or images. An empty variant selection currently means that configuration advice is requested.
+All machines and illustrations are labelled as demonstrations. Jumbo J1 has a default power of 105 kW, a 120 kW alternative and two independent extras: a rear camera and central lubrication. Jumbo J2 has a default width of 2.4 m and a 2.2 m alternative. Scooptram S1 and Drilling Rig D1 have no configurable choices or extras. These examples are fictional product configurations.
 
-The requirements step already collects purchase/rental preference, quantity, country, project location, rental details and free-text notes. Purchase and rental are enquiry preferences; COMQ confirms availability and terms. There is currently no automatic suitability matching or build configuration.
+Customization lives in **Machine**, inside the selected card. **Customize** is available when the machine defines configurable choices or extras. Configurable aspects use native dropdowns; other specifications are read-only. A separate default hint appears only when the selected answer differs from the default, including when advice is requested. Selecting the default hides that hint. Apply saves the temporary configuration; Cancel, changing machines or leaving the step discards unfinished edits. Escape keeps its native control behavior. Continue and Enter cannot advance while editing. Applied choices survive navigation within the wizard. Selecting a different machine initializes its own defaults while retaining commercial and project answers.
 
-## Proposed: separate facts, options and requirements
+Each configurable aspect starts at its explicit default; choosing advice stores a distinct answer for that aspect. Extras use independent native checkboxes and start with none requested. Any combination is valid, including none; questions can be written in the requirements notes. The review and WhatsApp enquiry include the applied option values, default references and extras. Editing an option from Review returns to Machine. Machines without configurable choices or extras omit customization controls and configuration summary rows. Product-page links preselect the model and open Machine so visitors can inspect its options.
 
-These three kinds of information should have distinct roles:
+Product pages display the model's baseline specifications and assigned gallery images. The selected wizard card and enquiry show the visitor's requested alternatives.
+
+The requirements step collects purchase/rental preference, quantity, country, project location, rental details and free-text notes. Purchase and rental are enquiry preferences; COMQ confirms availability and terms. There is currently no automatic suitability matching or compatibility engine for configurable builds.
+
+## Facts, options and requirements
+
+Machine specifications, equipment options and project requirements have distinct roles. The wizard captures project requirements in free-text notes; structured questions are proposed future work.
 
 | Information            | Meaning                                                                                                       | Intended behaviour                                               |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -22,49 +28,55 @@ These three kinds of information should have distinct roles:
 
 For example, a machine could have a published width of **2.4 m**, while the customer reports an access-width requirement of **2.2 m**. Preserve both values in the enquiry for review. Entering a requirement does not alter the machine's specification or establish suitability.
 
-Replace the generic Standard/Compact choices with meaningful, confirmed options. A genuine preset variant remains useful when it represents a documented version with clear differences.
+**Proposed:** publish confirmed machine specifications and supported options. Represent a preset build only when it corresponds to a documented product version with clear differences.
 
-## Proposed: wizard flow
+## Wizard flow
 
-Keep the existing four-step structure:
+The wizard has four steps:
 
 1. **Equipment category:** choose the relevant equipment group.
-2. **Machine:** compare the key published specifications and select a model. Keep its detailed product page accessible.
-3. **Options and requirements:** show options supported by that machine and questions relevant to the customer's project. Keep purchase/rental and delivery details here.
+2. **Machine:** compare specifications, select a model and customize its supported options inline. Its detailed product page remains accessible.
+3. **Requirements:** collect purchase/rental preference, quantity, location, rental details and project requirements. Future structured project questions also belong here.
 4. **Review and enquiry:** distinguish the selected machine, requested options, project requirements and commercial preferences in both the review and WhatsApp message.
 
-Use single-choice controls for mutually exclusive alternatives and multiple-choice controls for independent extras. Hide option groups when no choices are confirmed, including empty sections in the review. Provide an explicit advice choice when the visitor is unsure; distinguish it from deliberately requesting no extras.
+Mutually exclusive alternatives use single-choice controls; independent extras use native checkboxes. Controls and review sections appear only for options and extras defined by the machine. Configurable aspects include an explicit advice choice. Questions about optional extras belong in the requirements notes.
 
-When the visitor changes machines, clear choices that belong to the previous machine. Preserve generally applicable enquiry details and recheck any requirements whose meaning depends on the selected equipment.
+Changing machines initializes the new machine's configuration from its defaults with no extras selected. Purchase/rental preference, quantity, location, rental details and notes are preserved.
 
-## Proposed: product pages and images
+**Proposed:** when structured project questions are introduced, revalidate answers whose meaning depends on the selected equipment.
 
-Product pages should explain the machine's main differences through confirmed specifications, useful images and any real options. Remove the demonstration variant cards when replacing them with real product information.
+## Product pages and images
 
-Keep the shared [Gallery](../../components/gallery/) responsible for displaying images. Equipment data should determine which images it receives. Associate an image with an option only when it depicts that option, and change the displayed specifications only when a documented version or configuration justifies the change.
+Product pages list the machine's baseline specifications, configurable choices, defaults and independent extras. The shared [Gallery](../../components/gallery/) displays the images assigned by the equipment data.
 
-The current gallery demonstrations exercise image counts and layouts. They do not establish that a machine has multiple build configurations. This direction does not require changes to the gallery implementation.
+The [gallery demonstration](../gallery-demo/GalleryDemoPage.tsx) uses its own fixtures to exercise image counts and layouts independently of the equipment catalogue.
 
-## Proposed: data model direction
+**Proposed:** use confirmed product photographs and associate an image with an option only when it depicts that option. Any changes to displayed product specifications must correspond to a documented version or configuration.
 
-Keep one catalogue source for browsing, comparison, product details and the wizard. Extend it as confirmed information becomes available:
+## Data model and future extension
+
+Server entrypoints load the selected [dictionary](../../lib/i18n/dictionaries.ts) and pass its `equipment` text to `createEquipmentCatalogue`. The [machine records](catalogue-data.ts) are keyed by language-independent slugs and own specifications, option defaults and image assignments; the [English](../../lib/i18n/dictionaries/en.ts) and [Spanish](../../lib/i18n/dictionaries/es.ts) dictionaries own descriptions, labels and image alternative text. The [catalogue assembler](catalogue.ts) combines them into entries with plain strings for the UI. Values such as `105 kW` are shared across languages. Static route generation imports `EQUIPMENT_SLUGS` directly from the machine records and does not load a dictionary.
+
+The [equipment types](types.ts) define the shared data shapes and category, specification, extra and image keys. They do not depend on catalogue assembly, configuration validation or translation contracts. `MachineSlug` comes from `keyof typeof EQUIPMENT`, and the [translation contract](../../lib/i18n/types.ts) requires descriptions for every machine. Slugs appear once as catalogue keys; assembled entries receive their slug from that key. Each machine definition is directly annotated as `EquipmentDefinition` before it is added to the keyed catalogue. This checks each record and gives options and extras their declared element types even when their arrays are empty. Configuration creation and validation import their types directly from the shared type module.
+
+One catalogue supplies browsing, comparison, product details and the wizard. `options` have stable IDs, localized choices and an explicit default; `specificationId` optionally binds an option to a specification row. `extras` are independent equipment choices. [EquipmentConfiguration](types.ts) stores choice IDs (null means advice for an aspect) and selected extra IDs. Validation rejects missing, unknown, duplicate and cross-machine selections while allowing any combination of the machine's extras. Extend this as confirmed information becomes available:
 
 - Store model specifications separately from customer answers.
 - Describe supported option groups on the relevant machine, using stable IDs and localized labels.
-- Store selected option IDs separately from project requirement values. A single variant string can represent a preset, but cannot represent several independent equipment choices.
+- Store selected option IDs separately from project requirement values.
 - Define requirement questions, units and validation from the information COMQ actually needs to prepare an enquiry.
 - Preserve the same distinctions when producing the review and WhatsApp message.
 
-Choose concrete types once the first real options and requirements are known. Add compatibility rules or specification overrides only when documented product relationships require them.
+Refine the types for real options and structured project requirements once those are known. Add compatibility rules or specification overrides only when documented product relationships require them.
 
 ## Proposed: delivery stages
 
 1. **Confirm one real offer.** Gather its specifications, pictures, genuine versions, available options and the information needed for a quote.
-2. **Improve the enquiry.** Replace placeholder choices, add the confirmed questions and ensure the review accurately communicates the customer's request. A machine with no selectable options should still support a useful enquiry.
+2. **Improve the enquiry.** Publish confirmed options, add the agreed project questions and ensure the review accurately communicates the customer's request. Support useful enquiries for machines with and without selectable options.
 3. **Support configurable builds where applicable.** If COMQ supplies them, model valid combinations and any documented changes to specifications or images.
 4. **Add guided recommendations when criteria are validated.** Use confirmed selection rules to explain potential matches and retain an advice path when information is incomplete.
 
-Build configuration and guided recommendations are separate capabilities. Neither is a prerequisite for improving enquiry collection, and each depends on its own confirmed data. The first useful milestone is an enquiry Alberto can assess without having to reinterpret placeholder configuration names.
+Build configuration and guided recommendations are separate capabilities. Neither is a prerequisite for improving enquiry collection, and each depends on its own confirmed data. The first milestone is an enquiry Alberto can assess using confirmed machine information, requested options and relevant project requirements.
 
 ## Decisions awaiting Alberto's input
 
