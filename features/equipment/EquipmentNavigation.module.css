@@ -25,7 +25,8 @@
 }
 
 .links a:hover {
-  text-decoration: underline;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 0.5rem var(--color-surface);
 }
 
 @media (max-width: 640px) {
