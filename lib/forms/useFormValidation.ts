@@ -10,7 +10,8 @@ import {
 import type { FieldValidator } from './validation';
 
 /**
- * One validation policy for the existing native controls.
+ * One validation policy for native controls and structured answers.
+ * Each field rule owns its value-shape checks; native parsing stays separate.
  *
  * 1. Fields stay quiet until blur or submission finds an error. A radio group
  *    is left only when focus moves outside its entire fieldset.
@@ -23,7 +24,7 @@ import type { FieldValidator } from './validation';
  *    without blocking purchase. reset() clears presentation, never answers.
  */
 export function useFormValidation<FieldName extends string>(
-  values: Record<FieldName, string>,
+  values: Record<FieldName, unknown>,
   rules: Record<FieldName, FieldValidator>,
   activeFields: readonly FieldName[]
 ) {
