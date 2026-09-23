@@ -1,10 +1,20 @@
+import {
+  Controller,
+  useForm,
+  useWatch,
+  type Control,
+  type ResolverResult,
+  type UseFormReturn,
+  type UseFormRegister
+} from 'react-hook-form';
+
 import type {
   EquipmentEntry,
   EquipmentConfiguration,
   EquipmentExtra,
   EquipmentOption
 } from '../../types';
-import { createConfiguration } from '../../configuration';
+import { createConfiguration, isValidConfiguration } from '../../configuration';
 import type { SelectorContent } from '../../selector-content';
 import type { MachineCustomization } from '../types';
 import { ChevronDownIcon } from '../../../site/icons';
@@ -27,33 +37,110 @@ export function MachineConfiguration({
   customization,
   translations
 }: MachineConfigurationProps) {
-  const configuration =
-    customization?.draft ?? customization?.value ?? createConfiguration(entry);
-  const editing =
-    customization?.draft !== null && customization?.draft !== undefined;
-  const choices = customization ? configuration.choices : undefined;
-
-  function changeChoice(optionId: string, choiceId: string | null) {
-    customization?.onChange({
-      ...configuration,
-      choices: {
-        ...configuration.choices,
-        [optionId]: choiceId
-      }
-    });
-  }
-
-  function changeExtra(extraId: string, checked: boolean) {
-    customization?.onChange({
-      ...configuration,
-      extras: checked
-        ? [...configuration.extras, extraId]
-        : configuration.extras.filter(id => id !== extraId)
-    });
+  if (customization?.editing) {
+    return (
+      <ConfigurationEditor
+        entry={entry}
+        customization={customization}
+        translations={translations}
+      />
+    );
   }
 
   return (
-    <div className={styles.configuration} data-validation-field='configuration'>
+    <ConfigurationFields
+      entry={entry}
+      customization={customization}
+      configuration={customization?.value ?? createConfiguration(entry)}
+      translations={translations}
+    />
+  );
+}
+
+/**
+ * A temporary form exists only between Customize and Apply/Cancel.
+ */
+type ConfigurationEditorProps = MachineConfigurationProps & {
+  /**
+   * Applied values seed this session; only Apply updates the enquiry.
+   */
+  customization: MachineCustomization;
+};
+
+/**
+ * Own the draft independently from the enquiry without nesting HTML forms.
+ *
+ * 1. Seed a separate RHF instance from the applied configuration.
+ * 2. Register extras as an array and observe choices for default hints.
+ * 3. Apply validates the complete draft before passing it to the enquiry.
+ * 4. Cancel or unmounting discards the draft without changing the enquiry.
+ *
+ * The editor uses RHF's default onSubmit mode. Only choices need a value
+ * subscription; native checkboxes retain their own edits.
+ */
+function ConfigurationEditor({
+  entry,
+  customization,
+  translations
+}: ConfigurationEditorProps) {
+  const draftForm = useForm<EquipmentConfiguration>({
+    defaultValues: customization.value,
+    resolver: (values): ResolverResult<EquipmentConfiguration> =>
+      isValidConfiguration(entry, values)
+        ? { values, errors: {} }
+        : {
+            values: {},
+            errors: {
+              root: {
+                configuration: {
+                  type: 'validate',
+                  message: translations.invalidConfiguration
+                }
+              }
+            }
+          }
+  });
+  const choices = useWatch({ control: draftForm.control, name: 'choices' });
+
+  return (
+    <ConfigurationFields
+      entry={entry}
+      customization={customization}
+      configuration={{ ...customization.value, choices }}
+      translations={translations}
+      draftForm={draftForm}
+    />
+  );
+}
+
+/**
+ * The same rows display applied values and the temporary editing session.
+ */
+type ConfigurationFieldsProps = MachineConfigurationProps & {
+  /**
+   * Values shown by the rows; extras remain native registered controls in edit mode.
+   */
+  configuration: EquipmentConfiguration;
+  /**
+   * Present only while editing; never shares the enquiry form's field registry.
+   */
+  draftForm?: UseFormReturn<EquipmentConfiguration>;
+};
+
+/**
+ * Preserve specification rows and native controls in the existing card layout.
+ */
+function ConfigurationFields({
+  entry,
+  customization,
+  configuration,
+  translations,
+  draftForm
+}: ConfigurationFieldsProps) {
+  const choices = customization ? configuration.choices : undefined;
+
+  return (
+    <div className={styles.configuration}>
       <dl className={styles.specifications}>
         {entry.specifications.map(specification => (
           <ConfigurationRow
@@ -65,8 +152,7 @@ export function MachineConfiguration({
               option => option.specificationId === specification.id
             )}
             choices={choices}
-            editing={editing}
-            onChange={changeChoice}
+            control={draftForm?.control}
             translations={translations}
           />
         ))}
@@ -81,8 +167,7 @@ export function MachineConfiguration({
                 baseValue={null}
                 option={option}
                 choices={choices}
-                editing={editing}
-                onChange={changeChoice}
+                control={draftForm?.control}
                 translations={translations}
               />
             ))}
@@ -91,15 +176,16 @@ export function MachineConfiguration({
         <ConfigurationExtras
           extras={entry.extras}
           selectedIds={configuration.extras}
-          editing={editing}
-          onChange={changeExtra}
+          register={draftForm?.register}
           translations={translations}
         />
       )}
-      {editing && customization && (
+      {draftForm && customization && (
         <ConfigurationActions
           onCancel={customization.onCancel}
-          onApply={customization.onApply}
+          onApply={draftForm.handleSubmit(customization.onApply)}
+          error={draftForm.formState.errors.root?.configuration?.message}
+          isSubmitting={draftForm.formState.isSubmitting}
           translations={translations}
         />
       )}
@@ -115,69 +201,84 @@ type ConfigurationRowProps = {
   option?: EquipmentOption;
   /** Undefined on unselected cards, which display the original model facts. */
   choices: EquipmentConfiguration['choices'] | undefined;
-  editing: boolean;
-  onChange: (optionId: string, choiceId: string | null) => void;
+  /**
+   * Owns nullable select values only while customization is open.
+   */
+  control?: Control<EquipmentConfiguration>;
   translations: SelectorContent;
 };
 
+/**
+ * Render a specification or a nullable choice using the same row layout.
+ * The Controller render callback maps between the select's empty string and
+ * the configuration's null advice value. Default hints compare with the
+ * catalogue default, not form dirty state.
+ */
 function ConfigurationRow({
   id,
   label,
   baseValue,
   option,
   choices,
-  editing,
-  onChange,
+  control,
   translations
 }: ConfigurationRowProps) {
   const labelId = `${id}-label`;
-  const defaultId = `${id}-default`;
-  const selected = option ? choices?.[option.id] : undefined;
+  const defaultHintId = `${id}-default`;
+  const selectedChoiceId = option ? choices?.[option.id] : undefined;
   const showDefaultHint =
-    option && choices && selected !== option.defaultChoice;
+    option && choices && selectedChoiceId !== option.defaultChoice;
   const defaultLabel = option?.choices.find(
     choice => choice.id === option.defaultChoice
   )?.label;
-  const value =
-    option && choices
-      ? selected === null
-        ? translations.advice
-        : option.choices.find(choice => choice.id === selected)?.label
-      : baseValue;
+  let displayValue = baseValue;
+  if (option && choices) {
+    if (selectedChoiceId === null) {
+      displayValue = translations.advice;
+    } else {
+      displayValue =
+        option.choices.find(choice => choice.id === selectedChoiceId)?.label ??
+        null;
+    }
+  }
 
   return (
     <div className={styles.row}>
       <dt id={labelId}>{label}</dt>
       <dd>
-        {option && editing && choices ? (
-          <div className={controlStyles.selectWrapper}>
-            <select
-              name='configuration'
-              aria-labelledby={labelId}
-              aria-describedby={showDefaultHint ? defaultId : undefined}
-              className={`${controlStyles.input} ${controlStyles.select}`}
-              value={selected ?? ''}
-              onChange={event =>
-                onChange(option.id, event.target.value || null)
-              }
-            >
-              {option.choices.map(choice => (
-                <option key={choice.id} value={choice.id}>
-                  {choice.label}
-                  {choice.id === option.defaultChoice
-                    ? ` · ${translations.defaultValue}`
-                    : ''}
-                </option>
-              ))}
-              <option value=''>{translations.configurationAdvice}</option>
-            </select>
-            <ChevronDownIcon />
-          </div>
+        {option && control && choices ? (
+          <Controller
+            control={control}
+            name={`choices.${option.id}`}
+            render={({ field }) => (
+              <div className={controlStyles.selectWrapper}>
+                <select
+                  {...field}
+                  aria-labelledby={labelId}
+                  aria-describedby={showDefaultHint ? defaultHintId : undefined}
+                  className={`${controlStyles.input} ${controlStyles.select}`}
+                  value={field.value ?? ''}
+                  onChange={event => field.onChange(event.target.value || null)}
+                >
+                  {option.choices.map(choice => (
+                    <option key={choice.id} value={choice.id}>
+                      {choice.label}
+                      {choice.id === option.defaultChoice
+                        ? ` · ${translations.defaultValue}`
+                        : ''}
+                    </option>
+                  ))}
+                  <option value=''>{translations.configurationAdvice}</option>
+                </select>
+                <ChevronDownIcon />
+              </div>
+            )}
+          />
         ) : (
-          <span>{value ?? translations.notSpecified}</span>
+          <span>{displayValue ?? translations.notSpecified}</span>
         )}
         {showDefaultHint && (
-          <span id={defaultId} className={styles.hint}>
+          <span id={defaultHintId} className={styles.hint}>
             {translations.defaultValue}: {defaultLabel}
           </span>
         )}
@@ -189,19 +290,24 @@ function ConfigurationRow({
 type ConfigurationExtrasProps = {
   extras: EquipmentExtra[];
   selectedIds: string[];
-  editing: boolean;
-  onChange: (extraId: string, checked: boolean) => void;
+  /**
+   * Registers independent native checkboxes; absent in read-only mode.
+   */
+  register?: UseFormRegister<EquipmentConfiguration>;
   translations: SelectorContent;
 };
 
+/**
+ * Register independent native extras while editing; list applied extras otherwise.
+ * The editor's default extras array keeps even a single checkbox array-valued.
+ */
 function ConfigurationExtras({
   extras,
   selectedIds,
-  editing,
-  onChange,
+  register,
   translations
 }: ConfigurationExtrasProps) {
-  if (editing) {
+  if (register) {
     return (
       <fieldset className={styles.extras}>
         <legend>{translations.optionalEquipment}</legend>
@@ -209,10 +315,9 @@ function ConfigurationExtras({
           <label key={extra.id} className={styles.check}>
             <input
               type='checkbox'
-              name='configuration'
+              {...register('extras')}
               value={extra.id}
-              checked={selectedIds.includes(extra.id)}
-              onChange={event => onChange(extra.id, event.target.checked)}
+              defaultChecked={selectedIds.includes(extra.id)}
             />
             {extra.label}
           </label>
@@ -246,12 +351,25 @@ function ConfigurationExtras({
 type ConfigurationActionsProps = {
   onCancel: () => void;
   onApply: () => void;
+  /**
+   * Whole-configuration validation feedback after an unsuccessful Apply.
+   */
+  error?: string;
+  /**
+   * Prevent duplicate applications while validation completes.
+   */
+  isSubmitting: boolean;
   translations: SelectorContent;
 };
 
+/**
+ * Apply the local form through handleSubmit or discard it without submission.
+ */
 function ConfigurationActions({
   onCancel,
   onApply,
+  error,
+  isSubmitting,
   translations
 }: ConfigurationActionsProps) {
   return (
@@ -259,9 +377,15 @@ function ConfigurationActions({
       <button type='button' onClick={onCancel}>
         {translations.cancelCustomization}
       </button>
-      <button type='button' className={styles.apply} onClick={onApply}>
+      <button
+        type='button'
+        className={styles.apply}
+        onClick={onApply}
+        disabled={isSubmitting}
+      >
         {translations.applyOptions}
       </button>
+      {error && <p role='alert'>{error}</p>}
       <p className={styles.hint}>{translations.applyBeforeContinue}</p>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ComponentPropsWithRef, type Ref } from 'react';
 
 import {
   createHrefForLocale,
@@ -18,6 +18,22 @@ type MachineOptionProps = {
   checked: boolean;
   invalid: boolean;
   onChange: () => void;
+  /**
+   * Registers the actual radio for validation focus without owning its transition.
+   */
+  inputRef?: ComponentPropsWithRef<'input'>['ref'];
+  /**
+   * Reports native radio blur to the enquiry form.
+   */
+  onBlur?: ComponentPropsWithRef<'input'>['onBlur'];
+  /**
+   * Allows aggregate configuration errors to focus the selected Customize button.
+   */
+  customizationRef?: Ref<HTMLButtonElement>;
+  /**
+   * Feedback linked to the selected card's configuration trigger.
+   */
+  configurationError?: string;
   translations: SelectorContent;
   /** Editing session, supplied only to the selected card. */
   customization?: MachineCustomization;
@@ -29,10 +45,14 @@ export function MachineOption({
   checked,
   invalid,
   onChange,
+  inputRef,
+  onBlur,
+  customizationRef,
+  configurationError,
   translations,
   customization
 }: MachineOptionProps) {
-  const editing = customization?.draft != null;
+  const editing = customization?.editing ?? false;
   const customizeButton = useRef<HTMLButtonElement>(null);
   const wasEditing = useRef(false);
   useEffect(() => {
@@ -46,10 +66,12 @@ export function MachineOption({
   return (
     <div className={styles.option}>
       <RadioOption
+        ref={inputRef}
         name='machine'
         value={entry.slug}
         checked={checked}
         onChange={onChange}
+        onBlur={onBlur}
         required
         invalid={invalid}
         label={entry.name}
@@ -59,12 +81,21 @@ export function MachineOption({
       {customization &&
         (entry.options.length > 0 || entry.extras.length > 0) && (
           <button
-            ref={customizeButton}
+            ref={button => {
+              customizeButton.current = button;
+              if (typeof customizationRef === 'function')
+                return customizationRef(button);
+              if (customizationRef) customizationRef.current = button;
+            }}
             type='button'
             className={styles.customize}
             aria-expanded={editing}
             aria-controls={`${entry.slug}-configuration`}
             aria-disabled={editing}
+            aria-invalid={Boolean(configurationError) || undefined}
+            aria-describedby={
+              configurationError ? 'configuration-error' : undefined
+            }
             onClick={() => {
               if (!editing) customization.onStart();
             }}

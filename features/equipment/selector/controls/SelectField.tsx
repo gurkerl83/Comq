@@ -1,13 +1,11 @@
-import type { SelectHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import { ChevronDownIcon } from '../../../site/icons';
 import type { NativeFieldProps } from '../types';
 import { FormField } from './FormField';
 import styles from './FieldControl.module.css';
 
-type SelectFieldProps = NativeFieldProps<
-  SelectHTMLAttributes<HTMLSelectElement>
->;
+type SelectFieldProps = NativeFieldProps<ComponentPropsWithRef<'select'>>;
 
 export function SelectField({
   id,

@@ -1,10 +1,10 @@
-import type { InputHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import type { NativeFieldProps } from '../types';
 import { FormField } from './FormField';
 import styles from './FieldControl.module.css';
 
-type TextFieldProps = NativeFieldProps<InputHTMLAttributes<HTMLInputElement>>;
+type TextFieldProps = NativeFieldProps<ComponentPropsWithRef<'input'>>;
 
 export function TextField({
   id,

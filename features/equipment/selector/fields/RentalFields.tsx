@@ -1,73 +1,85 @@
-import type {
-  EquipmentSelection,
-  SelectionErrors,
-  UpdateSelectionField
-} from '../../selection';
+import { useEffect, type RefObject } from 'react';
+import { useFormContext, useFormState } from 'react-hook-form';
+
+import type { EquipmentSelection } from '../../selection';
 import type { SelectorContent } from '../../selector-content';
 import { SELECTION_LIMITS } from '../../selection-limits';
 import { SelectField } from '../controls/SelectField';
 import { TextField } from '../controls/TextField';
 
-type RentalValues = Pick<
-  EquipmentSelection,
-  'rentalDuration' | 'rentalUnit' | 'startDate'
->;
-
+/**
+ * Rental copy and the native date input inspected by the enquiry resolver.
+ */
 type RentalFieldsProps = {
-  value: RentalValues;
-  errors: Pick<SelectionErrors, keyof RentalValues>;
-  onChange: UpdateSelectionField<keyof RentalValues>;
+  /** Labels, requirement hints and unit names. */
   translations: SelectorContent;
+  /** Distinguishes an incomplete native date from an intentionally empty date. */
+  startDateRef: RefObject<HTMLInputElement | null>;
 };
 
 export function RentalFields({
-  value,
-  errors,
-  onChange,
-  translations
+  translations,
+  startDateRef
 }: RentalFieldsProps) {
+  const { control, register, getValues, getFieldState, trigger } =
+    useFormContext<EquipmentSelection>();
+
+  const { errors, touchedFields } = useFormState({
+    control,
+    name: ['rentalDuration', 'rentalUnit', 'startDate'],
+    exact: true
+  });
+
+  const startDate = register('startDate');
+
+  // A remounted date input has discarded any unfinished native edit. Recheck
+  // an existing error so a previous badInput message cannot linger.
+  useEffect(() => {
+    if (getFieldState('startDate').invalid) void trigger('startDate');
+  }, [getFieldState, trigger]);
+
   return (
     <>
       <TextField
+        {...register('rentalDuration')}
         id='rentalDuration'
-        name='rentalDuration'
         label={translations.duration}
         requirementLabel={translations.required}
-        error={errors.rentalDuration}
+        error={errors.rentalDuration?.message}
         type='number'
         min={SELECTION_LIMITS.rentalDuration.min}
         max={SELECTION_LIMITS.rentalDuration.max}
         step={1}
         inputMode='numeric'
         required
-        value={value.rentalDuration}
-        onChange={event => onChange('rentalDuration', event.target.value)}
+        defaultValue={getValues('rentalDuration')}
       />
       <SelectField
+        {...register('rentalUnit')}
         id='rentalUnit'
-        name='rentalUnit'
         label={translations.durationUnit}
-        error={errors.rentalUnit}
-        value={value.rentalUnit}
-        onChange={event =>
-          onChange(
-            'rentalUnit',
-            event.target.value === 'weeks' ? 'weeks' : 'months'
-          )
-        }
+        error={errors.rentalUnit?.message}
+        defaultValue={getValues('rentalUnit')}
       >
         <option value='weeks'>{translations.weeks}</option>
         <option value='months'>{translations.months}</option>
       </SelectField>
       <TextField
+        {...startDate}
+        ref={element => {
+          startDate.ref(element);
+          startDateRef.current = element;
+        }}
         id='startDate'
-        name='startDate'
         label={translations.startDate}
         requirementLabel={translations.optional}
-        error={errors.startDate}
+        error={errors.startDate?.message}
         type='date'
-        value={value.startDate}
-        onChange={event => onChange('startDate', event.target.value)}
+        defaultValue={getValues('startDate')}
+        onInput={() => {
+          // Partial date edits can change native validity without changing "".
+          if (touchedFields.startDate) void trigger('startDate');
+        }}
       />
     </>
   );

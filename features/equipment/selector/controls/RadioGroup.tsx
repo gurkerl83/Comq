@@ -32,7 +32,6 @@ export function RadioGroup({
   return (
     <fieldset
       className={styles.fieldset}
-      data-validation-field={name}
       aria-label={groupLabel}
       aria-describedby={hasFieldError ? `${name}-error` : undefined}
     >
