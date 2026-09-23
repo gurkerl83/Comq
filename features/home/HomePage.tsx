@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import {
   createHrefForLocale,
   type SupportedLocale
@@ -11,8 +9,10 @@ import {
   createSiteStructuredData
 } from '../../lib/site/json-ld';
 import { CompanyLogoStrip } from '../experience/CompanyLogoStrip';
+import { EquipmentActions } from '../equipment/EquipmentActions';
 import { ArrowRightIcon } from '../site/icons';
 import { QuoteInvitation } from '../site/QuoteInvitation';
+import { Link } from '../../components/Link';
 import styles from './HomePage.module.css';
 import { ServiceImagePlaceholder } from './ServiceImagePlaceholder';
 
@@ -84,6 +84,7 @@ export function HomePage({
             />
           </Link>
           <p>{service.description}</p>
+          {service.id === 'venta' && <EquipmentActions locale={locale} />}
         </section>
       ))}
       <QuoteInvitation dictionary={dictionary} />

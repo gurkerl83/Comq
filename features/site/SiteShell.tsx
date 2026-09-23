@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import type { SupportedLocale } from '../../lib/i18n/locales';
 import type { Dictionary } from '../../lib/i18n/types';
+import { Link } from '../../components/Link';
 import { SiteNav } from './SiteNav';
 import { SiteFooter } from './SiteFooter';
 import styles from './SiteShell.module.css';
@@ -22,9 +23,9 @@ export function SiteShell({
 }) {
   return (
     <div className={styles.shell}>
-      <a className={styles.skipLink} href='#main-content'>
+      <Link native className={styles.skipLink} href='#main-content'>
         {dictionary.navigation.skipToContent}
-      </a>
+      </Link>
       <SiteNav locale={locale} dictionary={dictionary} />
       <main id='main-content' tabIndex={-1}>
         {/* Pages own closing actions so service-specific quotes are not duplicated. */}

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import {
@@ -9,6 +8,7 @@ import {
   SUPPORTED_LOCALES,
   type SupportedLocale
 } from '../../lib/i18n/locales';
+import { Link } from '../../components/Link';
 import styles from './SiteShell.module.css';
 
 const languageNames: Record<SupportedLocale, string> = {

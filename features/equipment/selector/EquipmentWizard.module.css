@@ -1,0 +1,36 @@
+/* Keep the progress bar sticky only through this wizard's form. */
+.wizard {
+  margin-top: 2rem;
+}
+
+.stepPanel {
+  padding: 2rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  background: var(--color-surface);
+}
+
+/* Leave room for the sticky progress bar and label when focus scrolls a field. */
+.stepPanel :focus {
+  scroll-margin-block-start: 7rem;
+}
+
+.stepTitle {
+  margin: 0;
+}
+
+.stepTitle:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.stepIntro {
+  margin: 0.875rem 0 1.75rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 640px) {
+  .stepPanel {
+    padding: 1.25rem;
+  }
+}

@@ -1,13 +1,17 @@
+import type { ReactNode } from 'react';
+
 import type { Dictionary, ServiceKey } from '../../lib/i18n/types';
 import { QuoteLink } from '../site/QuoteLink';
 import styles from './ServicePage.module.css';
 
 export function ServicePage({
   dictionary,
-  service
+  service,
+  children
 }: {
   dictionary: Dictionary;
   service: ServiceKey;
+  children?: ReactNode;
 }) {
   const { quoteHeading, pages } = dictionary.servicePages;
   const content = pages[service];
@@ -26,6 +30,7 @@ export function ServicePage({
       </section>
 
       <div className={styles.details}>
+        {children}
         {detailSections.map(section => (
           <section
             key={section.id}

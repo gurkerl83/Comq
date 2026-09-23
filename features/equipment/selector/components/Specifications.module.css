@@ -1,0 +1,24 @@
+.specifications {
+  margin: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  padding: 0.875rem 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.row:first-child {
+  padding-top: 0;
+}
+
+.row dt {
+  color: var(--color-text-muted);
+}
+
+.row dd {
+  margin: 0;
+  font-weight: 700;
+}

@@ -146,6 +146,72 @@ const dictionary: Dictionary = {
       }
     }
   },
+  equipment: {
+    categories: {
+      jumbo: {
+        name: 'Jumbos',
+        description: 'Explore examples of underground drilling equipment.'
+      },
+      scooptram: {
+        name: 'Scooptrams',
+        description: 'Explore examples of loading and hauling equipment.'
+      },
+      drill: {
+        name: 'Drilling rigs',
+        description: 'Explore examples of equipment for drilling tasks.'
+      }
+    },
+    machines: {
+      'demo-jumbo-j1': {
+        name: 'Demo Jumbo J1',
+        summary: 'Fictional single-boom jumbo for underground drilling.',
+        application:
+          'An example underground drilling operation. Describe your project when preparing the enquiry.'
+      },
+      'demo-jumbo-j2': {
+        name: 'Demo Jumbo J2',
+        summary: 'Fictional two-boom jumbo for underground drilling.',
+        application:
+          'An example drilling operation with two booms. The figures only illustrate the selector options.'
+      },
+      'demo-scooptram-s1': {
+        name: 'Demo Scooptram S1',
+        summary: 'Fictional scooptram for loading and hauling material.',
+        application:
+          'An example of material loading and hauling tasks. The stated capacity is demonstration data.'
+      },
+      'demo-drill-d1': {
+        name: 'Demo Drilling Rig D1',
+        summary: 'Fictional drilling rig for drilling tasks.',
+        application:
+          'An example drilling project. Describe the method and working conditions in the enquiry.'
+      }
+    },
+    specifications: {
+      booms: 'Booms',
+      power: 'Power',
+      width: 'Width',
+      payload: 'Payload',
+      diameter: 'Drilling diameter'
+    },
+    extras: {
+      'rear-camera': 'Rear-view camera',
+      'central-lubrication': 'Central lubrication'
+    },
+    images: {
+      machineSide:
+        'Demo illustration 01: side view of a fictional mining machine.',
+      machineFront:
+        'Demo illustration 02: front view of a fictional mining machine.',
+      hydraulicBoom:
+        'Demo illustration 03: detail of a fictional hydraulic boom.',
+      operatorCab:
+        'Demo illustration 04: operator cab and controls of a fictional machine.',
+      wheelDetail: 'Demo illustration 05: wheel detail of a fictional machine.',
+      machineRear:
+        'Demo illustration 06: rear view of a fictional mining machine.'
+    }
+  },
   quote: {
     invitation: 'Let’s discuss your mining equipment needs.'
   },

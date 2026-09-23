@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <title>Rear three-quarter view of an imaginary underground vehicle — demo illustration</title>
+  <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#d8d7cb" stroke-width="1"/></pattern></defs>
+  <rect width="1200" height="800" fill="#f0ede5"/>
+  <rect x="35" y="35" width="1130" height="730" rx="12" fill="url(#grid)"/>
+  <g fill="none" stroke="#b3b7aa" stroke-width="2"><path d="M55 90V55H90M1110 55h35v35M55 710v35h35M1110 745h35v-35"/></g>
+  <rect x="65" y="62" width="178" height="46" rx="23" fill="#252e2c"/>
+  <text x="154" y="92" fill="#f0ede5" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="700" letter-spacing="3">DEMO 06</text>
+  <g stroke="#293330" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+<ellipse cx="600" cy="652" rx="398" ry="35" fill="#d5d8ca" stroke="none"/>
+<path d="M355 403V248l79-51h308l104 94v140" fill="#668d87"/>
+<path d="M381 261 441 222h275v166H381ZM741 227 820 305v99l-79-24Z" fill="#cfddd4"/>
+<path d="M546 226v159M403 248l142 108" fill="none" stroke-width="7"/>
+<path d="M350 197h394l101 91-22 22-91-85H350Z" fill="#343f39"/>
+<path d="M259 434 380 370H741l202 100v119H259Z" fill="#d39d4b"/>
+<path d="M741 370v215l202 41V470Z" fill="#b68b4e"/>
+<path d="M381 400h289v122H381Z" fill="#668d87"/>
+<path d="M401 422h249M401 446h249M401 470h249M401 494h249" stroke="#364f43" stroke-width="10"/>
+<rect x="291" y="441" width="60" height="28" rx="4" fill="#b97257"/><rect x="692" y="441" width="31" height="28" rx="4" fill="#b97257"/>
+<path d="M239 531h508v64H239Z" fill="#6d7d71"/><path d="m747 531 214 46v59l-214-41Z" fill="#51695a"/>
+<path d="M270 552h82m316 0h52" stroke="#eee5d4" stroke-width="10"/>
+<path d="M780 410v88m22-77v80m22-69v74m22-63v68m22-55v60" stroke="#786443" stroke-width="9"/>
+<path d="M538 533v-58m-23 9h46" fill="none"/><path d="M527 587v29h61v-29" fill="#b97257"/>
+<rect x="285" y="576" width="97" height="85" rx="22" fill="#3a4240"/><rect x="662" y="576" width="96" height="85" rx="22" fill="#3a4240"/>
+<path d="M302 596h63m-63 22h63m314-22h63m-63 22h63" stroke="#788079" stroke-width="9"/>
+<ellipse cx="881" cy="579" rx="60" ry="75" fill="#3a4240"/><ellipse cx="881" cy="579" rx="33" ry="48" fill="#c9d2bd"/><ellipse cx="881" cy="579" rx="14" ry="22" fill="#668d87"/>
+<path d="M764 292V170h26v153" fill="#b97257"/><path d="M763 169h44" stroke-width="12"/>
+<path d="M445 163v-28h34v28" fill="#d39d4b"/><path d="M434 162h54" stroke-width="7"/>
+<path d="M370 412v121m-16-99h32m-32 29h32m-32 29h32" fill="none"/>
+
+  </g>
+  <g fill="none" stroke="#8f998f" stroke-width="2"><path d="M65 715h110m-110-6v12m110-12v12M1015 715h110m-110-6v12m110-12v12"/></g>
+</svg>

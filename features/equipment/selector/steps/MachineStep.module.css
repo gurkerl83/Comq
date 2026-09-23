@@ -1,0 +1,5 @@
+.help {
+  margin: 0 0 1rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}

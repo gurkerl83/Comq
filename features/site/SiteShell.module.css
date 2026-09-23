@@ -27,6 +27,12 @@
   top: 0;
   border-bottom: var(--border-width) solid var(--color-border);
   background: var(--color-background);
+  /*
+   * Hint a separate rendering layer to reduce sticky-header flicker while
+   * history navigation restores page content and scroll position. This leaves
+   * native Back/Forward scroll restoration unchanged.
+   */
+  will-change: transform;
 }
 
 .headerInner {

@@ -1,0 +1,60 @@
+/*
+ * Share five content-sized rows from EquipmentCatalogue.module.css (.machines).
+ * Subgrid lets both cards contribute to the same row heights, so a longer
+ * name or summary keeps the specification blocks and links aligned.
+ *
+ *     +----------------------+----------------------+
+ *   1 | Category / demo      | Category / demo      |
+ *   2 | Machine name         | Machine name         |
+ *   3 | Summary              | Longer summary       |
+ *     |                      | continues here       |
+ *   4 | Specifications block | Specifications block |
+ *   5 | Details link         | Details link         |
+ *     +----------------------+----------------------+
+ *
+ * Each card is a direct list item and spans five parent rows. Row 4 holds
+ * the whole specifications block; its individual entries keep their own rows.
+ */
+.card {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  background: var(--color-surface);
+}
+
+.category,
+.name,
+.summary {
+  margin: 0;
+}
+
+.category,
+.summary {
+  color: var(--color-text-muted);
+}
+
+.category {
+  font-size: var(--font-size-small);
+}
+
+.details {
+  display: inline-flex;
+  align-items: center;
+  align-self: start;
+  justify-self: start;
+  min-height: 44px;
+  color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .card {
+    /* Match the single-column list; each card now sizes its own rows. */
+    grid-row: auto;
+    grid-template-rows: none;
+    padding: 1rem;
+  }
+}

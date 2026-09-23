@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { Dictionary } from '../../lib/i18n/types';
 import { FOUNDER_NAME, LINKEDIN_URL } from '../../lib/site/config';
 import { LinkedInIcon } from '../site/icons';
+import { Link } from '../../components/Link';
 import { QuoteInvitation } from '../site/QuoteInvitation';
 import styles from './ExperiencePage.module.css';
 
@@ -48,7 +49,8 @@ export function ExperiencePage({ dictionary }: { dictionary: Dictionary }) {
               </div>
               <div className={styles.biography}>
                 <p>{dictionary.experience.biography}</p>
-                <a
+                <Link
+                  native
                   className={styles.profileLink}
                   href={LINKEDIN_URL}
                   target='_blank'
@@ -56,7 +58,7 @@ export function ExperiencePage({ dictionary }: { dictionary: Dictionary }) {
                 >
                   <LinkedInIcon />
                   <span>{dictionary.experience.profileLink}</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

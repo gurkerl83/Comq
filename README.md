@@ -26,20 +26,27 @@ Next.js 16.3 App Router, React 19.3 and strict TypeScript, with Node.js 24 and p
 | Styling         | CSS Modules and shared design tokens; see [Theme](#theme).                                                              |
 | Assets          | Source artwork in `design/`; website copies in `public/` and App Router favicon files in `app/`.                        |
 
-### Routing and content
-
-Next.js rewrites keep default-language URLs unprefixed while letting all locales share the same pages and server layout. The routing rules and examples are documented in [next.config.ts](next.config.ts). Unsupported locales and missing pages return 404.
-
-The shared locale layout keeps the header and footer mounted during navigation within one language. Pages render only their content.
-
-When extending the site:
-
-- **Add a page:** create one thin entrypoint under `app/[locale]` that renders its feature, add its `metadata.ts` helper and translated content, and update its [sitemap](app/sitemap.ts) and [AI agent guide](public/llms.txt).
-- **Add a language:** extend the `Locale` constant in [locale configuration](lib/i18n/locales.ts), register a matching dictionary in the [loader](lib/i18n/dictionaries.ts), and update the [language labels](features/site/LanguageSwitcher.tsx) and Open Graph locale mapping in the metadata helper.
+For routing, shared layouts and navigation behavior, see [Next.js conventions](NEXTJS.md).
 
 Keep the original standalone `index.html` unchanged; it is separate from the Next.js application.
 
 Keep `public/llms.txt` aligned with published content, contact details and supported languages. It follows the [llms.txt proposal](https://llmstxt.org/) as a concise guide to the existing HTML pages; it does not replace the sitemap or guarantee AI search inclusion. The robots policy allows all crawlers; hosting and firewall settings must also permit their requests.
+
+### Equipment selector
+
+The sales pages (`/venta` and `/en/venta`) offer compact machine cards before the service details. Cards show the category, summary and first two specifications in catalogue order, then link to the full machine page. Keep those specifications ordered by their usefulness for a quick comparison. Demo equipment remains explicitly identified.
+
+`/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. Local React state retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
+
+The shared equipment navigation links back to the sales-page catalogue. Machine-page links use `?machine=...` to start at Machine with that model selected and its defaults ready to review. Missing or unknown machines start at equipment type. Change equipment returns to the equipment-type step and preserves the enquiry draft, including the visitor's purchase/rental preference and rental details.
+
+The draft lasts for the current wizard instance. A full page reload initializes a new draft from the machine in the URL, or from equipment type if none is recognized. Navigating to a different valid machine link also starts a new draft. Language changes do not transfer answers, and the language switch drops `?machine=...`.
+
+Purchase and Rental are enquiry preferences available for every machine. COMQ confirms availability and terms. Rental fields appear only when Rental is selected.
+
+The selected machine card offers inline **Customize** controls when the machine defines configurable choices or optional extras. Fixed specifications stay read-only. Configurable choices start at their defaults; a separate default hint appears in the card only when the selected answer differs from the default. Independent extras use checkboxes. Apply saves the temporary choices to the enquiry; Cancel, changing equipment or leaving the step discards unfinished edits. Continue is unavailable while customization is open. Applied choices survive Back/Continue and appear separately in the review and WhatsApp enquiry. Changing machines resets only machine-specific choices to the new defaults. Each optional extra toggles independently; none is a valid selection. Questions can be entered in the requirements notes.
+
+The fictional catalogue is explicitly labelled as a demo and does not represent real COMQ offers. The demo selector and machine-detail routes are marked `noindex` and intentionally excluded from the sitemap and `llms.txt` until real content is confirmed. To add real products later, update the specifications, `options` and `extras` in [the shared equipment catalogue](features/equipment/catalogue-data.ts), and add their translated text to the `equipment` sections of the [English](lib/i18n/dictionaries/en.ts) and [Spanish](lib/i18n/dictionaries/es.ts) dictionaries.
 
 ### Theme
 
@@ -93,6 +100,7 @@ Choose the existing `comq` project when linking. The CLI returns a preview URL; 
 
 ## Documentation
 
+- [Equipment catalogue and enquiry wizard](features/equipment/README.md) — current behaviour, data model, proposed development stages and decisions awaiting confirmation.
 - [Content strategy](strategy/content-roadmap.md) — product comparisons, staged pickers, articles and LinkedIn presence.
 - [What we need from Alberto](strategy/alberto-first-inputs.md) — a short list of the first content inputs, in priority order.
 - [Artwork guide](design/README.md) — directory overview and shared image rendering.
