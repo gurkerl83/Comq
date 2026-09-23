@@ -1,12 +1,10 @@
-import type { TextareaHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import type { NativeFieldProps } from '../types';
 import { FormField } from './FormField';
 import styles from './FieldControl.module.css';
 
-type TextAreaFieldProps = NativeFieldProps<
-  TextareaHTMLAttributes<HTMLTextAreaElement>
->;
+type TextAreaFieldProps = NativeFieldProps<ComponentPropsWithRef<'textarea'>>;
 
 export function TextAreaField({
   id,
