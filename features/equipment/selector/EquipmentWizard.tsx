@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, type FormEvent } from 'react';
+import { useCallback, useEffect, useRef, type FormEvent } from 'react';
+import { FormProvider } from 'react-hook-form';
 
-import { focusFormField } from '../../../lib/forms/native-controls';
 import { WHATSAPP_URL } from '../../../lib/site/config';
 import { Link } from '../../../components/Link';
 import type { EquipmentSelection } from '../selection';
@@ -13,27 +13,21 @@ import { RequirementsStep } from './steps/RequirementsStep';
 import { ReviewStep } from './steps/ReviewStep';
 import type { SelectorProps } from './types';
 import { useEquipmentSelection } from './useEquipmentSelection';
-import { WizardActions, WizardActionLink } from './WizardActions';
+import { WizardActions } from './WizardActions';
 import { WizardProgress } from './WizardProgress';
 import styles from './EquipmentWizard.module.css';
 
 /**
- * Client boundary for the interactive form and its step components.
+ * Client boundary for the native form and its retained enquiry answers.
  *
- * 1. On a direct visit, Next renders the initial wizard HTML on the server,
- *    then hydrates it in the browser using the same initialSelection. A valid
- *    machine link therefore starts at Machine without a post-mount jump.
- * 2. Subsequent Next navigation supplies server-prepared props through the RSC
- *    payload. The key assigned by EquipmentSelector determines whether this
- *    wizard instance is reused or replaced with a new draft.
- * 3. Once interactive, field events and step buttons update the shared hook
- *    locally. The callbacks passed to steps are created inside this client
- *    boundary; they do not call the server or change the browser URL.
- * 4. This native form delegates field input and blur to one validation hook.
- *    Continue is disabled while the active step is invalid. Submission still
- *    rechecks the fields and focuses the first invalid control if needed;
- *    heading focus follows a successful step change. Draft values remain in
- *    the selection hook so unmounting a step does not discard answers.
+ * 1. The server prepares initialSelection and the wizard key. Registered native
+ *    defaults and controlled equipment radios preserve that initial HTML.
+ * 2. FormProvider shares the enquiry with feature components. Base controls
+ *    continue accepting native props and do not depend on React Hook Form.
+ * 3. Continue/Enter prevent browser submission and trigger scoped validation.
+ *    The whole enquiry is checked before Review; WhatsApp remains explicit.
+ * 4. Step changes retain answers and touched fields. Navigation focuses the
+ *    new heading; validation focuses its target after the owning step mounts.
  */
 export function EquipmentWizard({
   locale,
@@ -42,12 +36,12 @@ export function EquipmentWizard({
   initialSelection
 }: SelectorProps & { initialSelection: EquipmentSelection }) {
   const wizard = useEquipmentSelection(
-    locale,
     catalogue,
     initialSelection,
     translations
   );
-  const { selection, step, errors, machine } = wizard;
+  const { form, step, machine } = wizard;
+  const { setFocus } = form;
   const currentStep = translations.steps[step];
   const progressSteps = SELECTION_STEP_ORDER.map(id => ({
     id,
@@ -55,24 +49,49 @@ export function EquipmentWizard({
   }));
   const wizardStart = useRef<HTMLDivElement>(null);
   const stepHeading = useRef<HTMLHeadingElement>(null);
+  const customizeButton = useRef<HTMLButtonElement>(null);
   const previousStep = useRef(step);
+  const pendingFocus = useRef<keyof EquipmentSelection | null>(null);
 
-  // Focus the new heading, but scroll from the wizard's start so the progress
-  // bar and heading both remain visible. Its height may vary when labels wrap
-  // or mobile hides the numbers. Leave initial page focus and scroll unchanged.
+  const focusInvalidField = useCallback(
+    (field: keyof EquipmentSelection) => {
+      if (field === 'configuration') {
+        (customizeButton.current ?? stepHeading.current)?.focus();
+      } else {
+        setFocus(field);
+      }
+    },
+    [setFocus]
+  );
+
+  // Focus the heading without scrolling, then align the wizard start so the
+  // progress remains visible. Error targets are focused after their step mounts.
+  // Initial rendering leaves page focus and scroll unchanged.
   useEffect(() => {
-    if (previousStep.current !== step) {
-      stepHeading.current?.focus({ preventScroll: true });
-      wizardStart.current?.scrollIntoView({ block: 'start' });
-      previousStep.current = step;
+    if (previousStep.current === step) return;
+    stepHeading.current?.focus({ preventScroll: true });
+    wizardStart.current?.scrollIntoView({ block: 'start' });
+    if (pendingFocus.current) {
+      focusInvalidField(pendingFocus.current);
+      pendingFocus.current = null;
     }
-  }, [step]);
+    previousStep.current = step;
+  }, [step, focusInvalidField]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  /**
+   * Continue/Enter call nextStep(), which validates through RHF's trigger()
+   * without marking the enquiry submitted.
+   */
+  async function handleStepSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const firstInvalid = wizard.nextStep(event.currentTarget);
-    if (!firstInvalid) return;
-    focusFormField(event.currentTarget, firstInvalid);
+    const invalid = await wizard.nextStep();
+    if (!invalid) return;
+    if (invalid.step === step) {
+      focusInvalidField(invalid.field);
+    } else {
+      pendingFocus.current = invalid.field;
+      wizard.goToStep(invalid.step);
+    }
   }
 
   if (!catalogue.length)
@@ -86,82 +105,67 @@ export function EquipmentWizard({
     );
 
   return (
-    <div ref={wizardStart} className={styles.wizard}>
-      <WizardProgress
-        steps={progressSteps}
-        currentIndex={wizard.stepIndex}
-        label={translations.progress}
-      />
-      <form
-        onSubmit={handleSubmit}
-        onInput={wizard.validation.handleInput}
-        onBlur={wizard.validation.handleBlur}
-        noValidate
-        className={styles.stepPanel}
-      >
-        <h2 ref={stepHeading} tabIndex={-1} className={styles.stepTitle}>
-          {currentStep.title}
-        </h2>
-        <p className={styles.stepIntro}>{currentStep.description}</p>
-        {step === SelectionStep.Category && (
-          <CategoryStep
-            categories={wizard.categories}
-            value={selection.category}
-            error={errors.category}
-            onChange={wizard.chooseCategory}
-            translations={translations}
-          />
-        )}
-        {step === SelectionStep.Machine && (
-          <MachineStep
-            locale={locale}
-            machines={wizard.machines}
-            value={selection.machine}
-            error={errors.machine}
-            configurationError={errors.configuration}
-            customization={wizard.customization}
-            onChange={wizard.chooseMachine}
-            translations={translations}
-          />
-        )}
-        {step === SelectionStep.Requirements && machine && (
-          <RequirementsStep
-            machine={machine}
-            selection={selection}
-            errors={errors}
-            onChange={wizard.updateField}
-            onChangeEquipment={() => wizard.goToStep(SelectionStep.Category)}
-            translations={translations}
-          />
-        )}
-        {step === SelectionStep.Review && machine && (
-          <ReviewStep
-            rows={wizard.summary}
-            onEdit={wizard.goToStep}
-            translations={translations}
-          />
-        )}
-        <WizardActions
-          onBack={wizard.hasPreviousStep ? wizard.previousStep : undefined}
-          backLabel={translations.back}
-          nextLabel={translations.next}
-          nextDisabled={
-            !wizard.validation.isValid || wizard.customization.draft !== null
-          }
-          isLastStep={wizard.isLastStep}
-          finalAction={
-            machine && (
-              <WizardActionLink
-                href={`${WHATSAPP_URL}?text=${encodeURIComponent(wizard.message)}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {translations.send}
-              </WizardActionLink>
-            )
-          }
+    <FormProvider {...form}>
+      <div ref={wizardStart} className={styles.wizard}>
+        <WizardProgress
+          steps={progressSteps}
+          currentIndex={wizard.stepIndex}
+          label={translations.progress}
         />
-      </form>
-    </div>
+        <form
+          onSubmit={handleStepSubmit}
+          noValidate
+          className={styles.stepPanel}
+        >
+          <h2 ref={stepHeading} tabIndex={-1} className={styles.stepTitle}>
+            {currentStep.title}
+          </h2>
+          <p className={styles.stepIntro}>{currentStep.description}</p>
+          {step === SelectionStep.Category && (
+            <CategoryStep
+              categories={wizard.categories}
+              onChange={wizard.chooseCategory}
+              translations={translations}
+            />
+          )}
+          {step === SelectionStep.Machine && (
+            <MachineStep
+              locale={locale}
+              machines={wizard.machines}
+              customization={wizard.customization}
+              customizationRef={customizeButton}
+              onChange={wizard.chooseMachine}
+              translations={translations}
+            />
+          )}
+          {step === SelectionStep.Requirements && machine && (
+            <RequirementsStep
+              machine={machine}
+              startDateRef={wizard.startDateRef}
+              onChangeEquipment={() => wizard.goToStep(SelectionStep.Category)}
+              translations={translations}
+            />
+          )}
+          {step === SelectionStep.Review && machine && (
+            <ReviewStep
+              locale={locale}
+              machine={machine}
+              onBack={wizard.previousStep}
+              onEdit={wizard.goToStep}
+              translations={translations}
+            />
+          )}
+          {!wizard.isLastStep && (
+            <WizardActions
+              onBack={wizard.hasPreviousStep ? wizard.previousStep : undefined}
+              backLabel={translations.back}
+              nextLabel={translations.next}
+              nextDisabled={wizard.isAdvancing || wizard.customization.editing}
+              isLastStep={false}
+            />
+          )}
+        </form>
+      </div>
+    </FormProvider>
   );
 }

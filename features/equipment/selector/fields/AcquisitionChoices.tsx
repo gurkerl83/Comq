@@ -1,17 +1,30 @@
+import { useFormContext, useFormState } from 'react-hook-form';
+
 import { hasError } from '../../../../lib/forms/errors';
 import { AcquisitionMode, type EquipmentSelection } from '../../selection';
-import type { ChoiceProps } from '../types';
+import type { SelectorContent } from '../../selector-content';
 import { RadioGroup } from '../controls/RadioGroup';
 import { RadioOption } from '../controls/RadioOption';
 
-type AcquisitionChoicesProps = ChoiceProps<EquipmentSelection['acquisition']>;
+/**
+ * Translated copy for the purchase and rental choices.
+ */
+type AcquisitionChoicesProps = {
+  /** Group legend and native radio labels. */
+  translations: SelectorContent;
+};
 
-export function AcquisitionChoices({
-  value,
-  error,
-  onChange,
-  translations
-}: AcquisitionChoicesProps) {
+export function AcquisitionChoices({ translations }: AcquisitionChoicesProps) {
+  const { control, register, getValues } = useFormContext<EquipmentSelection>();
+
+  const { errors } = useFormState({
+    control,
+    name: 'acquisition',
+    exact: true
+  });
+
+  const error = errors.acquisition?.message;
+
   return (
     <RadioGroup
       name='acquisition'
@@ -21,11 +34,10 @@ export function AcquisitionChoices({
       {Object.values(AcquisitionMode).map(mode => (
         <RadioOption
           key={mode}
-          name='acquisition'
+          {...register('acquisition')}
           value={mode}
-          checked={value === mode}
+          defaultChecked={getValues('acquisition') === mode}
           invalid={hasError(error)}
-          onChange={() => onChange(mode)}
           label={translations[mode]}
         />
       ))}

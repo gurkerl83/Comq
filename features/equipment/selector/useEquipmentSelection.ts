@@ -1,73 +1,65 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 
-import type { SupportedLocale } from '../../../lib/i18n/locales';
-import { isValidConfiguration } from '../configuration';
-import type {
-  EquipmentConfiguration,
-  EquipmentCategory,
-  EquipmentEntry
-} from '../types';
+import type { EquipmentCategory, EquipmentEntry } from '../types';
 import type { MachineCustomization } from './types';
-
-import { useFormValidation } from '../../../lib/forms/useFormValidation';
-import {
-  createSelectionValidators,
-  getSelectionFields
-} from '../selection-validation';
-
 import type { SelectorContent } from '../selector-content';
+import { getSelectionFields } from '../selection-validation';
 import { SelectionStep, SELECTION_STEP_ORDER } from '../selection-steps';
 import {
-  AcquisitionMode,
   getInitialSelectionStep,
   selectCategory,
   selectMachine,
-  getSelectionSummary,
-  createEnquiryMessage,
-  type EquipmentSelection,
-  type UpdateSelectionField
+  type EquipmentSelection
 } from '../selection';
+import { createSelectionResolver } from './selection-resolver';
 
 /**
- * Own the draft and step state for one mounted wizard instance.
+ * Own the applied enquiry, step navigation and customization visibility.
  *
- * 1. Use the server-provided initialSelection as the starting state. A known
- *    machine supplies its category, so begin at Machine to review its options;
- *    otherwise begin at the first step in the normal sequence.
- * 2. Back/Continue and Change equipment keep this hook mounted while replacing
- *    the visible step. Their field values survive in the shared draft.
- * 3. The initial props seed state once; they are not continuously copied over
- *    the visitor's edits. A changed server-assigned key creates a fresh instance.
- *
- * Example: select a country and enter a project location, choose Change
- * equipment, then return through Category and Machine. Both answers, the
- * requested purchase/rental mode and rental details remain; choosing another
- * machine initializes its own configuration defaults.
- * The shared validation hook keeps presentation history separate from answers.
- * Leaving a step resets that history, not the draft. DOM focus remains the
- * responsibility of EquipmentWizard.
+ * 1. React Hook Form seeds answers once and retains unmounted step fields.
+ *    The server-assigned wizard key still determines when a new enquiry begins.
+ * 2. Native controls validate on blur then edits. Continue validates and touches
+ *    its fields without submitting; untouched later fields still wait for blur.
+ * 3. The mounted configuration editor owns temporary values. Applying replaces
+ *    configuration; closing the editor discards its unfinished changes.
+ * 4. Category and machine transitions run against the previous form values so
+ *    their dependent defaults change together. Commercial answers survive.
  */
 export function useEquipmentSelection(
-  locale: SupportedLocale,
   catalogue: EquipmentEntry[],
   initialSelection: EquipmentSelection,
   translations: SelectorContent
 ) {
-  const [selection, setSelection] = useState(initialSelection);
-  const [configurationDraft, setConfigurationDraft] =
-    useState<EquipmentConfiguration | null>(null);
   const [step, setStep] = useState<SelectionStep>(() =>
     getInitialSelectionStep(initialSelection)
   );
-  const validation = useFormValidation(
-    selection,
-    createSelectionValidators(selection, catalogue, translations),
-    getSelectionFields(step, selection)
-  );
+  const [editing, setEditing] = useState(false);
+  const [isAdvancing, setIsAdvancing] = useState(false);
+  const startDateRef = useRef<HTMLInputElement>(null);
+  const advancePending = useRef(false);
+  const navigationVersion = useRef(0);
+
+  const form = useForm<EquipmentSelection>({
+    defaultValues: initialSelection,
+    mode: 'onTouched',
+    shouldUnregister: false,
+    resolver: createSelectionResolver(
+      catalogue,
+      translations,
+      () => startDateRef.current?.validity.badInput ?? false
+    )
+  });
+
+  const [category, machineSlug, configuration] = useWatch({
+    control: form.control,
+    name: ['category', 'machine', 'configuration']
+  });
+  const { touchedFields } = form.formState;
+
   const stepIndex = SELECTION_STEP_ORDER.indexOf(step);
   const hasPreviousStep = stepIndex > 0;
-  const isLastStep = stepIndex === SELECTION_STEP_ORDER.length - 1;
-
+  const isLastStep = step === SelectionStep.Review;
   const categories: EquipmentCategory[] = [
     ...new Map(
       catalogue.map(entry => [
@@ -80,96 +72,141 @@ export function useEquipmentSelection(
       ])
     ).values()
   ];
-  const machines = catalogue.filter(
-    entry => entry.category === selection.category
-  );
-  const machine = machines.find(entry => entry.slug === selection.machine);
-  const summary = machine
-    ? getSelectionSummary(locale, selection, machine, translations)
-    : [];
-  const message = createEnquiryMessage(
-    summary,
-    selection.acquisition,
-    machine?.isDemo ?? false,
-    translations
-  );
-
-  const updateField: UpdateSelectionField = (key, value) => {
-    setSelection(previous => ({ ...previous, [key]: value }));
-    if (key === 'acquisition' && value === AcquisitionMode.Purchase) {
-      validation.clearNativeValidity(['rentalDuration', 'startDate']);
-    }
-  };
+  const machines = catalogue.filter(entry => entry.category === category);
+  const machine = machines.find(entry => entry.slug === machineSlug);
 
   function goToStep(next: SelectionStep) {
-    setConfigurationDraft(null);
-    validation.reset();
+    navigationVersion.current += 1;
+    setEditing(false);
     setStep(next);
   }
 
   function previousStep() {
-    if (!hasPreviousStep) return;
-    const [previous] = SELECTION_STEP_ORDER.slice(stepIndex - 1);
+    const previous = SELECTION_STEP_ORDER[stepIndex - 1];
     if (previous) goToStep(previous);
   }
 
-  function chooseCategory(category: EquipmentSelection['category']) {
-    if (category !== selection.category) setConfigurationDraft(null);
-    setSelection(previous => selectCategory(previous, catalogue, category));
+  /**
+   * Revalidate touched fields after an equipment transition.
+   *
+   * Category and machine changes update dependent answers through setValues.
+   * Keep untouched fields quiet until blur or Continue.
+   *
+   * @param fields - Fields affected by the category or machine change.
+   */
+  function revalidateTouchedFields(fields: Array<keyof EquipmentSelection>) {
+    const fieldsToValidate = fields.filter(name => touchedFields[name]);
+    if (fieldsToValidate.length > 0) void form.trigger(fieldsToValidate);
+  }
+
+  function chooseCategory(nextCategory: EquipmentSelection['category']) {
+    if (nextCategory !== form.getValues('category')) setEditing(false);
+    navigationVersion.current += 1;
+    form.setValues(values => selectCategory(values, catalogue, nextCategory), {
+      shouldDirty: true
+    });
+    revalidateTouchedFields(['category', 'machine', 'configuration']);
   }
 
   function chooseMachine(slug: EquipmentSelection['machine']) {
-    if (slug !== selection.machine) setConfigurationDraft(null);
-    setSelection(previous => selectMachine(previous, catalogue, slug));
+    if (slug !== form.getValues('machine')) setEditing(false);
+    navigationVersion.current += 1;
+    form.setValues(values => selectMachine(values, catalogue, slug), {
+      shouldDirty: true
+    });
+    revalidateTouchedFields(['machine', 'configuration']);
   }
 
-  // Validate the visible step before advancing. The wizard focuses a returned
-  // invalid field; the shared hook controls when its error becomes visible.
-  function nextStep(form: HTMLFormElement) {
-    // Enter/Continue cannot silently discard or submit unconfirmed option edits.
-    if (configurationDraft) return;
-    const firstInvalid = validation.validate(form);
-    if (firstInvalid) return firstInvalid;
-    const [next] = SELECTION_STEP_ORDER.slice(stepIndex + 1);
-    if (next) goToStep(next);
+  /**
+   * Validate the active step without submitting the enquiry form.
+   *
+   * 1. Trigger the current step's fields, or all relevant answers before Review.
+   * 2. shouldTouch lets corrections revalidate under onTouched after Continue;
+   *    later fields remain untouched and the form's isSubmitted stays false.
+   * 3. A ref blocks repeated attempts immediately; isAdvancing drives the button.
+   * 4. Ignore results if navigation or equipment changed during validation.
+   * 5. Return the invalid field so the wizard mounts its step before focus.
+   *
+   * @returns The first invalid field and its step, or undefined when the
+   * attempt succeeds or is ignored.
+   */
+  async function nextStep() {
+    if (editing || advancePending.current || isLastStep) return;
+    advancePending.current = true;
+    setIsAdvancing(true);
+    const version = navigationVersion.current;
+    const next = SELECTION_STEP_ORDER[stepIndex + 1];
+    const values = form.getValues();
+    const stepsToValidate =
+      step === SelectionStep.Requirements ? SELECTION_STEP_ORDER : [step];
+    const fields = stepsToValidate.flatMap(id =>
+      getSelectionFields(id, values)
+    );
+
+    try {
+      const valid = await form.trigger(fields, { shouldTouch: true });
+      if (version !== navigationVersion.current) return;
+      if (valid) {
+        if (next) goToStep(next);
+        return;
+      }
+      for (const id of stepsToValidate) {
+        const field = getSelectionFields(id, values).find(
+          name => form.getFieldState(name).invalid
+        );
+        if (field) return { field, step: id };
+      }
+    } finally {
+      advancePending.current = false;
+      setIsAdvancing(false);
+    }
   }
 
   const customization: MachineCustomization = {
-    value: selection.configuration,
-    draft: configurationDraft,
+    value: configuration,
+    editing,
     onStart() {
-      setConfigurationDraft(selection.configuration);
+      navigationVersion.current += 1;
+      setEditing(true);
     },
-    onChange: setConfigurationDraft,
-    onApply() {
-      if (!machine || !isValidConfiguration(machine, configurationDraft))
-        return;
-      setSelection(previous => ({
-        ...previous,
-        configuration: configurationDraft
-      }));
-      setConfigurationDraft(null);
+    /**
+     * Apply the validated draft to the enquiry.
+     *
+     * 1. The editor calls this through draftForm.handleSubmit(customization.onApply).
+     * 2. setValue replaces the complete configuration (choices and extras);
+     *    the enquiry's other answers and initial defaults remain unchanged.
+     * 3. Dirty state compares with initial defaults; touched records Apply, and
+     *    validation refreshes configuration errors.
+     * 4. Closing the editor discards its separate RHF instance. The enquiry
+     *    is not submitted.
+     *
+     * @param value - Complete choices and extras accepted by the editor.
+     */
+    onApply(value) {
+      form.setValue('configuration', value, {
+        shouldDirty: true,
+        shouldTouch: true,
+        shouldValidate: true
+      });
+      setEditing(false);
     },
     onCancel() {
-      setConfigurationDraft(null);
+      setEditing(false);
     }
   };
 
   return {
+    form,
+    startDateRef,
     customization,
-    selection,
     step,
     stepIndex,
     hasPreviousStep,
     isLastStep,
-    errors: validation.errors,
-    validation,
+    isAdvancing,
     categories,
     machines,
     machine,
-    summary,
-    message,
-    updateField,
     goToStep,
     previousStep,
     chooseCategory,

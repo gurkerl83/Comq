@@ -2,24 +2,19 @@ import type { SupportedLocale } from '../../../lib/i18n/locales';
 import type { EquipmentEntry, EquipmentConfiguration } from '../types';
 import type { SelectorContent } from '../selector-content';
 
-/** Applied values and the explicit editing session for the selected machine. */
+/**
+ * Applied configuration and the lifecycle of its temporary editor.
+ */
 export type MachineCustomization = {
   /** Values already included in the enquiry. */
   value: EquipmentConfiguration;
-  /** Temporary values while customizing; null means read-only mode. */
-  draft: EquipmentConfiguration | null;
-  /**
-   * Begin editing the currently applied configuration.
-   */
+  /** Whether the separate configuration form is mounted. */
+  editing: boolean;
+  /** Begin an editing session seeded from the applied values. */
   onStart: () => void;
-  /**
-   * Replace the draft without changing the applied configuration.
-   * Create new objects or arrays for changed values; do not mutate existing ones.
-   */
-  onChange: (draft: EquipmentConfiguration) => void;
-  /** Validate and apply the temporary values, then leave edit mode. */
-  onApply: () => void;
-  /** Discard temporary edits. */
+  /** Replace the applied values after the editor validates them. */
+  onApply: (value: EquipmentConfiguration) => void;
+  /** Unmount the editor and discard its temporary values. */
   onCancel: () => void;
 };
 
@@ -39,20 +34,6 @@ export type SelectorQuery = {
   machine?: string | string[];
 };
 
-/**
- * A controlled choice reports the same value type that it receives.
- */
-export type ChoiceProps<TValue> = {
-  /** Parent-owned answer used to determine the checked option. */
-  value: TValue;
-  /** Feedback shown below the group and used to mark its options invalid. */
-  error?: string;
-  /** Reports a chosen answer for the parent to apply. */
-  onChange: (value: TValue) => void;
-  /** Legends, labels, and supporting text for the consuming choice component. */
-  translations: SelectorContent;
-};
-
 /** Label and feedback metadata linked to a native form control. */
 export type FieldDetails = {
   /** Connects the label to the control and prefixes generated message IDs. */
@@ -60,7 +41,7 @@ export type FieldDetails = {
   /** Visible text identifying the control. */
   label: string;
   /**
-   * Localized label hint; the native required attribute controls validity.
+   * Localized required/optional hint displayed alongside the label.
    */
   requirementLabel?: string;
   /** Supporting instructions included in the accessible description. */
@@ -79,6 +60,7 @@ export type WithoutClassName<Props> = Omit<Props, 'className'>;
  *
  * Preserve native attributes and event types, including ARIA. FieldDetails
  * adds the required id and label, plus optional help and errors. Each
- * component owns its styling through WithoutClassName.
+ * component owns its styling through WithoutClassName. Registration handlers
+ * and refs reach the native control; these components do not own form state.
  */
 export type NativeFieldProps<Props> = WithoutClassName<Props> & FieldDetails;

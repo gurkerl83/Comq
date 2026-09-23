@@ -143,17 +143,6 @@ export function selectMachine(
   };
 }
 
-type SelectionInputField = Exclude<
-  keyof EquipmentSelection,
-  'category' | 'machine' | 'configuration'
->;
-
-export type UpdateSelectionField<
-  Fields extends SelectionInputField = SelectionInputField
-> = <Key extends Fields>(key: Key, value: EquipmentSelection[Key]) => void;
-
-export type SelectionErrors = Partial<Record<keyof EquipmentSelection, string>>;
-
 /**
  * One formatted answer shared by Review and the WhatsApp enquiry.
  *

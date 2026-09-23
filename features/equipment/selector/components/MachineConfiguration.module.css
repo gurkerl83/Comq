@@ -1,8 +1,9 @@
 .configuration {
   /*
-   * Query this card's available width, including when cards sit side by side.
-   * inline-size means width in our horizontal writing mode; height still grows
-   * with the editor's content. It does not change the element's display mode.
+   * Establish the size container for the @container query below. inline-size
+   * means width in our horizontal writing mode, so specification rows stack
+   * when this container is at most 24rem wide, regardless of viewport width.
+   * Height still grows with the editor's content; the display mode is unchanged.
    */
   container-type: inline-size;
 }

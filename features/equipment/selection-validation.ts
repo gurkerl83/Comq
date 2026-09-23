@@ -12,8 +12,8 @@ import { SelectionStep } from './selection-steps';
 import type { SelectorContent } from './selector-content';
 
 /**
- * Build field rules from the current draft and catalogue. The shared form hook
- * applies them on blur, on edits after an error and when submitting the step.
+ * Build field rules from the current enquiry and catalogue. The form resolver
+ * applies them on blur, subsequent edits and explicit validation attempts.
  * Rules return messages without mutating answers or deciding navigation.
  */
 export function createSelectionValidators(
@@ -100,9 +100,14 @@ export function createSelectionValidators(
 }
 
 /**
- * Validate only the current step and its relevant fields, in display order.
- * Switching to purchase leaves rental values in the draft but excludes their
- * errors from rendering and from the checks that can block Continue.
+ * List the active fields for one step in display order.
+ *
+ * Rental fields participate only while renting; switching to purchase
+ * preserves their answers in the enquiry.
+ *
+ * @param step - Step whose fields will be checked.
+ * @param selection - Current answers that determine rental-field relevance.
+ * @returns Field names in focus order; Review has no additional fields.
  */
 export function getSelectionFields(
   step: SelectionStep,
