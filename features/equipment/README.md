@@ -16,6 +16,8 @@ Product pages display the model's baseline specifications and assigned gallery i
 
 The requirements step collects purchase/rental preference, quantity, country, project location, rental details and free-text notes. Purchase and rental are enquiry preferences; COMQ confirms availability and terms. There is currently no automatic suitability matching or compatibility engine for configurable builds.
 
+For form ownership, validation and the temporary customization editor, see [React Hook Form in the equipment selector](../../REACT_HOOK_FORM.md).
+
 ## Facts, options and requirements
 
 Machine specifications, equipment options and project requirements have distinct roles. The wizard captures project requirements in free-text notes; structured questions are proposed future work.

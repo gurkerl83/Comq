@@ -36,7 +36,7 @@ Keep `public/llms.txt` aligned with published content, contact details and suppo
 
 The sales pages (`/venta` and `/en/venta`) offer compact machine cards before the service details. Cards show the category, summary and first two specifications in catalogue order, then link to the full machine page. Keep those specifications ordered by their usefulness for a quick comparison. Demo equipment remains explicitly identified.
 
-`/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. Local React state retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
+`/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. React Hook Form retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
 
 The shared equipment navigation links back to the sales-page catalogue. Machine-page links use `?machine=...` to start at Machine with that model selected and its defaults ready to review. Missing or unknown machines start at equipment type. Change equipment returns to the equipment-type step and preserves the enquiry draft, including the visitor's purchase/rental preference and rental details.
 
@@ -101,6 +101,7 @@ Choose the existing `comq` project when linking. The CLI returns a preview URL; 
 ## Documentation
 
 - [Equipment catalogue and enquiry wizard](features/equipment/README.md) — current behaviour, data model, proposed development stages and decisions awaiting confirmation.
+- [React Hook Form in the equipment selector](REACT_HOOK_FORM.md) — form ownership, validation, customization and native controls.
 - [Content strategy](strategy/content-roadmap.md) — product comparisons, staged pickers, articles and LinkedIn presence.
 - [What we need from Alberto](strategy/alberto-first-inputs.md) — a short list of the first content inputs, in priority order.
 - [Artwork guide](design/README.md) — directory overview and shared image rendering.
