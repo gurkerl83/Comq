@@ -52,12 +52,7 @@ export function ReviewStep({
       );
       return {
         rows,
-        message: createEnquiryMessage(
-          rows,
-          selection.acquisition,
-          machine.isDemo,
-          translations
-        )
+        message: createEnquiryMessage(rows, selection.acquisition, translations)
       };
     }
   });

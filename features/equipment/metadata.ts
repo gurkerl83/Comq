@@ -12,5 +12,6 @@ export const getEquipmentMetadata = (
     equipment.name,
     equipment.summary
   ),
-  ...(equipment.isDemo && { robots: { index: false, follow: true } })
+  // Revisit this restriction when the catalogue is ready for search.
+  robots: { index: false, follow: true }
 });

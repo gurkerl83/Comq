@@ -11,9 +11,6 @@ import styles from './MachinePage.module.css';
 
 const CONTENT = {
   es: {
-    demo: 'Equipo de demostración',
-    demoNotice:
-      'Los modelos, las ilustraciones, las especificaciones y las opciones de esta demostración son ficticios. Sirven para probar el selector y no constituyen una oferta real de venta o alquiler.',
     model: 'Modelo',
     unconfirmed: 'Por confirmar con COMQ',
     noImage: 'Sin fotografía',
@@ -28,9 +25,7 @@ const CONTENT = {
     },
     application: 'Aplicación',
     specifications: 'Especificaciones',
-    demoSpecifications: 'Especificaciones ficticias de referencia',
     options: 'Opciones de equipo',
-    demoOptions: 'Opciones de demostración',
     defaultValue: 'De serie',
     extras: 'Equipamiento opcional',
     select: 'Preparar una consulta',
@@ -40,9 +35,6 @@ const CONTENT = {
     contactLabel: 'Conversar con COMQ por WhatsApp (abre otra pestaña)'
   },
   en: {
-    demo: 'Demonstration equipment',
-    demoNotice:
-      'The models, illustrations, specifications and options in this demonstration are fictional. They are for trying the selector and do not represent an actual sale or rental offer.',
     model: 'Model',
     unconfirmed: 'To be confirmed with COMQ',
     noImage: 'No photograph',
@@ -57,9 +49,7 @@ const CONTENT = {
     },
     application: 'Application',
     specifications: 'Specifications',
-    demoSpecifications: 'Fictional reference specifications',
     options: 'Equipment options',
-    demoOptions: 'Demonstration options',
     defaultValue: 'Default',
     extras: 'Optional equipment',
     select: 'Prepare an enquiry',
@@ -101,13 +91,6 @@ export function MachinePage({
 
   return (
     <article className={styles.page} aria-labelledby='equipment-title'>
-      {equipment.isDemo && (
-        <aside className={styles.notice} aria-labelledby='demo-label'>
-          <strong id='demo-label'>{content.demo}</strong>
-          <p>{content.demoNotice}</p>
-        </aside>
-      )}
-
       <div className={styles.hero}>
         <header>
           <p className={styles.category}>{equipment.categoryName}</p>
@@ -151,11 +134,7 @@ export function MachinePage({
           className={styles.section}
           aria-labelledby='equipment-specifications'
         >
-          <h2 id='equipment-specifications'>
-            {equipment.isDemo
-              ? content.demoSpecifications
-              : content.specifications}
-          </h2>
+          <h2 id='equipment-specifications'>{content.specifications}</h2>
           <dl className={styles.specifications}>
             {equipment.specifications.map(specification => (
               <div key={specification.label}>
@@ -169,9 +148,7 @@ export function MachinePage({
 
       {(equipment.options.length > 0 || equipment.extras.length > 0) && (
         <section className={styles.options} aria-labelledby='equipment-options'>
-          <h2 id='equipment-options'>
-            {equipment.isDemo ? content.demoOptions : content.options}
-          </h2>
+          <h2 id='equipment-options'>{content.options}</h2>
           <ul>
             {equipment.options.map(option => (
               <li key={option.id}>

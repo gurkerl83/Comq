@@ -43,7 +43,6 @@ export const createEquipmentCatalogue = (
       images: entry.images.map(image => ({
         ...image,
         alt: text.images[image.alt]
-      })),
-      isDemo: entry.isDemo
+      }))
     };
   });

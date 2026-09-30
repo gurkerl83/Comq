@@ -12,15 +12,6 @@
   color: var(--color-text-muted);
 }
 
-.demoNotice {
-  margin: 1.5rem 0 0;
-  padding: 0.875rem 1rem;
-  border-inline-start: 3px solid var(--color-accent);
-  color: var(--color-text-muted);
-  background: var(--color-surface);
-  font-size: var(--font-size-small);
-}
-
 @media (max-width: 640px) {
   .page {
     padding-right: 1.25rem;

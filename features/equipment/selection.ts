@@ -457,16 +457,10 @@ function formatSelectedExtras(
 export function createEnquiryMessage(
   rows: ReturnType<typeof getSelectionSummary>,
   acquisition: EquipmentSelection['acquisition'],
-  isDemo: boolean,
   translations: SelectorContent
 ) {
   const { message } = translations;
-  const blocks: string[] = [];
-
-  if (isDemo) {
-    blocks.push(`*${message.demoTitle}*\n${message.demoNotice}`);
-  }
-  blocks.push(message.introduction);
+  const blocks: string[] = [message.introduction];
 
   const sections: Array<{
     title: string;

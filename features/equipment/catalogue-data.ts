@@ -26,8 +26,7 @@ const DEMO_JUMBO_J1: EquipmentDefinition = {
     }
   ],
   extras: ['rear-camera', 'central-lubrication'],
-  images: DEMO_EQUIPMENT_IMAGES,
-  isDemo: true
+  images: DEMO_EQUIPMENT_IMAGES
 };
 
 /**
@@ -55,8 +54,7 @@ const DEMO_JUMBO_J2: EquipmentDefinition = {
     }
   ],
   extras: [],
-  images: DEMO_EQUIPMENT_IMAGES.slice(0, 3),
-  isDemo: true
+  images: DEMO_EQUIPMENT_IMAGES.slice(0, 3)
 };
 
 /**
@@ -72,8 +70,7 @@ const DEMO_SCOOPTRAM_S1: EquipmentDefinition = {
   ],
   options: [],
   extras: [],
-  images: DEMO_EQUIPMENT_IMAGES.slice(0, 4),
-  isDemo: true
+  images: DEMO_EQUIPMENT_IMAGES.slice(0, 4)
 };
 
 /**
@@ -89,15 +86,14 @@ const DEMO_DRILL_D1: EquipmentDefinition = {
   ],
   options: [],
   extras: [],
-  images: DEMO_EQUIPMENT_IMAGES.slice(0, 2),
-  isDemo: true
+  images: DEMO_EQUIPMENT_IMAGES.slice(0, 2)
 };
 
 /**
  * Fictional machine records keyed by their language-independent route slug.
  *
- * Add confirmed records with isDemo: false. Each key identifies the machine
- * in routes and translations; its facts do not repeat the slug.
+ * Each key identifies the machine in routes and translations; its facts do not
+ * repeat the slug.
  */
 export const EQUIPMENT = {
   'demo-jumbo-j1': DEMO_JUMBO_J1,

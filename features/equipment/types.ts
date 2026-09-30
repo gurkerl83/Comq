@@ -176,10 +176,6 @@ export type EquipmentEntry = {
    * Product photographs with localized descriptions, in display order.
    */
   images: GalleryImage[];
-  /**
-   * Identifies fictional records for demo notices and indexing rules.
-   */
-  isDemo: boolean;
 };
 
 /**
@@ -254,8 +250,4 @@ export type EquipmentDefinition = {
    * Image paths, dimensions and description keys in display order.
    */
   images: EquipmentImageDefinition[];
-  /**
-   * Identifies fictional records for demo notices and indexing rules.
-   */
-  isDemo: boolean;
 };
