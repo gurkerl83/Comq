@@ -34,7 +34,7 @@ Keep `public/llms.txt` aligned with published content, contact details and suppo
 
 ### Equipment selector
 
-The sales pages (`/venta` and `/en/venta`) offer compact machine cards before the service details. Cards show the category, summary and first two specifications in catalogue order, then link to the full machine page. Keep those specifications ordered by their usefulness for a quick comparison. Demo equipment remains explicitly identified.
+The sales pages (`/venta` and `/en/venta`) offer compact machine cards before the service details. Cards show the category, summary and first two specifications in catalogue order, then link to the full machine page. Keep those specifications ordered by their usefulness for a quick comparison. The current fixture names and descriptions identify the machines as fictional examples.
 
 `/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. React Hook Form retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
 
@@ -46,7 +46,7 @@ Purchase and Rental are enquiry preferences available for every machine. COMQ co
 
 The selected machine card offers inline **Customize** controls when the machine defines configurable choices or optional extras. Fixed specifications stay read-only. Configurable choices start at their defaults; a separate default hint appears in the card only when the selected answer differs from the default. Independent extras use checkboxes. Apply saves the temporary choices to the enquiry; Cancel, changing equipment or leaving the step discards unfinished edits. Continue is unavailable while customization is open. Applied choices survive Back/Continue and appear separately in the review and WhatsApp enquiry. Changing machines resets only machine-specific choices to the new defaults. Each optional extra toggles independently; none is a valid selection. Questions can be entered in the requirements notes.
 
-The fictional catalogue is explicitly labelled as a demo and does not represent real COMQ offers. The demo selector and machine-detail routes are marked `noindex` and intentionally excluded from the sitemap and `llms.txt` until real content is confirmed. To add real products later, update the specifications, `options` and `extras` in [the shared equipment catalogue](features/equipment/catalogue-data.ts), and add their translated text to the `equipment` sections of the [English](lib/i18n/dictionaries/en.ts) and [Spanish](lib/i18n/dictionaries/es.ts) dictionaries.
+The fictional catalogue does not represent real COMQ offers. Its names, descriptions and illustration alternative text identify the example content; all machines use the same display and enquiry logic. The selector and machine-detail routes generate localized page metadata with unconditional `noindex, follow` settings. Remove these restrictions explicitly when the catalogue is ready for search; adding a real record does not change indexing automatically. These routes are not currently listed in the sitemap or `llms.txt`; those discovery lists are maintained separately. To add real products later, update the specifications, `options` and `extras` in [the shared equipment catalogue](features/equipment/catalogue-data.ts), and add their translated text to the `equipment` sections of the [English](lib/i18n/dictionaries/en.ts) and [Spanish](lib/i18n/dictionaries/es.ts) dictionaries.
 
 ### Theme
 

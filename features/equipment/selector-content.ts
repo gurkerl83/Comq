@@ -7,7 +7,6 @@ const en = {
   title: 'Find equipment for your operation',
   introduction:
     'Explore equipment, choose a configuration and prepare your enquiry. You can go back at any time to adjust your selection.',
-  demo: 'Machines marked “Demo”, including their specifications and configurations, are fictional examples for trying the selector. They are not actual COMQ offers.',
   progress: 'Selection progress',
   steps: {
     [SelectionStep.Category]: {
@@ -73,8 +72,6 @@ const en = {
   notSpecified: 'Not specified',
   advice: 'Advice requested',
   message: {
-    demoTitle: 'DEMO ENQUIRY',
-    demoNotice: 'Fictional equipment — not an actual product offer.',
     introduction: 'Hello COMQ, I would like to discuss this equipment:',
     equipment: 'Equipment',
     options: 'Requested equipment options',
@@ -121,7 +118,6 @@ const es: SelectorContent = {
   title: 'Encuentra el equipo para tu operación',
   introduction:
     'Explora los equipos, elige una configuración y prepara tu consulta. Puedes volver a cualquier paso para ajustar tu selección.',
-  demo: 'Los equipos identificados como “Demo”, junto con sus especificaciones y configuraciones, son ejemplos ficticios para probar el selector. No representan ofertas reales de COMQ.',
   progress: 'Avance de la selección',
   steps: {
     [SelectionStep.Category]: {
@@ -188,8 +184,6 @@ const es: SelectorContent = {
   notSpecified: 'Sin especificar',
   advice: 'Asesoría solicitada',
   message: {
-    demoTitle: 'CONSULTA DE DEMOSTRACIÓN',
-    demoNotice: 'Equipos ficticios — no constituyen una oferta real.',
     introduction: 'Hola, COMQ. Quisiera consultar sobre este equipo:',
     equipment: 'Equipo',
     options: 'Opciones de equipo solicitadas',

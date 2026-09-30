@@ -27,9 +27,6 @@ export function EquipmentCatalogue({
     >
       <h2 id='equipment-catalogue-title'>{translations.title}</h2>
       <p className={styles.introduction}>{translations.introduction}</p>
-      {machines.some(machine => machine.isDemo) && (
-        <p className={styles.demoNotice}>{translations.demoNotice}</p>
-      )}
       <ul className={styles.machines}>
         {machines.map(machine => (
           <MachineBrowseCard

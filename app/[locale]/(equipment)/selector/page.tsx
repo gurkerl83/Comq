@@ -11,7 +11,6 @@ type LocalePageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: LocalePageProps) {
   const locale = await getRouteLocale(params);
-  const dictionary = await getDictionary(locale);
   const translations = getSelectorContent(locale);
   const metadata = createPageMetadata(
     locale,
@@ -19,13 +18,8 @@ export async function generateMetadata({ params }: LocalePageProps) {
     translations.title,
     translations.introduction
   );
-  if (
-    createEquipmentCatalogue(dictionary.equipment).every(
-      machine => machine.isDemo
-    )
-  ) {
-    metadata.robots = { index: false, follow: true };
-  }
+  // Revisit this restriction when the catalogue is ready for search.
+  metadata.robots = { index: false, follow: true };
   return metadata;
 }
 
@@ -55,9 +49,6 @@ export default async function Page({
     <article className={styles.page}>
       <h1 className={styles.heading}>{translations.title}</h1>
       <p className={styles.intro}>{translations.introduction}</p>
-      {catalogue.some(machine => machine.isDemo) && (
-        <p className={styles.demoNotice}>{translations.demo}</p>
-      )}
       <EquipmentSelector
         locale={locale}
         catalogue={catalogue}

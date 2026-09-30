@@ -3,19 +3,6 @@
   padding: 2rem 2rem var(--spacing-page-section);
 }
 
-.notice {
-  padding: 1rem 1.25rem;
-  border: var(--border-width) solid var(--color-border);
-  border-left: 3px solid var(--color-accent);
-  border-radius: var(--radius-small);
-  background: var(--color-surface);
-}
-
-.notice p {
-  margin: 0.25rem 0 0;
-  color: var(--color-text-muted);
-}
-
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;

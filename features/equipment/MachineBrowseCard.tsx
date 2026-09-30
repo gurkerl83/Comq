@@ -26,10 +26,7 @@ export function MachineBrowseCard({
 }: MachineBrowseCardProps) {
   return (
     <li className={styles.card}>
-      <p className={styles.category}>
-        {machine.categoryName}
-        {machine.isDemo && <span> · {translations.demo}</span>}
-      </p>
+      <p className={styles.category}>{machine.categoryName}</p>
       <h3 className={styles.name}>{machine.name}</h3>
       <p className={styles.summary}>{machine.summary}</p>
       <Specifications

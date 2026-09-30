@@ -12,15 +12,6 @@
   color: var(--color-text-muted);
 }
 
-.demoNotice {
-  margin: 0 0 1.5rem;
-  padding: 0.875rem 1rem;
-  border-inline-start: 3px solid var(--color-accent);
-  color: var(--color-text-muted);
-  background: var(--color-surface);
-  font-size: var(--font-size-small);
-}
-
 /*
  * MachineBrowseCard.module.css shares five rows across each adjacent pair.
  * This list owns the columns; each card passes its content into those rows.
