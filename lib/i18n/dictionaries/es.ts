@@ -17,6 +17,36 @@ const dictionary: Dictionary = {
     description:
       'Venta y alquiler de equipos y suministro de repuestos para la minería subterránea en Perú.'
   },
+  network: {
+    heading: 'Una red minera construida con experiencia',
+    companies: {
+      heading: 'Empresas mineras',
+      description: 'Personas que dirigen operaciones mineras',
+      caption: 'Necesidades de la operación'
+    },
+    suppliers: {
+      heading: 'Proveedores de equipos',
+      description: 'Personas que ofrecen soluciones en equipos',
+      caption: 'Equipos y alternativas'
+    },
+    roles: {
+      operations: 'Operaciones',
+      maintenance: 'Mantenimiento',
+      procurement: 'Compras',
+      sales: 'Ventas',
+      engineering: 'Ingeniería',
+      service: 'Servicio'
+    },
+    team: {
+      heading: 'Equipo COMQ',
+      experience: 'Experiencia en minería',
+      relationships: 'Relaciones profesionales'
+    },
+    foundation:
+      'La trayectoria previa de nuestro equipo en empresas del sector minero.',
+    outcome:
+      'Conectamos a las personas adecuadas para elegir el equipo adecuado.'
+  },
   company: {
     title: 'Empresa',
     heading: 'Acerca de COMQ',

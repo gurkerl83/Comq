@@ -28,6 +28,13 @@
   color: var(--color-text-muted);
 }
 
+/* The network diagrams follow the hero as their own band; each centers itself. */
+.network {
+  display: grid;
+  gap: 3rem;
+  padding: 0 2rem var(--spacing-large-section);
+}
+
 .serviceSection {
   margin: 0 auto;
   padding: var(--spacing-large-section) 2rem;
@@ -106,6 +113,10 @@
 
   .slogan {
     font-size: 1.75rem;
+  }
+
+  .network {
+    padding-inline: 1.25rem;
   }
 
   .serviceSection {

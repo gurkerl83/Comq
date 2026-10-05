@@ -1,0 +1,384 @@
+/*
+ * Size container for the artwork-grid unit below. Inline-size containment
+ * gives it no intrinsic width, so it needs an explicit one before the auto
+ * margins center it.
+ */
+.network {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/*
+ * The scene images carry the artwork's paper and panel colors, so the diagram
+ * keeps this palette in both themes. Dark mode frames it like other media.
+ *
+ * --artwork-unit is one unit of the 1536-unit artwork grid, so the wide
+ * layout scales every length with the container. The ring's radius equals one
+ * 202-unit contact row, as drawn by NetworkConnections.
+ */
+.card {
+  --artwork-unit: calc(100cqi / 1536);
+  --color-team-background: #f8f7f3;
+  --color-scene-background: #e9e7de;
+  --color-network-text: #20201d;
+  --color-network-text-muted: #5f5d57;
+  --color-network-border: #c4c1b8;
+  --color-network-connection: #ce9209;
+  --hub-radius: calc(var(--artwork-unit) * 202);
+  /* Each panel's outer side, and half of its inner dot zone. */
+  --panel-gap: calc(var(--artwork-unit) * 30);
+  --dot-zone: calc(var(--panel-gap) * 2);
+
+  color: var(--color-network-text);
+  background: light-dark(var(--color-background), var(--color-team-background));
+  border-radius: var(--radius-media);
+  /* An inset frame keeps the grid width equal to the container width. */
+  box-shadow: inset 0 0 0 var(--border-width) light-dark(transparent, var(--color-border));
+}
+
+.heading {
+  margin: 0;
+  padding: calc(var(--artwork-unit) * 35) calc(var(--artwork-unit) * 40) calc(var(--artwork-unit) * 28);
+  font-size: calc(var(--artwork-unit) * 64);
+  line-height: 1.1;
+}
+
+/*
+ * Columns: outer margin, companies panel, hub, suppliers panel, outer margin.
+ * Rows: panel headers, the three 202-unit contact rows the SVG spans, panel
+ * captions.
+ */
+.stage {
+  display: grid;
+  grid-template-columns:
+    calc(var(--artwork-unit) * 40) calc(var(--artwork-unit) * 476) 1fr calc(var(--artwork-unit) * 476) calc(var(--artwork-unit) * 40);
+  grid-template-rows: auto calc(var(--artwork-unit) * 606) auto;
+  grid-template-areas:
+    '. companies .          suppliers .'
+    '. companies hub        suppliers .'
+    '. companies foundation suppliers .';
+}
+
+.side {
+  display: grid;
+  grid-template-rows: subgrid;
+  background: var(--color-scene-background);
+}
+
+.companies {
+  grid-area: companies;
+}
+
+.suppliers {
+  grid-area: suppliers;
+}
+
+.sideHeader {
+  margin: 0 var(--panel-gap) calc(var(--artwork-unit) * 22);
+  padding: calc(var(--artwork-unit) * 19) 0 calc(var(--artwork-unit) * 14);
+  border-bottom: calc(var(--artwork-unit) * 1.5) solid var(--color-network-border);
+}
+
+.sideHeading {
+  margin: 0;
+  font-size: calc(var(--artwork-unit) * 34);
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.sideDescription {
+  margin: calc(var(--artwork-unit) * 4) 0 0;
+  font-size: calc(var(--artwork-unit) * 25);
+  line-height: 1.25;
+}
+
+.roles {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Each row is one column as wide as its scene, with the label above it,
+ * centred vertically in the row.
+ */
+.role {
+  display: grid;
+  align-content: center;
+}
+
+/*
+ * Each panel's outer side is one gap; its inner side is the dot zone, with the
+ * connection dot in its middle (NetworkConnections). The panels mirror each
+ * other: scenes sit at the outer edge, so spare width always faces the dots.
+ */
+.companies .role {
+  justify-content: start;
+  padding-inline: var(--panel-gap) var(--dot-zone);
+}
+
+.suppliers .role {
+  justify-content: end;
+  padding-inline: var(--dot-zone) var(--panel-gap);
+}
+
+.roleLabel {
+  margin-bottom: calc(var(--artwork-unit) * 8);
+  color: var(--color-network-text-muted);
+  font-size: calc(var(--artwork-unit) * 21);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Visible in the role-list variant's headers instead of above each scene. */
+.roleSummary {
+  margin: calc(var(--artwork-unit) * 6) 0 0;
+  color: var(--color-network-text-muted);
+  font-size: calc(var(--artwork-unit) * 23);
+  line-height: 1.3;
+}
+
+/* Keeps each scene's role name for screen readers in the role-list variant. */
+.hiddenLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Scenes keep their artwork size: --scene-width is the file's pixel width. */
+.scene {
+  width: calc(var(--artwork-unit) * var(--scene-width));
+  height: auto;
+}
+
+.sideCaption {
+  margin: calc(var(--artwork-unit) * 16) var(--panel-gap) 0;
+  padding: calc(var(--artwork-unit) * 14) 0 calc(var(--artwork-unit) * 18);
+  border-top: calc(var(--artwork-unit) * 1.5) solid var(--color-network-border);
+  font-size: calc(var(--artwork-unit) * 25);
+  line-height: 1.25;
+}
+
+.hub {
+  position: relative;
+  display: grid;
+  place-items: center;
+  grid-area: hub;
+}
+
+/* Centred on the hub, slightly raised like the artwork; sizes follow the ring
+   radius in both layouts. */
+.team {
+  position: relative;
+  top: calc(var(--hub-radius) * -0.03);
+  display: flex;
+  flex-direction: column;
+  width: calc(var(--hub-radius) * 1.72);
+  text-align: center;
+}
+
+.teamImage {
+  width: 100%;
+  height: auto;
+}
+
+.teamHeading {
+  margin: calc(var(--hub-radius) * 0.04) 0 0;
+  font-size: calc(var(--hub-radius) * 0.184);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.teamLines {
+  margin: calc(var(--hub-radius) * 0.02) 0 0;
+  font-size: calc(var(--hub-radius) * 0.114);
+  line-height: 1.15;
+}
+
+.teamLines span {
+  display: block;
+}
+
+.foundation {
+  grid-area: foundation;
+  max-width: calc(var(--artwork-unit) * 470);
+  margin: 0 auto;
+  padding-top: calc(var(--artwork-unit) * 4);
+  color: var(--color-network-text-muted);
+  font-size: calc(var(--artwork-unit) * 24);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* The hub's row, across the full width. */
+.connections {
+  grid-row: hub;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 100%;
+  color: var(--color-network-connection);
+  pointer-events: none;
+}
+
+.stackedConnections {
+  display: none;
+}
+
+.outcome {
+  margin: calc(var(--artwork-unit) * 15) calc(var(--artwork-unit) * 40) 0;
+  padding: calc(var(--artwork-unit) * 20) 0 calc(var(--artwork-unit) * 28);
+  border-top: calc(var(--artwork-unit) * 1.5) solid var(--color-network-text-muted);
+  font-size: calc(var(--artwork-unit) * 32);
+  line-height: 1.25;
+}
+
+/*
+ * At the site's shared mobile breakpoint, stack the panels and fan the
+ * connections vertically.
+ */
+@media (max-width: 640px) {
+  .card {
+    padding: 1.25rem;
+  }
+
+  .heading {
+    padding: 0 0 1rem;
+    font-size: var(--font-size-section-title);
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .side {
+    display: block;
+    padding: 1.25rem;
+  }
+
+  .sideHeader {
+    margin: 0 0 1rem;
+    padding: 0 0 0.75rem;
+    border-bottom-width: var(--border-width);
+  }
+
+  .sideHeading {
+    font-size: 1.125rem;
+  }
+
+  .sideDescription {
+    margin-top: 0.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .roleSummary {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  /*
+   * Each side's three roles stay in one row. Subgrid rows put all labels on
+   * one line above all three scenes, even when a long label wraps.
+   */
+  .roles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    column-gap: 0.5rem;
+  }
+
+  .companies .role,
+  .suppliers .role {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+  }
+
+  /* Long labels break, hyphenated where supported, instead of overlapping. */
+  .roleLabel {
+    align-self: end;
+    margin-bottom: 0.375rem;
+    font-size: 0.625rem;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+
+  .scene {
+    width: 100%;
+    max-width: calc(var(--scene-width) * 1px);
+  }
+
+  .sideCaption {
+    margin: 1.25rem 0 0;
+    padding: 0.75rem 0 0;
+    border-top-width: var(--border-width);
+    font-size: 0.9375rem;
+  }
+
+  /* The hub area is its own container: the team text scales with it. */
+  .hub {
+    --hub-radius: 34cqi;
+
+    container-type: inline-size;
+    width: min(100%, 22rem);
+    margin-inline: auto;
+    aspect-ratio: 200 / 174;
+  }
+
+  /*
+   * Bands for the outer dots, 21 of the hub's 200 units; the dots sit in their
+   * middle (NetworkConnections). Percentages here resolve against the stage
+   * width, like the hub's width.
+   */
+  .companies {
+    padding-bottom: calc(min(100%, 22rem) * 21 / 200);
+  }
+
+  .suppliers {
+    padding-top: calc(min(100%, 22rem) * 21 / 200);
+  }
+
+  .teamLines {
+    font-size: max(0.75rem, calc(var(--hub-radius) * 0.114));
+  }
+
+  .stackedConnections {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    color: var(--color-network-connection);
+  }
+
+  .connections {
+    display: none;
+  }
+
+  .foundation {
+    max-width: 30rem;
+    margin: 1.25rem auto 0;
+    padding: 0;
+    font-size: 0.9375rem;
+  }
+
+  .outcome {
+    margin: 1.25rem 0 0;
+    padding: 1rem 0 0;
+    border-top-width: var(--border-width);
+    font-size: 1rem;
+  }
+}

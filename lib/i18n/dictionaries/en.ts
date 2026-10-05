@@ -17,6 +17,36 @@ const dictionary: Dictionary = {
     description:
       'Equipment sales, rentals and spare parts for underground mining in Peru.'
   },
+  network: {
+    heading: 'A mining network built on experience',
+    companies: {
+      heading: 'Mining companies',
+      description: 'People who run mining operations',
+      caption: 'Operational needs'
+    },
+    suppliers: {
+      heading: 'Equipment suppliers',
+      description: 'People who provide equipment solutions',
+      caption: 'Equipment and options'
+    },
+    roles: {
+      operations: 'Operations',
+      maintenance: 'Maintenance',
+      procurement: 'Procurement',
+      sales: 'Sales',
+      engineering: 'Engineering',
+      service: 'Service'
+    },
+    team: {
+      heading: 'COMQ team',
+      experience: 'Mining experience',
+      relationships: 'Professional relationships'
+    },
+    foundation:
+      'Our team’s prior professional experience with companies in the mining sector.',
+    outcome:
+      'We connect the right people to help you choose the right equipment.'
+  },
   company: {
     title: 'Company',
     heading: 'About COMQ',

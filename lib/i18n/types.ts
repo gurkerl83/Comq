@@ -82,6 +82,47 @@ export type EquipmentContent = {
   images: Record<EquipmentImageKey, string>;
 };
 
+/**
+ * Contact roles shown in the mining network diagram.
+ */
+export type NetworkRoleId =
+  | 'operations'
+  | 'maintenance'
+  | 'procurement'
+  | 'sales'
+  | 'engineering'
+  | 'service';
+
+/**
+ * Heading, description and closing caption for one side of the network.
+ */
+type NetworkSideText = {
+  heading: string;
+  description: string;
+  caption: string;
+};
+
+/**
+ * Text for the mining network diagram. The component owns its layout,
+ * artwork and which roles belong to each side.
+ */
+export type NetworkContent = {
+  heading: string;
+  companies: NetworkSideText;
+  suppliers: NetworkSideText;
+  roles: Record<NetworkRoleId, string>;
+  team: {
+    heading: string;
+    experience: string;
+    relationships: string;
+  };
+  /**
+   * Explains that the team's earlier careers built the network.
+   */
+  foundation: string;
+  outcome: string;
+};
+
 export interface Dictionary {
   theme: {
     switchToLight: string;
@@ -98,6 +139,7 @@ export interface Dictionary {
     slogan: string;
     description: string;
   };
+  network: NetworkContent;
   company: {
     title: string;
     heading: string;

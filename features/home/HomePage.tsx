@@ -14,6 +14,7 @@ import { ArrowRightIcon } from '../site/icons';
 import { QuoteInvitation } from '../site/QuoteInvitation';
 import { Link } from '../../components/Link';
 import styles from './HomePage.module.css';
+import { MiningNetwork } from './MiningNetwork';
 import { ServiceImagePlaceholder } from './ServiceImagePlaceholder';
 
 export function HomePage({
@@ -56,6 +57,9 @@ export function HomePage({
           <p className={styles.description}>{dictionary.home.description}</p>
         </div>
       </section>
+      <div className={styles.network}>
+        <MiningNetwork content={dictionary.network} />
+      </div>
       <CompanyLogoStrip catchphrase={dictionary.experience.catchphrase} />
       {services.map(service => (
         <section
