@@ -73,7 +73,6 @@ function NetworkSide({
               height={160}
               alt=''
               unoptimized
-              sizes='(max-width: 40rem) 100vw, 26rem'
             />
           </li>
         ))}
@@ -134,7 +133,6 @@ export function MiningNetwork({
                 height={180}
                 alt=''
                 unoptimized
-                sizes='(max-width: 40rem) 60vw, 18rem'
               />
               <h3 className={styles.teamHeading}>{content.team.heading}</h3>
               <p className={styles.teamLines}>
