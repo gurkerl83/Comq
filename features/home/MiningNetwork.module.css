@@ -47,8 +47,8 @@
 
 /*
  * Columns: outer margin, companies panel, hub, suppliers panel, outer margin.
- * Rows: panel headers, the three 202-unit contact rows the SVG spans, panel
- * captions.
+ * Rows: panel headers, the three 202-unit contact rows the SVG spans, and the
+ * foundation note.
  */
 .stage {
   display: grid;
@@ -162,14 +162,6 @@
 .scene {
   width: 100%;
   height: auto;
-}
-
-.sideCaption {
-  margin: calc(var(--artwork-unit) * 16) var(--panel-gap) 0;
-  padding: calc(var(--artwork-unit) * 14) 0 calc(var(--artwork-unit) * 18);
-  border-top: calc(var(--artwork-unit) * 1.5) solid var(--color-network-border);
-  font-size: calc(var(--artwork-unit) * 25);
-  line-height: 1.25;
 }
 
 .hub {
@@ -345,13 +337,6 @@
     line-height: 1.15;
     hyphens: auto;
     overflow-wrap: anywhere;
-  }
-
-  .sideCaption {
-    margin: 1.25rem 0 0;
-    padding: 0.75rem 0 0;
-    border-top-width: var(--border-width);
-    font-size: 0.9375rem;
   }
 
   /* The hub area is its own container: the team text scales with it. */

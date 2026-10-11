@@ -94,12 +94,11 @@ export type NetworkRoleId =
   | 'service';
 
 /**
- * Heading, description and closing caption for one side of the network.
+ * Heading and description for one side of the network.
  */
 type NetworkSideText = {
   heading: string;
   description: string;
-  caption: string;
 };
 
 /**

@@ -21,13 +21,11 @@ const dictionary: Dictionary = {
     heading: 'Una red minera construida con experiencia',
     companies: {
       heading: 'Empresas mineras',
-      description: 'Personas que dirigen operaciones mineras',
-      caption: 'Necesidades de la operación'
+      description: 'Personas que dirigen operaciones mineras'
     },
     suppliers: {
       heading: 'Proveedores de equipos',
-      description: 'Personas que ofrecen soluciones en equipos',
-      caption: 'Equipos y alternativas'
+      description: 'Personas que ofrecen soluciones en equipos'
     },
     roles: {
       operations: 'Operaciones',

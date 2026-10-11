@@ -21,13 +21,11 @@ const dictionary: Dictionary = {
     heading: 'A mining network built on experience',
     companies: {
       heading: 'Mining companies',
-      description: 'People who run mining operations',
-      caption: 'Operational needs'
+      description: 'People who run mining operations'
     },
     suppliers: {
       heading: 'Equipment suppliers',
-      description: 'People who provide equipment solutions',
-      caption: 'Equipment and options'
+      description: 'People who provide equipment solutions'
     },
     roles: {
       operations: 'Operations',

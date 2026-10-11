@@ -77,7 +77,6 @@ function NetworkSide({
           </li>
         ))}
       </ul>
-      {/* <p className={styles.sideCaption}>{text.caption}</p> */}
     </div>
   );
 }
