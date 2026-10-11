@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import Image from 'next/image';
 
 import type { NetworkContent, NetworkRoleId } from '../../lib/i18n/types';
@@ -11,8 +10,6 @@ import { NetworkConnections } from './NetworkConnections';
  */
 export type MiningNetworkVariant = 'labels' | 'roleList';
 
-/** A scene file's pixel size. */
-type Size = { width: number; height: number };
 type Side = {
   id: 'companies' | 'suppliers';
   roles: [NetworkRoleId, NetworkRoleId, NetworkRoleId];
@@ -28,25 +25,14 @@ const suppliers: Side = {
   roles: ['sales', 'engineering', 'service']
 };
 
-/**
- * Scene artwork in `public/images/company/network/`, one file per role named
- * after it and shared by both variants. Sizes are the files' pixel dimensions.
- */
-const sceneFolder = '/images/company/network';
-const scenes: Record<NetworkRoleId, Size> = {
-  operations: { width: 359, height: 154 },
-  maintenance: { width: 389, height: 166 },
-  procurement: { width: 362, height: 156 },
-  sales: { width: 386, height: 153 },
-  engineering: { width: 348, height: 165 },
-  service: { width: 363, height: 160 }
-};
-
-/** Both variants show the same smiling COMQ team in the hub. */
-const team = {
-  src: '/images/company/network/comq-team.png',
-  width: 346,
-  height: 195
+/** Transparent scene assets served from public for both layout variants. */
+const scenes: Record<NetworkRoleId, string> = {
+  operations: '/images/company/network/operations-transparent.png',
+  maintenance: '/images/company/network/maintenance-transparent.png',
+  procurement: '/images/company/network/procurement-transparent.png',
+  sales: '/images/company/network/sales-transparent.png',
+  engineering: '/images/company/network/engineering-transparent.png',
+  service: '/images/company/network/service-transparent.png'
 };
 
 function NetworkSide({
@@ -68,7 +54,9 @@ function NetworkSide({
         {/* Screen readers hear each role in the list below instead. */}
         {roleList && (
           <p className={styles.roleSummary} aria-hidden='true'>
-            {side.roles.map(role => content.roles[role]).join(' · ')}
+            {side.roles.map(role => (
+              <span key={role}>• {content.roles[role]}</span>
+            ))}
           </p>
         )}
       </div>
@@ -80,17 +68,17 @@ function NetworkSide({
             </span>
             <Image
               className={styles.scene}
-              style={{ '--scene-width': scenes[role].width } as CSSProperties}
-              src={`${sceneFolder}/${role}.png`}
+              src={scenes[role]}
+              width={360}
+              height={160}
               alt=''
-              width={scenes[role].width}
-              height={scenes[role].height}
+              unoptimized
               sizes='(max-width: 40rem) 100vw, 26rem'
             />
           </li>
         ))}
       </ul>
-      <p className={styles.sideCaption}>{text.caption}</p>
+      {/* <p className={styles.sideCaption}>{text.caption}</p> */}
     </div>
   );
 }
@@ -102,8 +90,8 @@ function NetworkSide({
  *    All text comes from the dictionary, so both languages share the
  *    diagram. The scene images are decorative: each role's name, visible or
  *    visually hidden depending on the variant, says what its scene shows.
- *    Their paper and panel backgrounds are part of the artwork, so the
- *    diagram keeps that palette in both themes.
+ *    Transparent artwork lets CSS supply the panel backgrounds. The drawings
+ *    retain their opaque object fills and the diagram's palette in both themes.
  *
  * 2. Layouts
  *    One document order serves both layouts: companies, COMQ team,
@@ -122,7 +110,11 @@ export function MiningNetwork({
 }) {
   const headingId = `mining-network-${variant}`;
   return (
-    <section className={styles.network} aria-labelledby={headingId}>
+    <section
+      className={styles.network}
+      data-variant={variant}
+      aria-labelledby={headingId}
+    >
       <div className={styles.card}>
         <h2 className={styles.heading} id={headingId}>
           {content.heading}
@@ -137,10 +129,11 @@ export function MiningNetwork({
             <div className={styles.team}>
               <Image
                 className={styles.teamImage}
-                src={team.src}
+                src='/images/company/network/comq-team-transparent.png'
+                width={360}
+                height={180}
                 alt=''
-                width={team.width}
-                height={team.height}
+                unoptimized
                 sizes='(max-width: 40rem) 60vw, 18rem'
               />
               <h3 className={styles.teamHeading}>{content.team.heading}</h3>

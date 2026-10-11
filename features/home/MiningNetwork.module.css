@@ -11,8 +11,8 @@
 }
 
 /*
- * The scene images carry the artwork's paper and panel colors, so the diagram
- * keeps this palette in both themes. Dark mode frames it like other media.
+ * CSS supplies the backgrounds behind the transparent artwork, keeping this
+ * palette in both themes. Dark mode frames the diagram like other media.
  *
  * --artwork-unit is one unit of the 1536-unit artwork grid, so the wide
  * layout scales every length with the container. The ring's radius equals one
@@ -21,7 +21,7 @@
 .card {
   --artwork-unit: calc(100cqi / 1536);
   --color-team-background: #f8f7f3;
-  --color-scene-background: #e9e7de;
+  --color-scene-background: #e9e7df;
   --color-network-text: #20201d;
   --color-network-text-muted: #5f5d57;
   --color-network-border: #c4c1b8;
@@ -102,45 +102,50 @@
 }
 
 /*
- * Each row is one column as wide as its scene, with the label above it,
- * centred vertically in the row.
+ * Label and image share a column that fills the padded row,
+ * with their content centred vertically.
  */
 .role {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: center;
 }
 
 /*
  * Each panel's outer side is one gap; its inner side is the dot zone, with the
- * connection dot in its middle (NetworkConnections). The panels mirror each
- * other: scenes sit at the outer edge, so spare width always faces the dots.
+ * connection dot in its middle (NetworkConnections). Mirrored padding
+ * determines the label and image edges on both panels.
  */
 .companies .role {
-  justify-content: start;
   padding-inline: var(--panel-gap) var(--dot-zone);
 }
 
 .suppliers .role {
-  justify-content: end;
   padding-inline: var(--dot-zone) var(--panel-gap);
 }
 
 .roleLabel {
-  margin-bottom: calc(var(--artwork-unit) * 8);
+  margin-bottom: calc(var(--artwork-unit) * 5);
   color: var(--color-network-text-muted);
   font-size: calc(var(--artwork-unit) * 21);
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 /* Visible in the role-list variant's headers instead of above each scene. */
 .roleSummary {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.75em;
   margin: calc(var(--artwork-unit) * 6) 0 0;
   color: var(--color-network-text-muted);
-  font-size: calc(var(--artwork-unit) * 23);
+  font-size: 1rem;
   line-height: 1.3;
+}
+
+.roleSummary > span {
+  white-space: nowrap;
 }
 
 /* Keeps each scene's role name for screen readers in the role-list variant. */
@@ -153,9 +158,9 @@
   white-space: nowrap;
 }
 
-/* Scenes keep their artwork size: --scene-width is the file's pixel width. */
+/* Fill the padded row while preserving each scene's aspect ratio. */
 .scene {
-  width: calc(var(--artwork-unit) * var(--scene-width));
+  width: 100%;
   height: auto;
 }
 
@@ -241,6 +246,26 @@
   line-height: 1.25;
 }
 
+/* Align headings, descriptions and role lists across the desktop panels. */
+@media (width > 640px) {
+  .network[data-variant='roleList'] .stage {
+    grid-template-rows: repeat(3, auto) calc(var(--artwork-unit) * 606) auto;
+    grid-template-areas:
+      '. companies .          suppliers .'
+      '. companies .          suppliers .'
+      '. companies .          suppliers .'
+      '. companies hub        suppliers .'
+      '. companies foundation suppliers .';
+  }
+
+  .network[data-variant='roleList'] .sideHeader {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    align-items: start;
+  }
+}
+
 /*
  * At the site's shared mobile breakpoint, stack the panels and fan the
  * connections vertically.
@@ -297,11 +322,19 @@
 
   .companies .role,
   .suppliers .role {
-    display: grid;
-    grid-row: span 2;
+    grid-row: span 2; /* Extend across two rows: e.g. row 1 (label) and row 2 (image). */
     grid-template-rows: subgrid;
-    grid-template-columns: minmax(0, 1fr);
     padding: 0;
+  }
+
+  /* The role-list variant needs only one image row. */
+  .network[data-variant='roleList'] .roles {
+    grid-template-rows: auto;
+  }
+
+  .network[data-variant='roleList'] .role {
+    grid-row: auto;
+    grid-template-rows: auto;
   }
 
   /* Long labels break, hyphenated where supported, instead of overlapping. */
@@ -310,14 +343,8 @@
     margin-bottom: 0.375rem;
     font-size: 0.625rem;
     line-height: 1.15;
-    letter-spacing: 0.02em;
     hyphens: auto;
     overflow-wrap: anywhere;
-  }
-
-  .scene {
-    width: 100%;
-    max-width: calc(var(--scene-width) * 1px);
   }
 
   .sideCaption {
