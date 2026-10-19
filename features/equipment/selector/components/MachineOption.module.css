@@ -22,12 +22,10 @@
  *    Four is the number of rows, not a requirement that their heights match.
  * 3. A longer description enlarges row 2 for both cards, so both specification
  *    blocks start at row 3. Heights adjust with the text and available width.
- * 4. ../controls/RadioOption.module.css (.sharedRows and its text span) passes
- *    rows 1 and 2 through the radio label and text wrapper to name/description.
+ * 4. The title occupies row 1 directly; the description spans the
+ *    full content width in row 2.
  *
- * Customize occupies a separate column in row 1, outside the radio label.
- * Column subgrids reserve that space beside the name while letting the
- * description span the full content width in row 2.
+ * Customize occupies a separate column beside the title in row 1.
  * Row 3 contains specifications, extras and Apply/Cancel; its individual entries do
  * not share rows across cards. Later pairs of cards get their own four rows.
  * If the card's sections change, update the row spans and this map together.
@@ -36,21 +34,22 @@
   display: grid;
   grid-row: span 4;
   grid-template-rows: subgrid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
   column-gap: 0.875rem;
   padding: 1.25rem;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-media);
   background: var(--color-background);
+  cursor: pointer;
 }
 
-.option:has(> label:hover),
-.option:has(> label input:checked) {
+.option:hover,
+.option[aria-current='true'] {
   border-color: var(--color-accent);
 }
 
-.option:has(> label input:checked) {
+.option[aria-current='true'] {
   box-shadow: inset 0 0 0 1px var(--color-accent);
 }
 
@@ -66,17 +65,33 @@
   text-decoration: underline;
 }
 
-.option > label {
+.title {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.option:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.description {
   grid-column: 1 / -1;
-  grid-row: 1 / span 2;
+  grid-row: 2;
+  margin: 0;
+  color: var(--color-text-muted);
 }
 
 .option:has(.customize) {
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
 }
 
 .customize {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 1;
   align-self: center;
   min-height: 44px;
@@ -108,8 +123,7 @@
   .option {
     /*
      * Match .choices switching to one column in RadioGroup.module.css.
-     * Each card now creates its own content-sized rows. The label/text
-     * subgrids still work inside that card, without sharing with other cards.
+     * Each card now creates its own content-sized rows for its four sections.
      */
     grid-row: auto;
     grid-template-rows: none;

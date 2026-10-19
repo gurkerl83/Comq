@@ -29,7 +29,7 @@
  * At 640px and below, choices stack and each machine card sizes its own rows.
  *
  * Full layout map: ../components/MachineOption.module.css
- * Nested label/text alignment: RadioOption.module.css (.sharedRows)
+ * Machine card titles and descriptions occupy the shared rows directly.
  */
 .choices {
   display: grid;

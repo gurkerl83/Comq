@@ -1,5 +1,10 @@
 import type { ReactNode, Ref } from 'react';
-import { useFormContext, useFormState, useWatch } from 'react-hook-form';
+import {
+  useController,
+  useFormContext,
+  useFormState,
+  useWatch
+} from 'react-hook-form';
 
 import { hasError } from '../../../../lib/forms/errors';
 import type { SupportedLocale } from '../../../../lib/i18n/locales';
@@ -41,7 +46,7 @@ export function MachineStep({
   customization,
   customizationRef
 }: MachineStepProps) {
-  const { control, register } = useFormContext<EquipmentSelection>();
+  const { control } = useFormContext<EquipmentSelection>();
 
   const selectedMachineSlug = useWatch({ control, name: 'machine' });
   const { errors } = useFormState({
@@ -50,8 +55,10 @@ export function MachineStep({
   });
 
   // The wizard handles machine changes together with configuration resets.
-  // Keep RHF's native registration and blur handling.
-  const { ref, onBlur } = register('machine');
+  // Keep RHF's focus and blur handling for the selectable card.
+  const {
+    field: { ref, onBlur }
+  } = useController({ control, name: 'machine' });
 
   const machineError = errors.machine?.message;
   const configurationError = errors.configuration?.message;
@@ -95,7 +102,7 @@ export function MachineStep({
           checked={selectedMachineSlug === entry.slug}
           invalid={hasError(machineError)}
           onChange={() => onChange(entry.slug)}
-          inputRef={ref}
+          selectionRef={ref}
           onBlur={onBlur}
           customizationRef={
             selectedMachineSlug === entry.slug ? customizationRef : undefined

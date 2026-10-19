@@ -1,4 +1,10 @@
-import { useEffect, useRef, type ComponentPropsWithRef, type Ref } from 'react';
+import {
+  useEffect,
+  useRef,
+  type KeyboardEvent,
+  type MouseEvent,
+  type Ref
+} from 'react';
 
 import {
   createHrefForLocale,
@@ -7,10 +13,21 @@ import {
 import { Link } from '../../../../components/Link';
 import type { EquipmentEntry } from '../../types';
 import type { SelectorContent } from '../../selector-content';
-import { RadioOption } from '../controls/RadioOption';
 import type { MachineCustomization } from '../types';
 import { MachineConfiguration } from './MachineConfiguration';
 import styles from './MachineOption.module.css';
+
+/** Accept clicks and Enter/Space from the focused card itself. */
+function handleCardActivation(
+  event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+): boolean {
+  if (!('key' in event)) return true;
+  if (event.target !== event.currentTarget) return false;
+  if (event.key !== 'Enter' && event.key !== ' ') return false;
+
+  event.preventDefault();
+  return true;
+}
 
 type MachineOptionProps = {
   locale: SupportedLocale;
@@ -19,13 +36,13 @@ type MachineOptionProps = {
   invalid: boolean;
   onChange: () => void;
   /**
-   * Registers the actual radio for validation focus without owning its transition.
+   * Registers the selectable card for validation focus.
    */
-  inputRef?: ComponentPropsWithRef<'input'>['ref'];
+  selectionRef?: Ref<HTMLDivElement>;
   /**
-   * Reports native radio blur to the enquiry form.
+   * Reports card blur to the enquiry form.
    */
-  onBlur?: ComponentPropsWithRef<'input'>['onBlur'];
+  onBlur?: () => void;
   /**
    * Allows aggregate configuration errors to focus the selected Customize button.
    */
@@ -45,7 +62,7 @@ export function MachineOption({
   checked,
   invalid,
   onChange,
-  inputRef,
+  selectionRef,
   onBlur,
   customizationRef,
   configurationError,
@@ -53,6 +70,8 @@ export function MachineOption({
   customization
 }: MachineOptionProps) {
   const editing = customization?.editing ?? false;
+  const titleId = `machine-${entry.slug}-title`;
+  const summaryId = `machine-${entry.slug}-summary`;
   const customizeButton = useRef<HTMLButtonElement>(null);
   const wasEditing = useRef(false);
   useEffect(() => {
@@ -63,21 +82,38 @@ export function MachineOption({
     wasEditing.current = editing;
   }, [editing, checked]);
 
+  function selectCard(
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+  ) {
+    if (!handleCardActivation(event)) return;
+    if (checked) return;
+    event.currentTarget.focus({ preventScroll: true });
+    onChange();
+  }
+
   return (
-    <div className={styles.option}>
-      <RadioOption
-        ref={inputRef}
-        name='machine'
-        value={entry.slug}
-        checked={checked}
-        onChange={onChange}
-        onBlur={onBlur}
-        required
-        invalid={invalid}
-        label={entry.name}
-        description={entry.summary}
-        appearance='sharedRows'
-      />
+    <div
+      ref={selectionRef}
+      className={styles.option}
+      role='group'
+      tabIndex={0}
+      aria-current={checked || undefined}
+      aria-invalid={invalid}
+      aria-labelledby={titleId}
+      aria-describedby={invalid ? `${summaryId} machine-error` : summaryId}
+      aria-keyshortcuts='Enter Space'
+      onClick={selectCard}
+      onKeyDown={selectCard}
+      onBlur={event => {
+        if (event.target === event.currentTarget) onBlur?.();
+      }}
+    >
+      <span id={titleId} className={styles.title}>
+        {entry.name}
+      </span>
+      <p id={summaryId} className={styles.description}>
+        {entry.summary}
+      </p>
       {customization &&
         (entry.options.length > 0 || entry.extras.length > 0) && (
           <button
@@ -111,6 +147,7 @@ export function MachineOption({
         />
       </div>
       <Link
+        onClick={event => event.stopPropagation()}
         className={styles.detailLink}
         href={createHrefForLocale(locale, `/equipos/${entry.slug}`)}
         target='_blank'
