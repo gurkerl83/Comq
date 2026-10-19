@@ -57,6 +57,7 @@
   grid-row: 1 / span 2;
   grid-template-rows: subgrid;
   grid-template-columns: subgrid;
+  row-gap: inherit;
   min-width: 0;
 }
 
