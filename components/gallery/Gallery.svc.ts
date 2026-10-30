@@ -28,6 +28,22 @@ export type GalleryLabels = {
   image: string;
 };
 
+/** The photographs and interface text that every part of the gallery shows. */
+export type GalleryContent = {
+  /** Ordered photographs; the gallery never changes this collection. */
+  images: GalleryImage[];
+  /** Interface text already resolved to the page's language. */
+  labels: GalleryLabels;
+};
+
+/** The photograph the viewer shows, and a way to show another. */
+export type GallerySelection = {
+  /** Index of the photograph the viewer shows, or null while it is closed. */
+  activeIndex: number | null;
+  /** Shows the photograph at this index in the viewer. */
+  onSelect: (index: number) => void;
+};
+
 /** Reserve the fourth cell for a count when the collection exceeds four images. */
 export function getGalleryLayout(imageCount: number) {
   return {
