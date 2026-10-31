@@ -1,9 +1,15 @@
+/* The strip scrolls sideways without a visible scrollbar.
+   1. Its moving bar made the glide to the current thumbnail look like the
+      whole viewer scrolling.
+   2. Swiping, the trackpad and Shift with the mouse wheel still scroll it,
+      and the arrows and keys bring the current thumbnail into view. */
 .thumbnails {
   display: flex;
   flex-shrink: 0;
   gap: 0.5rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
+  scrollbar-width: none;
   padding: 0.75rem 1rem;
   border-top: var(--border-width) solid var(--color-border);
 }
