@@ -10,6 +10,13 @@
   border-radius: var(--radius-media);
   background: var(--color-background);
   color: var(--color-text);
+
+  /* Nothing inside the viewer can be selected.
+     1. A quick double-click on an arrow would otherwise select the image
+        and the thumbnails, which browsers tint with the selection colour.
+     2. Safari still needs the -webkit- prefix. */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .viewer[open] {
