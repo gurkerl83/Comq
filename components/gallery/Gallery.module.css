@@ -55,13 +55,6 @@
       color-mix(in srgb, var(--color-border) 85%, var(--color-text)));
 }
 
-/* No focus ring on tiles; globals.css would draw one 5px outside. As the
-   outline is also the band's outer half, a focused tile under the mouse
-   shows a 1px band, typically right after the viewer closes. */
-.band:focus-visible {
-  outline: none;
-}
-
 /* Fill the 4:3 image area.
    1. display: block takes the image off the text baseline. Inline, the
       room left for descenders would push the tile past 4:3.

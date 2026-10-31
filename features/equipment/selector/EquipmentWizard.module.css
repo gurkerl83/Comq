@@ -19,11 +19,6 @@
   margin: 0;
 }
 
-.stepTitle:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus-ring);
-  outline-offset: var(--focus-ring-offset);
-}
-
 .stepIntro {
   margin: 0.875rem 0 1.75rem;
   color: var(--color-text-muted);

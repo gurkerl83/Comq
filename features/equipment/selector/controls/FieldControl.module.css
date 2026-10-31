@@ -50,14 +50,6 @@
   opacity: 1;
 }
 
-.input:focus-visible,
-.textarea:focus-visible {
-  border-color: var(--color-focus-ring);
-  outline: var(--focus-ring-width) solid var(--color-focus-ring);
-  /* Overlap the border so focus forms one edge without changing field size. */
-  outline-offset: calc(-1 * var(--focus-ring-width));
-}
-
 .input[aria-invalid='true'],
 .textarea[aria-invalid='true'] {
   border-color: var(--color-action);

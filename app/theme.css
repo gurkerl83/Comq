@@ -26,14 +26,12 @@
   --spacing-column-gap: 2rem;
 
   /*
-   * Border, control and focus dimensions.
+   * Border and control dimensions.
    */
   --radius-small: 0.25rem;
   --radius-control: 0.3125rem;
   --radius-media: 10px;
   --border-width: 1px;
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 5px;
 
   /* Fixed colors: for example, the quote button stays red in both themes. */
   --color-brand-base: #d4af37;
@@ -55,7 +53,6 @@
 
   /* Foregrounds belong to their surfaces, independent of the page text color. */
   --color-on-accent: light-dark(#fff, #000);
-  --color-focus-ring: var(--color-accent);
 
   /* Logo strip background and text; artwork colors come from the image files. */
   --color-logo-strip-background: var(--color-surface);
