@@ -70,7 +70,7 @@ export function GalleryViewer({
         )}
         <button
           type='button'
-          className={styles.control}
+          className={`${styles.control} ${styles.closeControl}`}
           aria-label={labels.close}
           title={labels.close}
           onClick={() => dialogRef.current?.close()}

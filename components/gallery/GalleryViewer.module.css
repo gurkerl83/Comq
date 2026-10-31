@@ -104,6 +104,15 @@
   grid-column: 3;
 }
 
+/* No focus outline on the close button.
+   1. showModal() focuses it, as the first button inside, when the viewer
+      opens, and some browsers then outline it although nobody chose it.
+   2. A deliberate exception, like the gallery tiles: keyboard users also
+      see no outline when they reach it with Tab. */
+.closeControl:focus-visible {
+  outline: none;
+}
+
 .counter {
   margin: 0;
   padding: 0.375rem 0.625rem;
