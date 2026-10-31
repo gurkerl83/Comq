@@ -1,4 +1,14 @@
-.galleryContainer {
+/* The gallery's root: the tiles and the viewer.
+   1. No tap highlight: phone browsers flash a box over a tapped tile or
+      viewer button, and a tile's box would stay on top of the viewer as
+      it opens.
+   2. The property is inherited, so this one rule covers both, and it
+      only exists with the -webkit- prefix. */
+.gallery {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tiles {
   /* Spacing, from the figure's edge inward.
      1. --gallery-padding: from the figure's border to the tiles. At least
         --band-width, so the band stays inside the gallery.
@@ -88,50 +98,50 @@
    2. The hover band (.band) follows these corners. */
 
 /* One image: it fills the row. */
-.galleryContainer[data-cells='1']>.tile:nth-child(1) {
+.tiles[data-cells='1']>.tile:nth-child(1) {
   grid-column: 1 / -1;
   border-radius: var(--tile-radius);
 }
 
 /* Two images, side by side. */
-.galleryContainer[data-cells='2']>.tile:nth-child(1) {
+.tiles[data-cells='2']>.tile:nth-child(1) {
   border-top-left-radius: var(--tile-radius);
   border-bottom-left-radius: var(--tile-radius);
 }
 
-.galleryContainer[data-cells='2']>.tile:nth-child(2) {
+.tiles[data-cells='2']>.tile:nth-child(2) {
   border-top-right-radius: var(--tile-radius);
   border-bottom-right-radius: var(--tile-radius);
 }
 
 /* Three images: the first fills the row above the other two. */
-.galleryContainer[data-cells='3']>.tile:nth-child(1) {
+.tiles[data-cells='3']>.tile:nth-child(1) {
   grid-column: 1 / -1;
   border-top-left-radius: var(--tile-radius);
   border-top-right-radius: var(--tile-radius);
 }
 
-.galleryContainer[data-cells='3']>.tile:nth-child(2) {
+.tiles[data-cells='3']>.tile:nth-child(2) {
   border-bottom-left-radius: var(--tile-radius);
 }
 
-.galleryContainer[data-cells='3']>.tile:nth-child(3) {
+.tiles[data-cells='3']>.tile:nth-child(3) {
   border-bottom-right-radius: var(--tile-radius);
 }
 
 /* Four cells, two by two. With more than four images, the fourth is +N. */
-.galleryContainer[data-cells='4']>.tile:nth-child(1) {
+.tiles[data-cells='4']>.tile:nth-child(1) {
   border-top-left-radius: var(--tile-radius);
 }
 
-.galleryContainer[data-cells='4']>.tile:nth-child(2) {
+.tiles[data-cells='4']>.tile:nth-child(2) {
   border-top-right-radius: var(--tile-radius);
 }
 
-.galleryContainer[data-cells='4']>.tile:nth-child(3) {
+.tiles[data-cells='4']>.tile:nth-child(3) {
   border-bottom-left-radius: var(--tile-radius);
 }
 
-.galleryContainer[data-cells='4']>.tile:nth-child(4) {
+.tiles[data-cells='4']>.tile:nth-child(4) {
   border-bottom-right-radius: var(--tile-radius);
 }

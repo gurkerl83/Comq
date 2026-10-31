@@ -25,9 +25,9 @@ export function Gallery({ images, labels }: GalleryProps) {
   };
 
   return (
-    <>
+    <div className={styles.gallery}>
       <div
-        className={styles.galleryContainer}
+        className={styles.tiles}
         data-cells={cellCount}
         role='group'
         aria-label={labels.label}
@@ -77,6 +77,6 @@ export function Gallery({ images, labels }: GalleryProps) {
         onSelect={setActiveIndex}
         onClose={() => setActiveIndex(null)}
       />
-    </>
+    </div>
   );
 }
