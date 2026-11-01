@@ -1,3 +1,5 @@
+import type { TrackObserver } from './GalleryViewer.svc';
+
 /** A photograph with localized alternative text and its original dimensions. */
 export type GalleryImage = {
   /** Local public path or an allowed remote image URL. */
@@ -38,10 +40,16 @@ export type GalleryContent = {
 
 /** The photograph the viewer shows, and a way to show another. */
 export type GallerySelection = {
-  /** Index of the photograph the viewer shows. */
-  activeIndex: number;
+  /** Says which image the viewer shows. */
+  track: TrackObserver;
   /** Shows the photograph at this index in the viewer. */
   onSelect: (index: number) => void;
+};
+
+/** What a slide or a thumbnail needs to know whether its image is current. */
+export type GalleryCurrentMark = Pick<GallerySelection, 'track'> & {
+  /** Answers whether its image is the current one, from `track.isAt`. */
+  isCurrent: () => boolean;
 };
 
 /** Reserve the fourth cell for a count when the collection exceeds four images. */

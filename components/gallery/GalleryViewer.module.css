@@ -61,11 +61,27 @@
   grid-template-columns: minmax(0, 1fr);
 }
 
-.viewerImage {
-  position: relative;
+/* The images sit side by side in a track that scrolls sideways.
+   1. Scroll snapping makes a swipe settle on one whole image, natively
+      and with momentum; scroll-snap-stop keeps it to one image per swipe.
+   2. GalleryViewer.tsx scrolls the track for the arrows, keys and
+      thumbnails, and reads the current image from its position.
+   3. The scrollbar is hidden; the arrows and thumbnails show there is
+      more. */
+.track {
+  display: flex;
   grid-row: 1;
-  overflow: hidden;
-  border-radius: var(--radius-media);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .image {
@@ -73,6 +89,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: var(--radius-media);
 }
 
 .control {
@@ -152,7 +169,7 @@
     padding: 0.5rem;
   }
 
-  .viewerImage {
+  .track {
     grid-column: 1 / -1;
   }
 
