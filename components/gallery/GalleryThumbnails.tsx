@@ -22,7 +22,6 @@ export function GalleryThumbnails({
   // 2. All of these are clicks or key presses, so React runs the Effect
   //    before the browser paints; a layout effect would add nothing.
   useEffect(() => {
-    if (activeIndex === null) return;
     stripRef.current?.children[activeIndex]?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',

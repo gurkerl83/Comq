@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 
 import { getGalleryLayout, type GalleryContent } from './Gallery.svc';
@@ -11,18 +11,12 @@ import styles from './Gallery.module.css';
 export type GalleryProps = GalleryContent;
 
 export function Gallery({ images, labels }: GalleryProps) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { cellCount, visibleCount, extraCount } = getGalleryLayout(
     images.length
   );
 
   if (images.length === 0) return null;
-
-  const openImage = (index: number) => {
-    setActiveIndex(index);
-    dialogRef.current?.showModal();
-  };
 
   return (
     <div className={styles.gallery}>
@@ -39,7 +33,7 @@ export function Gallery({ images, labels }: GalleryProps) {
             className={`${styles.tile} ${styles.band}`}
             aria-label={`${labels.openImage}: ${image.alt}`}
             aria-haspopup='dialog'
-            onClick={() => openImage(index)}
+            onClick={() => setOpenIndex(index)}
           >
             <Image
               className={styles.image}
@@ -62,21 +56,21 @@ export function Gallery({ images, labels }: GalleryProps) {
             className={`${styles.tile} ${styles.band}`}
             aria-label={`${labels.moreImages}: ${extraCount}`}
             aria-haspopup='dialog'
-            onClick={() => openImage(visibleCount)}
+            onClick={() => setOpenIndex(visibleCount)}
           >
             <span className={styles.moreCount}>{`+${extraCount}`}</span>
           </button>
         )}
       </div>
 
-      <GalleryViewer
-        dialogRef={dialogRef}
-        images={images}
-        labels={labels}
-        activeIndex={activeIndex}
-        onSelect={setActiveIndex}
-        onClose={() => setActiveIndex(null)}
-      />
+      {openIndex !== null && (
+        <GalleryViewer
+          images={images}
+          labels={labels}
+          initialIndex={openIndex}
+          onClose={() => setOpenIndex(null)}
+        />
+      )}
     </div>
   );
 }

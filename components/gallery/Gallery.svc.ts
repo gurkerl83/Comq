@@ -38,8 +38,8 @@ export type GalleryContent = {
 
 /** The photograph the viewer shows, and a way to show another. */
 export type GallerySelection = {
-  /** Index of the photograph the viewer shows, or null while it is closed. */
-  activeIndex: number | null;
+  /** Index of the photograph the viewer shows. */
+  activeIndex: number;
   /** Shows the photograph at this index in the viewer. */
   onSelect: (index: number) => void;
 };
