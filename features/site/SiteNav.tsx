@@ -10,6 +10,7 @@ import { Link } from '../../components/Link';
 import { ThemeToggle } from './ThemeToggle';
 import styles from './SiteShell.module.css';
 
+/** Show the sticky site header: the brand link, then the page preferences. */
 export function SiteNav({
   locale,
   dictionary
@@ -19,21 +20,19 @@ export function SiteNav({
 }) {
   return (
     <header className={styles.header}>
-      <div className={styles.headerInner}>
-        <Link
-          className={styles.brandLink}
-          href={createHrefForLocale(locale, '/')}
-          aria-label={`${SITE_NAME} — ${dictionary.navigation.home}`}
-        >
-          <BrandSymbol className={styles.brandIcon} />
-        </Link>
-        <div className={styles.preferences}>
-          <LanguageSwitcher
-            locale={locale}
-            label={dictionary.navigation.language}
-          />
-          <ThemeToggle labels={dictionary.theme} />
-        </div>
+      <Link
+        className={styles.brandLink}
+        href={createHrefForLocale(locale, '/')}
+        aria-label={`${SITE_NAME} — ${dictionary.navigation.home}`}
+      >
+        <BrandSymbol className={styles.brandIcon} />
+      </Link>
+      <div className={styles.preferences}>
+        <LanguageSwitcher
+          locale={locale}
+          label={dictionary.navigation.language}
+        />
+        <ThemeToggle labels={dictionary.theme} />
       </div>
     </header>
   );

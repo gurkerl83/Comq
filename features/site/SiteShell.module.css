@@ -25,6 +25,10 @@
   position: sticky;
   z-index: 5;
   top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: var(--site-header-padding-block) 2rem;
   border-bottom: var(--border-width) solid var(--color-border);
   background: var(--color-background);
   /*
@@ -35,23 +39,11 @@
   will-change: transform;
 }
 
-.headerInner {
+.brandLink {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  min-height: calc(var(--site-header-height) - var(--border-width));
-  margin: 0 auto;
-  padding: var(--site-header-padding-block) 2rem;
-}
-
-.brandLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
   min-height: 44px;
   margin-right: auto;
-  text-decoration: none;
 }
 
 .brandIcon {
@@ -62,15 +54,17 @@
 .preferences {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
   gap: 0.5rem;
 }
 
 .languages a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
+  /* A minimum, not a fixed width: a longer label widens the link instead of
+     spilling over its neighbour. 2em keeps the space between ES and EN
+     growing with the text; 32px holds the default size at small fonts. */
+  min-width: max(32px, 2em);
   min-height: 44px;
   text-decoration: none;
 }
@@ -82,8 +76,6 @@
 
 .languages {
   display: flex;
-  flex-shrink: 0;
-  gap: 0;
   color: var(--color-text-muted);
 }
 
@@ -207,7 +199,7 @@
 }
 
 @media (max-width: 640px) {
-  .headerInner {
+  .header {
     gap: 1rem;
     padding: var(--site-header-padding-block) 1.25rem;
   }
