@@ -15,8 +15,6 @@
   );
 
   font-family: var(--font-family-body);
-  /* Respect the browser's preferred font size, normally 16px. */
-  font-size: 100%;
   color: var(--color-text);
   background: var(--color-background);
   scrollbar-gutter: stable;
