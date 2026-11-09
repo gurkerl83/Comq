@@ -10,7 +10,7 @@
 
 .primaryButton,
 .secondaryButton {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100%;
@@ -24,7 +24,10 @@
   cursor: pointer;
 }
 
+/* Borrows the control sizing through composes: the min-height above
+   includes the padding and border, also when the button is a link. */
 .primaryButton {
+  composes: control from '../../../components/control.module.css';
   margin-left: auto;
   color: var(--color-on-action);
   background: var(--color-action);
