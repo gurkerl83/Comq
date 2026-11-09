@@ -4,11 +4,14 @@
   align-items: flex-start;
   min-height: 58svh;
   margin: 0 auto;
-  padding: var(--spacing-large-section) 2rem;
+  padding: 0 2rem;
 }
 
+/* The hero's vertical space is padding on its content, so the hero itself
+   has no vertical padding and its min-height measures the whole hero. */
 .content {
   width: 100%;
+  padding: var(--spacing-large-section) 0;
 }
 
 .content h1 {
@@ -104,7 +107,7 @@
 @media (max-width: 640px) {
   .hero {
     min-height: 52svh;
-    padding: var(--spacing-large-section) 1.25rem;
+    padding: 0 1.25rem;
   }
 
   .content h1 {
