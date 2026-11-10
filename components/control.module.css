@@ -1,4 +1,5 @@
-/* Sizing for controls: links styled as buttons, form fields, option cards.
+/* Sizing for controls and fixed-size indicators: links styled as buttons,
+   form fields, option cards, the selector's step circles.
    1. What: box-sizing: border-box. The width and height a rule sets then
       include the control's padding and border, so min-height: 44px is the
       height of the whole control.

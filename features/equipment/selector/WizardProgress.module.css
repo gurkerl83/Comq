@@ -22,8 +22,11 @@
   color: var(--color-text-muted);
 }
 
+/* Borrows the control sizing through composes: the 32px size below
+   includes the border. */
 .progressNumber {
-  display: inline-flex;
+  composes: control from '../../../components/control.module.css';
+  display: flex;
   flex: 0 0 32px;
   align-items: center;
   justify-content: center;
