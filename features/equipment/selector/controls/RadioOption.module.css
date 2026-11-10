@@ -6,7 +6,10 @@
   cursor: pointer;
 }
 
+/* Borrows the control sizing through composes: the min-height in .option
+   includes this padding and border. */
 .card {
+  composes: control from '../../../../components/control.module.css';
   padding: 1.25rem;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-control);
