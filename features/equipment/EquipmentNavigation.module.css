@@ -11,10 +11,16 @@
   list-style: none;
 }
 
-.links a {
-  display: inline-flex;
-  align-items: center;
+/* The 44px tap height sits on the list item, which has no border; the link
+   stretches to it, underline included. */
+.links li {
+  display: flex;
   min-height: 44px;
+}
+
+.links a {
+  display: flex;
+  align-items: center;
   border-bottom: 2px solid transparent;
   font-weight: 700;
   text-decoration: none;

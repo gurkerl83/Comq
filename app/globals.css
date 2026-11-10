@@ -5,8 +5,9 @@
 
 :root {
   /* Shared dimensions align the header and document scroll offsets.
-     The header's single row reserves at least 44px for its controls. */
-  --site-header-row-height: max(44px, 2.75rem);
+     The header's single row is as tall as its tallest item: a 44px control,
+     or one line of text (1.5rem at the body's line-height) at large fonts. */
+  --site-header-row-height: max(44px, 1.5rem);
   --site-header-padding-block: 1.375rem;
   --site-header-height: calc(
     var(--site-header-row-height) + 2 * var(--site-header-padding-block) +
@@ -14,8 +15,6 @@
   );
 
   font-family: var(--font-family-body);
-  /* Respect the browser's preferred font size, normally 16px. */
-  font-size: 100%;
   color: var(--color-text);
   background: var(--color-background);
   scrollbar-gutter: stable;
@@ -27,10 +26,6 @@
   :root {
     --site-header-padding-block: 1rem;
   }
-}
-
-* {
-  box-sizing: border-box;
 }
 
 body {

@@ -13,7 +13,10 @@ type EquipmentActionsProps = {
   locale: SupportedLocale;
 };
 
-/** Offer direct browsing alongside the guided equipment selector. */
+/**
+ * Offer direct browsing alongside the guided equipment selector. Both links
+ * combine the shared .link styles with their .primary or .secondary look.
+ */
 export function EquipmentActions({ locale }: EquipmentActionsProps) {
   const content = getEquipmentNavigationContent(locale);
 
@@ -21,14 +24,14 @@ export function EquipmentActions({ locale }: EquipmentActionsProps) {
     <div className={styles.actions}>
       <Link
         href={createHrefForLocale(locale, '/venta')}
-        className={styles.primary}
+        className={`${styles.link} ${styles.primary}`}
       >
         {content.browse}
         <ArrowRightIcon />
       </Link>
       <Link
         href={createHrefForLocale(locale, '/selector')}
-        className={styles.secondary}
+        className={`${styles.link} ${styles.secondary}`}
       >
         {content.selector}
         <ArrowRightIcon />

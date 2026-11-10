@@ -1,10 +1,12 @@
+/* Borrows the control sizing through composes: the width and min-height
+   below include the padding. */
 .link {
-  display: inline-flex;
+  composes: control from '../../components/control.module.css';
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   gap: 0.5rem;
-  /* Keep the button width consistent across translations. */
   width: 9rem;
   max-width: 100%;
   min-height: 44px;

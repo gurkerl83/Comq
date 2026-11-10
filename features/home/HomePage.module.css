@@ -4,11 +4,14 @@
   align-items: flex-start;
   min-height: 58svh;
   margin: 0 auto;
-  padding: var(--spacing-large-section) 2rem;
+  padding: 0 2rem;
 }
 
+/* The hero's vertical space is padding on its content, so the hero itself
+   has no vertical padding and its min-height measures the whole hero. */
 .content {
   width: 100%;
+  padding: var(--spacing-large-section) 0;
 }
 
 .content h1 {
@@ -74,8 +77,10 @@
   height: 0.75em;
 }
 
+/* A flex column, so the image stretches to the link's width. */
 .serviceImageLink {
-  display: block;
+  display: flex;
+  flex-direction: column;
   max-width: 400px;
   margin: 0 auto 1.5rem;
   border-radius: var(--radius-media);
@@ -86,9 +91,14 @@
   border-color: var(--color-accent);
 }
 
+/* The link's flex column stretches the image to its width, border included.
+   1. width: auto overrides the svg's width="800" attribute.
+   2. max-width: 100%, as a percentage, keeps the svg's 800px out of the
+      page's minimum width, so the page doesn't widen on phones. */
 .serviceImage {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-media);
@@ -104,7 +114,7 @@
 @media (max-width: 640px) {
   .hero {
     min-height: 52svh;
-    padding: var(--spacing-large-section) 1.25rem;
+    padding: 0 1.25rem;
   }
 
   .content h1 {

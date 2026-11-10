@@ -1,0 +1,16 @@
+/* Sizing for controls and fixed-size indicators: links styled as buttons,
+   form fields, option cards, the selector's step circles.
+   1. What: box-sizing: border-box. The width and height a rule sets then
+      include the control's padding and border, so min-height: 44px is the
+      height of the whole control.
+   2. When: only in a rule that sets a size and has padding or a border on
+      the same axis, and only after measuring that the size depends on it.
+      Anywhere else the class would change nothing.
+   3. How: compose it as the rule's first declaration:
+      composes: control from '<path>/components/control.module.css';
+   4. Why it is needed: CSS starts every element at content-box. Browsers
+      size only their own buttons, selects and button-type inputs this way
+      (HTML Standard, 15.3.10 Form controls), never links or text fields. */
+.control {
+  box-sizing: border-box;
+}

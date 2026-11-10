@@ -1,7 +1,6 @@
 .input,
 .textarea {
   width: 100%;
-  min-height: 48px;
   padding: 0.75rem 0.875rem;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-control);
@@ -9,7 +8,11 @@
   background: var(--color-background);
 }
 
+/* Borrows the control sizing through composes: the width, min-height and
+   height include the padding and border. */
 .input {
+  composes: control from '../../../../components/control.module.css';
+  min-height: 48px;
   /* Match native inputs and selects: one text line, padding and borders. */
   height: calc(1.5em + 1.5rem + 2 * var(--border-width));
 }
@@ -39,7 +42,10 @@
   color: var(--color-text-muted);
 }
 
+/* Borrows the control sizing through composes: the width and min-height
+   include the padding and border. */
 .textarea {
+  composes: control from '../../../../components/control.module.css';
   min-height: 8rem;
   resize: vertical;
 }
