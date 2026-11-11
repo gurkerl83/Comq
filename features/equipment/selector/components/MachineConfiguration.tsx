@@ -31,7 +31,10 @@ type MachineConfigurationProps = {
   translations: SelectorContent;
 };
 
-/** Keep native option controls outside the machine radio's label. */
+/**
+ * Show a machine card's specifications with its applied options, or the
+ * option editor while the selected card is being customized.
+ */
 export function MachineConfiguration({
   entry,
   customization,

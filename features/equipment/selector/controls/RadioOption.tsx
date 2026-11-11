@@ -19,8 +19,6 @@ type RadioOptionProps = Omit<
   description?: string;
   /** Whether the group's exposed validation error applies to this input. */
   invalid?: boolean;
-  /** Layout shared with the surrounding choice cards. */
-  appearance?: 'card' | 'sharedRows';
 };
 
 export function RadioOption({
@@ -29,7 +27,6 @@ export function RadioOption({
   label,
   description,
   invalid,
-  appearance = 'card',
   'aria-describedby': describedBy,
   'aria-invalid': ariaInvalid,
   ...inputProps
@@ -44,7 +41,7 @@ export function RadioOption({
   const ariaDescribedBy = descriptionIds.join(' ') || undefined;
 
   return (
-    <label className={`${styles.option} ${styles[appearance]}`}>
+    <label className={`${styles.option} ${styles.card}`}>
       <input
         {...inputProps}
         type='radio'
