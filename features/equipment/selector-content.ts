@@ -64,6 +64,7 @@ const en = {
   weeks: 'Weeks',
   months: 'Months',
   startDate: 'Preferred rental start date',
+  startDateHelp: 'Choose a date.',
   requirements: 'Operating requirements or questions',
   requirementsHelp:
     'Tell us about the work, access constraints or anything you want to clarify.',
@@ -176,6 +177,7 @@ const es: SelectorContent = {
   weeks: 'Semanas',
   months: 'Meses',
   startDate: 'Fecha deseada de inicio del alquiler',
+  startDateHelp: 'Selecciona una fecha.',
   requirements: 'Necesidades de operación o consultas',
   requirementsHelp:
     'Cuéntanos sobre el trabajo, las restricciones de acceso o cualquier duda que tengas.',

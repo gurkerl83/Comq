@@ -73,6 +73,7 @@ export function RentalFields({
         id='startDate'
         label={translations.startDate}
         requirementLabel={translations.optional}
+        help={translations.startDateHelp}
         error={errors.startDate?.message}
         type='date'
         defaultValue={getValues('startDate')}

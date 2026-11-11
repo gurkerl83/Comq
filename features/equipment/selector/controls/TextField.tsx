@@ -1,5 +1,6 @@
 import type { ComponentPropsWithRef } from 'react';
 
+import { CalendarIcon } from '../../../site/icons';
 import type { NativeFieldProps } from '../types';
 import { FormField } from './FormField';
 import styles from './FieldControl.module.css';
@@ -26,9 +27,20 @@ export function TextField({
       aria-describedby={describedBy}
       aria-invalid={invalid}
     >
-      {controlProps => (
-        <input {...inputProps} {...controlProps} className={styles.input} />
-      )}
+      {controlProps => {
+        const input = (
+          <input {...inputProps} {...controlProps} className={styles.input} />
+        );
+
+        return inputProps.type === 'date' ? (
+          <div className={styles.dateWrapper}>
+            {input}
+            <CalendarIcon />
+          </div>
+        ) : (
+          input
+        );
+      }}
     </FormField>
   );
 }

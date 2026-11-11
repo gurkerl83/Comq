@@ -17,6 +17,54 @@
   height: calc(1.5em + 1.5rem + 2 * var(--border-width));
 }
 
+.dateWrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+
+.dateWrapper > .input,
+.dateWrapper > svg {
+  grid-area: 1 / 1;
+}
+
+.dateWrapper > svg {
+  display: none;
+  justify-self: end;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.875rem;
+  pointer-events: none;
+}
+
+/* Keep the native icon in browsers without these date-control styling hooks. */
+@supports selector(input::-webkit-calendar-picker-indicator) or
+  selector(input::-webkit-date-and-time-value) {
+  .dateWrapper > .input {
+    position: relative;
+    appearance: none;
+    padding-right: 2.75rem;
+  }
+
+  .dateWrapper > svg {
+    display: block;
+    z-index: 1;
+  }
+
+  /* Preserve the native picker target underneath the decorative SVG. */
+  .dateWrapper > .input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.75rem;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+
 /* Overlay the decorative arrow without changing the native select's size. */
 .selectWrapper {
   display: grid;
@@ -26,7 +74,7 @@
 .select {
   grid-area: 1 / 1;
   appearance: none;
-  padding-inline-end: 2.75rem;
+  padding-right: 2.75rem;
 }
 
 .selectWrapper > svg {
@@ -34,7 +82,7 @@
   justify-self: end;
   width: 1rem;
   height: 1rem;
-  margin-inline-end: 0.875rem;
+  margin-right: 0.875rem;
   pointer-events: none;
 }
 
