@@ -1,7 +1,7 @@
 .page {
   max-width: 64rem;
   margin: 0 auto;
-  padding: var(--spacing-content-section) 2rem var(--spacing-page-section);
+  padding: 0 2rem var(--spacing-page-section);
 }
 
 .page h1 {

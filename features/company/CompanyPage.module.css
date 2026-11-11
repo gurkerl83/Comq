@@ -1,6 +1,6 @@
 .page {
   margin: 0 auto;
-  padding: var(--spacing-large-section) 2rem;
+  padding: 0 2rem var(--spacing-large-section);
 }
 
 .introduction h1 {
@@ -28,7 +28,8 @@
 
 @media (max-width: 640px) {
   .page {
-    padding: var(--spacing-large-section) 1.25rem;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
   }
 
   .section {

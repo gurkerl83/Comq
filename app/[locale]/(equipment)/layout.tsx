@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import { EquipmentNavigation } from '../../../features/equipment/EquipmentNavigation';
 import { getRouteLocale } from '../../../lib/i18n/route-locale';
+import styles from '../content.module.css';
 
 /** Equipment pages sharing navigation within the current locale. */
 type EquipmentLayoutProps = {
@@ -11,7 +12,10 @@ type EquipmentLayoutProps = {
   params: Promise<{ locale: string }>;
 };
 
-/** Keep the equipment navigation mounted while the child page changes. */
+/**
+ * Keep the equipment navigation mounted while the child page changes, and
+ * give the page the standard spacing below the navigation.
+ */
 export default async function EquipmentLayout({
   children,
   params
@@ -21,7 +25,7 @@ export default async function EquipmentLayout({
   return (
     <>
       <EquipmentNavigation locale={locale} />
-      {children}
+      <div className={styles.content}>{children}</div>
     </>
   );
 }

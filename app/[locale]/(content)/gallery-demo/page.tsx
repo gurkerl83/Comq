@@ -1,9 +1,9 @@
 import {
   GalleryDemoPage,
   getGalleryDemoContent
-} from '../../../features/gallery-demo/GalleryDemoPage';
-import { getRouteLocale } from '../../../lib/i18n/route-locale';
-import { createPageMetadata } from '../../../lib/site/metadata';
+} from '../../../../features/gallery-demo/GalleryDemoPage';
+import { getRouteLocale } from '../../../../lib/i18n/route-locale';
+import { createPageMetadata } from '../../../../lib/site/metadata';
 
 /** Locale and optional image count supplied by the gallery example URL. */
 type GalleryDemoRouteProps = {

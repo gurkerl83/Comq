@@ -1,6 +1,6 @@
 .page {
   margin: 0 auto;
-  padding: 2rem 2rem var(--spacing-page-section);
+  padding: 0 2rem var(--spacing-page-section);
 }
 
 .heading {
