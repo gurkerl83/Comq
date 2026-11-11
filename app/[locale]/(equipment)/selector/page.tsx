@@ -4,10 +4,11 @@ import type { SelectorQuery } from '../../../../features/equipment/selector/type
 import styles from '../../../../features/equipment/SelectorPage.module.css';
 import { getSelectorContent } from '../../../../features/equipment/selector-content';
 import { getDictionary } from '../../../../lib/i18n/dictionaries';
-import { getRouteLocale } from '../../../../lib/i18n/route-locale';
+import {
+  getRouteLocale,
+  type LocalePageProps
+} from '../../../../lib/i18n/route-locale';
 import { createPageMetadata } from '../../../../lib/site/metadata';
-
-type LocalePageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: LocalePageProps) {
   const locale = await getRouteLocale(params);

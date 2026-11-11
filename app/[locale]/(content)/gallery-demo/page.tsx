@@ -2,13 +2,14 @@ import {
   GalleryDemoPage,
   getGalleryDemoContent
 } from '../../../../features/gallery-demo/GalleryDemoPage';
-import { getRouteLocale } from '../../../../lib/i18n/route-locale';
+import {
+  getRouteLocale,
+  type LocalePageProps
+} from '../../../../lib/i18n/route-locale';
 import { createPageMetadata } from '../../../../lib/site/metadata';
 
 /** Locale and optional image count supplied by the gallery example URL. */
-type GalleryDemoRouteProps = {
-  /** Route segment used to resolve the page language. */
-  params: Promise<{ locale: string }>;
+type GalleryDemoRouteProps = LocalePageProps & {
   /** Requested sample size; repeated or invalid values use all six images. */
   searchParams: Promise<{ count?: string | string[] }>;
 };

@@ -1,9 +1,10 @@
 import { ServicePage } from '../../../../features/services/ServicePage';
 import { getServiceMetadata } from '../../../../features/services/metadata';
 import { getDictionary } from '../../../../lib/i18n/dictionaries';
-import { getRouteLocale } from '../../../../lib/i18n/route-locale';
-
-type LocalePageProps = { params: Promise<{ locale: string }> };
+import {
+  getRouteLocale,
+  type LocalePageProps
+} from '../../../../lib/i18n/route-locale';
 
 export async function generateMetadata({ params }: LocalePageProps) {
   return getServiceMetadata(await getRouteLocale(params), 'rentals');

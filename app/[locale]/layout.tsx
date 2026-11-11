@@ -1,10 +1,10 @@
 import { Analytics } from '@vercel/analytics/next';
 import { notFound } from 'next/navigation';
-import type { ReactNode } from 'react';
 
 import { SiteShell } from '../../features/site/SiteShell';
 import { getDictionary } from '../../lib/i18n/dictionaries';
 import { isSupportedLocale, SUPPORTED_LOCALES } from '../../lib/i18n/locales';
+import type { LocaleLayoutProps } from '../../lib/i18n/route-locale';
 import '../globals.css';
 
 export const dynamicParams = false;
@@ -38,10 +38,7 @@ export const generateStaticParams = () =>
 export default async function LocaleLayout({
   children,
   params
-}: {
-  children: ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+}: LocaleLayoutProps) {
   const { locale } = await params;
   if (!isSupportedLocale(locale)) notFound();
   const dictionary = await getDictionary(locale);
