@@ -1,0 +1,71 @@
+/* The box and the looks shared by buttons and button-looking links.
+   1. Dimensions come from the --button-* values in app/theme.css. A page
+      sets one of them on its own class, or on a section, to change a button
+      or every button inside that section. The text look sets its own.
+   2. Borrows the control sizing through composes: the min-height includes
+      the padding and border, also when the element is a link.
+   3. The rule sets no width, margin or flex: the place that uses the button
+      sets those through className. */
+.button {
+  composes: control from './control.module.css';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
+  min-height: var(--button-height);
+  padding: var(--button-padding);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-control);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* An icon follows the size of the label next to it. */
+.button svg {
+  flex-shrink: 0;
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.primary {
+  color: var(--color-on-action);
+  background: var(--color-action);
+}
+
+.primary:hover {
+  background: var(--color-action-hover);
+}
+
+.secondary {
+  border-color: var(--color-border);
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+.secondary:hover {
+  border-color: var(--color-accent);
+}
+
+/* A label that acts: underlined, no box, as tall as the tap target. */
+.text {
+  --button-height: 44px;
+  --button-padding: 0.5rem;
+  border-width: 0;
+  color: var(--color-accent);
+  background: transparent;
+  text-decoration: underline;
+}
+
+.text:hover {
+  background: var(--color-background);
+}
+
+/* Last, so a disabled button keeps this look under the pointer too. */
+.button:disabled {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  cursor: not-allowed;
+}

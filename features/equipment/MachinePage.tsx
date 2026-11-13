@@ -4,6 +4,7 @@ import {
 } from '../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../lib/site/config';
 import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
+import { Button } from '../../components/Button';
 import { Link } from '../../components/Link';
 import type { EquipmentEntry, EquipmentOption } from './types';
 import { Gallery } from '../../components/gallery';
@@ -76,6 +77,12 @@ function formatOptionChoices(
     .join(' · ');
 }
 
+/**
+ * The detail page of one machine. The hero shows its name, summary and model
+ * with the enquiry button, next to the image gallery. Below follow the
+ * application, the specifications with the datasheet link, and the equipment
+ * options. The closing section repeats the enquiry button and offers WhatsApp.
+ */
 export function MachinePage({
   locale,
   equipment
@@ -100,10 +107,14 @@ export function MachinePage({
             {content.model}:{' '}
             <strong>{equipment.model ?? content.unconfirmed}</strong>
           </p>
-          <Link className={styles.action} href={selectorHref}>
+          <Button
+            variant='primary'
+            className={styles.action}
+            href={selectorHref}
+          >
             {content.select}
             <span aria-hidden='true'> →</span>
-          </Link>
+          </Button>
         </header>
 
         <figure className={styles.media}>
@@ -169,10 +180,10 @@ export function MachinePage({
       <section className={styles.closing} aria-labelledby='equipment-enquiry'>
         <h2 id='equipment-enquiry'>{content.closing}</h2>
         <p>{content.next}</p>
-        <Link className={styles.action} href={selectorHref}>
+        <Button variant='primary' className={styles.action} href={selectorHref}>
           {content.select}
           <span aria-hidden='true'> →</span>
-        </Link>
+        </Button>
         <p>
           <Link
             native

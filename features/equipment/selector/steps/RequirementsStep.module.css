@@ -21,22 +21,6 @@
   font-size: var(--font-size-small);
 }
 
-.changeEquipment {
-  min-height: 44px;
-  padding: 0.5rem;
-  border: 0;
-  border-radius: var(--radius-control);
-  color: var(--color-accent);
-  background: transparent;
-  font-weight: 700;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.changeEquipment:hover {
-  background: var(--color-background);
-}
-
 .fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -18,6 +18,7 @@ import { createConfiguration, isValidConfiguration } from '../../configuration';
 import type { SelectorContent } from '../../selector-content';
 import type { MachineCustomization } from '../types';
 import { ChevronDownIcon } from '../../../site/icons';
+import { Button } from '../../../../components/Button';
 import controlStyles from '../controls/FieldControl.module.css';
 import styles from './MachineConfiguration.module.css';
 
@@ -377,17 +378,17 @@ function ConfigurationActions({
 }: ConfigurationActionsProps) {
   return (
     <div className={styles.actions}>
-      <button type='button' onClick={onCancel}>
+      <Button variant='secondary' type='button' onClick={onCancel}>
         {translations.cancelCustomization}
-      </button>
-      <button
+      </Button>
+      <Button
+        variant='primary'
         type='button'
-        className={styles.apply}
         onClick={onApply}
         disabled={isSubmitting}
       >
         {translations.applyOptions}
-      </button>
+      </Button>
       {error && <p role='alert'>{error}</p>}
       <p className={styles.hint}>{translations.applyBeforeContinue}</p>
     </div>

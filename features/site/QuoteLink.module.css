@@ -1,29 +1,8 @@
-/* Borrows the control sizing through composes: the width and min-height
-   below include the padding. */
+/* Places the quote button: at least 9rem wide, padding and border included
+   (the shared button is sized that way), and wider when the label needs it.
+   In a row it keeps that width. */
 .link {
-  composes: control from '../../components/control.module.css';
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  gap: 0.5rem;
-  width: 9rem;
-  max-width: 100%;
-  min-height: 44px;
-  padding: 0.625rem 0.75rem;
-  border-radius: var(--radius-control);
-  color: var(--color-on-action);
-  background: var(--color-action);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.link svg {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-}
-
-.link:hover {
-  background: var(--color-action-hover);
+  width: fit-content;
+  min-width: 9rem;
 }

@@ -37,27 +37,10 @@
   color: var(--color-text);
 }
 
-/* Borrows the control sizing through composes: the min-height below
-   includes the padding. */
+/* Keeps the enquiry button as wide as its label; on its own it would fill
+   the hero column and the closing section. */
 .action {
-  composes: control from '../../components/control.module.css';
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
   width: fit-content;
-  min-height: 44px;
-  padding: 0.875rem 1.25rem;
-  border-radius: var(--radius-control);
-  color: var(--color-on-action);
-  background: var(--color-action);
-  font-weight: 700;
-  text-decoration: none;
-  text-align: center;
-}
-
-.action:hover {
-  background: var(--color-action-hover);
 }
 
 .media {

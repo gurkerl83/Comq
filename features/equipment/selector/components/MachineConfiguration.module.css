@@ -81,24 +81,6 @@
   gap: 0.75rem;
   margin-top: 1.25rem;
 }
-.actions button {
-  min-height: 44px;
-  padding: 0.625rem 1rem;
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-control);
-  background: var(--color-background);
-  color: var(--color-text);
-  font-weight: 700;
-  cursor: pointer;
-}
-.actions .apply {
-  color: var(--color-on-action);
-  background: var(--color-action);
-  border-color: var(--color-action);
-}
-.actions .apply:hover {
-  background: var(--color-action-hover);
-}
 .actions p {
   flex-basis: 100%;
 }
