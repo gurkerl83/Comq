@@ -33,6 +33,16 @@
   --radius-media: 10px;
   --border-width: 1px;
 
+  /*
+   * Buttons and button-looking links. The height is the smallest height of the
+   * whole button, padding and border included; it follows the reader's font
+   * size and never goes below the 44px tap target. The padding only decides
+   * the height when a label wraps.
+   */
+  --button-height: max(44px, 3rem);
+  --button-padding: 0.5rem 1.25rem;
+  --button-gap: 0.75rem;
+
   /* Fixed colors: for example, the quote button stays red in both themes. */
   --color-brand-base: #d4af37;
   --color-action: #c8102e;

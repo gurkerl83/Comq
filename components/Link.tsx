@@ -16,8 +16,8 @@ export type LinkProps =
 
 /**
  * 1. Use Link for every application link, including styled wrappers such as
- *    QuoteLink and WizardActionLink. Only this file imports next/link or
- *    renders native anchors.
+ *    Button and QuoteLink. Only this file imports next/link or renders native
+ *    anchors.
  * 2. Routed links default to scroll={true} on mobile and desktop. This enables
  *    Next's normal scrolling; it does not always force the page to the top.
  * 3. Use scroll={false} for in-place updates such as gallery count selection.

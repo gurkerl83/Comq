@@ -31,22 +31,6 @@
   white-space: pre-line;
 }
 
-.editButton {
-  min-height: 44px;
-  padding: 0.5rem;
-  border: 0;
-  border-radius: var(--radius-control);
-  color: var(--color-accent);
-  background: transparent;
-  font-weight: 700;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.editButton:hover {
-  background: var(--color-background);
-}
-
 .note {
   margin: 1.5rem 0 0;
   color: var(--color-text-muted);
