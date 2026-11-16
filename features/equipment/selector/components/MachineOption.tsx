@@ -111,9 +111,6 @@ export function MachineOption({
       <span id={titleId} className={styles.title}>
         {entry.name}
       </span>
-      <p id={summaryId} className={styles.description}>
-        {entry.summary}
-      </p>
       {customization &&
         (entry.options.length > 0 || entry.extras.length > 0) && (
           <button
@@ -139,6 +136,9 @@ export function MachineOption({
             {translations.customize}
           </button>
         )}
+      <p id={summaryId} className={styles.description}>
+        {entry.summary}
+      </p>
       <div id={`${entry.slug}-configuration`} className={styles.configuration}>
         <MachineConfiguration
           entry={entry}
