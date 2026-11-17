@@ -23,8 +23,8 @@
  * Subgrid shares those rows across each side-by-side pair, aligning:
  * 1. Machine names.
  * 2. Descriptions.
- * 3. Specification blocks.
- * 4. Details links.
+ * 3. Details links.
+ * 4. Specification blocks.
  *
  * At 640px and below, choices stack and each machine card sizes its own rows.
  *

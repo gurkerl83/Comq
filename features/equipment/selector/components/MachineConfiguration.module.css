@@ -1,11 +1,24 @@
 .configuration {
   /*
    * Establish the size container for the @container query below. inline-size
-   * means width in our horizontal writing mode, so specification rows stack
-   * when this container is at most 24rem wide, regardless of viewport width.
+   * means width in our horizontal writing mode, so specification rows and the
+   * Cancel / Apply buttons stack when this container is at most 24rem wide,
+   * regardless of viewport width.
    * Height still grows with the editor's content; the display mode is unchanged.
    */
   container-type: inline-size;
+}
+
+/*
+ * While editing, the editor takes the full height of the card's row (the
+ * taller card of the pair sets it), so the footer sits at the bottom of the
+ * card. The gap keeps at least 1.25rem above the footer's line.
+ */
+.configuration:has(> .actions) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.25rem;
 }
 
 .specifications {
@@ -50,7 +63,7 @@
   font-weight: 400;
 }
 .extras {
-  margin: 1.25rem 0 0;
+  margin: 0;
   padding: 0;
   border: 0;
   min-width: 0;
@@ -75,11 +88,18 @@
   height: 1.125rem;
   accent-color: var(--color-accent);
 }
+/*
+ * The editor's footer: a line above Cancel and Apply, as above the wizard's
+ * Back and Continue. Cancel at the left end, Apply at the right end.
+ */
 .actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 0.75rem;
-  margin-top: 1.25rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: var(--border-width) solid var(--color-border);
 }
 .actions p {
   flex-basis: 100%;
@@ -87,5 +107,8 @@
 @container (max-width: 24rem) {
   .row {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .actions {
+    flex-direction: column;
   }
 }

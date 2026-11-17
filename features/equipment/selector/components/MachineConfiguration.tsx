@@ -390,7 +390,6 @@ function ConfigurationActions({
         {translations.applyOptions}
       </Button>
       {error && <p role='alert'>{error}</p>}
-      <p className={styles.hint}>{translations.applyBeforeContinue}</p>
     </div>
   );
 }
