@@ -6,8 +6,7 @@ import messageStyles from './FieldMessage.module.css';
 import styles from './RadioGroup.module.css';
 
 type RadioGroupProps = WithoutClassName<ComponentPropsWithRef<'fieldset'>> & {
-  legend: string;
-  hideLegend?: boolean;
+  legend?: string;
   error?: string;
   before?: ReactNode;
   after?: ReactNode;
@@ -21,7 +20,6 @@ type RadioGroupProps = WithoutClassName<ComponentPropsWithRef<'fieldset'>> & {
  */
 export function RadioGroup({
   legend,
-  hideLegend = false,
   error,
   before,
   after,
@@ -32,7 +30,7 @@ export function RadioGroup({
 
   return (
     <fieldset {...fieldsetProps} className={styles.fieldset}>
-      {!hideLegend && <legend className={styles.legend}>{legend}</legend>}
+      {legend && <legend className={styles.legend}>{legend}</legend>}
       {before}
       <div className={styles.choices}>{children}</div>
       {after}

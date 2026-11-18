@@ -107,11 +107,7 @@ export function EquipmentWizard({
   return (
     <FormProvider {...form}>
       <div ref={wizardStart} className={styles.wizard}>
-        <WizardProgress
-          steps={progressSteps}
-          currentIndex={wizard.stepIndex}
-          label={translations.progress}
-        />
+        <WizardProgress steps={progressSteps} currentIndex={wizard.stepIndex} />
         <form
           onSubmit={handleStepSubmit}
           noValidate
@@ -125,7 +121,6 @@ export function EquipmentWizard({
             <CategoryStep
               categories={wizard.categories}
               onChange={wizard.chooseCategory}
-              translations={translations}
             />
           )}
           {step === SelectionStep.Machine && (
