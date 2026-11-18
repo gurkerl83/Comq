@@ -149,7 +149,6 @@ function ConfigurationFields({
         {entry.specifications.map(specification => (
           <ConfigurationRow
             key={specification.id}
-            id={`${entry.slug}-${specification.id}`}
             label={specification.label}
             baseValue={specification.value}
             option={entry.options.find(
@@ -166,7 +165,6 @@ function ConfigurationFields({
             .map(option => (
               <ConfigurationRow
                 key={option.id}
-                id={`${entry.slug}-${option.id}`}
                 label={option.label}
                 baseValue={null}
                 option={option}
@@ -198,8 +196,6 @@ function ConfigurationFields({
 }
 
 type ConfigurationRowProps = {
-  /** Machine slug and row ID combined into a stable accessibility prefix. */
-  id: string;
   label: string;
   baseValue: string | null;
   option?: EquipmentOption;
@@ -219,7 +215,6 @@ type ConfigurationRowProps = {
  * catalogue default, not form dirty state.
  */
 function ConfigurationRow({
-  id,
   label,
   baseValue,
   option,
@@ -227,8 +222,6 @@ function ConfigurationRow({
   control,
   translations
 }: ConfigurationRowProps) {
-  const labelId = `${id}-label`;
-  const defaultHintId = `${id}-default`;
   const selectedChoiceId = option ? choices?.[option.id] : undefined;
   const showDefaultHint =
     option && choices && selectedChoiceId !== option.defaultChoice;
@@ -248,7 +241,7 @@ function ConfigurationRow({
 
   return (
     <div className={styles.row}>
-      <dt id={labelId}>{label}</dt>
+      <dt>{label}</dt>
       <dd>
         {option && control && choices ? (
           <Controller
@@ -258,8 +251,6 @@ function ConfigurationRow({
               <div className={controlStyles.selectWrapper}>
                 <select
                   {...field}
-                  aria-labelledby={labelId}
-                  aria-describedby={showDefaultHint ? defaultHintId : undefined}
                   className={`${controlStyles.input} ${controlStyles.select}`}
                   value={field.value ?? ''}
                   onChange={event => field.onChange(event.target.value || null)}
@@ -282,7 +273,7 @@ function ConfigurationRow({
           <span>{displayValue ?? translations.notSpecified}</span>
         )}
         {showDefaultHint && (
-          <span id={defaultHintId} className={styles.hint}>
+          <span className={styles.hint}>
             {translations.defaultValue}: {defaultLabel}
           </span>
         )}
@@ -389,7 +380,7 @@ function ConfigurationActions({
       >
         {translations.applyOptions}
       </Button>
-      {error && <p role='alert'>{error}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 }

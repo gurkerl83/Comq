@@ -1,9 +1,7 @@
 import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 
-import { hasError } from '../../../../lib/forms/errors';
 import type { EquipmentCategory } from '../../types';
 import type { EquipmentSelection } from '../../selection';
-import type { SelectorContent } from '../../selector-content';
 import { RadioGroup } from '../controls/RadioGroup';
 import { RadioOption } from '../controls/RadioOption';
 
@@ -15,15 +13,9 @@ type CategoryStepProps = {
   categories: readonly EquipmentCategory[];
   /** Apply the category and dependent machine defaults together. */
   onChange: (value: EquipmentSelection['category']) => void;
-  /** Localized legend and validation labels. */
-  translations: SelectorContent;
 };
 
-export function CategoryStep({
-  categories,
-  onChange,
-  translations
-}: CategoryStepProps) {
+export function CategoryStep({ categories, onChange }: CategoryStepProps) {
   const { control, register } = useFormContext<EquipmentSelection>();
 
   const selectedCategory = useWatch({ control, name: 'category' });
@@ -36,12 +28,7 @@ export function CategoryStep({
   const categoryError = errors.category?.message;
 
   return (
-    <RadioGroup
-      name={name}
-      legend={translations.category}
-      hideLegend
-      error={categoryError}
-    >
+    <RadioGroup error={categoryError}>
       {categories.map(category => (
         <RadioOption
           key={category.id}
@@ -52,7 +39,6 @@ export function CategoryStep({
           checked={selectedCategory === category.id}
           onChange={() => onChange(category.id)}
           required
-          invalid={hasError(categoryError)}
           label={category.name}
           description={category.description}
         />

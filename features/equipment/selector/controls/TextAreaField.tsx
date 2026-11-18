@@ -6,14 +6,16 @@ import styles from './FieldControl.module.css';
 
 type TextAreaFieldProps = NativeFieldProps<ComponentPropsWithRef<'textarea'>>;
 
+/**
+ * A labelled textarea inside FormField. Attributes it does not set itself,
+ * such as aria-* or data-*, are passed on to the textarea.
+ */
 export function TextAreaField({
   id,
   label,
   requirementLabel,
   help,
   error,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
   ...textareaProps
 }: TextAreaFieldProps) {
   return (
@@ -23,8 +25,6 @@ export function TextAreaField({
       requirementLabel={requirementLabel}
       help={help}
       error={error}
-      aria-describedby={describedBy}
-      aria-invalid={invalid}
     >
       {controlProps => (
         <textarea

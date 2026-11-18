@@ -1,6 +1,5 @@
 import { useFormContext, useFormState } from 'react-hook-form';
 
-import { hasError } from '../../../../lib/forms/errors';
 import { AcquisitionMode, type EquipmentSelection } from '../../selection';
 import type { SelectorContent } from '../../selector-content';
 import { RadioGroup } from '../controls/RadioGroup';
@@ -26,18 +25,13 @@ export function AcquisitionChoices({ translations }: AcquisitionChoicesProps) {
   const error = errors.acquisition?.message;
 
   return (
-    <RadioGroup
-      name='acquisition'
-      legend={translations.acquisition}
-      error={error}
-    >
+    <RadioGroup legend={translations.acquisition} error={error}>
       {Object.values(AcquisitionMode).map(mode => (
         <RadioOption
           key={mode}
           {...register('acquisition')}
           value={mode}
           defaultChecked={getValues('acquisition') === mode}
-          invalid={hasError(error)}
           label={translations[mode]}
         />
       ))}

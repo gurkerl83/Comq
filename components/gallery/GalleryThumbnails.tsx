@@ -32,7 +32,7 @@ function Thumbnail({
 }: GalleryCurrentMark & ComponentProps<'button'>) {
   const current = useSyncExternalStore(track.subscribe, isCurrent);
 
-  return <button {...buttonProps} aria-current={current} />;
+  return <button {...buttonProps} data-current={current} />;
 }
 
 /**

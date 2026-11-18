@@ -36,7 +36,7 @@ export type SelectorQuery = {
 
 /** Label and feedback metadata linked to a native form control. */
 export type FieldDetails = {
-  /** Connects the label to the control and prefixes generated message IDs. */
+  /** Connects the label to the control. */
   id: string;
   /** Visible text identifying the control. */
   label: string;
@@ -44,9 +44,9 @@ export type FieldDetails = {
    * Localized required/optional hint displayed alongside the label.
    */
   requirementLabel?: string;
-  /** Supporting instructions included in the accessible description. */
+  /** Supporting instructions shown below the control. */
   help?: string;
-  /** Nonempty feedback is announced as an alert and marks the control invalid. */
+  /** Nonempty feedback shown below the control; marks the control invalid. */
   error?: string;
 };
 

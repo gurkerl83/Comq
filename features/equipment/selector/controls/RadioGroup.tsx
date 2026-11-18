@@ -1,49 +1,40 @@
-import type { ReactNode } from 'react';
+import type { ComponentPropsWithRef, ReactNode } from 'react';
 
 import { hasError } from '../../../../lib/forms/errors';
+import type { WithoutClassName } from '../types';
 import messageStyles from './FieldMessage.module.css';
 import styles from './RadioGroup.module.css';
 
-type RadioGroupProps = {
-  name: string;
-  legend: string;
-  hideLegend?: boolean;
+type RadioGroupProps = WithoutClassName<ComponentPropsWithRef<'fieldset'>> & {
+  legend?: string;
   error?: string;
   before?: ReactNode;
   after?: ReactNode;
   children: ReactNode;
 };
 
+/**
+ * A fieldset with an optional legend, the choices in a grid and the error
+ * message below them. Attributes it does not set itself, such as aria-* or
+ * data-*, are passed on to the fieldset.
+ */
 export function RadioGroup({
-  name,
   legend,
-  hideLegend = false,
   error,
   before,
   after,
-  children
+  children,
+  ...fieldsetProps
 }: RadioGroupProps) {
   const hasFieldError = hasError(error);
-  let groupLabel: string | undefined;
-  if (hideLegend) {
-    groupLabel = legend;
-  }
 
   return (
-    <fieldset
-      className={styles.fieldset}
-      aria-label={groupLabel}
-      aria-describedby={hasFieldError ? `${name}-error` : undefined}
-    >
-      {!hideLegend && <legend className={styles.legend}>{legend}</legend>}
+    <fieldset {...fieldsetProps} className={styles.fieldset}>
+      {legend && <legend className={styles.legend}>{legend}</legend>}
       {before}
       <div className={styles.choices}>{children}</div>
       {after}
-      {hasFieldError && (
-        <p id={`${name}-error`} className={messageStyles.error} role='alert'>
-          {error}
-        </p>
-      )}
+      {hasFieldError && <p className={messageStyles.error}>{error}</p>}
     </fieldset>
   );
 }

@@ -1,27 +1,29 @@
-import type { AriaAttributes, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
+import { hasError } from '../../../../lib/forms/errors';
 import type { FieldDetails } from '../types';
-import { getFieldAccessibility } from './field-accessibility';
 import styles from './FormField.module.css';
 import messageStyles from './FieldMessage.module.css';
 
-type FieldControlProps = Pick<
-  AriaAttributes,
-  'aria-describedby' | 'aria-invalid'
-> & {
+/** What FormField passes to its control. */
+type FieldControlProps = {
+  /** Connects the native label to the control. */
   id: string;
+  /**
+   * True while an error is shown; FieldControl.module.css draws the invalid
+   * border from it.
+   */
+  'data-invalid': boolean;
 };
 
-type FormFieldProps = FieldDetails &
-  Pick<AriaAttributes, 'aria-describedby' | 'aria-invalid'> & {
-    children: (props: FieldControlProps) => ReactNode;
-  };
+type FormFieldProps = FieldDetails & {
+  children: (props: FieldControlProps) => ReactNode;
+};
 
 /**
- * Render the label, control and messages using one accessibility binding.
- * The helper supplies both message IDs and the control's references to them,
- * so removing a message also removes its generated reference. The native
- * label/control association continues to use the required field id.
+ * The label, the control and the help and error messages below it. The
+ * control receives the field id, which the native label points at, and
+ * data-invalid, which is true while an error is shown.
  */
 export function FormField({
   id,
@@ -29,18 +31,12 @@ export function FormField({
   requirementLabel,
   help,
   error,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
   children
 }: FormFieldProps) {
-  const { helpId, errorId, attributes } = getFieldAccessibility({
+  const controlProps: FieldControlProps = {
     id,
-    help,
-    error,
-    'aria-describedby': describedBy,
-    'aria-invalid': invalid
-  });
-  const controlProps: FieldControlProps = { id, ...attributes };
+    'data-invalid': hasError(error)
+  };
 
   return (
     <div className={styles.field}>
@@ -54,16 +50,8 @@ export function FormField({
         )}
       </label>
       {children(controlProps)}
-      {helpId && (
-        <span id={helpId} className={messageStyles.help}>
-          {help}
-        </span>
-      )}
-      {errorId && (
-        <span id={errorId} className={messageStyles.error} role='alert'>
-          {error}
-        </span>
-      )}
+      {help && <span className={messageStyles.help}>{help}</span>}
+      {hasError(error) && <span className={messageStyles.error}>{error}</span>}
     </div>
   );
 }

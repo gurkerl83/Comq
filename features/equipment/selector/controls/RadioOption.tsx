@@ -9,7 +9,7 @@ type RadioOptionProps = Omit<
   ComponentPropsWithRef<'input'>,
   'type' | 'className' | 'name' | 'value'
 > & {
-  /** Native group name, also used to locate the group's error message. */
+  /** Native group name. */
   name: string;
   /** Answer submitted when this option is checked. */
   value: string;
@@ -17,39 +17,23 @@ type RadioOptionProps = Omit<
   label: string;
   /** Optional supporting text inside the label. */
   description?: string;
-  /** Whether the group's exposed validation error applies to this input. */
-  invalid?: boolean;
 };
 
+/**
+ * A native radio inside a card label, with a title and an optional
+ * description. Attributes it does not set itself, such as aria-* or data-*,
+ * are passed on to the input; type, name and value are its own.
+ */
 export function RadioOption({
   name,
   value,
   label,
   description,
-  invalid,
-  'aria-describedby': describedBy,
-  'aria-invalid': ariaInvalid,
   ...inputProps
 }: RadioOptionProps) {
-  const descriptionIds: string[] = [];
-  if (describedBy) {
-    descriptionIds.push(describedBy);
-  }
-  if (invalid) {
-    descriptionIds.push(`${name}-error`);
-  }
-  const ariaDescribedBy = descriptionIds.join(' ') || undefined;
-
   return (
     <label className={`${styles.option} ${styles.card}`}>
-      <input
-        {...inputProps}
-        type='radio'
-        name={name}
-        value={value}
-        aria-invalid={invalid ?? ariaInvalid}
-        aria-describedby={ariaDescribedBy}
-      />
+      <input {...inputProps} type='radio' name={name} value={value} />
       {description !== undefined ? (
         <span>
           <span className={styles.title}>{label}</span>

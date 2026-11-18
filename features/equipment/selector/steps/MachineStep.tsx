@@ -6,7 +6,6 @@ import {
   useWatch
 } from 'react-hook-form';
 
-import { hasError } from '../../../../lib/forms/errors';
 import type { SupportedLocale } from '../../../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../../../lib/site/config';
 import { Link } from '../../../../components/Link';
@@ -74,18 +73,11 @@ export function MachineStep({
       </p>
     );
   } else if (configurationError) {
-    feedback = (
-      <p id='configuration-error' role='alert'>
-        {configurationError}
-      </p>
-    );
+    feedback = <p>{configurationError}</p>;
   }
 
   return (
     <RadioGroup
-      name='machine'
-      legend={translations.machine}
-      hideLegend
       error={machineError}
       before={
         machines.length === 1 && (
@@ -100,15 +92,11 @@ export function MachineStep({
           locale={locale}
           entry={entry}
           checked={selectedMachineSlug === entry.slug}
-          invalid={hasError(machineError)}
           onChange={() => onChange(entry.slug)}
           selectionRef={ref}
           onBlur={onBlur}
           customizationRef={
             selectedMachineSlug === entry.slug ? customizationRef : undefined
-          }
-          configurationError={
-            selectedMachineSlug === entry.slug ? configurationError : undefined
           }
           translations={translations}
           customization={

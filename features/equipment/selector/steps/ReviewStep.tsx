@@ -70,7 +70,6 @@ export function ReviewStep({
                 variant='text'
                 type='button'
                 onClick={() => onEdit(row.step)}
-                aria-label={`${translations.edit}: ${row.label}`}
               >
                 {translations.edit}
               </Button>

@@ -36,7 +36,7 @@
   border-color: var(--color-border);
 }
 
-.thumbnail[aria-current='true'] {
+.thumbnail[data-current='true'] {
   border-color: var(--color-accent);
 }
 

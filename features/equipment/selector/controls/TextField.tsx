@@ -7,14 +7,17 @@ import styles from './FieldControl.module.css';
 
 type TextFieldProps = NativeFieldProps<ComponentPropsWithRef<'input'>>;
 
+/**
+ * A labelled input inside FormField; a date input gets the calendar icon.
+ * Attributes it does not set itself, such as aria-* or data-*, are passed on
+ * to the input.
+ */
 export function TextField({
   id,
   label,
   requirementLabel,
   help,
   error,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
   ...inputProps
 }: TextFieldProps) {
   return (
@@ -24,8 +27,6 @@ export function TextField({
       requirementLabel={requirementLabel}
       help={help}
       error={error}
-      aria-describedby={describedBy}
-      aria-invalid={invalid}
     >
       {controlProps => {
         const input = (
