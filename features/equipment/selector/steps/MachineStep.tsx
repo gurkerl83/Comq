@@ -6,7 +6,6 @@ import {
   useWatch
 } from 'react-hook-form';
 
-import { hasError } from '../../../../lib/forms/errors';
 import type { SupportedLocale } from '../../../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../../../lib/site/config';
 import { Link } from '../../../../components/Link';
@@ -74,7 +73,7 @@ export function MachineStep({
       </p>
     );
   } else if (configurationError) {
-    feedback = <p role='alert'>{configurationError}</p>;
+    feedback = <p>{configurationError}</p>;
   }
 
   return (
@@ -96,7 +95,6 @@ export function MachineStep({
           locale={locale}
           entry={entry}
           checked={selectedMachineSlug === entry.slug}
-          invalid={hasError(machineError)}
           onChange={() => onChange(entry.slug)}
           selectionRef={ref}
           onBlur={onBlur}

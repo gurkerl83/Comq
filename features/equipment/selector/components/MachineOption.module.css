@@ -46,11 +46,11 @@
 }
 
 .option:hover,
-.option[aria-current='true'] {
+.option[data-selected='true'] {
   border-color: var(--color-accent);
 }
 
-.option[aria-current='true'] {
+.option[data-selected='true'] {
   box-shadow: inset 0 0 0 1px var(--color-accent);
 }
 

@@ -27,7 +27,6 @@ type MachineOptionProps = {
   locale: SupportedLocale;
   entry: EquipmentEntry;
   checked: boolean;
-  invalid: boolean;
   onChange: () => void;
   /**
    * Registers the selectable card for validation focus.
@@ -50,7 +49,6 @@ export function MachineOption({
   locale,
   entry,
   checked,
-  invalid,
   onChange,
   selectionRef,
   onBlur,
@@ -59,8 +57,6 @@ export function MachineOption({
   customization
 }: MachineOptionProps) {
   const editing = customization?.editing ?? false;
-  const titleId = `machine-${entry.slug}-title`;
-  const summaryId = `machine-${entry.slug}-summary`;
 
   function selectCard(
     event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
@@ -75,22 +71,15 @@ export function MachineOption({
     <div
       ref={selectionRef}
       className={styles.option}
-      role='group'
+      data-selected={checked}
       tabIndex={0}
-      aria-current={checked || undefined}
-      aria-invalid={invalid}
-      aria-labelledby={titleId}
-      aria-describedby={invalid ? `${summaryId} machine-error` : summaryId}
-      aria-keyshortcuts='Enter Space'
       onClick={selectCard}
       onKeyDown={selectCard}
       onBlur={event => {
         if (event.target === event.currentTarget) onBlur?.();
       }}
     >
-      <span id={titleId} className={styles.title}>
-        {entry.name}
-      </span>
+      <span className={styles.title}>{entry.name}</span>
       {customization &&
         !editing &&
         (entry.options.length > 0 || entry.extras.length > 0) && (
@@ -103,16 +92,13 @@ export function MachineOption({
             {translations.customize}
           </button>
         )}
-      <p id={summaryId} className={styles.description}>
-        {entry.summary}
-      </p>
+      <p className={styles.description}>{entry.summary}</p>
       <Link
         onClick={event => event.stopPropagation()}
         className={styles.detailLink}
         href={createHrefForLocale(locale, `/equipos/${entry.slug}`)}
         target='_blank'
         rel='noopener noreferrer'
-        aria-label={`${translations.details}: ${entry.name} (${translations.opensNewTab})`}
       >
         {translations.details}
       </Link>
