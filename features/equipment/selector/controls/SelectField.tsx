@@ -7,14 +7,16 @@ import styles from './FieldControl.module.css';
 
 type SelectFieldProps = NativeFieldProps<ComponentPropsWithRef<'select'>>;
 
+/**
+ * A labelled select inside FormField, with the chevron icon. Attributes it
+ * does not set itself, such as aria-* or data-*, are passed on to the select.
+ */
 export function SelectField({
   id,
   label,
   requirementLabel,
   help,
   error,
-  'aria-describedby': describedBy,
-  'aria-invalid': invalid,
   children,
   ...selectProps
 }: SelectFieldProps) {
@@ -25,8 +27,6 @@ export function SelectField({
       requirementLabel={requirementLabel}
       help={help}
       error={error}
-      aria-describedby={describedBy}
-      aria-invalid={invalid}
     >
       {controlProps => (
         <div className={styles.selectWrapper}>

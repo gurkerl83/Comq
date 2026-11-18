@@ -104,8 +104,8 @@
   opacity: 1;
 }
 
-.input[aria-invalid='true'],
-.textarea[aria-invalid='true'] {
+.input[data-invalid='true'],
+.textarea[data-invalid='true'] {
   border-color: var(--color-action);
   box-shadow: inset 0 0 0 1px var(--color-action);
 }

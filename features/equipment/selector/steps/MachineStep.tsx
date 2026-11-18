@@ -78,7 +78,6 @@ export function MachineStep({
 
   return (
     <RadioGroup
-      name='machine'
       legend={translations.machine}
       hideLegend
       error={machineError}
