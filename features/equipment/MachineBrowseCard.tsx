@@ -2,6 +2,7 @@ import {
   createHrefForLocale,
   type SupportedLocale
 } from '../../lib/i18n/locales';
+import { Card } from '../../components/Card';
 import { Link } from '../../components/Link';
 import type { EquipmentEntry } from './types';
 import type { CatalogueContent } from './catalogue-content';
@@ -25,7 +26,7 @@ export function MachineBrowseCard({
   translations
 }: MachineBrowseCardProps) {
   return (
-    <li className={styles.card}>
+    <Card as='li' className={styles.card}>
       <p className={styles.category}>{machine.categoryName}</p>
       <h3 className={styles.name}>{machine.name}</h3>
       <p className={styles.summary}>{machine.summary}</p>
@@ -40,6 +41,6 @@ export function MachineBrowseCard({
       >
         {translations.details}
       </Link>
-    </li>
+    </Card>
   );
 }

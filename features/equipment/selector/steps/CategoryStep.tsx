@@ -7,7 +7,7 @@ import {
 
 import type { EquipmentCategory } from '../../types';
 import type { EquipmentSelection } from '../../selection';
-import { ChoiceCard } from '../controls/ChoiceCard';
+import { SelectableCard } from '../controls/SelectableCard';
 import { RadioGroup } from '../controls/RadioGroup';
 import styles from './CategoryStep.module.css';
 
@@ -22,7 +22,7 @@ type CategoryStepProps = {
 };
 
 /**
- * The catalogue's categories, each a ChoiceCard with its name and
+ * The catalogue's categories, each a SelectableCard with its name and
  * description.
  */
 export function CategoryStep({ categories, onChange }: CategoryStepProps) {
@@ -42,7 +42,7 @@ export function CategoryStep({ categories, onChange }: CategoryStepProps) {
   return (
     <RadioGroup error={categoryError}>
       {categories.map(category => (
-        <ChoiceCard
+        <SelectableCard
           key={category.id}
           ref={ref}
           onBlur={onBlur}
@@ -51,7 +51,7 @@ export function CategoryStep({ categories, onChange }: CategoryStepProps) {
         >
           <span className={styles.title}>{category.name}</span>
           <span className={styles.description}>{category.description}</span>
-        </ChoiceCard>
+        </SelectableCard>
       ))}
     </RadioGroup>
   );

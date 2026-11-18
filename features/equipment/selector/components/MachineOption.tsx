@@ -1,4 +1,4 @@
-import type { Ref } from 'react';
+import type { Ref, RefCallback } from 'react';
 
 import {
   createHrefForLocale,
@@ -8,7 +8,7 @@ import { Link } from '../../../../components/Link';
 import type { EquipmentEntry } from '../../types';
 import type { SelectorContent } from '../../selector-content';
 import type { MachineCustomization } from '../types';
-import { ChoiceCard } from '../controls/ChoiceCard';
+import { SelectableCard } from '../controls/SelectableCard';
 import { MachineConfiguration } from './MachineConfiguration';
 import styles from './MachineOption.module.css';
 
@@ -18,9 +18,10 @@ type MachineOptionProps = {
   checked: boolean;
   onChange: () => void;
   /**
-   * Registers the selectable card for validation focus.
+   * The machine field's ref from React Hook Form, attached to the card, so
+   * setFocus('machine') can focus it when no machine is chosen.
    */
-  selectionRef?: Ref<HTMLDivElement>;
+  ref?: RefCallback<HTMLElement>;
   /**
    * Reports card blur to the enquiry form.
    */
@@ -35,7 +36,7 @@ type MachineOptionProps = {
 };
 
 /**
- * One machine in the selector, drawn as a ChoiceCard: its name, summary,
+ * One machine in the selector, drawn as a SelectableCard: its name, summary,
  * details link and specifications, with Customize and the option editor on
  * the selected card.
  */
@@ -44,7 +45,7 @@ export function MachineOption({
   entry,
   checked,
   onChange,
-  selectionRef,
+  ref,
   onBlur,
   customizationRef,
   translations,
@@ -53,8 +54,8 @@ export function MachineOption({
   const editing = customization?.editing ?? false;
 
   return (
-    <ChoiceCard
-      ref={selectionRef}
+    <SelectableCard
+      ref={ref}
       className={styles.option}
       selected={checked}
       onSelect={onChange}
@@ -90,6 +91,6 @@ export function MachineOption({
           translations={translations}
         />
       </div>
-    </ChoiceCard>
+    </SelectableCard>
   );
 }
