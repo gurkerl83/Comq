@@ -1,9 +1,15 @@
-import { useFormContext, useFormState, useWatch } from 'react-hook-form';
+import {
+  useController,
+  useFormContext,
+  useFormState,
+  useWatch
+} from 'react-hook-form';
 
 import type { EquipmentCategory } from '../../types';
 import type { EquipmentSelection } from '../../selection';
+import { SelectableCard } from '../controls/SelectableCard';
 import { RadioGroup } from '../controls/RadioGroup';
-import { RadioOption } from '../controls/RadioOption';
+import styles from './CategoryStep.module.css';
 
 /**
  * Catalogue categories and the domain transition that initializes their machines.
@@ -15,33 +21,37 @@ type CategoryStepProps = {
   onChange: (value: EquipmentSelection['category']) => void;
 };
 
+/**
+ * The catalogue's categories, each a SelectableCard with its name and
+ * description.
+ */
 export function CategoryStep({ categories, onChange }: CategoryStepProps) {
-  const { control, register } = useFormContext<EquipmentSelection>();
+  const { control } = useFormContext<EquipmentSelection>();
 
   const selectedCategory = useWatch({ control, name: 'category' });
   const { errors } = useFormState({ control, name: 'category' });
 
   // The wizard handles category changes together with machine/configuration
-  // resets. Keep RHF's native registration and blur handling.
-  const { name, ref, onBlur } = register('category');
+  // resets. Keep RHF's focus and blur handling for the cards.
+  const {
+    field: { ref, onBlur }
+  } = useController({ control, name: 'category' });
 
   const categoryError = errors.category?.message;
 
   return (
     <RadioGroup error={categoryError}>
       {categories.map(category => (
-        <RadioOption
+        <SelectableCard
           key={category.id}
-          name={name}
           ref={ref}
           onBlur={onBlur}
-          value={category.id}
-          checked={selectedCategory === category.id}
-          onChange={() => onChange(category.id)}
-          required
-          label={category.name}
-          description={category.description}
-        />
+          selected={selectedCategory === category.id}
+          onSelect={() => onChange(category.id)}
+        >
+          <span className={styles.title}>{category.name}</span>
+          <span className={styles.description}>{category.description}</span>
+        </SelectableCard>
       ))}
     </RadioGroup>
   );

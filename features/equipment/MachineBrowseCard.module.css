@@ -20,10 +20,6 @@
   grid-row: span 5;
   grid-template-rows: subgrid;
   gap: 0.75rem;
-  padding: 1.25rem;
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-media);
-  background: var(--color-surface);
 }
 
 .category,
@@ -55,6 +51,5 @@
     /* Match the single-column list; each card now sizes its own rows. */
     grid-row: auto;
     grid-template-rows: none;
-    padding: 1rem;
   }
 }

@@ -1,0 +1,15 @@
+/* The frame every card shares: padding, border, corners and fill.
+   --card-background (app/theme.css) sets the fill; a section sets it for the
+   cards inside it. */
+.card {
+  padding: 1.25rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  background: var(--card-background);
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1rem;
+  }
+}

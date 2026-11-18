@@ -93,7 +93,7 @@ export function MachineStep({
           entry={entry}
           checked={selectedMachineSlug === entry.slug}
           onChange={() => onChange(entry.slug)}
-          selectionRef={ref}
+          ref={ref}
           onBlur={onBlur}
           customizationRef={
             selectedMachineSlug === entry.slug ? customizationRef : undefined

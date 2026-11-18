@@ -1,4 +1,4 @@
-import { type KeyboardEvent, type MouseEvent, type Ref } from 'react';
+import type { Ref, RefCallback } from 'react';
 
 import {
   createHrefForLocale,
@@ -8,20 +8,9 @@ import { Link } from '../../../../components/Link';
 import type { EquipmentEntry } from '../../types';
 import type { SelectorContent } from '../../selector-content';
 import type { MachineCustomization } from '../types';
+import { SelectableCard } from '../controls/SelectableCard';
 import { MachineConfiguration } from './MachineConfiguration';
 import styles from './MachineOption.module.css';
-
-/** Accept clicks and Enter/Space from the focused card itself. */
-function handleCardActivation(
-  event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
-): boolean {
-  if (!('key' in event)) return true;
-  if (event.target !== event.currentTarget) return false;
-  if (event.key !== 'Enter' && event.key !== ' ') return false;
-
-  event.preventDefault();
-  return true;
-}
 
 type MachineOptionProps = {
   locale: SupportedLocale;
@@ -29,9 +18,10 @@ type MachineOptionProps = {
   checked: boolean;
   onChange: () => void;
   /**
-   * Registers the selectable card for validation focus.
+   * The machine field's ref from React Hook Form, attached to the card, so
+   * setFocus('machine') can focus it when no machine is chosen.
    */
-  selectionRef?: Ref<HTMLDivElement>;
+  ref?: RefCallback<HTMLElement>;
   /**
    * Reports card blur to the enquiry form.
    */
@@ -45,12 +35,17 @@ type MachineOptionProps = {
   customization?: MachineCustomization;
 };
 
+/**
+ * One machine in the selector, drawn as a SelectableCard: its name, summary,
+ * details link and specifications, with Customize and the option editor on
+ * the selected card.
+ */
 export function MachineOption({
   locale,
   entry,
   checked,
   onChange,
-  selectionRef,
+  ref,
   onBlur,
   customizationRef,
   translations,
@@ -58,26 +53,13 @@ export function MachineOption({
 }: MachineOptionProps) {
   const editing = customization?.editing ?? false;
 
-  function selectCard(
-    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
-  ) {
-    if (!handleCardActivation(event)) return;
-    if (checked) return;
-    event.currentTarget.focus({ preventScroll: true });
-    onChange();
-  }
-
   return (
-    <div
-      ref={selectionRef}
+    <SelectableCard
+      ref={ref}
       className={styles.option}
-      data-selected={checked}
-      tabIndex={0}
-      onClick={selectCard}
-      onKeyDown={selectCard}
-      onBlur={event => {
-        if (event.target === event.currentTarget) onBlur?.();
-      }}
+      selected={checked}
+      onSelect={onChange}
+      onBlur={onBlur}
     >
       <span className={styles.title}>{entry.name}</span>
       {customization &&
@@ -109,6 +91,6 @@ export function MachineOption({
           translations={translations}
         />
       </div>
-    </div>
+    </SelectableCard>
   );
 }

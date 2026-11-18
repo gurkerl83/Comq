@@ -1,0 +1,15 @@
+/* A card the visitor picks from a set: the category and machine cards. The
+   frame comes from Card; this adds the pointer and the look of the hovered and
+   the chosen card. */
+.card {
+  cursor: pointer;
+}
+
+.card:hover,
+.card[data-selected='true'] {
+  border-color: var(--color-accent);
+}
+
+.card[data-selected='true'] {
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}

@@ -4,6 +4,8 @@
 }
 
 .stepPanel {
+  /* The cards inside take the page background to stand out from the panel. */
+  --card-background: var(--color-background);
   padding: 2rem;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-media);
