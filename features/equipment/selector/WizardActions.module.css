@@ -11,11 +11,6 @@
   border-top: var(--border-width) solid var(--color-border);
 }
 
-/* No button gets wider than the row. */
-.actions > * {
-  max-width: 100%;
-}
-
 /* Back takes the left end. */
 .back {
   margin-right: auto;
