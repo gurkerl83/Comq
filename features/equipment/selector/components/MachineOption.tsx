@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  type KeyboardEvent,
-  type MouseEvent,
-  type Ref
-} from 'react';
+import { type KeyboardEvent, type MouseEvent, type Ref } from 'react';
 
 import {
   createHrefForLocale,
@@ -47,10 +41,6 @@ type MachineOptionProps = {
    * Allows aggregate configuration errors to focus the selected Customize button.
    */
   customizationRef?: Ref<HTMLButtonElement>;
-  /**
-   * Feedback linked to the selected card's configuration trigger.
-   */
-  configurationError?: string;
   translations: SelectorContent;
   /** Editing session, supplied only to the selected card. */
   customization?: MachineCustomization;
@@ -65,22 +55,12 @@ export function MachineOption({
   selectionRef,
   onBlur,
   customizationRef,
-  configurationError,
   translations,
   customization
 }: MachineOptionProps) {
   const editing = customization?.editing ?? false;
   const titleId = `machine-${entry.slug}-title`;
   const summaryId = `machine-${entry.slug}-summary`;
-  const customizeButton = useRef<HTMLButtonElement>(null);
-  const wasEditing = useRef(false);
-  useEffect(() => {
-    // Opening leaves focus untouched. Apply/Cancel disappear when editing ends,
-    // so return focus to the trigger without scrolling.
-    if (!editing && wasEditing.current && checked)
-      customizeButton.current?.focus({ preventScroll: true });
-    wasEditing.current = editing;
-  }, [editing, checked]);
 
   function selectCard(
     event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
@@ -112,26 +92,13 @@ export function MachineOption({
         {entry.name}
       </span>
       {customization &&
+        !editing &&
         (entry.options.length > 0 || entry.extras.length > 0) && (
           <button
-            ref={button => {
-              customizeButton.current = button;
-              if (typeof customizationRef === 'function')
-                return customizationRef(button);
-              if (customizationRef) customizationRef.current = button;
-            }}
+            ref={customizationRef}
             type='button'
             className={styles.customize}
-            aria-expanded={editing}
-            aria-controls={`${entry.slug}-configuration`}
-            aria-disabled={editing}
-            aria-invalid={Boolean(configurationError) || undefined}
-            aria-describedby={
-              configurationError ? 'configuration-error' : undefined
-            }
-            onClick={() => {
-              if (!editing) customization.onStart();
-            }}
+            onClick={customization.onStart}
           >
             {translations.customize}
           </button>
@@ -149,7 +116,7 @@ export function MachineOption({
       >
         {translations.details}
       </Link>
-      <div id={`${entry.slug}-configuration`} className={styles.configuration}>
+      <div className={styles.configuration}>
         <MachineConfiguration
           entry={entry}
           customization={customization}

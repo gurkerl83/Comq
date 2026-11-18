@@ -100,11 +100,6 @@
   cursor: pointer;
 }
 
-.customize[aria-disabled='true'] {
-  color: var(--color-text-muted);
-  cursor: default;
-}
-
 .configuration {
   grid-column: 1 / -1;
   grid-row: 4;

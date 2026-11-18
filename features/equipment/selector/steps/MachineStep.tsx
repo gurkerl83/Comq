@@ -74,11 +74,7 @@ export function MachineStep({
       </p>
     );
   } else if (configurationError) {
-    feedback = (
-      <p id='configuration-error' role='alert'>
-        {configurationError}
-      </p>
-    );
+    feedback = <p role='alert'>{configurationError}</p>;
   }
 
   return (
@@ -106,9 +102,6 @@ export function MachineStep({
           onBlur={onBlur}
           customizationRef={
             selectedMachineSlug === entry.slug ? customizationRef : undefined
-          }
-          configurationError={
-            selectedMachineSlug === entry.slug ? configurationError : undefined
           }
           translations={translations}
           customization={
