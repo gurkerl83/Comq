@@ -111,9 +111,6 @@ export function MachineOption({
       <span id={titleId} className={styles.title}>
         {entry.name}
       </span>
-      <p id={summaryId} className={styles.description}>
-        {entry.summary}
-      </p>
       {customization &&
         (entry.options.length > 0 || entry.extras.length > 0) && (
           <button
@@ -139,13 +136,9 @@ export function MachineOption({
             {translations.customize}
           </button>
         )}
-      <div id={`${entry.slug}-configuration`} className={styles.configuration}>
-        <MachineConfiguration
-          entry={entry}
-          customization={customization}
-          translations={translations}
-        />
-      </div>
+      <p id={summaryId} className={styles.description}>
+        {entry.summary}
+      </p>
       <Link
         onClick={event => event.stopPropagation()}
         className={styles.detailLink}
@@ -156,6 +149,13 @@ export function MachineOption({
       >
         {translations.details}
       </Link>
+      <div id={`${entry.slug}-configuration`} className={styles.configuration}>
+        <MachineConfiguration
+          entry={entry}
+          customization={customization}
+          translations={translations}
+        />
+      </div>
     </div>
   );
 }

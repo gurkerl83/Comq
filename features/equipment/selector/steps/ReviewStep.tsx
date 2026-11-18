@@ -1,5 +1,6 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 
+import { Button } from '../../../../components/Button';
 import type { SupportedLocale } from '../../../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../../../lib/site/config';
 import type { EquipmentEntry } from '../../types';
@@ -8,7 +9,7 @@ import {
   getSelectionSummary,
   type EquipmentSelection
 } from '../../selection';
-import { WizardActions, WizardActionLink } from '../WizardActions';
+import { WizardActions } from '../WizardActions';
 import type { SelectorContent } from '../../selector-content';
 import type { SelectionStep } from '../../selection-steps';
 import styles from './ReviewStep.module.css';
@@ -65,14 +66,14 @@ export function ReviewStep({
             <dt>{row.label}</dt>
             <dd>
               <span>{row.value}</span>
-              <button
-                className={styles.editButton}
+              <Button
+                variant='text'
                 type='button'
                 onClick={() => onEdit(row.step)}
                 aria-label={`${translations.edit}: ${row.label}`}
               >
                 {translations.edit}
-              </button>
+              </Button>
             </dd>
           </div>
         ))}
@@ -85,13 +86,15 @@ export function ReviewStep({
         nextDisabled={false}
         isLastStep
         finalAction={
-          <WizardActionLink
+          <Button
+            native
+            variant='primary'
             href={`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`}
             target='_blank'
             rel='noopener noreferrer'
           >
             {translations.send}
-          </WizardActionLink>
+          </Button>
         }
       />
     </>

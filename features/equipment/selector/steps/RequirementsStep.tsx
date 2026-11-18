@@ -1,6 +1,7 @@
 import type { RefObject } from 'react';
 import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 
+import { Button } from '../../../../components/Button';
 import type { EquipmentEntry } from '../../types';
 import { AcquisitionMode, type EquipmentSelection } from '../../selection';
 import type { SelectorContent } from '../../selector-content';
@@ -53,13 +54,9 @@ export function RequirementsStep({
           <strong>{machine.name}</strong>
           <span>{machine.categoryName}</span>
         </p>
-        <button
-          type='button'
-          className={styles.changeEquipment}
-          onClick={onChangeEquipment}
-        >
+        <Button variant='text' type='button' onClick={onChangeEquipment}>
           {translations.changeEquipment}
-        </button>
+        </Button>
       </div>
       <AcquisitionChoices translations={translations} />
       <div className={styles.fields}>

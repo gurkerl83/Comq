@@ -10,9 +10,9 @@
  *   2 | Short description      | Longer description     |
  *     |                        | continues here         |
  *     +------------------------+------------------------+
- *   3 | Specs / option editor  | Specifications block   |
+ *   3 | Details link           | Details link           |
  *     +------------------------+------------------------+
- *   4 | Details link           | Details link           |
+ *   4 | Specs / option editor  | Specifications block   |
  *     +------------------------+------------------------+
  *
  * 1. ../controls/RadioGroup.module.css (.choices) provides two columns.
@@ -20,13 +20,14 @@
  * 2. grid-row: span 4 places each card across four parent rows;
  *    grid-template-rows: subgrid uses those rows inside the card as well.
  *    Four is the number of rows, not a requirement that their heights match.
- * 3. A longer description enlarges row 2 for both cards, so both specification
- *    blocks start at row 3. Heights adjust with the text and available width.
+ * 3. A longer description enlarges row 2 for both cards, so both details links
+ *    sit in row 3 and both specification blocks start at row 4. Heights adjust
+ *    with the text and available width.
  * 4. The title occupies row 1 directly; the description spans the
  *    full content width in row 2.
  *
  * Customize occupies a separate column beside the title in row 1.
- * Row 3 contains specifications, extras and Apply/Cancel; its individual entries do
+ * Row 4 contains specifications, extras and Apply/Cancel; its individual entries do
  * not share rows across cards. Later pairs of cards get their own four rows.
  * If the card's sections change, update the row spans and this map together.
  */
@@ -55,7 +56,7 @@
 
 .detailLink {
   grid-column: 1 / -1;
-  grid-row: 4;
+  grid-row: 3;
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
@@ -106,7 +107,7 @@
 
 .configuration {
   grid-column: 1 / -1;
-  grid-row: 3;
+  grid-row: 4;
   min-width: 0;
 }
 

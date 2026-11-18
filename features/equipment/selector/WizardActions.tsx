@@ -1,7 +1,6 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import { Link } from '../../../components/Link';
-import type { WithoutClassName } from './types';
+import { Button } from '../../../components/Button';
 import styles from './WizardActions.module.css';
 
 type WizardActionsProps = {
@@ -13,6 +12,12 @@ type WizardActionsProps = {
   finalAction?: ReactNode;
 };
 
+/**
+ * The button row below a wizard step. Back sits on the left when the step has
+ * a previous one. On the right sits the submit button that continues, or on
+ * the last step the button passed in as finalAction. The row places its
+ * buttons itself, so finalAction needs no class.
+ */
 export function WizardActions({
   onBack,
   backLabel,
@@ -24,31 +29,22 @@ export function WizardActions({
   return (
     <div className={styles.actions}>
       {onBack && (
-        <button
+        <Button
+          variant='secondary'
+          className={styles.back}
           type='button'
-          className={styles.secondaryButton}
           onClick={onBack}
         >
           {backLabel}
-        </button>
+        </Button>
       )}
       {isLastStep ? (
         finalAction
       ) : (
-        <button
-          className={styles.primaryButton}
-          type='submit'
-          disabled={nextDisabled}
-        >
+        <Button variant='primary' type='submit' disabled={nextDisabled}>
           {nextLabel}
-        </button>
+        </Button>
       )}
     </div>
   );
-}
-
-export function WizardActionLink(
-  props: WithoutClassName<ComponentPropsWithoutRef<'a'>> & { href: string }
-) {
-  return <Link native {...props} className={styles.primaryButton} />;
 }
