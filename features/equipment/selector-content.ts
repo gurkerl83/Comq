@@ -7,7 +7,6 @@ const en = {
   title: 'Find equipment for your operation',
   introduction:
     'Explore equipment, choose a configuration and prepare your enquiry. You can go back at any time to adjust your selection.',
-  progress: 'Selection progress',
   steps: {
     [SelectionStep.Category]: {
       title: 'What type of equipment do you need?',
@@ -37,7 +36,6 @@ const en = {
   changeEquipment: 'Change equipment',
   edit: 'Edit',
   details: 'View machine details',
-  opensNewTab: 'opens in a new tab',
   oneMachine:
     'This category has one machine, so it is selected for you. You can still review its details.',
   customize: 'Customize',
@@ -47,7 +45,6 @@ const en = {
   configurationAdvice: 'I need advice',
   applyOptions: 'Apply options',
   cancelCustomization: 'Cancel',
-  applyBeforeContinue: 'Apply or cancel your changes before continuing.',
   acquisition: 'How would you like to obtain it?',
   purchase: 'Purchase',
   rental: 'Rental',
@@ -119,7 +116,6 @@ const es: SelectorContent = {
   title: 'Encuentra el equipo para tu operación',
   introduction:
     'Explora los equipos, elige una configuración y prepara tu consulta. Puedes volver a cualquier paso para ajustar tu selección.',
-  progress: 'Avance de la selección',
   steps: {
     [SelectionStep.Category]: {
       title: '¿Qué tipo de equipo necesitas?',
@@ -150,7 +146,6 @@ const es: SelectorContent = {
   changeEquipment: 'Cambiar equipo',
   edit: 'Editar',
   details: 'Ver detalles del equipo',
-  opensNewTab: 'se abre en una nueva pestaña',
   oneMachine:
     'Esta categoría tiene un solo equipo, por eso ya está seleccionado. Puedes revisar sus detalles antes de continuar.',
   customize: 'Personalizar',
@@ -160,7 +155,6 @@ const es: SelectorContent = {
   configurationAdvice: 'Necesito asesoría',
   applyOptions: 'Aplicar opciones',
   cancelCustomization: 'Cancelar',
-  applyBeforeContinue: 'Aplica o cancela los cambios antes de continuar.',
   acquisition: '¿Buscas comprar o alquilar?',
   purchase: 'Compra',
   rental: 'Alquiler',
