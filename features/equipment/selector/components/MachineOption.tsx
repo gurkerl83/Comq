@@ -1,4 +1,4 @@
-import { type KeyboardEvent, type MouseEvent, type Ref } from 'react';
+import type { Ref } from 'react';
 
 import {
   createHrefForLocale,
@@ -8,20 +8,9 @@ import { Link } from '../../../../components/Link';
 import type { EquipmentEntry } from '../../types';
 import type { SelectorContent } from '../../selector-content';
 import type { MachineCustomization } from '../types';
+import { ChoiceCard } from '../controls/ChoiceCard';
 import { MachineConfiguration } from './MachineConfiguration';
 import styles from './MachineOption.module.css';
-
-/** Accept clicks and Enter/Space from the focused card itself. */
-function handleCardActivation(
-  event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
-): boolean {
-  if (!('key' in event)) return true;
-  if (event.target !== event.currentTarget) return false;
-  if (event.key !== 'Enter' && event.key !== ' ') return false;
-
-  event.preventDefault();
-  return true;
-}
 
 type MachineOptionProps = {
   locale: SupportedLocale;
@@ -45,6 +34,11 @@ type MachineOptionProps = {
   customization?: MachineCustomization;
 };
 
+/**
+ * One machine in the selector, drawn as a ChoiceCard: its name, summary,
+ * details link and specifications, with Customize and the option editor on
+ * the selected card.
+ */
 export function MachineOption({
   locale,
   entry,
@@ -58,26 +52,13 @@ export function MachineOption({
 }: MachineOptionProps) {
   const editing = customization?.editing ?? false;
 
-  function selectCard(
-    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
-  ) {
-    if (!handleCardActivation(event)) return;
-    if (checked) return;
-    event.currentTarget.focus({ preventScroll: true });
-    onChange();
-  }
-
   return (
-    <div
+    <ChoiceCard
       ref={selectionRef}
       className={styles.option}
-      data-selected={checked}
-      tabIndex={0}
-      onClick={selectCard}
-      onKeyDown={selectCard}
-      onBlur={event => {
-        if (event.target === event.currentTarget) onBlur?.();
-      }}
+      selected={checked}
+      onSelect={onChange}
+      onBlur={onBlur}
     >
       <span className={styles.title}>{entry.name}</span>
       {customization &&
@@ -109,6 +90,6 @@ export function MachineOption({
           translations={translations}
         />
       </div>
-    </div>
+    </ChoiceCard>
   );
 }
