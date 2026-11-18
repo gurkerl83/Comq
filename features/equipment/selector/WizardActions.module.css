@@ -1,8 +1,8 @@
 /* The row places its buttons: the main action at the right end, also when it
-   is the only button. */
+   is the only button. Side by side, the buttons stay on one line; a long
+   label breaks onto a second line inside its button. */
 .actions {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
