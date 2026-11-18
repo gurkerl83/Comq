@@ -16,6 +16,10 @@ const languageNames: Record<SupportedLocale, string> = {
   en: 'English'
 };
 
+/**
+ * Links to the current page in each supported language. The link for the
+ * page's own language has data-current, which SiteShell.module.css marks.
+ */
 export function LanguageSwitcher({
   locale,
   label
@@ -35,7 +39,7 @@ export function LanguageSwitcher({
           hrefLang={language}
           lang={language}
           aria-label={languageNames[language]}
-          aria-current={language === locale ? 'page' : undefined}
+          data-current={language === locale}
           title={languageNames[language]}
         >
           {language.toUpperCase()}

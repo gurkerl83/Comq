@@ -20,12 +20,7 @@ type EquipmentNavigationProps = {
 export function EquipmentNavigation({ locale }: EquipmentNavigationProps) {
   const segment = useSelectedLayoutSegment();
   const content = getEquipmentNavigationContent(locale);
-  const browseCurrent =
-    segment === 'venta'
-      ? 'page'
-      : segment === 'equipos'
-        ? 'location'
-        : undefined;
+  const browseCurrent = segment === 'venta' || segment === 'equipos';
 
   return (
     <nav aria-label={content.label} className={styles.navigation}>
@@ -33,7 +28,7 @@ export function EquipmentNavigation({ locale }: EquipmentNavigationProps) {
         <li>
           <Link
             href={createHrefForLocale(locale, '/venta')}
-            aria-current={browseCurrent}
+            data-current={browseCurrent}
           >
             {content.browse}
           </Link>
@@ -41,7 +36,7 @@ export function EquipmentNavigation({ locale }: EquipmentNavigationProps) {
         <li>
           <Link
             href={createHrefForLocale(locale, '/selector')}
-            aria-current={segment === 'selector' ? 'page' : undefined}
+            data-current={segment === 'selector'}
           >
             {content.selector}
           </Link>

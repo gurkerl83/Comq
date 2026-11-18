@@ -51,7 +51,7 @@
   border-color: var(--color-accent);
 }
 
-.counts a[aria-current='page'] {
+.counts a[data-current='true'] {
   border-color: var(--color-action);
   color: var(--color-on-action);
   background: var(--color-action);

@@ -26,7 +26,7 @@
   text-decoration: none;
 }
 
-.links a[aria-current] {
+.links a[data-current='true'] {
   border-color: var(--color-accent);
 }
 

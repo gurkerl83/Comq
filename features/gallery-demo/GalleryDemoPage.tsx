@@ -80,6 +80,10 @@ type GalleryDemoPageProps = {
   count: number;
 };
 
+/**
+ * The gallery demo: title and notes, links for zero to six sample images with
+ * data-current on the count shown, and the gallery with that many images.
+ */
 export function GalleryDemoPage({ locale, count }: GalleryDemoPageProps) {
   const content = getGalleryDemoContent(locale);
   const images = getGalleryDemoImages(locale).slice(0, count);
@@ -96,7 +100,7 @@ export function GalleryDemoPage({ locale, count }: GalleryDemoPageProps) {
           <Link
             key={imageCount}
             href={{ pathname, query: { count: imageCount } }}
-            aria-current={count === imageCount ? 'page' : undefined}
+            data-current={count === imageCount}
             scroll={false}
           >
             {imageCount} {imageCount === 1 ? content.image : content.images}
