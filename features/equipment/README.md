@@ -51,8 +51,6 @@ Changing machines initializes the new machine's configuration from its defaults 
 
 Product pages list the machine's baseline specifications, configurable choices, defaults and independent extras. The shared [Gallery](../../components/gallery/) displays the images assigned by the equipment data.
 
-The [gallery demonstration](../gallery-demo/GalleryDemoPage.tsx) uses its own fixtures to exercise image counts and layouts independently of the equipment catalogue.
-
 **Proposed:** use confirmed product photographs and associate an image with an option only when it depicts that option. Any changes to displayed product specifications must correspond to a documented version or configuration.
 
 ## Data model and future extension

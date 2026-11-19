@@ -20,7 +20,7 @@ export type LinkProps =
  *    anchors.
  * 2. Routed links default to scroll={true} on mobile and desktop. This enables
  *    Next's normal scrolling; it does not always force the page to the top.
- * 3. Use scroll={false} for in-place updates such as gallery count selection.
+ * 3. Use scroll={false} for in-place updates that keep the scroll position.
  *    It does not control browser Back/Forward restoration.
  * 4. Use native for hashes, external sites, email, telephone and downloads.
  *    Native mode accepts anchor attributes rather than Next-specific props.
