@@ -1,14 +1,23 @@
 /* The row places its buttons: the main action at the right end, also when it
-   is the only button. Side by side, the buttons stay on one line; a long
-   label breaks onto a second line inside its button. */
+   is the only button. Side by side, the buttons stay on one line, also on
+   phones; a long label breaks onto a second line inside its button.
+
+   The row stays at the bottom of the window while the step goes on below it,
+   and stops at its own place at the end of the step. The step panel's
+   background covers what scrolls under it. z-index 2 keeps the row above the
+   date field (1) and below the step bar (4). */
 .actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 2rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem 0 1rem;
   border-top: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
 }
 
 /* Back takes the left end. */
@@ -16,15 +25,9 @@
   margin-right: auto;
 }
 
-/* On phones the buttons stack: one per line, full width, Back first. */
-@media (max-width: 640px) {
-  .actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-  }
-
-  .back {
-    margin-right: 0;
-  }
+/* While the row is on the page, the browser keeps 7rem at the bottom of the
+   window free when it scrolls to a focused field, so the field does not end
+   up under the row. 7rem fits the row with a two-line button label. */
+:global(html):has(.actions) {
+  scroll-padding-bottom: 7rem;
 }
