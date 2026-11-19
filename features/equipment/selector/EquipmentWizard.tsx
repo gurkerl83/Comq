@@ -50,7 +50,8 @@ export function EquipmentWizard({
   const wizardStart = useRef<HTMLDivElement>(null);
   const stepHeading = useRef<HTMLHeadingElement>(null);
   const customizeButton = useRef<HTMLButtonElement>(null);
-  const previousStep = useRef(step);
+  // The step the focus effect below last handled.
+  const handledStep = useRef(step);
   const pendingFocus = useRef<keyof EquipmentSelection | null>(null);
 
   const focusInvalidField = useCallback(
@@ -68,14 +69,14 @@ export function EquipmentWizard({
   // progress remains visible. Error targets are focused after their step mounts.
   // Initial rendering leaves page focus and scroll unchanged.
   useEffect(() => {
-    if (previousStep.current === step) return;
+    if (handledStep.current === step) return;
     stepHeading.current?.focus({ preventScroll: true });
     wizardStart.current?.scrollIntoView({ block: 'start' });
     if (pendingFocus.current) {
       focusInvalidField(pendingFocus.current);
       pendingFocus.current = null;
     }
-    previousStep.current = step;
+    handledStep.current = step;
   }, [step, focusInvalidField]);
 
   /**
