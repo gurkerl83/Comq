@@ -5,11 +5,18 @@
   cursor: pointer;
 }
 
-.card:hover,
 .card[data-selected='true'] {
   border-color: var(--color-accent);
 }
 
 .card[data-selected='true'] {
   box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+/* Touch screens keep :hover on the card a finger last touched, even when it
+   only scrolled, so that card would look chosen. */
+@media (hover: hover) {
+  .card:hover {
+    border-color: var(--color-accent);
+  }
 }
