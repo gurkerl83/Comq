@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
 import type { EquipmentCategory, EquipmentEntry } from '../types';
-import type { MachineCustomization } from './types';
 import type { SelectorContent } from '../selector-content';
 import { getSelectionFields } from '../selection-validation';
 import { SelectionStep, SELECTION_STEP_ORDER } from '../selection-steps';
@@ -13,17 +12,19 @@ import {
   type EquipmentSelection
 } from '../selection';
 import { createSelectionResolver } from './selection-resolver';
+import { useMachineCustomization } from './useMachineCustomization';
 import { useSelectionStep } from './useSelectionStep';
 
 /**
- * Own the applied enquiry, step navigation and customization visibility.
+ * Own the applied enquiry and step navigation.
  *
  * 1. React Hook Form seeds answers once and retains unmounted step fields.
  *    The server-assigned wizard key still determines when a new enquiry begins.
  * 2. Native controls validate on blur then edits. Continue validates and touches
  *    its fields without submitting; untouched later fields still wait for blur.
- * 3. The mounted configuration editor owns temporary values. Applying replaces
- *    configuration; closing the editor discards its unfinished changes.
+ * 3. useMachineCustomization holds whether the option editor is open. A step
+ *    change or an equipment change (category or machine) closes it through
+ *    closeEditor.
  * 4. Category and machine transitions run against the previous form values so
  *    their dependent defaults change together. Commercial answers survive.
  */
@@ -35,7 +36,6 @@ export function useEquipmentSelection(
   const { step, stepIndex, previousStep, nextStep, setStep } = useSelectionStep(
     getInitialSelectionStep(initialSelection)
   );
-  const [editing, setEditing] = useState(false);
   const startDateRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<EquipmentSelection>({
@@ -49,10 +49,11 @@ export function useEquipmentSelection(
     )
   });
 
-  const [category, machineSlug, configuration] = useWatch({
+  const [category, machineSlug] = useWatch({
     control: form.control,
-    name: ['category', 'machine', 'configuration']
+    name: ['category', 'machine']
   });
+  const { customization, closeEditor } = useMachineCustomization(form);
   const { touchedFields } = form.formState;
 
   const hasPreviousStep = previousStep !== undefined;
@@ -76,11 +77,11 @@ export function useEquipmentSelection(
    * Show another step. The option editor closes, so no step opens with an
    * editor left open.
    *
-   * @param next - The step to show.
+   * @param target - The step to show.
    */
-  function goToStep(next: SelectionStep) {
-    setEditing(false);
-    setStep(next);
+  function goToStep(target: SelectionStep) {
+    closeEditor();
+    setStep(target);
   }
 
   /** Show the previous step, as Back does; the first step has none. */
@@ -102,7 +103,7 @@ export function useEquipmentSelection(
   }
 
   function chooseCategory(nextCategory: EquipmentSelection['category']) {
-    if (nextCategory !== form.getValues('category')) setEditing(false);
+    if (nextCategory !== form.getValues('category')) closeEditor();
     form.setValues(values => selectCategory(values, catalogue, nextCategory), {
       shouldDirty: true
     });
@@ -110,7 +111,7 @@ export function useEquipmentSelection(
   }
 
   function chooseMachine(slug: EquipmentSelection['machine']) {
-    if (slug !== form.getValues('machine')) setEditing(false);
+    if (slug !== form.getValues('machine')) closeEditor();
     form.setValues(values => selectMachine(values, catalogue, slug), {
       shouldDirty: true
     });
@@ -130,7 +131,7 @@ export function useEquipmentSelection(
    * attempt succeeds or is ignored.
    */
   async function goToNextStep() {
-    if (editing || !nextStep) return;
+    if (customization.editing || !nextStep) return;
     const values = form.getValues();
     const stepsToValidate =
       step === SelectionStep.Requirements ? SELECTION_STEP_ORDER : [step];
@@ -150,38 +151,6 @@ export function useEquipmentSelection(
       if (field) return { field, step: id };
     }
   }
-
-  const customization: MachineCustomization = {
-    value: configuration,
-    editing,
-    onStart() {
-      setEditing(true);
-    },
-    /**
-     * Apply the validated draft to the enquiry.
-     *
-     * 1. The editor calls this through draftForm.handleSubmit(customization.onApply).
-     * 2. setValue replaces the complete configuration (choices and extras);
-     *    the enquiry's other answers and initial defaults remain unchanged.
-     * 3. Dirty state compares with initial defaults; touched records Apply, and
-     *    validation refreshes configuration errors.
-     * 4. Closing the editor discards its separate RHF instance. The enquiry
-     *    is not submitted.
-     *
-     * @param value - Complete choices and extras accepted by the editor.
-     */
-    onApply(value) {
-      form.setValue('configuration', value, {
-        shouldDirty: true,
-        shouldTouch: true,
-        shouldValidate: true
-      });
-      setEditing(false);
-    },
-    onCancel() {
-      setEditing(false);
-    }
-  };
 
   return {
     form,

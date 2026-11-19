@@ -50,6 +50,10 @@ sequenceDiagram
 
 ## Customize tries changes before saving them
 
+Customize is a branch inside the Machine step, not a step of its own. While it is open, Continue is unavailable and the wizard stays on Machine. Every way out closes it and returns to the step sequence.
+
+![Customize branches off the Machine step. The editor starts from the applied options in the main enquiry form, and Continue is unavailable while it is open. Apply, Cancel or leaving the step closes it and returns to the step sequence.](docs/images/customize-in-the-steps.svg)
+
 Customize starts with the currently applied equipment options. Edits stay in the temporary form until Apply succeeds.
 
 1. **Apply** uses the editor's `handleSubmit()` to check all temporary choices. If they pass, `setValue()` replaces the enquiry's equipment options with the complete chosen set. Other answers stay as they were.
