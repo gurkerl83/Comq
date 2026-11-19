@@ -21,6 +21,9 @@ export const SELECTION_STEP_ORDER = [
   SelectionStep.Review
 ] as const;
 
+/** The query parameter that names the step in the address: ?step=machine. */
+export const SELECTION_STEP_PARAM = 'step';
+
 /**
  * The step before the given one in SELECTION_STEP_ORDER.
  *
@@ -41,4 +44,34 @@ export function getPreviousStep(
  */
 export function getNextStep(step: SelectionStep): SelectionStep | undefined {
   return SELECTION_STEP_ORDER[SELECTION_STEP_ORDER.indexOf(step) + 1];
+}
+
+/**
+ * Read a step ID, such as the step a page address names.
+ *
+ * @param value - The step ID, or null when there is none.
+ * @returns The step with that ID, or undefined for a missing or unknown ID.
+ */
+export function readSelectionStep(
+  value: string | null
+): SelectionStep | undefined {
+  return SELECTION_STEP_ORDER.find(step => step === value);
+}
+
+/**
+ * The requested step, or the first step before it whose answers are not
+ * complete, so a step never shows ahead of a missing answer.
+ *
+ * @param requested - The step asked for.
+ * @param isStepComplete - Whether a step's answers are complete.
+ * @returns The step that may show.
+ */
+export function getReachableStep(
+  requested: SelectionStep,
+  isStepComplete: (step: SelectionStep) => boolean
+): SelectionStep {
+  for (const step of SELECTION_STEP_ORDER) {
+    if (step === requested || !isStepComplete(step)) return step;
+  }
+  return requested;
 }

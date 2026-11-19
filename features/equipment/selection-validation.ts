@@ -124,3 +124,34 @@ export function getSelectionFields(
   fields.push('quantity', 'country', 'projectLocation', 'notes');
   return fields;
 }
+
+/**
+ * Whether a step's answers pass the rules Continue applies, so the steps
+ * after it may show.
+ *
+ * @param step - The step to check.
+ * @param selection - The current answers.
+ * @param catalogue - Machines and supported configurations for this enquiry.
+ * @param translations - Localized messages the rules return.
+ * @returns True when every active field of the step passes its rule.
+ */
+export function isSelectionStepComplete(
+  step: SelectionStep,
+  selection: EquipmentSelection,
+  catalogue: EquipmentEntry[],
+  translations: SelectorContent
+): boolean {
+  const validators = createSelectionValidators(
+    selection,
+    catalogue,
+    translations
+  );
+  const fields = getSelectionFields(step, selection);
+
+  return fields.every(field => {
+    const validate = validators[field];
+    const answer = selection[field];
+    const errorMessage = validate(answer);
+    return errorMessage === null;
+  });
+}
