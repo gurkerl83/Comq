@@ -35,10 +35,7 @@ export function useEquipmentSelection(
     getInitialSelectionStep(initialSelection)
   );
   const [editing, setEditing] = useState(false);
-  const [isAdvancing, setIsAdvancing] = useState(false);
   const startDateRef = useRef<HTMLInputElement>(null);
-  const advancePending = useRef(false);
-  const navigationVersion = useRef(0);
 
   const form = useForm<EquipmentSelection>({
     defaultValues: initialSelection,
@@ -76,7 +73,6 @@ export function useEquipmentSelection(
   const machine = machines.find(entry => entry.slug === machineSlug);
 
   function goToStep(next: SelectionStep) {
-    navigationVersion.current += 1;
     setEditing(false);
     setStep(next);
   }
@@ -101,7 +97,6 @@ export function useEquipmentSelection(
 
   function chooseCategory(nextCategory: EquipmentSelection['category']) {
     if (nextCategory !== form.getValues('category')) setEditing(false);
-    navigationVersion.current += 1;
     form.setValues(values => selectCategory(values, catalogue, nextCategory), {
       shouldDirty: true
     });
@@ -110,7 +105,6 @@ export function useEquipmentSelection(
 
   function chooseMachine(slug: EquipmentSelection['machine']) {
     if (slug !== form.getValues('machine')) setEditing(false);
-    navigationVersion.current += 1;
     form.setValues(values => selectMachine(values, catalogue, slug), {
       shouldDirty: true
     });
@@ -123,18 +117,13 @@ export function useEquipmentSelection(
    * 1. Trigger the current step's fields, or all relevant answers before Review.
    * 2. shouldTouch lets corrections revalidate under onTouched after Continue;
    *    later fields remain untouched and the form's isSubmitted stays false.
-   * 3. A ref blocks repeated attempts immediately; isAdvancing drives the button.
-   * 4. Ignore results if navigation or equipment changed during validation.
-   * 5. Return the invalid field so the wizard mounts its step before focus.
+   * 3. Return the invalid field so the wizard mounts its step before focus.
    *
    * @returns The first invalid field and its step, or undefined when the
    * attempt succeeds or is ignored.
    */
   async function nextStep() {
-    if (editing || advancePending.current || isLastStep) return;
-    advancePending.current = true;
-    setIsAdvancing(true);
-    const version = navigationVersion.current;
+    if (editing || isLastStep) return;
     const next = SELECTION_STEP_ORDER[stepIndex + 1];
     const values = form.getValues();
     const stepsToValidate =
@@ -143,22 +132,16 @@ export function useEquipmentSelection(
       getSelectionFields(id, values)
     );
 
-    try {
-      const valid = await form.trigger(fields, { shouldTouch: true });
-      if (version !== navigationVersion.current) return;
-      if (valid) {
-        if (next) goToStep(next);
-        return;
-      }
-      for (const id of stepsToValidate) {
-        const field = getSelectionFields(id, values).find(
-          name => form.getFieldState(name).invalid
-        );
-        if (field) return { field, step: id };
-      }
-    } finally {
-      advancePending.current = false;
-      setIsAdvancing(false);
+    const valid = await form.trigger(fields, { shouldTouch: true });
+    if (valid) {
+      if (next) goToStep(next);
+      return;
+    }
+    for (const id of stepsToValidate) {
+      const field = getSelectionFields(id, values).find(
+        name => form.getFieldState(name).invalid
+      );
+      if (field) return { field, step: id };
     }
   }
 
@@ -166,7 +149,6 @@ export function useEquipmentSelection(
     value: configuration,
     editing,
     onStart() {
-      navigationVersion.current += 1;
       setEditing(true);
     },
     /**
@@ -203,7 +185,6 @@ export function useEquipmentSelection(
     stepIndex,
     hasPreviousStep,
     isLastStep,
-    isAdvancing,
     categories,
     machines,
     machine,

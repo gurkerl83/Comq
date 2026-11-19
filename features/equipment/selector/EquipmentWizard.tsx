@@ -155,7 +155,7 @@ export function EquipmentWizard({
               onBack={wizard.hasPreviousStep ? wizard.previousStep : undefined}
               backLabel={translations.back}
               nextLabel={translations.next}
-              nextDisabled={wizard.isAdvancing || wizard.customization.editing}
+              nextDisabled={wizard.customization.editing}
               isLastStep={false}
             />
           )}
