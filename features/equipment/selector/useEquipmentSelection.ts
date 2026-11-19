@@ -17,17 +17,26 @@ import { useMachineCustomization } from './useMachineCustomization';
 import { useSelectionStep } from './useSelectionStep';
 
 /**
- * Own the applied enquiry and step navigation.
+ * The equipment selector's state: the enquiry form, the step shown, the
+ * option editor and the moves between steps.
  *
  * 1. React Hook Form seeds answers once and retains unmounted step fields.
  *    The server-assigned wizard key still determines when a new enquiry begins.
  * 2. Native controls validate on blur then edits. Continue validates and touches
  *    its fields without submitting; untouched later fields still wait for blur.
- * 3. useMachineCustomization holds whether the option editor is open. A step
- *    change or an equipment change (category or machine) closes it through
- *    closeEditor.
- * 4. Category and machine transitions run against the previous form values so
+ * 3. useSelectionStep holds the step shown. goToStep is the only way to change
+ *    it, and it closes the option editor first.
+ * 4. useMachineCustomization holds whether the option editor is open. A step
+ *    change or another machine closes it through closeEditor.
+ * 5. Category and machine transitions run against the previous form values so
  *    their dependent defaults change together. Commercial answers survive.
+ *
+ * @param catalogue - Machines and supported configurations for this enquiry.
+ * @param initialSelection - The starting answers the server prepared, with a
+ * machine when the address names a known one.
+ * @param translations - Localized messages and country options.
+ * @returns What EquipmentWizard renders and calls: the form, the step and its
+ * moves, the option editor, the catalogue lists and the equipment choices.
  */
 export function useEquipmentSelection(
   catalogue: EquipmentEntry[],
@@ -92,8 +101,14 @@ export function useEquipmentSelection(
     if (fieldsToValidate.length > 0) void form.trigger(fieldsToValidate);
   }
 
+  /**
+   * Choose a category, as the Equipment step does. selectCategory adjusts the
+   * machine and its options to it, and touched fields among the three are
+   * checked again.
+   *
+   * @param nextCategory - The category the visitor chose.
+   */
   function chooseCategory(nextCategory: EquipmentSelection['category']) {
-    if (nextCategory !== form.getValues('category')) closeEditor();
     form.setValues(values => selectCategory(values, catalogue, nextCategory), {
       shouldDirty: true
     });

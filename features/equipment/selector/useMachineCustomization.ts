@@ -13,8 +13,8 @@ import type { MachineCustomization } from './types';
  *    own form, not here.
  * 2. Apply writes the complete configuration to the enquiry and closes the
  *    editor; Cancel closes it and the temporary choices are dropped.
- * 3. closeEditor is for the caller, because a step change or an equipment
- *    change (category or machine) closes the editor too.
+ * 3. closeEditor is for the caller, because a step change or another
+ *    machine closes the editor too.
  *
  * Flow between the editor's draft form and the enquiry form:
  * - Seed: the draft starts from customization.value, the applied
