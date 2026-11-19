@@ -13,6 +13,7 @@ import {
   type EquipmentSelection
 } from '../selection';
 import { createSelectionResolver } from './selection-resolver';
+import { useSelectionStep } from './useSelectionStep';
 
 /**
  * Own the applied enquiry, step navigation and customization visibility.
@@ -31,7 +32,7 @@ export function useEquipmentSelection(
   initialSelection: EquipmentSelection,
   translations: SelectorContent
 ) {
-  const [step, setStep] = useState<SelectionStep>(() =>
+  const { step, stepIndex, previousStep, nextStep, setStep } = useSelectionStep(
     getInitialSelectionStep(initialSelection)
   );
   const [editing, setEditing] = useState(false);
@@ -54,9 +55,8 @@ export function useEquipmentSelection(
   });
   const { touchedFields } = form.formState;
 
-  const stepIndex = SELECTION_STEP_ORDER.indexOf(step);
-  const hasPreviousStep = stepIndex > 0;
-  const isLastStep = step === SelectionStep.Review;
+  const hasPreviousStep = previousStep !== undefined;
+  const isLastStep = nextStep === undefined;
   const categories: EquipmentCategory[] = [
     ...new Map(
       catalogue.map(entry => [
@@ -72,14 +72,20 @@ export function useEquipmentSelection(
   const machines = catalogue.filter(entry => entry.category === category);
   const machine = machines.find(entry => entry.slug === machineSlug);
 
+  /**
+   * Show another step. The option editor closes, so no step opens with an
+   * editor left open.
+   *
+   * @param next - The step to show.
+   */
   function goToStep(next: SelectionStep) {
     setEditing(false);
     setStep(next);
   }
 
-  function previousStep() {
-    const previous = SELECTION_STEP_ORDER[stepIndex - 1];
-    if (previous) goToStep(previous);
+  /** Show the previous step, as Back does; the first step has none. */
+  function goToPreviousStep() {
+    if (previousStep) goToStep(previousStep);
   }
 
   /**
@@ -112,7 +118,8 @@ export function useEquipmentSelection(
   }
 
   /**
-   * Validate the active step without submitting the enquiry form.
+   * Validate the active step without submitting the enquiry form and, when
+   * it passes, show the next step, as Continue does.
    *
    * 1. Trigger the current step's fields, or all relevant answers before Review.
    * 2. shouldTouch lets corrections revalidate under onTouched after Continue;
@@ -122,9 +129,8 @@ export function useEquipmentSelection(
    * @returns The first invalid field and its step, or undefined when the
    * attempt succeeds or is ignored.
    */
-  async function nextStep() {
-    if (editing || isLastStep) return;
-    const next = SELECTION_STEP_ORDER[stepIndex + 1];
+  async function goToNextStep() {
+    if (editing || !nextStep) return;
     const values = form.getValues();
     const stepsToValidate =
       step === SelectionStep.Requirements ? SELECTION_STEP_ORDER : [step];
@@ -134,7 +140,7 @@ export function useEquipmentSelection(
 
     const valid = await form.trigger(fields, { shouldTouch: true });
     if (valid) {
-      if (next) goToStep(next);
+      goToStep(nextStep);
       return;
     }
     for (const id of stepsToValidate) {
@@ -189,9 +195,9 @@ export function useEquipmentSelection(
     machines,
     machine,
     goToStep,
-    previousStep,
+    goToPreviousStep,
     chooseCategory,
     chooseMachine,
-    nextStep
+    goToNextStep
   };
 }

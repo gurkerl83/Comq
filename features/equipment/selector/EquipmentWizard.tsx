@@ -79,12 +79,12 @@ export function EquipmentWizard({
   }, [step, focusInvalidField]);
 
   /**
-   * Continue/Enter call nextStep(), which validates through RHF's trigger()
-   * without marking the enquiry submitted.
+   * Continue/Enter call goToNextStep(), which validates through RHF's
+   * trigger() without marking the enquiry submitted.
    */
   async function handleStepSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const invalid = await wizard.nextStep();
+    const invalid = await wizard.goToNextStep();
     if (!invalid) return;
     if (invalid.step === step) {
       focusInvalidField(invalid.field);
@@ -145,14 +145,16 @@ export function EquipmentWizard({
             <ReviewStep
               locale={locale}
               machine={machine}
-              onBack={wizard.previousStep}
+              onBack={wizard.goToPreviousStep}
               onEdit={wizard.goToStep}
               translations={translations}
             />
           )}
           {!wizard.isLastStep && (
             <WizardActions
-              onBack={wizard.hasPreviousStep ? wizard.previousStep : undefined}
+              onBack={
+                wizard.hasPreviousStep ? wizard.goToPreviousStep : undefined
+              }
               backLabel={translations.back}
               nextLabel={translations.next}
               nextDisabled={wizard.customization.editing}

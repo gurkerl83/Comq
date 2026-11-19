@@ -20,3 +20,25 @@ export const SELECTION_STEP_ORDER = [
   SelectionStep.Requirements,
   SelectionStep.Review
 ] as const;
+
+/**
+ * The step before the given one in SELECTION_STEP_ORDER.
+ *
+ * @param step - A wizard step.
+ * @returns The previous step, or undefined for the first step.
+ */
+export function getPreviousStep(
+  step: SelectionStep
+): SelectionStep | undefined {
+  return SELECTION_STEP_ORDER[SELECTION_STEP_ORDER.indexOf(step) - 1];
+}
+
+/**
+ * The step after the given one in SELECTION_STEP_ORDER.
+ *
+ * @param step - A wizard step.
+ * @returns The next step, or undefined for the last step.
+ */
+export function getNextStep(step: SelectionStep): SelectionStep | undefined {
+  return SELECTION_STEP_ORDER[SELECTION_STEP_ORDER.indexOf(step) + 1];
+}
