@@ -4,7 +4,10 @@ import { useForm, useWatch } from 'react-hook-form';
 import type { EquipmentEntry } from '../types';
 import type { SelectorContent } from '../selector-content';
 import { listCategories, listMachines } from '../catalogue-lists';
-import { getSelectionFields } from '../selection-validation';
+import {
+  getSelectionFields,
+  isSelectionStepComplete
+} from '../selection-validation';
 import { SelectionStep, SELECTION_STEP_ORDER } from '../selection-steps';
 import {
   getInitialSelectionStep,
@@ -24,8 +27,9 @@ import { useSelectionStep } from './useSelectionStep';
  *    The server-assigned wizard key still determines when a new enquiry begins.
  * 2. Native controls validate on blur then edits. Continue validates and touches
  *    its fields without submitting; untouched later fields still wait for blur.
- * 3. useSelectionStep holds the step shown. goToStep is the only way to change
- *    it, and it closes the option editor first.
+ * 3. useSelectionStep holds the step shown and keeps it in the address
+ *    (?step=) and the browser history. Every step change, by the wizard or by
+ *    the browser's Back and Forward, closes the option editor first.
  * 4. useMachineCustomization holds whether the option editor is open. A step
  *    change or another machine closes it through closeEditor.
  * 5. Category and machine transitions run against the previous form values so
@@ -43,9 +47,6 @@ export function useEquipmentSelection(
   initialSelection: EquipmentSelection,
   translations: SelectorContent
 ) {
-  const { step, stepIndex, previousStep, nextStep, setStep } = useSelectionStep(
-    getInitialSelectionStep(initialSelection)
-  );
   const startDateRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<EquipmentSelection>({
@@ -64,6 +65,12 @@ export function useEquipmentSelection(
     name: ['category', 'machine']
   });
   const { customization, closeEditor } = useMachineCustomization(form);
+  const { step, stepIndex, previousStep, nextStep, goToStep } =
+    useSelectionStep(getInitialSelectionStep(initialSelection), {
+      isStepComplete: id =>
+        isSelectionStepComplete(id, form.getValues(), catalogue, translations),
+      beforeStepChange: closeEditor
+    });
   const { touchedFields } = form.formState;
 
   const hasPreviousStep = previousStep !== undefined;
@@ -71,17 +78,6 @@ export function useEquipmentSelection(
   const categories = listCategories(catalogue);
   const machines = listMachines(catalogue, category);
   const machine = machines.find(entry => entry.slug === machineSlug);
-
-  /**
-   * Show another step. The option editor closes, so no step opens with an
-   * editor left open.
-   *
-   * @param target - The step to show.
-   */
-  function goToStep(target: SelectionStep) {
-    closeEditor();
-    setStep(target);
-  }
 
   /** Show the previous step, as Back does; the first step has none. */
   function goToPreviousStep() {
