@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
-import type { EquipmentCategory, EquipmentEntry } from '../types';
+import type { EquipmentEntry } from '../types';
 import type { SelectorContent } from '../selector-content';
+import { listCategories, listMachines } from '../catalogue-lists';
 import { getSelectionFields } from '../selection-validation';
 import { SelectionStep, SELECTION_STEP_ORDER } from '../selection-steps';
 import {
@@ -58,19 +59,8 @@ export function useEquipmentSelection(
 
   const hasPreviousStep = previousStep !== undefined;
   const isLastStep = nextStep === undefined;
-  const categories: EquipmentCategory[] = [
-    ...new Map(
-      catalogue.map(entry => [
-        entry.category,
-        {
-          id: entry.category,
-          name: entry.categoryName,
-          description: entry.categoryDescription
-        }
-      ])
-    ).values()
-  ];
-  const machines = catalogue.filter(entry => entry.category === category);
+  const categories = listCategories(catalogue);
+  const machines = listMachines(catalogue, category);
   const machine = machines.find(entry => entry.slug === machineSlug);
 
   /**
