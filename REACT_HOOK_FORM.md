@@ -28,7 +28,7 @@ Continue checks the answers needed to move forward. It uses `trigger()` to reque
 
 The wizard checks the whole relevant enquiry before Review so an earlier answer cannot escape validation simply because its step is no longer visible. For a purchase, saved rental answers do not participate in that check.
 
-A visitor can press Continue with incomplete answers to find out what needs attention. The wizard shows the relevant question and moves keyboard focus to it. Continue is unavailable while customization is open or a previous Continue check is still running.
+A visitor can press Continue with incomplete answers to find out what needs attention. The wizard shows the relevant question and moves keyboard focus to it. Continue is unavailable while customization is open.
 
 ```mermaid
 sequenceDiagram
@@ -48,9 +48,11 @@ sequenceDiagram
     Note over Enquiry: Answers remain available for Back and Review
 ```
 
-Repeated Continue actions are ignored while a check is running. If the visitor navigates, changes equipment or opens Customize during that check, its old result cannot subsequently move them to another step.
-
 ## Customize tries changes before saving them
+
+Customize is a branch inside the Machine step, not a step of its own. While it is open, Continue is unavailable and the wizard stays on Machine. Every way out closes it and returns to the step sequence.
+
+![Customize branches off the Machine step. The editor starts from the applied options in the main enquiry form, and Continue is unavailable while it is open. Apply, Cancel or leaving the step closes it and returns to the step sequence.](docs/images/customize-in-the-steps.svg)
 
 Customize starts with the currently applied equipment options. Edits stay in the temporary form until Apply succeeds.
 

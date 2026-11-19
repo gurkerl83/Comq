@@ -50,7 +50,8 @@ export function EquipmentWizard({
   const wizardStart = useRef<HTMLDivElement>(null);
   const stepHeading = useRef<HTMLHeadingElement>(null);
   const customizeButton = useRef<HTMLButtonElement>(null);
-  const previousStep = useRef(step);
+  // The step the focus effect below last handled.
+  const handledStep = useRef(step);
   const pendingFocus = useRef<keyof EquipmentSelection | null>(null);
 
   const focusInvalidField = useCallback(
@@ -68,23 +69,23 @@ export function EquipmentWizard({
   // progress remains visible. Error targets are focused after their step mounts.
   // Initial rendering leaves page focus and scroll unchanged.
   useEffect(() => {
-    if (previousStep.current === step) return;
+    if (handledStep.current === step) return;
     stepHeading.current?.focus({ preventScroll: true });
     wizardStart.current?.scrollIntoView({ block: 'start' });
     if (pendingFocus.current) {
       focusInvalidField(pendingFocus.current);
       pendingFocus.current = null;
     }
-    previousStep.current = step;
+    handledStep.current = step;
   }, [step, focusInvalidField]);
 
   /**
-   * Continue/Enter call nextStep(), which validates through RHF's trigger()
-   * without marking the enquiry submitted.
+   * Continue/Enter call goToNextStep(), which validates through RHF's
+   * trigger() without marking the enquiry submitted.
    */
   async function handleStepSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const invalid = await wizard.nextStep();
+    const invalid = await wizard.goToNextStep();
     if (!invalid) return;
     if (invalid.step === step) {
       focusInvalidField(invalid.field);
@@ -145,17 +146,19 @@ export function EquipmentWizard({
             <ReviewStep
               locale={locale}
               machine={machine}
-              onBack={wizard.previousStep}
+              onBack={wizard.goToPreviousStep}
               onEdit={wizard.goToStep}
               translations={translations}
             />
           )}
           {!wizard.isLastStep && (
             <WizardActions
-              onBack={wizard.hasPreviousStep ? wizard.previousStep : undefined}
+              onBack={
+                wizard.hasPreviousStep ? wizard.goToPreviousStep : undefined
+              }
               backLabel={translations.back}
               nextLabel={translations.next}
-              nextDisabled={wizard.isAdvancing || wizard.customization.editing}
+              nextDisabled={wizard.customization.editing}
               isLastStep={false}
             />
           )}
