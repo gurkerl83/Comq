@@ -3,79 +3,18 @@ import {
   type SupportedLocale
 } from '../../lib/i18n/locales';
 import { WHATSAPP_URL } from '../../lib/site/config';
-import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
 import { Button } from '../../components/Button';
 import { Link } from '../../components/Link';
-import type { EquipmentEntry, EquipmentOption } from './types';
-import { Gallery } from '../../components/gallery';
+import type { EquipmentEntry } from './types';
+import { getMachineContent } from './machine-content';
+import { getMachineTabs } from './machine-tabs';
+import { MachineComqVersion } from './MachineComqVersion';
+import { MachineEquipment } from './MachineEquipment';
+import { MachineMedia } from './MachineMedia';
+import { MachineOverview } from './MachineOverview';
+import { MachineRangeViews } from './MachineRangeViews';
+import { Specifications } from './selector/components/Specifications';
 import styles from './MachinePage.module.css';
-
-const CONTENT = {
-  es: {
-    model: 'Modelo',
-    unconfirmed: 'Por confirmar con COMQ',
-    noImage: 'Sin fotografía',
-    gallery: {
-      label: 'Imágenes del equipo',
-      openImage: 'Abrir imagen',
-      moreImages: 'Más imágenes',
-      close: 'Cerrar',
-      previous: 'Imagen anterior',
-      next: 'Imagen siguiente',
-      image: 'Imagen'
-    },
-    application: 'Aplicación',
-    specifications: 'Especificaciones',
-    options: 'Opciones de equipo',
-    defaultValue: 'De serie',
-    extras: 'Equipamiento opcional',
-    select: 'Preparar una consulta',
-    closing: 'Prepara tu consulta',
-    next: 'Elige la configuración, indica si prefieres comprar o alquilar y añade los detalles de tu proyecto en el selector. COMQ confirmará la disponibilidad y las condiciones.',
-    contact: 'También puedes conversar con COMQ por WhatsApp.',
-    contactLabel: 'Conversar con COMQ por WhatsApp (abre otra pestaña)'
-  },
-  en: {
-    model: 'Model',
-    unconfirmed: 'To be confirmed with COMQ',
-    noImage: 'No photograph',
-    gallery: {
-      label: 'Equipment images',
-      openImage: 'Open image',
-      moreImages: 'More images',
-      close: 'Close',
-      previous: 'Previous image',
-      next: 'Next image',
-      image: 'Image'
-    },
-    application: 'Application',
-    specifications: 'Specifications',
-    options: 'Equipment options',
-    defaultValue: 'Default',
-    extras: 'Optional equipment',
-    select: 'Prepare an enquiry',
-    closing: 'Prepare your enquiry',
-    next: 'Choose your configuration, purchase or rental preference, and project details in the selector. COMQ will confirm availability and terms.',
-    contact: 'You can also talk to COMQ on WhatsApp.',
-    contactLabel: 'Talk to COMQ on WhatsApp (opens a new tab)'
-  }
-};
-
-/**
- * Format the available choices, marking the default with its translated label.
- */
-function formatOptionChoices(
-  option: EquipmentOption,
-  defaultLabel: string
-): string {
-  return option.choices
-    .map(choice =>
-      choice.id === option.defaultChoice
-        ? `${choice.label} (${defaultLabel})`
-        : choice.label
-    )
-    .join(' · ');
-}
 
 type MachinePageProps = {
   /** The page's language, for the page texts and links. */
@@ -87,11 +26,13 @@ type MachinePageProps = {
 /**
  * The detail page of one machine. The hero shows its name, summary and model
  * with the enquiry button, next to the image gallery. Below follow the
- * application, the specifications with the datasheet link, and the equipment
- * options. The closing section repeats the enquiry button and offers WhatsApp.
+ * application and the specifications, the range drawings and the COMQ
+ * version when the machine has them, and the equipment options. The closing
+ * section repeats the enquiry button and offers WhatsApp.
  */
 export function MachinePage({ locale, equipment }: MachinePageProps) {
-  const content = CONTENT[locale];
+  const content = getMachineContent(locale);
+  const tabs = getMachineTabs(equipment);
   const selectorHref = {
     pathname: createHrefForLocale(locale, '/selector'),
     query: { machine: equipment.slug }
@@ -100,14 +41,7 @@ export function MachinePage({ locale, equipment }: MachinePageProps) {
   return (
     <article className={styles.page} aria-labelledby='equipment-title'>
       <div className={styles.hero}>
-        <header>
-          <p className={styles.category}>{equipment.categoryName}</p>
-          <h1 id='equipment-title'>{equipment.name}</h1>
-          <p className={styles.summary}>{equipment.summary}</p>
-          <p className={styles.model}>
-            {content.model}:{' '}
-            <strong>{equipment.model ?? content.unconfirmed}</strong>
-          </p>
+        <MachineOverview equipment={equipment} content={content} heading='h1'>
           <Button
             variant='primary'
             className={styles.action}
@@ -116,21 +50,8 @@ export function MachinePage({ locale, equipment }: MachinePageProps) {
             {content.select}
             <span aria-hidden='true'> →</span>
           </Button>
-        </header>
-
-        <figure className={styles.media}>
-          {equipment.images.length > 0 ? (
-            <Gallery images={equipment.images} labels={content.gallery} />
-          ) : (
-            <>
-              <ServiceImagePlaceholder
-                className={styles.image}
-                alt={content.noImage}
-              />
-              <figcaption>{content.noImage}</figcaption>
-            </>
-          )}
-        </figure>
+        </MachineOverview>
+        <MachineMedia equipment={equipment} content={content} />
       </div>
 
       <div className={styles.details}>
@@ -147,34 +68,31 @@ export function MachinePage({ locale, equipment }: MachinePageProps) {
           aria-labelledby='equipment-specifications'
         >
           <h2 id='equipment-specifications'>{content.specifications}</h2>
-          <dl className={styles.specifications}>
-            {equipment.specifications.map(specification => (
-              <div key={specification.label}>
-                <dt>{specification.label}</dt>
-                <dd>{specification.value ?? content.unconfirmed}</dd>
-              </div>
-            ))}
-          </dl>
+          <Specifications
+            items={equipment.specifications}
+            fallback={content.unconfirmed}
+          />
         </section>
       </div>
 
-      {(equipment.options.length > 0 || equipment.extras.length > 0) && (
-        <section className={styles.options} aria-labelledby='equipment-options'>
+      {tabs.includes('range') && (
+        <section className={styles.block} aria-labelledby='equipment-range'>
+          <h2 id='equipment-range'>{content.rangeViews}</h2>
+          <MachineRangeViews equipment={equipment} content={content} />
+        </section>
+      )}
+
+      {tabs.includes('comq') && (
+        <section className={styles.block} aria-labelledby='equipment-comq'>
+          <h2 id='equipment-comq'>{content.comqVersion}</h2>
+          <MachineComqVersion equipment={equipment} content={content} />
+        </section>
+      )}
+
+      {tabs.includes('options') && (
+        <section className={styles.block} aria-labelledby='equipment-options'>
           <h2 id='equipment-options'>{content.options}</h2>
-          <ul>
-            {equipment.options.map(option => (
-              <li key={option.id}>
-                <h3>{option.label}</h3>
-                <p>{formatOptionChoices(option, content.defaultValue)}</p>
-              </li>
-            ))}
-            {equipment.extras.length > 0 && (
-              <li>
-                <h3>{content.extras}</h3>
-                <p>{equipment.extras.map(extra => extra.label).join(', ')}</p>
-              </li>
-            )}
-          </ul>
+          <MachineEquipment equipment={equipment} content={content} />
         </section>
       )}
 

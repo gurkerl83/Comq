@@ -19,7 +19,7 @@
   text-transform: uppercase;
 }
 
-.hero h1 {
+.name {
   margin: 0;
 }
 
@@ -79,69 +79,21 @@
 }
 
 .section h2,
-.options h2,
+.block h2,
 .closing h2 {
   margin: 0 0 1.25rem;
 }
 
-.options h3 {
-  margin: 0 0 0.75rem;
-}
-
 .section p,
-.options p,
 .closing p {
   margin: 0 0 1.5rem;
   color: var(--color-text-muted);
 }
 
-.specifications {
-  margin: 0;
-}
-
-.specifications div {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem 1rem;
-  padding: 0.875rem 0;
-  border-bottom: var(--border-width) solid var(--color-border);
-}
-
-.specifications div:first-child {
-  padding-top: 0;
-}
-
-.specifications dt {
-  color: var(--color-text-muted);
-}
-
-.specifications dd {
-  margin: 0;
-  font-weight: 700;
-}
-
-.options {
+/* A section below the details, such as the range drawings or the options. */
+.block {
   padding: var(--spacing-content-section) 0;
   border-bottom: var(--border-width) solid var(--color-border);
-}
-
-.options ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.options li {
-  padding: 1.25rem;
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-small);
-}
-
-.options p {
-  margin: 0;
 }
 
 .closing {
@@ -170,9 +122,5 @@
   .page {
     padding-right: 1.25rem;
     padding-left: 1.25rem;
-  }
-
-  .options ul {
-    grid-template-columns: 1fr;
   }
 }
