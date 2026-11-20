@@ -1,17 +1,7 @@
+/* A list of labels and values. Specifications.tsx adds one layout class:
+   .table or .inline. */
 .specifications {
   margin: 0;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem 1rem;
-  padding: 0.875rem 0;
-  border-bottom: var(--border-width) solid var(--color-border);
-}
-
-.row:first-child {
-  padding-top: 0;
 }
 
 .row dt {
@@ -21,4 +11,42 @@
 .row dd {
   margin: 0;
   font-weight: 700;
+}
+
+/* table: the label beside its value, a line under each row. */
+.table .row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  padding: 0.875rem 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.table .row:first-child {
+  padding-top: 0;
+}
+
+/* inline: one line of small text, each label followed by its value. When
+   the line is too long, a whole row moves to the next line first. */
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.75rem;
+  font-size: var(--font-size-small);
+}
+
+/* A row is running text: the label, a space, the value. A row wider than
+   the list wraps between the label's words. */
+.inline dt {
+  display: inline;
+}
+
+.inline dt::after {
+  content: ' ';
+}
+
+/* inline-block keeps a value such as "45 m²" in one piece; a value wider
+   than the list still wraps inside itself. */
+.inline dd {
+  display: inline-block;
 }

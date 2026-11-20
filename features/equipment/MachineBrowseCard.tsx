@@ -20,8 +20,9 @@ type MachineBrowseCardProps = {
 
 /**
  * One machine in the catalogue list, drawn as a SelectableCard: a thumbnail
- * of its first photograph, its name and its first two specifications in
- * their authored order. Choosing it shows the machine in the preview.
+ * of its first photograph, its name and, on one line, its first two
+ * specifications in their authored order, so machines can be compared in
+ * the list. Choosing it shows the machine in the preview.
  */
 export function MachineBrowseCard({
   machine,
@@ -55,6 +56,7 @@ export function MachineBrowseCard({
       <Specifications
         items={machine.specifications.slice(0, 2)}
         fallback={translations.notSpecified}
+        layout='inline'
       />
     </SelectableCard>
   );

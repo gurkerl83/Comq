@@ -63,13 +63,24 @@
   list-style: none;
 }
 
+/* A category's name above its machines, with a line that runs from the name
+   to the end of the row. */
 .groupLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   padding-top: 0.75rem;
   color: var(--color-text-muted);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.groupLabel::after {
+  content: '';
+  flex: 1;
+  border-top: var(--border-width) solid var(--color-border);
 }
 
 .hint {
