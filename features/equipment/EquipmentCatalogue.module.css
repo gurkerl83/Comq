@@ -35,18 +35,11 @@
   overflow: hidden;
 }
 
-/* A row of tabs: the list's filter and the preview's tabs. The tabs stay on
-   one line and scroll sideways when they don't fit. */
+/* The frame of a TabBar: the list's filter and the preview's tabs. */
 .bar {
-  display: flex;
-  overflow-x: auto;
   padding: 0 0.5rem;
   border-bottom: var(--border-width) solid var(--color-border);
   background: var(--color-background);
-}
-
-.tab {
-  flex: none;
 }
 
 /* The filter's tabs are narrower, with their count close to the name, so

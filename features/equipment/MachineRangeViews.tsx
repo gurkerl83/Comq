@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import { Button } from '../../components/Button';
+import { TabBar } from '../../components/TabBar';
 import type { MachineContent } from './machine-content';
 import type { EquipmentDrawingView, EquipmentEntry } from './types';
 import styles from './MachineRangeViews.module.css';
@@ -41,20 +42,19 @@ export function MachineRangeViews({
 
   return (
     <>
-      <div className={styles.views}>
+      <TabBar className={styles.views} current={drawing.view}>
         {equipment.drawings.map(item => (
           <Button
             key={item.view}
             variant='tab'
             type='button'
-            className={styles.view}
             data-current={item.view === drawing.view}
             onClick={() => setChosenView(item.view)}
           >
             {content.views[item.view]}
           </Button>
         ))}
-      </div>
+      </TabBar>
       <figure className={styles.drawing}>
         <Image
           className={styles.image}

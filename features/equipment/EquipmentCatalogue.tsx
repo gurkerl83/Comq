@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { Button } from '../../components/Button';
 import { Link } from '../../components/Link';
+import { TabBar } from '../../components/TabBar';
 import {
   createHrefForLocale,
   type SupportedLocale
@@ -100,7 +101,10 @@ export function EquipmentCatalogue({
 
       <div className={styles.browser}>
         <div className={styles.listPane}>
-          <div className={`${styles.bar} ${styles.filters}`}>
+          <TabBar
+            className={`${styles.bar} ${styles.filters}`}
+            current={filter}
+          >
             <Button
               variant='tab'
               type='button'
@@ -124,7 +128,7 @@ export function EquipmentCatalogue({
                 <span className={styles.count}>{group.machines.length}</span>
               </Button>
             ))}
-          </div>
+          </TabBar>
 
           <ul className={styles.list}>
             {shownGroups.map(group => [
@@ -182,20 +186,19 @@ export function EquipmentCatalogue({
             </MachineOverview>
           </div>
 
-          <div className={`${styles.bar} ${styles.tabs}`}>
+          <TabBar className={`${styles.bar} ${styles.tabs}`} current={tab}>
             {tabs.map(id => (
               <Button
                 key={id}
                 variant='tab'
                 type='button'
-                className={styles.tab}
                 data-current={id === tab}
                 onClick={() => selectTab(id)}
               >
                 {tabLabels[id]}
               </Button>
             ))}
-          </div>
+          </TabBar>
 
           <div className={styles.panel}>
             {tab === 'specifications' && (

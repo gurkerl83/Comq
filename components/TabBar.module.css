@@ -1,0 +1,49 @@
+/* A row of tabs on one line. When the tabs don't fit, the bar scrolls
+   sideways without a scrollbar.
+   1. --tab-bar-fade is how far the fade reaches in from an edge.
+   2. contain: inline-size keeps the bar as wide as its place allows, however
+      wide its tabs are; without it a long row of tabs widens the page.
+   3. The rule sets no border, padding or fill: the place that uses the bar
+      sets those through className. */
+.bar {
+  --tab-bar-fade: 3rem;
+
+  contain: inline-size;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* The tabs side by side, as wide as they are together. TabBar.tsx watches
+   this width to know whether tabs are hidden. */
+.tabs {
+  display: flex;
+  width: max-content;
+}
+
+/* The fade on each side where tabs are hidden; TabBar.tsx sets data-hidden.
+   A mask fades the labels themselves, whatever is behind the bar. */
+.bar[data-hidden='start'] {
+  mask-image: linear-gradient(to right, transparent, #000 var(--tab-bar-fade));
+}
+
+.bar[data-hidden='end'] {
+  mask-image: linear-gradient(to left, transparent, #000 var(--tab-bar-fade));
+}
+
+.bar[data-hidden='both'] {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--tab-bar-fade),
+    #000 calc(100% - var(--tab-bar-fade)),
+    transparent
+  );
+}
+
+/* The current tab glides into view, unless the visitor asked for less
+   motion; then it jumps. */
+@media (prefers-reduced-motion: no-preference) {
+  .bar {
+    scroll-behavior: smooth;
+  }
+}

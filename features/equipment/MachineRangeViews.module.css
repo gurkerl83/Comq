@@ -1,13 +1,7 @@
-/* The tabs stay on one line and scroll sideways when they don't fit. */
+/* The frame of the TabBar that switches between the drawings. */
 .views {
-  display: flex;
-  overflow-x: auto;
   margin-bottom: 1rem;
   border-bottom: var(--border-width) solid var(--color-border);
-}
-
-.view {
-  flex: none;
 }
 
 /* The drawings are dark lines meant for a white sheet, so the sheet stays
