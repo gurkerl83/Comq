@@ -110,6 +110,14 @@
   box-shadow: inset 0 0 0 1px var(--color-action);
 }
 
+/* A focused field shows a ring in the accent colour, just outside its frame.
+   The 2px gap keeps it apart from the red frame of an invalid field. */
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 .input:disabled,
 .textarea:disabled {
   border-style: dashed;
