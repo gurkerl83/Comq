@@ -173,6 +173,20 @@ export type EquipmentEntry = {
    */
   extras: EquipmentExtra[];
   /**
+   * Drawings of the machine's working range, such as its coverage area.
+   * Empty when none are published.
+   */
+  drawings: EquipmentDrawing[];
+  /**
+   * Notes shown with a drawing, such as the feed it was drawn with.
+   */
+  drawingNotes?: Partial<Record<EquipmentDrawingView, string>>;
+  /**
+   * How the version COMQ supplies differs from the factory model.
+   * Empty until COMQ documents the differences.
+   */
+  comqVersion: ComqVersionRow[];
+  /**
    * Product photographs with localized descriptions, in display order.
    */
   images: GalleryImage[];
@@ -204,6 +218,36 @@ export type EquipmentImageDefinition = Omit<GalleryImage, 'alt'> & {
    * Description key resolved when assembling the localized catalogue.
    */
   alt: EquipmentImageKey;
+};
+
+/**
+ * The views a range drawing can show.
+ * 1. coverage: the area the booms reach at the face.
+ * 2. side: the machine from the side, with its main dimensions.
+ * 3. turning: the turning radius.
+ */
+export type EquipmentDrawingView = 'coverage' | 'side' | 'turning';
+
+/**
+ * A published drawing of a machine's working range: its path, its size and
+ * the view it shows. Its alternative text comes from the view's label and the
+ * machine name, so the drawing has no description key.
+ */
+export type EquipmentDrawing = Omit<GalleryImage, 'alt'> & {
+  /** The view the drawing shows. */
+  view: EquipmentDrawingView;
+};
+
+/**
+ * One difference between the factory model and the version COMQ supplies.
+ */
+export type ComqVersionRow = {
+  /** What differs, such as the electrical system. */
+  topic: string;
+  /** The factory model's value. */
+  factory: string;
+  /** The value in the version COMQ supplies. */
+  comq: string;
 };
 
 /**
@@ -246,6 +290,10 @@ export type EquipmentDefinition = {
    * IDs of independent extras offered for this machine.
    */
   extras: Array<EquipmentExtraId>;
+  /**
+   * Drawings of the working range, in display order.
+   */
+  drawings?: EquipmentDrawing[];
   /**
    * Image paths, dimensions and description keys in display order.
    */
