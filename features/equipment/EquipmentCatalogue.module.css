@@ -28,11 +28,23 @@
   background: var(--color-surface);
 }
 
-/* The filter bar on top, the list, and the selector hint at the bottom. */
+/* The filter bar on top, the list, and the selector hint at the bottom.
+   overflow: clip keeps the filter inside the rounded corners without making
+   the box a scroll container, so the filter can stick to the window. */
 .listPane {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: clip;
+}
+
+/* The filter stays below the site header while the list scrolls past it, as
+   the progress bar does in the selector (WizardProgress.module.css). The
+   fill keeps the layer solid where the tab bar fades out at its ends. */
+.stickyFilter {
+  position: sticky;
+  top: var(--site-header-height);
+  z-index: 4;
+  background: var(--color-background);
 }
 
 /* The frame of a TabBar: the list's filter and the preview's tabs. */
@@ -134,6 +146,11 @@
     overflow: visible;
     border: 0;
     background: none;
+  }
+
+  /* The strip is short, so the filter scrolls away with it. */
+  .stickyFilter {
+    position: static;
   }
 
   /* The strip: one card per column, scrolling sideways. Every card shares

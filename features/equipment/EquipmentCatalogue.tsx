@@ -101,34 +101,36 @@ export function EquipmentCatalogue({
 
       <div className={styles.browser}>
         <div className={styles.listPane}>
-          <TabBar
-            className={`${styles.bar} ${styles.filters}`}
-            current={filter}
-          >
-            <Button
-              variant='tab'
-              type='button'
-              className={styles.tab}
-              data-current={filter === 'all'}
-              onClick={() => chooseFilter('all')}
+          <div className={styles.stickyFilter}>
+            <TabBar
+              className={`${styles.bar} ${styles.filters}`}
+              current={filter}
             >
-              {translations.all}
-              <span className={styles.count}>{machines.length}</span>
-            </Button>
-            {groups.map(group => (
               <Button
-                key={group.id}
                 variant='tab'
                 type='button'
                 className={styles.tab}
-                data-current={filter === group.id}
-                onClick={() => chooseFilter(group.id)}
+                data-current={filter === 'all'}
+                onClick={() => chooseFilter('all')}
               >
-                {group.name}
-                <span className={styles.count}>{group.machines.length}</span>
+                {translations.all}
+                <span className={styles.count}>{machines.length}</span>
               </Button>
-            ))}
-          </TabBar>
+              {groups.map(group => (
+                <Button
+                  key={group.id}
+                  variant='tab'
+                  type='button'
+                  className={styles.tab}
+                  data-current={filter === group.id}
+                  onClick={() => chooseFilter(group.id)}
+                >
+                  {group.name}
+                  <span className={styles.count}>{group.machines.length}</span>
+                </Button>
+              ))}
+            </TabBar>
+          </div>
 
           <ul className={styles.list}>
             {shownGroups.map(group => [
