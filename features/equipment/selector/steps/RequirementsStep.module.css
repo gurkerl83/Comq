@@ -2,23 +2,10 @@
   margin-top: 2rem;
 }
 
-/* Two columns: the machine name takes the rest of the width and wraps when it
-   must, Change equipment keeps its own width in the top right corner. Their
-   first text lines sit on the same line. */
-.selectedEquipment {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: first baseline;
-  gap: 1.5rem;
-}
-
-/* The space above the name matches the button's padding above its label, so
-   both start at the top of the row. */
 .selectedMachine {
   display: grid;
   gap: 0.25rem;
   margin: 0;
-  padding-top: 0.5rem;
 }
 
 .selectedMachine span {

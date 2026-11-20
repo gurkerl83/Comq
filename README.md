@@ -38,7 +38,7 @@ The sales pages (`/venta` and `/en/venta`) offer compact machine cards before th
 
 `/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. React Hook Form retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
 
-The shared equipment navigation links back to the sales-page catalogue. Machine-page links use `?machine=...` to start at Machine with that model selected and its defaults ready to review. Missing or unknown machines start at equipment type. Change equipment returns to the equipment-type step and preserves the enquiry draft, including the visitor's purchase/rental preference and rental details.
+The shared equipment navigation links back to the sales-page catalogue. Machine-page links use `?machine=...` to start at Machine with that model selected and its defaults ready to review. Missing or unknown machines start at equipment type.
 
 The draft lasts for the current wizard instance. A full page reload initializes a new draft from the machine in the URL, or from equipment type if none is recognized. Navigating to a different valid machine link also starts a new draft. Language changes do not transfer answers, and the language switch drops `?machine=...`.
 

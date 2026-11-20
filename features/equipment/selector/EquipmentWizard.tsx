@@ -138,7 +138,6 @@ export function EquipmentWizard({
             <RequirementsStep
               machine={machine}
               startDateRef={wizard.startDateRef}
-              onChangeEquipment={() => wizard.goToStep(SelectionStep.Category)}
               translations={translations}
             />
           )}

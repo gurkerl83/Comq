@@ -33,7 +33,6 @@ const en = {
   },
   next: 'Continue',
   back: 'Back',
-  changeEquipment: 'Change equipment',
   edit: 'Edit',
   details: 'View machine details',
   oneMachine:
@@ -143,7 +142,6 @@ const es: SelectorContent = {
   },
   next: 'Continuar',
   back: 'Volver',
-  changeEquipment: 'Cambiar equipo',
   edit: 'Editar',
   details: 'Ver detalles del equipo',
   oneMachine:

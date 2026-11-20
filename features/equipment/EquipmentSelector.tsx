@@ -36,8 +36,8 @@ export async function EquipmentSelector({
 
   // The key identifies the server's starting machine, not the live draft.
   // A Next navigation from J1 to J2 changes it and mounts a fresh wizard.
-  // Back/Next, Change equipment and in-wizard machine choices leave this key
-  // unchanged. Missing and unknown query slugs both use the empty key.
+  // Back/Next and in-wizard machine choices leave this key unchanged.
+  // Missing and unknown query slugs both use the empty key.
   return (
     <EquipmentWizard
       key={initialSelection.machine}

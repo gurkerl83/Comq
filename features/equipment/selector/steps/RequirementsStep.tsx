@@ -1,7 +1,6 @@
 import type { RefObject } from 'react';
 import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 
-import { Button } from '../../../../components/Button';
 import type { EquipmentEntry } from '../../types';
 import { AcquisitionMode, type EquipmentSelection } from '../../selection';
 import type { SelectorContent } from '../../selector-content';
@@ -14,13 +13,11 @@ import { RentalFields } from '../fields/RentalFields';
 import styles from './RequirementsStep.module.css';
 
 /**
- * Selected equipment context and navigation surrounding the enquiry fields.
+ * Selected equipment context surrounding the enquiry fields.
  */
 type RequirementsStepProps = {
   /** Applied machine displayed above the commercial requirements. */
   machine: EquipmentEntry;
-  /** Return to equipment selection while preserving entered requirements. */
-  onChangeEquipment: () => void;
   /** Labels, country options, help text and requirement hints. */
   translations: SelectorContent;
   /** Native date input used by the resolver to detect unfinished edits. */
@@ -29,12 +26,10 @@ type RequirementsStepProps = {
 
 /**
  * Show the selected machine and collect project and commercial requirements.
- * Change equipment opens Category while retaining the applied enquiry.
  * Selecting another machine resets its configuration and preserves requirements.
  */
 export function RequirementsStep({
   machine,
-  onChangeEquipment,
   translations,
   startDateRef
 }: RequirementsStepProps) {
@@ -49,15 +44,10 @@ export function RequirementsStep({
 
   return (
     <div className={styles.requirements}>
-      <div className={styles.selectedEquipment}>
-        <p className={styles.selectedMachine}>
-          <strong>{machine.name}</strong>
-          <span>{machine.categoryName}</span>
-        </p>
-        <Button variant='text' type='button' onClick={onChangeEquipment}>
-          {translations.changeEquipment}
-        </Button>
-      </div>
+      <p className={styles.selectedMachine}>
+        <strong>{machine.name}</strong>
+        <span>{machine.categoryName}</span>
+      </p>
       <AcquisitionChoices translations={translations} />
       <div className={styles.fields}>
         {acquisition === AcquisitionMode.Rental && (
