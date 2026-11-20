@@ -21,10 +21,6 @@ type CategoryStepProps = {
   onChange: (value: EquipmentSelection['category']) => void;
 };
 
-/**
- * The catalogue's categories, each a SelectableCard with its name and
- * description.
- */
 export function CategoryStep({ categories, onChange }: CategoryStepProps) {
   const { control } = useFormContext<EquipmentSelection>();
 

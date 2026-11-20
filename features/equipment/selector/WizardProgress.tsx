@@ -1,16 +1,20 @@
 import styles from './WizardProgress.module.css';
 
+/** One step in the progress list. */
+type WizardProgressStep = {
+  /** The step's ID, which keys its list item. */
+  id: string;
+  /** The step's short title, shown after its number. */
+  shortTitle: string;
+};
+
 type WizardProgressProps = {
-  /** The steps in order, each with its ID and short title. */
-  steps: readonly { id: string; shortTitle: string }[];
+  /** The steps in order. */
+  steps: readonly WizardProgressStep[];
   /** The position of the current step in steps. */
   currentIndex: number;
 };
 
-/**
- * The numbered list of wizard steps. The current step gets
- * styles.progressCurrent, the steps before it styles.progressComplete.
- */
 export function WizardProgress({ steps, currentIndex }: WizardProgressProps) {
   return (
     <ol className={styles.progress}>
