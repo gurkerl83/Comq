@@ -60,9 +60,11 @@
 
 /* Hover colours the band: the border colour, with 15% text colour mixed
    in for dark mode, where the plain border barely shows. */
-.band:hover {
-  --band-color: light-dark(var(--color-border),
-      color-mix(in srgb, var(--color-border) 85%, var(--color-text)));
+@media (hover: hover) {
+  .band:hover {
+    --band-color: light-dark(var(--color-border),
+        color-mix(in srgb, var(--color-border) 85%, var(--color-text)));
+  }
 }
 
 /* Fill the 4:3 image area.

@@ -30,9 +30,11 @@
   border-color: var(--color-accent);
 }
 
-.links a:hover {
-  background: var(--color-surface);
-  box-shadow: 0 0 0 0.5rem var(--color-surface);
+@media (hover: hover) {
+  .links a:hover {
+    background: var(--color-surface);
+    box-shadow: 0 0 0 0.5rem var(--color-surface);
+  }
 }
 
 @media (max-width: 640px) {

@@ -69,9 +69,11 @@
   text-decoration: none;
 }
 
-.languages a:hover {
-  color: var(--color-accent);
-  text-decoration: underline;
+@media (hover: hover) {
+  .languages a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
 }
 
 .languages {
@@ -148,10 +150,16 @@
   text-decoration: none;
 }
 
-.footerLink:hover,
 .footerLink:focus-visible {
   color: var(--color-accent);
   text-decoration: underline;
+}
+
+@media (hover: hover) {
+  .footerLink:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
 }
 
 .footerLink svg {
@@ -188,9 +196,14 @@
   color: var(--color-accent);
 }
 
-.footerSocialLink:hover,
 .footerSocialLink:focus-visible {
   color: var(--color-text);
+}
+
+@media (hover: hover) {
+  .footerSocialLink:hover {
+    color: var(--color-text);
+  }
 }
 
 .footerSocialLink svg {

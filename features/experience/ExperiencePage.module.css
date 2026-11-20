@@ -96,9 +96,14 @@
   height: 1.125rem;
 }
 
-.profileLink:hover span,
 .profileLink:focus-visible span {
   text-decoration: underline;
+}
+
+@media (hover: hover) {
+  .profileLink:hover span {
+    text-decoration: underline;
+  }
 }
 
 @media (max-width: 640px) {

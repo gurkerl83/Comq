@@ -32,8 +32,10 @@
   object-fit: contain;
 }
 
-.thumbnail:hover {
-  border-color: var(--color-border);
+@media (hover: hover) {
+  .thumbnail:hover {
+    border-color: var(--color-border);
+  }
 }
 
 .thumbnail[data-current='true'] {

@@ -56,6 +56,29 @@ The theme follows the operating system until the user toggles it. The manual cho
 
 Logo variants, image loading and regeneration are covered in the [artwork guides](#documentation).
 
+### Hover styles
+
+Hover styles apply only where the primary pointer can hover, such as a mouse or a trackpad.
+
+Why: touch screens keep `:hover` on whatever a finger last touched, also after a scroll. A card, button or link would then keep its hover look.
+
+How:
+
+1. Every `:hover` rule sits inside `@media (hover: hover)`, in the CSS Module that owns it.
+2. A rule that shares its selector with `:focus-visible` is split. The `:focus-visible` rule stays outside the media query, so keyboard focus keeps its look on every device.
+
+```css
+.link:focus-visible {
+  text-decoration: underline;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: underline;
+  }
+}
+```
+
 ## Local development
 
 Use Node.js 24 (the exact version is in [.nvmrc](.nvmrc)) and pnpm 11.1.1. From the project root:

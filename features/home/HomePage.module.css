@@ -58,9 +58,14 @@
   text-decoration: none;
 }
 
-.serviceTitleLink:hover span,
 .serviceTitleLink:focus-visible span {
   text-decoration: underline;
+}
+
+@media (hover: hover) {
+  .serviceTitleLink:hover span {
+    text-decoration: underline;
+  }
 }
 
 .serviceSection h2 {
@@ -86,9 +91,14 @@
   border-radius: var(--radius-media);
 }
 
-.serviceImageLink:hover .serviceImage,
 .serviceImageLink:focus-visible .serviceImage {
   border-color: var(--color-accent);
+}
+
+@media (hover: hover) {
+  .serviceImageLink:hover .serviceImage {
+    border-color: var(--color-accent);
+  }
 }
 
 /* The link's flex column stretches the image to its width, border included.

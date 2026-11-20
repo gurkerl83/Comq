@@ -92,8 +92,10 @@
   min-width: 0;
 }
 
-.detailLink:hover {
-  text-decoration-thickness: 2px;
+@media (hover: hover) {
+  .detailLink:hover {
+    text-decoration-thickness: 2px;
+  }
 }
 
 @media (max-width: 640px) {

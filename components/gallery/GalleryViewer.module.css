@@ -105,8 +105,10 @@
   cursor: pointer;
 }
 
-.control:hover {
-  border-color: var(--color-accent);
+@media (hover: hover) {
+  .control:hover {
+    border-color: var(--color-accent);
+  }
 }
 
 .control svg {

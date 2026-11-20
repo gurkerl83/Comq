@@ -13,9 +13,11 @@
   cursor: pointer;
 }
 
-.toggle:hover {
-  color: var(--color-accent);
-  background: var(--color-surface);
+@media (hover: hover) {
+  .toggle:hover {
+    color: var(--color-accent);
+    background: var(--color-surface);
+  }
 }
 
 .toggle svg {

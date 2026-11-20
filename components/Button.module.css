@@ -34,8 +34,10 @@
   background: var(--color-action);
 }
 
-.primary:hover {
-  background: var(--color-action-hover);
+@media (hover: hover) {
+  .primary:hover {
+    background: var(--color-action-hover);
+  }
 }
 
 .secondary {
@@ -44,8 +46,10 @@
   background: var(--color-background);
 }
 
-.secondary:hover {
-  border-color: var(--color-accent);
+@media (hover: hover) {
+  .secondary:hover {
+    border-color: var(--color-accent);
+  }
 }
 
 /* A label that acts: underlined, no box, as tall as the tap target. */
@@ -58,8 +62,10 @@
   text-decoration: underline;
 }
 
-.text:hover {
-  background: var(--color-background);
+@media (hover: hover) {
+  .text:hover {
+    background: var(--color-background);
+  }
 }
 
 /* Last, so a disabled button keeps this look under the pointer too. */
