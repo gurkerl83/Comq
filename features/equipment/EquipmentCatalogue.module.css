@@ -37,9 +37,10 @@
   overflow: clip;
 }
 
-/* The filter stays below the site header while the list scrolls past it, as
-   the progress bar does in the selector (WizardProgress.module.css). The
-   fill keeps the layer solid where the tab bar fades out at its ends. */
+/* The filter stays below the site header, as the progress bar does in the
+   selector (WizardProgress.module.css): from 900px while the list box is on
+   screen, below 900px through the strip and the preview. The fill keeps the
+   layer solid where the tab bar fades out at its ends. */
 .stickyFilter {
   position: sticky;
   top: var(--site-header-height);
@@ -139,18 +140,19 @@
 @media (max-width: 899px) {
   .browser {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
+    gap: 0;
   }
 
+  /* The list box has no frame here and makes no box of its own: its
+     filter, strip and hint are items of .browser. The filter then sticks
+     for as long as .browser is on screen, not only beside the short strip. */
   .listPane {
-    overflow: visible;
-    border: 0;
-    background: none;
+    display: contents;
   }
 
-  /* The strip is short, so the filter scrolls away with it. */
-  .stickyFilter {
-    position: static;
+  /* The room .browser's gap gave between the list and the preview. */
+  .preview {
+    margin-top: 1rem;
   }
 
   /* The strip: one card per column, scrolling sideways. Every card shares
