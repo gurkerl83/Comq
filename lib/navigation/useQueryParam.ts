@@ -42,7 +42,15 @@ function createQueryString(name: string, value: string): string {
  *    window.history.pushState and replaceState with versions that hand the
  *    new address to React inside startTransition, so a state update made
  *    together with push, such as in the same click handler, renders first.
- * 4. It knows nothing about what the value means: any text can be a value.
+ * 4. replace passes the entry's current history state on.
+ *    a. Next keeps its own data in each entry's state.
+ *       Next ignores Back and Forward to an entry without it.
+ *    b. Next's versions of pushState and replaceState keep that data.
+ *       Next installs them only after the page's first effects have run.
+ *    c. After a full page load, a replace can run before Next installs them.
+ *       It then reaches the browser's own replaceState.
+ *       Only the state passed on keeps Next's data in the entry.
+ * 5. It knows nothing about what the value means: any text can be a value.
  *
  * @param name - The query parameter, such as 'tab'.
  * @returns The parameter's value and the functions that write it.
@@ -55,6 +63,10 @@ export function useQueryParam(name: string): QueryParam {
     push: newValue =>
       window.history.pushState(null, '', createQueryString(name, newValue)),
     replace: newValue =>
-      window.history.replaceState(null, '', createQueryString(name, newValue))
+      window.history.replaceState(
+        window.history.state,
+        '',
+        createQueryString(name, newValue)
+      )
   };
 }
