@@ -48,7 +48,11 @@ export function useSelectionStep(
   initialStep: SelectionStep,
   { isStepComplete, beforeStepChange }: SelectionStepRules
 ) {
-  const stepParam = useQueryParam(SELECTION_STEP_PARAM);
+  const {
+    value: requestedStep,
+    push: pushStep,
+    replace: replaceStep
+  } = useQueryParam(SELECTION_STEP_PARAM);
 
   /**
    * The step to show for what the address names.
@@ -57,7 +61,7 @@ export function useSelectionStep(
    * @returns That step, or the first incomplete step before it; initialStep
    * when the address names no known step.
    */
-  function stepFromAddress(requested: string | null): SelectionStep {
+  function getStepFromAddress(requested: string | null): SelectionStep {
     return getReachableStep(
       readSelectionStep(requested) ?? initialStep,
       isStepComplete
@@ -78,34 +82,42 @@ export function useSelectionStep(
     return target;
   }
 
-  const [step, setStep] = useState(() => stepFromAddress(stepParam.value));
+  const [step, setStep] = useState(() => getStepFromAddress(requestedStep));
 
   /**
-   * Show another step and add a browser history entry for it.
-   * 1. beforeStepChange runs first.
-   * 2. setStep shows the step.
-   * 3. push adds the entry with the step's value from getStepParamValue.
-   *    For initialStep, the entry's address leaves SELECTION_STEP_PARAM out.
+   * Change the step shown.
+   * Both paths use it: goToStep (fast) and onRequestedStepChange (slow).
+   *
+   * @param target - The step to show.
+   */
+  function changeShownStep(target: SelectionStep) {
+    // First let the caller close what is open on the step being left.
+    beforeStepChange();
+    // Then show the new step; both changes reach the screen in one render.
+    setStep(target);
+  }
+
+  /**
+   * The wizard's own step changes come here, such as Continue or Back.
+   * This is the fast path: the step shows first, and the address follows.
+   * The new history entry lets the browser's Back return to the step left.
    *
    * @param target - The step to show.
    */
   function goToStep(target: SelectionStep) {
-    beforeStepChange();
-    setStep(target);
-    stepParam.push(getStepParamValue(target));
+    // Fast path: show the step in the click's own render.
+    changeShownStep(target);
+    // Record the step in the history; the address follows one render later.
+    pushStep(getStepParamValue(target));
   }
 
   /**
    * Show the step the address names, and keep the address honest.
-   *
-   * 1. It runs whenever the address's step changes: after the browser's Back
-   *    or Forward, and after goToStep's own entry, where it finds that step
-   *    already shown and does nothing.
-   * 2. replace corrects the current entry's address to the step shown:
-   *    a. An unreachable step shows the first incomplete step.
-   *    b. initialStep leaves the parameter out, also when the address names it.
-   *    This also happens when the step shown stays, as after a full page load.
-   * 3. Before another step shows, beforeStepChange runs, as in goToStep.
+   * It runs whenever the address's step changes.
+   * That happens after the browser's Back or Forward and after goToStep.
+   * It also runs once right after a full page load.
+   * This is the slow path: the address changes first, and the step follows.
+   * It writes the address only to correct it, as after a reload.
    *
    * Why useEffectEvent (React 19.2):
    * The effect below has to answer two questions separately:
@@ -119,10 +131,11 @@ export function useSelectionStep(
    *    says why).
    * 2. isStepComplete and beforeStepChange are new functions on every render
    *    of the caller, so the effect would run after every render.
-   * useEffectEvent separates them. followAddress reads the current values
-   * whenever it is called, but it is not a dependency, so the effect lists
-   * only the address and runs only when the address changes. A function made
-   * with useEffectEvent may only be called from inside an effect.
+   * useEffectEvent separates them.
+   * The function it wraps, `onRequestedStepChange`, reads the current values.
+   * That function is not a dependency, so the effect lists only the address.
+   * The effect then runs only when the address changes.
+   * A function made with useEffectEvent may only be called inside an effect.
    *
    * Example: Continue from Category to Machine.
    *
@@ -149,25 +162,30 @@ export function useSelectionStep(
    *    so the effect does not run.
    * 3. Render 2 brings ?step=machine. The address changed, so the effect
    *    runs.
-   * 4. followAddress reads the current step 'machine', the same as the
-   *    address, and does nothing.
+   * 4. The Effect Event `onRequestedStepChange` sees 'machine' already shown.
+   *    That is the step the address names, so it does nothing.
    *
    * @param requested - The step the address names, or null.
    */
-  const followAddress = useEffectEvent((requested: string | null) => {
-    const target = stepFromAddress(requested);
+  const onRequestedStepChange = useEffectEvent((requested: string | null) => {
+    // The named step, or the first incomplete one while it is unreachable.
+    const target = getStepFromAddress(requested);
+    // How the address names that step; initialStep leaves the parameter out.
     const targetValue = getStepParamValue(target);
-    if (requested !== targetValue) stepParam.replace(targetValue);
+    // Correction: replace the address only when it names the wrong step.
+    // After the fast path or Back and Forward, it already names the right one.
+    // It comes before the return, so a full page load is corrected too.
+    if (requested !== targetValue) replaceStep(targetValue);
+    // The step already shows, as after the fast path or a full page load.
     if (target === step) return;
-    beforeStepChange();
-    setStep(target);
+    // Slow path: Back or Forward reached another step, so show it now.
+    changeShownStep(target);
   });
 
   // Follow the step the address names whenever it changes.
-  const requested = stepParam.value;
   useEffect(() => {
-    followAddress(requested);
-  }, [requested]);
+    onRequestedStepChange(requestedStep);
+  }, [requestedStep]);
 
   return {
     step,
