@@ -26,9 +26,10 @@ type NativeButtonProps = ComponentProps<'button'> & {
 export type ButtonProps = {
   /**
    * primary is filled with the action colour; secondary is outlined; text is
-   * an underlined label without a box.
+   * an underlined label without a box; tab is a label in a tab bar, marked
+   * with the accent colour while data-current is true.
    */
-  variant: 'primary' | 'secondary' | 'text';
+  variant: 'primary' | 'secondary' | 'text' | 'tab';
 } & (NativeButtonProps | LinkProps);
 
 /**
@@ -36,9 +37,9 @@ export type ButtonProps = {
  *
  * 1. Without href it renders a native button; with href it renders through
  *    Link, so the routing rules stay in Link.
- * 2. variant chooses the look. primary and secondary are boxes whose
- *    dimensions come from the --button-* values in app/theme.css; text is a
- *    label with its own, smaller dimensions.
+ * 2. variant chooses the look. primary, secondary and tab take their
+ *    dimensions from the --button-* values in app/theme.css; text is a label
+ *    with its own, smaller dimensions.
  * 3. className only places the button in the caller's layout (width, margin,
  *    flex) or sets a --button-* value. It must not set a property the shared
  *    classes set, because the order of two stylesheets is not guaranteed.
