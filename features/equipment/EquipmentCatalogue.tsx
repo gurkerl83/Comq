@@ -39,7 +39,8 @@ type CategoryFilter = EquipmentCategoryId | 'all';
  * chosen one.
  *
  * 1. From 900px the list takes a third of the width and the preview two
- *    thirds; below, the list becomes a sideways strip above the preview.
+ *    thirds; below, the list becomes a sideways strip of compact cards
+ *    above the preview, which stays in view with the filter.
  * 2. The filter above the list narrows it to one category. Choosing a
  *    category shows its first machine unless the chosen one belongs to it.
  * 3. The chosen machine and tab are in the address, so a link opens the

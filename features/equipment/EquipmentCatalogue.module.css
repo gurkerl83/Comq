@@ -155,17 +155,25 @@
     margin-top: 1rem;
   }
 
-  /* The strip: one card per column, scrolling sideways. Every card shares
-     its three rows (picture, name, figures), so the names and the figures
-     line up across the cards, however long each one is. */
+  /* The strip: compact cards side by side, scrolling sideways.
+     1. It stays in view below the site header and the filter, so another
+        machine can be chosen while its details scroll.
+     2. top adds the filter's height to the header's: one button and the
+        bar's bottom line. */
   .list {
+    position: sticky;
+    top: calc(
+      var(--site-header-height) + var(--button-height) + var(--border-width)
+    );
+    z-index: 4;
     display: grid;
-    grid-auto-columns: 10rem;
+    grid-auto-columns: max-content;
     grid-auto-flow: column;
-    grid-template-rows: repeat(3, auto);
     gap: 0 0.75rem;
     overflow-x: auto;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-background);
     scroll-snap-type: x mandatory;
   }
 
@@ -173,16 +181,16 @@
     display: none;
   }
 
-  /* Subgrid passes the strip's three rows on to the card inside. */
   .item {
-    display: grid;
-    grid-row: span 3;
-    grid-template-rows: subgrid;
     scroll-snap-align: start;
   }
 
+  /* Below the preview, so it does not stay in view with the strip. */
   .hint {
-    padding: 0.75rem 0 0;
+    order: 1;
+    margin-top: 1rem;
+    padding: 0;
+    border-top: 0;
   }
 
   .specifications {
