@@ -1,5 +1,6 @@
 /* The thumbnail beside the name and the first two specifications. Below
-   900px, where the cards form a strip, the thumbnail sits on top. */
+   900px, where the cards form a strip, the thumbnail sits on top and the
+   card takes the strip's three rows (EquipmentCatalogue.module.css). */
 .card {
   display: grid;
   grid-template-columns: 4rem minmax(0, 1fr);
@@ -34,6 +35,8 @@
 @media (max-width: 899px) {
   .card {
     grid-template-columns: minmax(0, 1fr);
+    grid-row: span 3;
+    grid-template-rows: subgrid;
   }
 
   .thumbnail {

@@ -4,7 +4,7 @@ This document describes the equipment feature and its development direction. Ite
 
 ## Current implementation
 
-The sales catalogue lists the machines beside a preview of the chosen one, which links to its machine page. The preview and the machine page share their parts: the gallery, the overview, and the content for the specifications, the range drawings, the COMQ version and the equipment options. The [machine tabs](machine-tabs.ts) decide which of these parts a machine has; the preview shows them as tabs and the machine page as sections. The wizard collects equipment type, machine, requirements and a review before preparing a WhatsApp enquiry.
+The sales catalogue lists the machines beside a preview of the chosen one. The preview and the machine page share their parts: the gallery, the overview, and the content for the specifications, the range drawings, the COMQ version and the equipment options. The [machine tabs](machine-tabs.ts) decide which of these parts a machine has; the preview shows them as tabs and the machine page as sections. The wizard collects equipment type, machine, requirements and a review before preparing a WhatsApp enquiry.
 
 The current fixture names, descriptions and illustration alternative text identify the demonstration content. All machines use the same display and enquiry logic. Jumbo J1 has a default power of 105 kW, a 120 kW alternative and two independent extras: a rear camera and central lubrication. Jumbo J2 has a default width of 2.4 m and a 2.2 m alternative. Scooptram S1 and Drilling Rig D1 have no configurable choices or extras. These examples are fictional product configurations.
 

@@ -96,31 +96,10 @@
   font-weight: 700;
 }
 
-/* The gallery beside the machine's name, figures and actions. */
+/* The room around the machine's overview; MachineOverview lays out the
+   name, the gallery, the figures and the actions inside it. */
 .previewTop {
-  display: grid;
-  grid-template-columns: minmax(0, 11fr) minmax(0, 10fr);
-  align-items: start;
-  gap: 1.5rem;
   padding: 1.25rem;
-}
-
-/* The enquiry button across the row; below it the machine page and, when
-   there is one, the datasheet. */
-.actions {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
-}
-
-.enquiry {
-  grid-column: 1 / -1;
-}
-
-/* Spans the row when no datasheet button follows. */
-.machinePage:last-child {
-  grid-column: 1 / -1;
 }
 
 .tabs {
@@ -157,9 +136,15 @@
     background: none;
   }
 
+  /* The strip: one card per column, scrolling sideways. Every card shares
+     its three rows (picture, name, figures), so the names and the figures
+     line up across the cards, however long each one is. */
   .list {
-    display: flex;
-    gap: 0.75rem;
+    display: grid;
+    grid-auto-columns: 10rem;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, auto);
+    gap: 0 0.75rem;
     overflow-x: auto;
     padding: 0.75rem 0;
     scroll-snap-type: x mandatory;
@@ -169,10 +154,11 @@
     display: none;
   }
 
-  /* Grid, so the card inside stretches to the row's tallest card. */
+  /* Subgrid passes the strip's three rows on to the card inside. */
   .item {
     display: grid;
-    flex: 0 0 10rem;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
     scroll-snap-align: start;
   }
 
@@ -180,8 +166,12 @@
     padding: 0.75rem 0 0;
   }
 
-  .previewTop,
   .specifications {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The enquiry button fills the row. */
+  .enquiry {
+    flex: 1;
   }
 }

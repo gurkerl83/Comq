@@ -158,13 +158,12 @@ export function EquipmentCatalogue({
 
         <article className={styles.preview} aria-labelledby='equipment-title'>
           <div className={styles.previewTop}>
-            <MachineMedia equipment={machine} content={content} />
-            <MachineOverview equipment={machine} content={content} heading='h2'>
-              <Specifications
-                items={machine.specifications.slice(0, 3)}
-                fallback={content.unconfirmed}
-              />
-              <div className={styles.actions}>
+            <MachineOverview
+              equipment={machine}
+              content={content}
+              heading='h2'
+              media={<MachineMedia equipment={machine} content={content} />}
+              actions={
                 <Button
                   variant='primary'
                   className={styles.enquiry}
@@ -175,14 +174,12 @@ export function EquipmentCatalogue({
                 >
                   {content.select}
                 </Button>
-                <Button
-                  variant='secondary'
-                  className={styles.machinePage}
-                  href={createHrefForLocale(locale, `/equipos/${machine.slug}`)}
-                >
-                  {translations.details}
-                </Button>
-              </div>
+              }
+            >
+              <Specifications
+                items={machine.specifications.slice(0, 3)}
+                fallback={content.unconfirmed}
+              />
             </MachineOverview>
           </div>
 
