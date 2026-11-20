@@ -1,49 +1,61 @@
-import {
-  createHrefForLocale,
-  type SupportedLocale
-} from '../../lib/i18n/locales';
-import { Card } from '../../components/Card';
-import { Link } from '../../components/Link';
-import type { EquipmentEntry } from './types';
+import Image from 'next/image';
+
+import { ServiceImagePlaceholder } from '../home/ServiceImagePlaceholder';
 import type { CatalogueContent } from './catalogue-content';
 import { Specifications } from './selector/components/Specifications';
+import { SelectableCard } from './selector/controls/SelectableCard';
+import type { EquipmentEntry } from './types';
 import styles from './MachineBrowseCard.module.css';
 
 type MachineBrowseCardProps = {
-  /** The page's language, for the link to the machine page. */
-  locale: SupportedLocale;
-  /** The machine the card previews. */
+  /** The machine the card shows. */
   machine: EquipmentEntry;
-  /** The catalogue texts: the details link and the text for a missing value. */
+  /** Whether the preview shows this machine. */
+  selected: boolean;
+  /** Shows this machine in the preview. */
+  onSelect: () => void;
+  /** The catalogue texts: the text for a missing value. */
   translations: CatalogueContent;
 };
 
 /**
- * A server-rendered preview linking to the full machine page.
- * Show the first two specifications in their authored order; the same labels
- * and values appear in the wizard and machine page, which show the full list.
+ * One machine in the catalogue list, drawn as a SelectableCard: a thumbnail
+ * of its first photograph, its name and its first two specifications in
+ * their authored order. Choosing it shows the machine in the preview.
  */
 export function MachineBrowseCard({
-  locale,
   machine,
+  selected,
+  onSelect,
   translations
 }: MachineBrowseCardProps) {
+  const [image] = machine.images;
+
   return (
-    <Card as='li' className={styles.card}>
-      <p className={styles.category}>{machine.categoryName}</p>
-      <h3 className={styles.name}>{machine.name}</h3>
-      <p className={styles.summary}>{machine.summary}</p>
+    <SelectableCard
+      className={styles.card}
+      selected={selected}
+      onSelect={onSelect}
+    >
+      <span className={styles.thumbnail}>
+        {image ? (
+          <Image
+            className={styles.image}
+            src={image.src}
+            alt=''
+            width={image.width}
+            height={image.height}
+            sizes='10rem'
+          />
+        ) : (
+          <ServiceImagePlaceholder className={styles.image} alt='' />
+        )}
+      </span>
+      <span className={styles.name}>{machine.name}</span>
       <Specifications
         items={machine.specifications.slice(0, 2)}
         fallback={translations.notSpecified}
       />
-      <Link
-        className={styles.details}
-        href={createHrefForLocale(locale, `/equipos/${machine.slug}`)}
-        aria-label={`${translations.details}: ${machine.name}`}
-      >
-        {translations.details}
-      </Link>
-    </Card>
+    </SelectableCard>
   );
 }
