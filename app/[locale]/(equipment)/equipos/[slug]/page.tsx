@@ -8,6 +8,7 @@ import { getDictionary } from '../../../../../lib/i18n/dictionaries';
 import { getRouteLocale } from '../../../../../lib/i18n/route-locale';
 
 type EquipmentPageProps = {
+  /** The locale and the machine's slug, from the [locale] and [slug] folders. */
   params: Promise<{ locale: string; slug: string }>;
 };
 

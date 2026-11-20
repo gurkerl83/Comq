@@ -2,7 +2,9 @@ import type { EquipmentEntry } from '../../types';
 import styles from './Specifications.module.css';
 
 type SpecificationsProps = {
+  /** The rows to show, each a label and its value. */
   items: Readonly<EquipmentEntry['specifications']>;
+  /** The text shown in place of a missing value. */
   fallback: string;
 };
 

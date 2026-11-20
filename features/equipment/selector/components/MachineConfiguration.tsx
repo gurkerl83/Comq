@@ -196,8 +196,11 @@ function ConfigurationFields({
 }
 
 type ConfigurationRowProps = {
+  /** The row's label: a specification or an option name. */
   label: string;
+  /** The model's own value; null for an option without a specification. */
   baseValue: string | null;
+  /** The option whose choice replaces the value; absent for a fixed value. */
   option?: EquipmentOption;
   /** Undefined on unselected cards, which display the original model facts. */
   choices: EquipmentConfiguration['choices'] | undefined;
@@ -205,6 +208,7 @@ type ConfigurationRowProps = {
    * Owns nullable select values only while customization is open.
    */
   control?: Control<EquipmentConfiguration>;
+  /** The selector texts for advice and the default hint. */
   translations: SelectorContent;
 };
 
@@ -283,12 +287,15 @@ function ConfigurationRow({
 }
 
 type ConfigurationExtrasProps = {
+  /** The machine's optional extras. */
   extras: EquipmentExtra[];
+  /** The IDs of the extras chosen so far. */
   selectedIds: string[];
   /**
    * Registers independent native checkboxes; absent in read-only mode.
    */
   register?: UseFormRegister<EquipmentConfiguration>;
+  /** The selector texts for the extras heading and the empty list. */
   translations: SelectorContent;
 };
 
@@ -344,7 +351,9 @@ function ConfigurationExtras({
 }
 
 type ConfigurationActionsProps = {
+  /** Discards the edits and closes the editor. */
   onCancel: () => void;
+  /** Validates the edits and applies them. */
   onApply: () => void;
   /**
    * Whole-configuration validation feedback after an unsuccessful Apply.
@@ -354,6 +363,7 @@ type ConfigurationActionsProps = {
    * Prevent duplicate applications while validation completes.
    */
   isSubmitting: boolean;
+  /** The selector texts for Cancel and Apply. */
   translations: SelectorContent;
 };
 

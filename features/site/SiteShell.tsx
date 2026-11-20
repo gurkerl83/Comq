@@ -7,20 +7,21 @@ import { SiteNav } from './SiteNav';
 import { SiteFooter } from './SiteFooter';
 import styles from './SiteShell.module.css';
 
+type SiteShellProps = {
+  /** The page, shown in main. */
+  children: ReactNode;
+  /** The page's language, passed to the header and footer. */
+  locale: SupportedLocale;
+  /** The site's texts in the page's language. */
+  dictionary: Dictionary;
+};
+
 /**
  * The locale layout owns this shell so navigation and footer markup persist
  * between pages in the same language. The root layout owns the document and
  * analytics; LanguageSwitcher reads the current pathname on navigation.
  */
-export function SiteShell({
-  children,
-  locale,
-  dictionary
-}: {
-  children: ReactNode;
-  locale: SupportedLocale;
-  dictionary: Dictionary;
-}) {
+export function SiteShell({ children, locale, dictionary }: SiteShellProps) {
   return (
     <div className={styles.shell}>
       <Link native className={styles.skipLink} href='#main-content'>

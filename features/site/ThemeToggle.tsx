@@ -5,7 +5,12 @@ import { MoonIcon, SunIcon } from './icons';
 import styles from './ThemeToggle.module.css';
 import { useThemeToggle } from './useThemeToggle';
 
-export function ThemeToggle({ labels }: { labels: Dictionary['theme'] }) {
+type ThemeToggleProps = {
+  /** The texts of the two theme actions. */
+  labels: Dictionary['theme'];
+};
+
+export function ThemeToggle({ labels }: ThemeToggleProps) {
   const toggleTheme = useThemeToggle();
 
   return (

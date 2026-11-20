@@ -17,6 +17,11 @@ import { WizardActions } from './WizardActions';
 import { WizardProgress } from './WizardProgress';
 import styles from './EquipmentWizard.module.css';
 
+type EquipmentWizardProps = SelectorProps & {
+  /** The answers the wizard starts with, prepared on the server. */
+  initialSelection: EquipmentSelection;
+};
+
 /**
  * Client boundary for the native form and its retained enquiry answers.
  *
@@ -34,7 +39,7 @@ export function EquipmentWizard({
   catalogue,
   translations,
   initialSelection
-}: SelectorProps & { initialSelection: EquipmentSelection }) {
+}: EquipmentWizardProps) {
   const wizard = useEquipmentSelection(
     catalogue,
     initialSelection,

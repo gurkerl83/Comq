@@ -17,6 +17,7 @@ type FieldControlProps = {
 };
 
 type FormFieldProps = FieldDetails & {
+  /** Renders the control; it receives the field id and data-invalid. */
   children: (props: FieldControlProps) => ReactNode;
 };
 

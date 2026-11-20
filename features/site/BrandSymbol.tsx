@@ -2,12 +2,17 @@ import Image from 'next/image';
 
 import styles from './BrandSymbol.module.css';
 
+type BrandSymbolProps = {
+  /** Placement and size from the parent's CSS. */
+  className: string;
+};
+
 /**
  * Decorative brand mark; the home link or adjacent company name supplies its
  * accessible label. Both exports preserve the original outline and dimensions.
  * CSS selects the artwork for the OS preference or the manual theme choice.
  */
-export function BrandSymbol({ className }: { className: string }) {
+export function BrandSymbol({ className }: BrandSymbolProps) {
   return (
     <span className={`${styles.symbol} ${className}`} aria-hidden='true'>
       {/* Load both small variants immediately so theme changes do not wait for

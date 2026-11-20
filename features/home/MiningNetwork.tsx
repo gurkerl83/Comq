@@ -35,15 +35,16 @@ const scenes: Record<NetworkRoleId, string> = {
   service: '/images/company/network/service-transparent.png'
 };
 
-function NetworkSide({
-  side,
-  content,
-  variant
-}: {
+type NetworkSideProps = {
+  /** The side to draw, with its roles from top to bottom. */
   side: Side;
+  /** The diagram's texts. */
   content: NetworkContent;
+  /** How the roles are named: labels on the scenes or a list in the header. */
   variant: MiningNetworkVariant;
-}) {
+};
+
+function NetworkSide({ side, content, variant }: NetworkSideProps) {
   const text = content[side.id];
   const roleList = variant === 'roleList';
   return (
@@ -81,6 +82,13 @@ function NetworkSide({
   );
 }
 
+type MiningNetworkProps = {
+  /** The diagram's texts in the page's language. */
+  content: NetworkContent;
+  /** How the roles are named: labels on the scenes (default) or a list. */
+  variant?: MiningNetworkVariant;
+};
+
 /**
  * Show how COMQ's team connects mining companies with equipment suppliers.
  *
@@ -102,10 +110,7 @@ function NetworkSide({
 export function MiningNetwork({
   content,
   variant = 'labels'
-}: {
-  content: NetworkContent;
-  variant?: MiningNetworkVariant;
-}) {
+}: MiningNetworkProps) {
   const headingId = `mining-network-${variant}`;
   return (
     <section

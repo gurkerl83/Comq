@@ -2,7 +2,12 @@ import type { Dictionary } from '../../lib/i18n/types';
 import { QuoteInvitation } from '../site/QuoteInvitation';
 import styles from './CompanyPage.module.css';
 
-export function CompanyPage({ dictionary }: { dictionary: Dictionary }) {
+type CompanyPageProps = {
+  /** The site's texts in the page's language. */
+  dictionary: Dictionary;
+};
+
+export function CompanyPage({ dictionary }: CompanyPageProps) {
   const { company } = dictionary;
   const sections = [company.purpose, company.customers, company.approach];
 

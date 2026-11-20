@@ -17,13 +17,14 @@ import styles from './HomePage.module.css';
 import { MiningNetwork } from './MiningNetwork';
 import { ServiceImagePlaceholder } from './ServiceImagePlaceholder';
 
-export function HomePage({
-  locale,
-  dictionary
-}: {
+type HomePageProps = {
+  /** The page's language, for links and structured data. */
   locale: SupportedLocale;
+  /** The site's texts in the page's language. */
   dictionary: Dictionary;
-}) {
+};
+
+export function HomePage({ locale, dictionary }: HomePageProps) {
   const services = [
     {
       id: 'venta',

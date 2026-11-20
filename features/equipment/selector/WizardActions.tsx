@@ -4,11 +4,17 @@ import { Button } from '../../../components/Button';
 import styles from './WizardActions.module.css';
 
 type WizardActionsProps = {
+  /** Goes to the previous step; without it, Back is left out. */
   onBack?: () => void;
+  /** The text of the Back button. */
   backLabel: string;
+  /** The text of the Continue button. */
   nextLabel: string;
+  /** Disables Continue, such as while the option editor is open. */
   nextDisabled: boolean;
+  /** Shows finalAction in place of Continue. */
   isLastStep: boolean;
+  /** The button of the last step, such as opening the enquiry in WhatsApp. */
   finalAction?: ReactNode;
 };
 

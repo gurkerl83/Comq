@@ -15,13 +15,14 @@ import { BrandSymbol } from './BrandSymbol';
 import { Link } from '../../components/Link';
 import styles from './SiteShell.module.css';
 
-export function SiteFooter({
-  locale,
-  dictionary
-}: {
+type SiteFooterProps = {
+  /** The page's language, for the footer links. */
   locale: SupportedLocale;
+  /** The site's texts in the page's language. */
   dictionary: Dictionary;
-}) {
+};
+
+export function SiteFooter({ locale, dictionary }: SiteFooterProps) {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerInner}>

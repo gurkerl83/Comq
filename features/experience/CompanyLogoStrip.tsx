@@ -33,6 +33,11 @@ const companies = [
   }
 ];
 
+type CompanyLogoStripProps = {
+  /** The heading above the logos. */
+  catchphrase: string;
+};
+
 /**
  * Identify the founder's previous employers with local logo artwork.
  *
@@ -52,7 +57,7 @@ const companies = [
  *    revealing it does not initiate its first image downloads. Loading both
  *    sets does not change which artwork CSS displays.
  */
-export function CompanyLogoStrip({ catchphrase }: { catchphrase: string }) {
+export function CompanyLogoStrip({ catchphrase }: CompanyLogoStripProps) {
   return (
     <section className={styles.section} aria-labelledby='company-experience'>
       <div className={styles.strip}>

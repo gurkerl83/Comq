@@ -24,6 +24,11 @@ export async function generateMetadata({ params }: LocalePageProps) {
   return metadata;
 }
 
+type SelectorPageProps = LocalePageProps & {
+  /** The address's query from Next, such as ?machine=demo-jumbo-j1. */
+  searchParams: Promise<SelectorQuery>;
+};
+
 /**
  * Server entrypoint for the localized equipment selector.
  *
@@ -41,7 +46,7 @@ export async function generateMetadata({ params }: LocalePageProps) {
 export default async function Page({
   params,
   searchParams
-}: LocalePageProps & { searchParams: Promise<SelectorQuery> }) {
+}: SelectorPageProps) {
   const locale = await getRouteLocale(params);
   const dictionary = await getDictionary(locale);
   const catalogue = createEquipmentCatalogue(dictionary.equipment);

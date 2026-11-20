@@ -16,17 +16,18 @@ const languageNames: Record<SupportedLocale, string> = {
   en: 'English'
 };
 
+type LanguageSwitcherProps = {
+  /** The page's language; its link gets data-current. */
+  locale: SupportedLocale;
+  /** The accessible name of the language navigation. */
+  label: string;
+};
+
 /**
  * Links to the current page in each supported language. The link for the
  * page's own language has data-current, which SiteShell.module.css marks.
  */
-export function LanguageSwitcher({
-  locale,
-  label
-}: {
-  locale: SupportedLocale;
-  label: string;
-}) {
+export function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const localeFreePathname = getLocaleFreePathname(pathname);
 

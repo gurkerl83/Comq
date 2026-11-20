@@ -4,6 +4,13 @@ import { getCatalogueContent } from './catalogue-content';
 import { MachineBrowseCard } from './MachineBrowseCard';
 import styles from './EquipmentCatalogue.module.css';
 
+type EquipmentCatalogueProps = {
+  /** The page's language, for the catalogue texts and machine links. */
+  locale: SupportedLocale;
+  /** The machines to list; without any, the section is left out. */
+  machines: EquipmentEntry[];
+};
+
 /**
  * Render the sales-page catalogue on the server, before the service details.
  * The selector's browse link targets this section. Opening a machine page
@@ -12,10 +19,7 @@ import styles from './EquipmentCatalogue.module.css';
 export function EquipmentCatalogue({
   locale,
   machines
-}: {
-  locale: SupportedLocale;
-  machines: EquipmentEntry[];
-}) {
+}: EquipmentCatalogueProps) {
   const translations = getCatalogueContent(locale);
   if (machines.length === 0) return null;
 

@@ -25,7 +25,12 @@ type GalleryViewerProps = GalleryContent & {
   onClose: () => void;
 };
 
-function ViewerIcon({ path }: { path: string }) {
+type ViewerIconProps = {
+  /** The icon's SVG path data, drawn as a stroke in a 24 × 24 box. */
+  path: string;
+};
+
+function ViewerIcon({ path }: ViewerIconProps) {
   return (
     <svg
       aria-hidden='true'

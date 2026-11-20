@@ -2,6 +2,11 @@ import { createSelection } from './selection';
 import { EquipmentWizard } from './selector/EquipmentWizard';
 import type { SelectorProps, SelectorQuery } from './selector/types';
 
+type EquipmentSelectorProps = SelectorProps & {
+  /** The page's query, which may name a machine to preselect. */
+  searchParams: Promise<SelectorQuery>;
+};
+
 /**
  * Prepare the wizard's initial data in a Server Component.
  *
@@ -22,7 +27,7 @@ import type { SelectorProps, SelectorQuery } from './selector/types';
 export async function EquipmentSelector({
   searchParams,
   ...props
-}: SelectorProps & { searchParams: Promise<SelectorQuery> }) {
+}: EquipmentSelectorProps) {
   const query = await searchParams;
   let requestedMachine = query.machine;
   if (Array.isArray(requestedMachine)) {

@@ -10,14 +10,15 @@ import { Link } from '../../components/Link';
 import { ThemeToggle } from './ThemeToggle';
 import styles from './SiteShell.module.css';
 
-/** Show the sticky site header: the brand link, then the page preferences. */
-export function SiteNav({
-  locale,
-  dictionary
-}: {
+type SiteNavProps = {
+  /** The page's language, for the home link and the language links. */
   locale: SupportedLocale;
+  /** The site's texts in the page's language. */
   dictionary: Dictionary;
-}) {
+};
+
+/** Show the sticky site header: the brand link, then the page preferences. */
+export function SiteNav({ locale, dictionary }: SiteNavProps) {
   return (
     <header className={styles.header}>
       <Link

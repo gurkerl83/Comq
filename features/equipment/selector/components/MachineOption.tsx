@@ -13,9 +13,13 @@ import { MachineConfiguration } from './MachineConfiguration';
 import styles from './MachineOption.module.css';
 
 type MachineOptionProps = {
+  /** The page's language, for the details link. */
   locale: SupportedLocale;
+  /** The machine the card shows. */
   entry: EquipmentEntry;
+  /** Whether this machine is the chosen one. */
   checked: boolean;
+  /** Chooses this machine. */
   onChange: () => void;
   /**
    * The machine field's ref from React Hook Form, attached to the card, so
@@ -30,6 +34,7 @@ type MachineOptionProps = {
    * Allows aggregate configuration errors to focus the selected Customize button.
    */
   customizationRef?: Ref<HTMLButtonElement>;
+  /** The selector texts, such as Customize and the details link. */
   translations: SelectorContent;
   /** Editing session, supplied only to the selected card. */
   customization?: MachineCustomization;

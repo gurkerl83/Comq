@@ -2,13 +2,17 @@ import type { Dictionary } from '../../lib/i18n/types';
 import { QuoteLink } from './QuoteLink';
 import styles from './QuoteInvitation.module.css';
 
+type QuoteInvitationProps = {
+  /** The site's texts in the page's language. */
+  dictionary: Dictionary;
+  /** Draws a line above the section (default). */
+  showDivider?: boolean;
+};
+
 export function QuoteInvitation({
   dictionary,
   showDivider = true
-}: {
-  dictionary: Dictionary;
-  showDivider?: boolean;
-}) {
+}: QuoteInvitationProps) {
   return (
     <section
       className={

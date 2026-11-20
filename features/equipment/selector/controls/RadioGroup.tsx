@@ -6,10 +6,15 @@ import messageStyles from './FieldMessage.module.css';
 import styles from './RadioGroup.module.css';
 
 type RadioGroupProps = WithoutClassName<ComponentPropsWithRef<'fieldset'>> & {
+  /** The question above the choices, shown as the fieldset's legend. */
   legend?: string;
+  /** The error message below the choices. */
   error?: string;
+  /** Content between the legend and the choices, such as a hint. */
   before?: ReactNode;
+  /** Content between the choices and the error, such as feedback. */
   after?: ReactNode;
+  /** The options to choose from, such as RadioOption or SelectableCard. */
   children: ReactNode;
 };
 

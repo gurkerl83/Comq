@@ -10,8 +10,11 @@ import { Specifications } from './selector/components/Specifications';
 import styles from './MachineBrowseCard.module.css';
 
 type MachineBrowseCardProps = {
+  /** The page's language, for the link to the machine page. */
   locale: SupportedLocale;
+  /** The machine the card previews. */
   machine: EquipmentEntry;
+  /** The catalogue texts: the details link and the text for a missing value. */
   translations: CatalogueContent;
 };
 

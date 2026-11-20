@@ -7,7 +7,12 @@ import { Link } from '../../components/Link';
 import { QuoteInvitation } from '../site/QuoteInvitation';
 import styles from './ExperiencePage.module.css';
 
-export function ExperiencePage({ dictionary }: { dictionary: Dictionary }) {
+type ExperiencePageProps = {
+  /** The site's texts in the page's language. */
+  dictionary: Dictionary;
+};
+
+export function ExperiencePage({ dictionary }: ExperiencePageProps) {
   return (
     <>
       <article id='expertise' aria-labelledby='founder-heading'>

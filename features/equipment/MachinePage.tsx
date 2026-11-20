@@ -77,19 +77,20 @@ function formatOptionChoices(
     .join(' · ');
 }
 
+type MachinePageProps = {
+  /** The page's language, for the page texts and links. */
+  locale: SupportedLocale;
+  /** The machine the page shows. */
+  equipment: EquipmentEntry;
+};
+
 /**
  * The detail page of one machine. The hero shows its name, summary and model
  * with the enquiry button, next to the image gallery. Below follow the
  * application, the specifications with the datasheet link, and the equipment
  * options. The closing section repeats the enquiry button and offers WhatsApp.
  */
-export function MachinePage({
-  locale,
-  equipment
-}: {
-  locale: SupportedLocale;
-  equipment: EquipmentEntry;
-}) {
+export function MachinePage({ locale, equipment }: MachinePageProps) {
   const content = CONTENT[locale];
   const selectorHref = {
     pathname: createHrefForLocale(locale, '/selector'),

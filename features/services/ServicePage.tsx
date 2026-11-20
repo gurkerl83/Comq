@@ -4,15 +4,20 @@ import type { Dictionary, ServiceKey } from '../../lib/i18n/types';
 import { QuoteLink } from '../site/QuoteLink';
 import styles from './ServicePage.module.css';
 
+type ServicePageProps = {
+  /** The site's texts in the page's language. */
+  dictionary: Dictionary;
+  /** The service the page presents: sales, rentals or parts. */
+  service: ServiceKey;
+  /** Content before the detail sections, such as the sales catalogue. */
+  children?: ReactNode;
+};
+
 export function ServicePage({
   dictionary,
   service,
   children
-}: {
-  dictionary: Dictionary;
-  service: ServiceKey;
-  children?: ReactNode;
-}) {
+}: ServicePageProps) {
   const { quoteHeading, pages } = dictionary.servicePages;
   const content = pages[service];
   const detailSections = [

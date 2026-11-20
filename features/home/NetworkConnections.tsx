@@ -187,15 +187,18 @@ const STACKED_SPOKES = fanSpokes(STACKED_RING, STACKED_REACH, 'vertical');
  */
 const round = (value: number) => Number(value.toFixed(2));
 
+type RingAndSpokesProps = {
+  /** The ring to draw, in the SVG's units. */
+  ring: Ring;
+  /** The spokes to draw, from `fanSpokes`. */
+  spokes: Spoke[];
+};
+
 /**
  * Draw a ring and its spokes in `currentColor`. Line widths and dot sizes
  * follow the ring's radius.
- *
- * @param props.ring - The ring to draw, in the SVG's units.
- * @param props.spokes - The spokes to draw, from `fanSpokes`.
- * @returns The ring's outline and one group per spoke.
  */
-function RingAndSpokes({ ring, spokes }: { ring: Ring; spokes: Spoke[] }) {
+function RingAndSpokes({ ring, spokes }: RingAndSpokesProps) {
   const dot = round(ring.radius * SIZE.dot);
   return (
     <>
@@ -236,10 +239,9 @@ function RingAndSpokes({ ring, spokes }: { ring: Ring; spokes: Spoke[] }) {
 }
 
 /**
- * Draw the arrow from the bottom of the wide ring down to the foundation note.
+ * Draw the arrow from the bottom of the wide ring down to the foundation note
+ * in `currentColor`.
  * The shaft starts inside the head, which is drawn over it, so no seam shows.
- *
- * @returns The shaft and the arrow head in `currentColor`.
  */
 function FoundationArrow() {
   const x = WIDE_RING.x;
@@ -266,6 +268,13 @@ function FoundationArrow() {
   );
 }
 
+type NetworkConnectionsProps = {
+  /** Which layout to draw. */
+  layout: 'wide' | 'stacked';
+  /** Placement, size and colour from the parent's CSS. */
+  className?: string;
+};
+
 /**
  * Draw the connections between the COMQ team and the six roles.
  *
@@ -278,18 +287,11 @@ function FoundationArrow() {
  *
  * The drawing is decorative, so it is hidden from assistive technology. The
  * parent places, sizes and colours it through `className`.
- *
- * @param props.layout - Which layout to draw.
- * @param props.className - Placement, size and colour from the parent's CSS.
- * @returns The SVG for the chosen layout.
  */
 export function NetworkConnections({
   layout,
   className
-}: {
-  layout: 'wide' | 'stacked';
-  className?: string;
-}) {
+}: NetworkConnectionsProps) {
   if (layout === 'stacked') {
     return (
       <svg

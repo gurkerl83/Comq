@@ -1,7 +1,9 @@
 import styles from './WizardProgress.module.css';
 
 type WizardProgressProps = {
+  /** The steps in order, each with its ID and short title. */
   steps: readonly { id: string; shortTitle: string }[];
+  /** The position of the current step in steps. */
   currentIndex: number;
 };
 

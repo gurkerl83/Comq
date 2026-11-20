@@ -2,13 +2,14 @@ import type { HTMLAttributes, RefCallback } from 'react';
 
 import styles from './Card.module.css';
 
-/**
- * Props for a card: as chooses the element, a div or a list item, and the
- * other props are HTML attributes both take. The ref is a callback ref, such
- * as React Hook Form's, because a callback fits either element.
- */
+/** Props for a card: the HTML attributes a div and a list item both take. */
 type CardProps = HTMLAttributes<HTMLElement> & {
+  /** The element to render: a div, or a list item inside a list. */
   as?: 'div' | 'li';
+  /**
+   * A callback ref, such as React Hook Form's.
+   * A callback fits either element.
+   */
   ref?: RefCallback<HTMLElement>;
 };
 

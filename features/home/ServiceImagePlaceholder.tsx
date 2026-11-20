@@ -1,11 +1,15 @@
+type ServiceImagePlaceholderProps = {
+  /** The image's accessible name. */
+  alt: string;
+  /** Placement and size from the parent's CSS. */
+  className?: string;
+};
+
 /** Inline SVG inherits theme colors; an external image cannot inherit page styles. */
 export function ServiceImagePlaceholder({
   alt,
   className
-}: {
-  alt: string;
-  className?: string;
-}) {
+}: ServiceImagePlaceholderProps) {
   return (
     <svg
       className={className}
