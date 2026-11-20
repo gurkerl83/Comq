@@ -26,8 +26,9 @@ type SelectionStepRules = {
  * The step the wizard shows, kept in the page address and the browser
  * history.
  *
- * 1. The step starts at the step the address names in SELECTION_STEP_PARAM,
- *    such as ?step=machine, or at initialStep when it names none.
+ * 1. The address names the step in SELECTION_STEP_PARAM: ?step=machine.
+ *    initialStep stays out of the address.
+ *    An address without the parameter shows initialStep.
  * 2. goToStep runs beforeStepChange, shows the step and adds a browser
  *    history entry for it, so the browser's Back and Forward move between
  *    steps. The page does not reload, so every answer stays.
@@ -63,18 +64,35 @@ export function useSelectionStep(
     );
   }
 
+  /**
+   * The value of SELECTION_STEP_PARAM for a step.
+   * initialStep, the step the wizard starts on, gets null.
+   * null leaves the parameter out of the address.
+   * Every other step gets its ID, such as 'machine'.
+   *
+   * @param target - The step the address names.
+   * @returns null for initialStep, otherwise the step's ID.
+   */
+  function getStepParamValue(target: SelectionStep): string | null {
+    if (target === initialStep) return null;
+    return target;
+  }
+
   const [step, setStep] = useState(() => stepFromAddress(stepParam.value));
 
   /**
    * Show another step and add a browser history entry for it.
-   * beforeStepChange runs first.
+   * 1. beforeStepChange runs first.
+   * 2. setStep shows the step.
+   * 3. push adds the entry with the step's value from getStepParamValue.
+   *    For initialStep, the entry's address leaves SELECTION_STEP_PARAM out.
    *
    * @param target - The step to show.
    */
   function goToStep(target: SelectionStep) {
     beforeStepChange();
     setStep(target);
-    stepParam.push(target);
+    stepParam.push(getStepParamValue(target));
   }
 
   /**
@@ -83,8 +101,10 @@ export function useSelectionStep(
    * 1. It runs whenever the address's step changes: after the browser's Back
    *    or Forward, and after goToStep's own entry, where it finds that step
    *    already shown and does nothing.
-   * 2. A step the answers cannot reach yet shows the first incomplete step
-   *    instead, and replace corrects the address without a new entry.
+   * 2. replace corrects the current entry's address to the step shown:
+   *    a. An unreachable step shows the first incomplete step.
+   *    b. initialStep leaves the parameter out, also when the address names it.
+   *    This also happens when the step shown stays, as after a full page load.
    * 3. Before another step shows, beforeStepChange runs, as in goToStep.
    *
    * Why useEffectEvent (React 19.2):
@@ -136,7 +156,8 @@ export function useSelectionStep(
    */
   const followAddress = useEffectEvent((requested: string | null) => {
     const target = stepFromAddress(requested);
-    if (requested !== null && requested !== target) stepParam.replace(target);
+    const targetValue = getStepParamValue(target);
+    if (requested !== targetValue) stepParam.replace(targetValue);
     if (target === step) return;
     beforeStepChange();
     setStep(target);
