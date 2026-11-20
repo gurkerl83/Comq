@@ -34,7 +34,7 @@ Keep `public/llms.txt` aligned with published content, contact details and suppo
 
 ### Equipment selector
 
-The sales pages (`/venta` and `/en/venta`) offer compact machine cards before the service details. Cards show the category, summary and first two specifications in catalogue order, then link to the full machine page. Keep those specifications ordered by their usefulness for a quick comparison. The current fixture names and descriptions identify the machines as fictional examples.
+The sales pages (`/venta` and `/en/venta`) show the catalogue before the service details: a list of the machines, which a filter narrows to one category, beside a preview of the chosen machine. The preview shows its gallery and first three specifications, an enquiry button that opens the selector at Machine, a link to the machine page, and tabs for the specifications, the range drawings, the COMQ version and the equipment options; a tab appears only when the machine has content for it. The address names the chosen machine and tab (`?machine=…&tab=…`), so a link opens the same preview and Back returns to the one before; the first machine and the specifications tab stay out of the address. The list shows each machine's first two specifications in catalogue order. Keep those specifications ordered by their usefulness for a quick comparison. The current fixture names and descriptions identify the machines as fictional examples.
 
 `/selector` and `/en/selector` provide a data-driven, four-step flow: equipment type, machine, requirements and review. React Hook Form retains answers when moving Back or Continue within the wizard. Individual equipment pages are available at `/equipos/[slug]` and `/en/equipos/[slug]`.
 
