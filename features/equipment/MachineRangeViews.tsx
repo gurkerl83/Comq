@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from '../../components/Button';
 import { TabBar } from '../../components/TabBar';
 import type { MachineContent } from './machine-content';
+import { Specifications } from './selector/components/Specifications';
 import type { EquipmentDrawingView, EquipmentEntry } from './types';
 import styles from './MachineRangeViews.module.css';
 
@@ -18,8 +19,9 @@ type MachineRangeViewsProps = {
 
 /**
  * The machine's range drawings, one at a time: a tab per view, then the
- * drawing with its caption. The page or the preview around it adds the
- * heading; nothing shows when the machine has no drawings.
+ * drawing with its caption and, when the view has any, its named dimensions
+ * as a table. The page or the preview around it adds the heading; nothing
+ * shows when the machine has no drawings.
  */
 export function MachineRangeViews({
   equipment,
@@ -39,6 +41,7 @@ export function MachineRangeViews({
     equipment.drawingNotes?.[drawing.view],
     content.dimensions
   ];
+  const dimensions = equipment.drawingDimensions?.[drawing.view];
 
   return (
     <>
@@ -65,6 +68,11 @@ export function MachineRangeViews({
         />
         <figcaption>{caption.filter(Boolean).join(' · ')}</figcaption>
       </figure>
+      {dimensions && (
+        <div className={styles.dimensions}>
+          <Specifications items={dimensions} fallback={content.unconfirmed} />
+        </div>
+      )}
     </>
   );
 }

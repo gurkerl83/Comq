@@ -29,3 +29,8 @@
   background: var(--color-surface);
   font-size: var(--font-size-small);
 }
+
+/* The room between the drawing and the table of its dimensions. */
+.dimensions {
+  margin-top: 1.25rem;
+}

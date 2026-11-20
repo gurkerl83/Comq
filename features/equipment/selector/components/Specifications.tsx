@@ -3,7 +3,9 @@ import styles from './Specifications.module.css';
 
 type SpecificationsProps = {
   /** The rows to show, each a label and its value. */
-  items: Readonly<EquipmentEntry['specifications']>;
+  items: ReadonlyArray<
+    Pick<EquipmentEntry['specifications'][number], 'label' | 'value'>
+  >;
   /** The text shown in place of a missing value. */
   fallback: string;
   /** How the rows are drawn; a table when left out. */

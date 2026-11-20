@@ -182,6 +182,10 @@ export type EquipmentEntry = {
    */
   drawingNotes?: Partial<Record<EquipmentDrawingView, string>>;
   /**
+   * The dimensions listed below a drawing, by view.
+   */
+  drawingDimensions?: Partial<Record<EquipmentDrawingView, DrawingDimension[]>>;
+  /**
    * How the version COMQ supplies differs from the factory model.
    * Empty until COMQ documents the differences.
    */
@@ -236,6 +240,16 @@ export type EquipmentDrawingView = 'coverage' | 'side' | 'turning';
 export type EquipmentDrawing = Omit<GalleryImage, 'alt'> & {
   /** The view the drawing shows. */
   view: EquipmentDrawingView;
+};
+
+/**
+ * One named dimension of a range drawing, such as the machine's length.
+ */
+export type DrawingDimension = {
+  /** What is measured. */
+  label: string;
+  /** The measurement with its unit. */
+  value: string;
 };
 
 /**
