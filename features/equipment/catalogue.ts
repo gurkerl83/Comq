@@ -8,6 +8,7 @@ import { EQUIPMENT, EQUIPMENT_SLUGS } from './catalogue-data';
  * 1. Read each machine by its slug, preserving catalogue order.
  * 2. Resolve descriptions, labels and image alternatives through stable keys.
  * 3. Return display-ready entries without changing the records or dictionary.
+ *    A machine without drawings or COMQ-version rows gets empty lists.
  *
  * @param text - Equipment translations for the selected language.
  * @returns A new catalogue containing localized text and the shared machine facts.
@@ -40,6 +41,8 @@ export const createEquipmentCatalogue = (
         choices: option.choices.map(choice => ({ ...choice }))
       })),
       extras: entry.extras.map(id => ({ id, label: text.extras[id] })),
+      drawings: entry.drawings ?? [],
+      comqVersion: text.machines[slug].comqVersion ?? [],
       images: entry.images.map(image => ({
         ...image,
         alt: text.images[image.alt]

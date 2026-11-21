@@ -1,3 +1,5 @@
+import { connection } from 'next/server';
+
 import { createEquipmentCatalogue } from '../../../../features/equipment/catalogue';
 import { EquipmentCatalogue } from '../../../../features/equipment/EquipmentCatalogue';
 import { ServicePage } from '../../../../features/services/ServicePage';
@@ -13,6 +15,9 @@ export async function generateMetadata({ params }: LocalePageProps) {
 }
 
 export default async function Page({ params }: LocalePageProps) {
+  // The catalogue's address names the chosen machine and tab, so the page
+  // renders on request, with the address the visitor opened.
+  await connection();
   const locale = await getRouteLocale(params);
   const dictionary = await getDictionary(locale);
   const machines = createEquipmentCatalogue(dictionary.equipment);

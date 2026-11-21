@@ -1,0 +1,62 @@
+/* The COMQ version table. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  border-bottom: var(--border-width) solid var(--color-border);
+  color: var(--color-text-muted);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table tbody th {
+  color: var(--color-text);
+}
+
+/* The COMQ column: text colour and weight, and the action colour under its
+   heading. */
+.table .comq {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.table thead .comq {
+  border-bottom: 2px solid var(--color-action);
+}
+
+/* On phones each row stacks: the topic on its own line, then the two values
+   side by side, each named by its data-label. */
+@media (max-width: 640px) {
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .table tbody th {
+    grid-column: 1 / -1;
+    padding-bottom: 0.25rem;
+    border: 0;
+  }
+
+  .table td {
+    padding-top: 0.25rem;
+    border: 0;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+}

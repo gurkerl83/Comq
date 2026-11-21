@@ -4,7 +4,7 @@ This document describes the equipment feature and its development direction. Ite
 
 ## Current implementation
 
-The sales catalogue links to individual machine pages with specifications and an image gallery. The wizard collects equipment type, machine, requirements and a review before preparing a WhatsApp enquiry.
+The sales catalogue lists the machines beside a preview of the chosen one. The preview and the machine page share their parts: the gallery, the overview, and the content for the specifications, the range drawings, the COMQ version and the equipment options. The [machine tabs](machine-tabs.ts) decide which of these parts a machine has; the preview shows them as tabs and the machine page as sections. The wizard collects equipment type, machine, requirements and a review before preparing a WhatsApp enquiry.
 
 The current fixture names, descriptions and illustration alternative text identify the demonstration content. All machines use the same display and enquiry logic. Jumbo J1 has a default power of 105 kW, a 120 kW alternative and two independent extras: a rear camera and central lubrication. Jumbo J2 has a default width of 2.4 m and a 2.2 m alternative. Scooptram S1 and Drilling Rig D1 have no configurable choices or extras. These examples are fictional product configurations.
 
@@ -49,7 +49,7 @@ Changing machines initializes the new machine's configuration from its defaults 
 
 ## Product pages and images
 
-Product pages list the machine's baseline specifications, configurable choices, defaults and independent extras. The shared [Gallery](../../components/gallery/) displays the images assigned by the equipment data.
+Product pages list the machine's baseline specifications, configurable choices, defaults and independent extras, and its range drawings and COMQ version when it has them. The shared [Gallery](../../components/gallery/) displays the images assigned by the equipment data. Range drawings are language-independent entries in the machine record (`drawings`, each naming its view); a note shown with a drawing and the COMQ-version rows are dictionary text (`drawingNotes`, `comqVersion`). Without them, the machine page and the preview leave that part out.
 
 **Proposed:** use confirmed product photographs and associate an image with an option only when it depicts that option. Any changes to displayed product specifications must correspond to a documented version or configuration.
 

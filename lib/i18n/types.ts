@@ -1,6 +1,9 @@
 import type { MachineSlug } from '../../features/equipment/catalogue-data';
 import type {
+  ComqVersionRow,
+  DrawingDimension,
   EquipmentCategoryId,
+  EquipmentDrawingView,
   EquipmentExtraId,
   EquipmentImageKey,
   EquipmentSpecificationId
@@ -39,6 +42,18 @@ type MachineText = {
    * Intended-use description for the product page.
    */
   application: string;
+  /**
+   * Notes shown with a drawing, such as the feed it was drawn with.
+   */
+  drawingNotes?: Partial<Record<EquipmentDrawingView, string>>;
+  /**
+   * The dimensions listed below a drawing, by view, with their units.
+   */
+  drawingDimensions?: Partial<Record<EquipmentDrawingView, DrawingDimension[]>>;
+  /**
+   * Differences between the factory model and the version COMQ supplies.
+   */
+  comqVersion?: ComqVersionRow[];
 };
 
 /**

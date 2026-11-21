@@ -68,6 +68,27 @@
   }
 }
 
+/* A label in a tab bar: no box, a 3px line below it. While data-current is
+   true the line and the label take the accent and text colours; the other
+   tabs are muted. */
+.tab {
+  border-width: 0 0 3px;
+  border-radius: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+}
+
+.tab[data-current='true'] {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+@media (hover: hover) {
+  .tab:hover {
+    color: var(--color-text);
+  }
+}
+
 /* Last, so a disabled button keeps this look under the pointer too. */
 .button:disabled {
   border-color: var(--color-border);

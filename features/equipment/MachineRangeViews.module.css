@@ -1,0 +1,36 @@
+/* The frame of the TabBar that switches between the drawings. */
+.views {
+  margin-bottom: 1rem;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+/* The drawings are dark lines meant for a white sheet, so the sheet stays
+   white in both themes. The caption sits below it on the surface colour. */
+.drawing {
+  overflow: hidden;
+  margin: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-media);
+  background: #fff;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 28rem;
+  object-fit: contain;
+}
+
+.drawing figcaption {
+  padding: 0.75rem 1rem;
+  border-top: var(--border-width) solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  font-size: var(--font-size-small);
+}
+
+/* The room between the drawing and the table of its dimensions. */
+.dimensions {
+  margin-top: 1.25rem;
+}

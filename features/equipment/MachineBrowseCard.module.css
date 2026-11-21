@@ -1,55 +1,54 @@
-/*
- * Share five content-sized rows from EquipmentCatalogue.module.css (.machines).
- * Subgrid lets both cards contribute to the same row heights, so a longer
- * name or summary keeps the specification blocks and links aligned.
- *
- *     +----------------------+----------------------+
- *   1 | Category             | Category             |
- *   2 | Machine name         | Machine name         |
- *   3 | Summary              | Longer summary       |
- *     |                      | continues here       |
- *   4 | Specifications block | Specifications block |
- *   5 | Details link         | Details link         |
- *     +----------------------+----------------------+
- *
- * Each card is a direct list item and spans five parent rows. Row 4 holds
- * the whole specifications block; its individual entries keep their own rows.
- */
+/* The thumbnail beside the name and the first two specifications. */
 .card {
   display: grid;
-  grid-row: span 5;
-  grid-template-rows: subgrid;
-  gap: 0.75rem;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.25rem 0.875rem;
 }
 
-.category,
-.name,
-.summary {
-  margin: 0;
+/* Photographs are on white, so the thumbnail's frame stays white in both
+   themes. */
+.thumbnail {
+  display: grid;
+  grid-row: span 2;
+  place-items: center;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: #fff;
 }
 
-.category,
-.summary {
-  color: var(--color-text-muted);
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.category {
-  font-size: var(--font-size-small);
+.name {
+  font-weight: 700;
 }
 
-.details {
-  display: inline-flex;
-  align-items: center;
-  align-self: start;
-  justify-self: start;
-  min-height: 44px;
-  color: var(--color-accent);
-}
-
-@media (max-width: 640px) {
+/* Below 900px the cards form a strip that stays in view above the details
+   (EquipmentCatalogue.module.css), so each card is compact: a small
+   thumbnail beside the name on one line, without the figures. */
+@media (max-width: 899px) {
   .card {
-    /* Match the single-column list; each card now sizes its own rows. */
+    grid-template-columns: 2.5rem auto;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .thumbnail {
     grid-row: auto;
-    grid-template-rows: none;
+  }
+
+  .name {
+    white-space: nowrap;
+  }
+
+  .figures {
+    display: none;
   }
 }

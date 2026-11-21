@@ -19,7 +19,7 @@
   text-transform: uppercase;
 }
 
-.hero h1 {
+.name {
   margin: 0;
 }
 
@@ -35,6 +35,75 @@
 
 .model strong {
   color: var(--color-text);
+}
+
+/* The buttons passed to MachineOverview as actions: side by side, below the
+   rest of the overview. */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+/* The overview with the machine's pictures inside it (MachineOverview's
+   media). The pictures follow the name in the markup, .actions come last.
+   1. From 900px it is a stage: the category across the top, then the name
+      with .actions to its right, below them the pictures on the left and
+      .facts on the right.
+   2. Below 900px everything stacks in markup order: the category and the
+      name, the pictures, .facts, then .actions. */
+@media (min-width: 900px) {
+  /* The right column is at least as wide as the buttons beside the name,
+     so their labels stay on one line. */
+  .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(max-content, 2fr);
+    align-items: start;
+    column-gap: 1.5rem;
+  }
+
+  .stage .category {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .stage .name {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 1.5rem;
+    font-size: 2.25rem;
+  }
+
+  /* The buttons end at the right edge of their column. */
+  .stage .actions {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+
+  .stage .media {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  /* contain: inline-size takes the width from the column alone, so the
+     text in .facts cannot widen the column the buttons size. */
+  .stage .facts {
+    grid-column: 2;
+    grid-row: 3;
+    contain: inline-size;
+  }
+
+  .stage .summary {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 899px) {
+  .stage .media {
+    margin: 1.25rem 0 1.5rem;
+  }
 }
 
 /* Keeps the enquiry button as wide as its label; on its own it would fill
@@ -79,69 +148,21 @@
 }
 
 .section h2,
-.options h2,
+.block h2,
 .closing h2 {
   margin: 0 0 1.25rem;
 }
 
-.options h3 {
-  margin: 0 0 0.75rem;
-}
-
 .section p,
-.options p,
 .closing p {
   margin: 0 0 1.5rem;
   color: var(--color-text-muted);
 }
 
-.specifications {
-  margin: 0;
-}
-
-.specifications div {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem 1rem;
-  padding: 0.875rem 0;
-  border-bottom: var(--border-width) solid var(--color-border);
-}
-
-.specifications div:first-child {
-  padding-top: 0;
-}
-
-.specifications dt {
-  color: var(--color-text-muted);
-}
-
-.specifications dd {
-  margin: 0;
-  font-weight: 700;
-}
-
-.options {
+/* A section below the details, such as the range drawings or the options. */
+.block {
   padding: var(--spacing-content-section) 0;
   border-bottom: var(--border-width) solid var(--color-border);
-}
-
-.options ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.options li {
-  padding: 1.25rem;
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-small);
-}
-
-.options p {
-  margin: 0;
 }
 
 .closing {
@@ -170,9 +191,5 @@
   .page {
     padding-right: 1.25rem;
     padding-left: 1.25rem;
-  }
-
-  .options ul {
-    grid-template-columns: 1fr;
   }
 }
